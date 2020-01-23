@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.Rider2019.3/system/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.Rider2019.3/system/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_Benchmark.88693651.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="Benchmark.Domain.Impl" t="IncludeRecursive">
+        <e p="Benchmark.Domain.Impl.csproj" t="IncludeRecursive" />
+        <e p="ProductService.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Benchmark.Domain.Impl.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Benchmark.Domain.Spec" t="IncludeRecursive">
+        <e p="Benchmark.Domain.Spec.csproj" t="IncludeRecursive" />
+        <e p="IProductService.cs" t="Include" />
+        <e p="Product.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Benchmark.Domain.Spec.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Benchmark.Repositories.Impl" t="IncludeRecursive">
+        <e p="Benchmark.Repositories.Impl.csproj" t="IncludeRecursive" />
+        <e p="BenchmarkDBContext.cs" t="Include" />
+        <e p="ProductRepository.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Benchmark.Repositories.Impl.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Benchmark.Repositories.Spec" t="IncludeRecursive">
+        <e p="Benchmark.Repositories.Spec.csproj" t="IncludeRecursive" />
+        <e p="IProductRepository.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Benchmark.Repositories.Spec.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Benchmark.sln" t="IncludeFlat" />
+      <e p="Clients" t="Include">
+        <e p="Ordinary" t="IncludeRecursive">
+          <e p="Controllers" t="Include">
+            <e p="WeatherForecastController.cs" t="Include" />
+          </e>
+          <e p="Dockerfile" t="Include" />
+          <e p="Ordinary.csproj" t="IncludeRecursive" />
+          <e p="Program.cs" t="Include" />
+          <e p="Properties" t="Include">
+            <e p="launchSettings.json" t="Include" />
+          </e>
+          <e p="Startup.cs" t="Include" />
+          <e p="WeatherForecast.cs" t="Include" />
+          <e p="appsettings.Development.json" t="Include" />
+          <e p="appsettings.json" t="Include" />
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="mono_crash.mem.10021.1.blob" t="Include" />
+          <e p="mono_crash.mem.22034.1.blob" t="Include" />
+          <e p="mono_crash.mem.6355.1.blob" t="Include" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netcoreapp3.1" t="Include">
+                <e p="Ordinary.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
