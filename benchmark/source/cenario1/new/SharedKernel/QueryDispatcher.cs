@@ -1,4 +1,7 @@
 using System;
+using System.Text.Json;
+using NetMQ;
+using NetMQ.Sockets;
 
 namespace SharedKernel
 {
@@ -14,7 +17,22 @@ namespace SharedKernel
         public TResult Handle<TQuery, TResult>(TQuery query) where TQuery : IQuery<TResult>
         {
             var service = _resolver.Resolve<TQuery, TResult>();
-            return service.Handle(query);
+
+            using (var dealer = new DealerSocket())
+            {
+                dealer.Connect($"inproc://{service.GetName()}");
+                var message = JsonSerializer.Serialize(query);
+                
+                
+                var messageToServer = new NetMQMessage();
+                messageToServer.AppendEmptyFrame();
+                messageToServer.Append(message);
+                dealer.SendMultipartMessage(messageToServer);
+                
+                var json = dealer.ReceiveMultipartMessage();
+                var result = JsonSerializer.Deserialize<TResult>(json[2].ConvertToString());
+                return result;
+            }
         }
     }
 }

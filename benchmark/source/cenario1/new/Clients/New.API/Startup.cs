@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 using Infraestructure.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,9 +25,15 @@ namespace New.API
             _serviceProvider = serviceProvider;
         }
 
-        public IQueryHandler<TQuery,TResult> Resolve<TQuery, TResult>() where TQuery : IQuery<TResult>
+        // public IQueryHandler<TQuery,TResult> Resolve<TQuery, TResult>() where TQuery : IQuery<TResult>
+        // {
+        //     var service = this._serviceProvider.GetService(typeof(IQueryHandler<TQuery,TResult>)) as IQueryHandler<TQuery,TResult>;
+        //     return service;
+        // }
+        
+        public QueryHandlerBase<TQuery,TResult> Resolve<TQuery, TResult>() where TQuery : IQuery<TResult>
         {
-            var service = this._serviceProvider.GetService(typeof(IQueryHandler<TQuery,TResult>)) as IQueryHandler<TQuery,TResult>;
+            var service = this._serviceProvider.GetService(typeof(QueryHandlerBase<TQuery,TResult>)) as QueryHandlerBase<TQuery,TResult>;
             return service;
         }
     }
@@ -46,18 +55,34 @@ namespace New.API
             });
 
             services.AddScoped<IDependencyResolver, AspNetCoreDependencyResolver>();
-            services.AddScoped<IQueryHandler<GetAllProducts, IEnumerable<Product>>  , GetAllProductsHandler>();
+            //services.AddScoped<IQueryHandler<GetAllProducts, IEnumerable<Product>>  , GetAllProductsHandler>();
+            services.AddScoped<QueryHandlerBase<GetAllProducts, IEnumerable<Product>>, GetAllProductsHandler>();
             services.AddScoped<IQueryDispatcher, QueryDispatcher>();
+            
+            
+            AppDomain.CurrentDomain.Load("ProductModule");
             
             services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider provider)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+            
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(p => typeof(QueryHandlerBase<GetAllProducts, IEnumerable<Product>>).IsAssignableFrom(p) && !p.IsInterface && !p.IsAbstract).ToList();
+
+            IQueryHandler query = null;
+            
+            for (var i = 0; i < types.Count; i++)
+            {
+                query = provider.GetService(typeof(QueryHandlerBase<GetAllProducts, IEnumerable<Product>>)) as QueryHandlerBase<GetAllProducts, IEnumerable<Product>>;
+                query.Start();
             }
 
             app.UseHttpsRedirection();
