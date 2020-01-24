@@ -30,7 +30,7 @@ namespace SharedKernel
                 dealer.SendMultipartMessage(messageToServer);
                 
                 var json = dealer.ReceiveMultipartMessage();
-                var result = JsonSerializer.Deserialize<TResult>(json[2].ConvertToString());
+                var result = JsonSerializer.Deserialize<TResult>(json[1].ConvertToString());
                 return result;
             }
         }

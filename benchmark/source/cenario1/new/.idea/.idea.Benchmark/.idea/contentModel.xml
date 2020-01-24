@@ -22,17 +22,11 @@
           <e p="appsettings.Development.json" t="Include" />
           <e p="appsettings.json" t="Include" />
           <e p="bin" t="ExcludeRecursive" />
-          <e p="mono_crash.mem.22687.1.blob" t="Include" />
-          <e p="mono_crash.mem.22930.1.blob" t="Include" />
-          <e p="mono_crash.mem.23827.1.blob" t="Include" />
-          <e p="mono_crash.mem.24084.1.blob" t="Include" />
-          <e p="mono_crash.mem.24347.1.blob" t="Include" />
-          <e p="mono_crash.mem.24724.1.blob" t="Include" />
-          <e p="mono_crash.mem.25236.1.blob" t="Include" />
-          <e p="mono_crash.mem.25494.1.blob" t="Include" />
-          <e p="mono_crash.mem.25751.1.blob" t="Include" />
-          <e p="mono_crash.mem.26334.1.blob" t="Include" />
-          <e p="mono_crash.mem.26678.1.blob" t="Include" />
+          <e p="mono_crash.mem.29313.1.blob" t="Include" />
+          <e p="mono_crash.mem.29630.1.blob" t="Include" />
+          <e p="mono_crash.mem.29898.1.blob" t="Include" />
+          <e p="mono_crash.mem.30137.1.blob" t="Include" />
+          <e p="mono_crash.mem.30403.1.blob" t="Include" />
           <e p="obj" t="ExcludeRecursive">
             <e p="Debug" t="Include">
               <e p="netcoreapp3.1" t="Include">

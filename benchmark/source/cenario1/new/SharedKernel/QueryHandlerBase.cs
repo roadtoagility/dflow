@@ -29,14 +29,13 @@ namespace SharedKernel
                     while (true)
                     {
                         var message = server.ReceiveMultipartMessage();
-                        // var id = server.ReceiveFrameString();
-                        // var message = server.ReceiveFrameString();
 
                         var json = message[2].ConvertToString();
                         var query = JsonSerializer.Deserialize<TQuery>(json);
                         var result = Handler(query);
                         
                         var messageToRouter = new NetMQMessage();
+                        messageToRouter.Append(message[0]);
                         messageToRouter.AppendEmptyFrame();
                         messageToRouter.Append(JsonSerializer.Serialize(result));
 
