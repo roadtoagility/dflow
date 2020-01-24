@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Infraestructure.EntityFramework;
 using Microsoft.AspNetCore.Builder;
@@ -12,6 +13,22 @@ using SharedKernel;
 
 namespace New.API
 {
+    public class AspNetCoreDependencyResolver : IDependencyResolver
+    {
+        private readonly IServiceProvider _serviceProvider;
+
+        public AspNetCoreDependencyResolver(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
+        public IQueryHandler<TQuery,TResult> Resolve<TQuery, TResult>() where TQuery : IQuery<TResult>
+        {
+            var service = this._serviceProvider.GetService(typeof(IQueryHandler<TQuery,TResult>)) as IQueryHandler<TQuery,TResult>;
+            return service;
+        }
+    }
+    
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -28,8 +45,8 @@ namespace New.API
                 options.UseSqlServer(Configuration.GetConnectionString("BdBenchmark"));
             });
 
-            //IQueryHandler<TQuery,TResult>
-            services.AddScoped<IQueryHandler<GetAllProducts, IEnumerable<Product>>  , GetAllProductsHandler>();    
+            services.AddScoped<IDependencyResolver, AspNetCoreDependencyResolver>();
+            services.AddScoped<IQueryHandler<GetAllProducts, IEnumerable<Product>>  , GetAllProductsHandler>();
             services.AddScoped<IQueryDispatcher, QueryDispatcher>();
             
             services.AddControllers();

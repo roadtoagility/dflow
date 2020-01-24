@@ -62,6 +62,7 @@
         </e>
       </e>
       <e p="SharedKernel" t="IncludeRecursive">
+        <e p="IDependencyResolver.cs" t="Include" />
         <e p="IQuery.cs" t="Include" />
         <e p="Product.cs" t="Include" />
         <e p="QueryDispatcher.cs" t="Include" />

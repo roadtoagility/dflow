@@ -1,26 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="25a0de35-a152-41b7-a204-51a34ad6e000" name="Default Changelist" comment="" />
+    <list default="true" id="25a0de35-a152-41b7-a204-51a34ad6e000" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/SharedKernel/IDependencyResolver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Clients/New.API/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Clients/New.API/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infraestructure.EntityFramework/EntityContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infraestructure.EntityFramework/EntityContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductModule/Handlers/GetAllProductsHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProductModule/Handlers/GetAllProductsHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedKernel/QueryDispatcher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedKernel/QueryDispatcher.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="master: database" type="ccb7ac2a:MsImplModel$Database" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/ProductModule/Queries/GetAllProducts.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ProductModule/Handlers/GetAllProductsHandler.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Infraestructure.EntityFramework/BenchmarkDBContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/SharedKernel/IDependencyResolver.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/C866BA95-6C92-4815-BE5F-137AACAC57CE/1D8/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Clients/New.API/WeatherForecast.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Infraestructure.EntityFramework/EntityContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Clients/New.API/Controllers/WeatherForecastController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Clients/New.API/appsettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedKernel/Product.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Clients/New.API/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Clients/New.API/Startup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Clients/New.API/appsettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedKernel/IQuery.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Clients/New.API/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProductModule/Queries/GetAllProducts.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Clients/New.API/Startup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedKernel/QueryDispatcher.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProductModule/Handlers/GetAllProductsHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infraestructure.EntityFramework/BenchmarkDBContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Infraestructure.EntityFramework/EntityContext.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -35,27 +71,32 @@
         <option value="$PROJECT_DIR$/ProductModule/GetProductsQuery.cs" />
         <option value="$PROJECT_DIR$/ProductModule/Queries/GetProductsQuery.cs" />
         <option value="$PROJECT_DIR$/ProductModule/ProductReadService.cs" />
-        <option value="$PROJECT_DIR$/SharedKernel/QueryDispatcher.cs" />
         <option value="$PROJECT_DIR$/Infraestructure.EntityFramework/Class1.cs" />
-        <option value="$PROJECT_DIR$/Infraestructure.EntityFramework/EntityContext.cs" />
         <option value="$PROJECT_DIR$/ProductModule/Handlers/ProductHandler.cs" />
-        <option value="$PROJECT_DIR$/ProductModule/Queries/GetAllProducts.cs" />
         <option value="$PROJECT_DIR$/ProductModule/BenchmarkDBContext.cs" />
-        <option value="$PROJECT_DIR$/ProductModule/Handlers/GetAllProductsHandler.cs" />
-        <option value="$PROJECT_DIR$/Clients/New.API/Controllers/WeatherForecastController.cs" />
         <option value="$PROJECT_DIR$/SharedKernel/IQuery.cs" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/4574ef22-55f6-4bd2-998f-b522066703ba/console.sql" />
+        <option value="$PROJECT_DIR$/ProductModule/Queries/GetAllProducts.cs" />
+        <option value="$PROJECT_DIR$/Infraestructure.EntityFramework/EntityContext.cs" />
+        <option value="$PROJECT_DIR$/Clients/New.API/Controllers/WeatherForecastController.cs" />
+        <option value="$PROJECT_DIR$/ProductModule/Handlers/GetAllProductsHandler.cs" />
         <option value="$PROJECT_DIR$/Clients/New.API/Startup.cs" />
+        <option value="$PROJECT_DIR$/SharedKernel/QueryDispatcher.cs" />
+        <option value="$PROJECT_DIR$/SharedKernel/IDependencyResolver.cs" />
       </list>
     </option>
   </component>
   <component name="ProjectId" id="1WlovgLrfBsBAtcnZPZbsHjvSZg" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="sqlserver" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TWShift.4" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.New.API">
@@ -95,7 +136,17 @@
       <list>
         <serviceView>
           <treeState>
-            <expand />
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@2861fbce" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+            </expand>
             <select />
           </treeState>
         </serviceView>
@@ -114,6 +165,8 @@
       <updated>1579733774039</updated>
       <workItem from="1579733775674" duration="3273000" />
       <workItem from="1579796479701" duration="9023000" />
+      <workItem from="1579809116554" duration="506000" />
+      <workItem from="1579865601785" duration="9437000" />
     </task>
     <servers />
   </component>
@@ -122,87 +175,102 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
-    <state width="1874" height="351" key="GridCell.Tab.0.bottom" timestamp="1579807815301">
+    <state x="2475" y="201" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579865924970">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.0.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815301" />
-    <state width="1874" height="351" key="GridCell.Tab.0.center" timestamp="1579807815300">
+    <state x="2475" y="201" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579865924970" />
+    <state width="1874" height="351" key="GridCell.Tab.0.bottom" timestamp="1579882493227">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.0.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815300" />
-    <state width="1874" height="351" key="GridCell.Tab.0.left" timestamp="1579807815300">
+    <state width="1874" height="351" key="GridCell.Tab.0.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493227" />
+    <state width="1874" height="351" key="GridCell.Tab.0.center" timestamp="1579882493227">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.0.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815300" />
-    <state width="1874" height="351" key="GridCell.Tab.0.right" timestamp="1579807815300">
+    <state width="1874" height="351" key="GridCell.Tab.0.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493227" />
+    <state width="1874" height="351" key="GridCell.Tab.0.left" timestamp="1579882493227">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.0.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815300" />
-    <state width="1874" height="351" key="GridCell.Tab.1.bottom" timestamp="1579807815301">
+    <state width="1874" height="351" key="GridCell.Tab.0.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493227" />
+    <state width="1874" height="351" key="GridCell.Tab.0.right" timestamp="1579882493227">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.1.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815301" />
-    <state width="1874" height="351" key="GridCell.Tab.1.center" timestamp="1579807815301">
+    <state width="1874" height="351" key="GridCell.Tab.0.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493227" />
+    <state width="1874" height="351" key="GridCell.Tab.1.bottom" timestamp="1579882493228">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.1.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815301" />
-    <state width="1874" height="351" key="GridCell.Tab.1.left" timestamp="1579807815301">
+    <state width="1874" height="351" key="GridCell.Tab.1.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493228" />
+    <state width="1874" height="351" key="GridCell.Tab.1.center" timestamp="1579882493228">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.1.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815301" />
-    <state width="1874" height="351" key="GridCell.Tab.1.right" timestamp="1579807815301">
+    <state width="1874" height="351" key="GridCell.Tab.1.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493228" />
+    <state width="1874" height="351" key="GridCell.Tab.1.left" timestamp="1579882493228">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.1.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815301" />
-    <state width="1874" height="351" key="GridCell.Tab.2.bottom" timestamp="1579807815302">
+    <state width="1874" height="351" key="GridCell.Tab.1.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493228" />
+    <state width="1874" height="351" key="GridCell.Tab.1.right" timestamp="1579882493228">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.2.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815302" />
-    <state width="1874" height="351" key="GridCell.Tab.2.center" timestamp="1579807815302">
+    <state width="1874" height="351" key="GridCell.Tab.1.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493228" />
+    <state width="1874" height="351" key="GridCell.Tab.2.bottom" timestamp="1579882493228">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.2.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815302" />
-    <state width="1874" height="351" key="GridCell.Tab.2.left" timestamp="1579807815302">
+    <state width="1874" height="351" key="GridCell.Tab.2.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493228" />
+    <state width="1874" height="351" key="GridCell.Tab.2.center" timestamp="1579882493228">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.2.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815302" />
-    <state width="1874" height="351" key="GridCell.Tab.2.right" timestamp="1579807815302">
+    <state width="1874" height="351" key="GridCell.Tab.2.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493228" />
+    <state width="1874" height="351" key="GridCell.Tab.2.left" timestamp="1579882493228">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.2.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815302" />
-    <state width="1874" height="351" key="GridCell.Tab.3.bottom" timestamp="1579807815303">
+    <state width="1874" height="351" key="GridCell.Tab.2.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493228" />
+    <state width="1874" height="351" key="GridCell.Tab.2.right" timestamp="1579882493228">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.3.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815303" />
-    <state width="1874" height="351" key="GridCell.Tab.3.center" timestamp="1579807815302">
+    <state width="1874" height="351" key="GridCell.Tab.2.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493228" />
+    <state width="1874" height="351" key="GridCell.Tab.3.bottom" timestamp="1579882493229">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.3.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815302" />
-    <state width="1874" height="351" key="GridCell.Tab.3.left" timestamp="1579807815302">
+    <state width="1874" height="351" key="GridCell.Tab.3.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493229" />
+    <state width="1874" height="351" key="GridCell.Tab.3.center" timestamp="1579882493229">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.3.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815302" />
-    <state width="1874" height="351" key="GridCell.Tab.3.right" timestamp="1579807815302">
+    <state width="1874" height="351" key="GridCell.Tab.3.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493229" />
+    <state width="1874" height="351" key="GridCell.Tab.3.left" timestamp="1579882493229">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.3.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815302" />
-    <state width="1874" height="351" key="GridCell.Tab.4.bottom" timestamp="1579807815303">
+    <state width="1874" height="351" key="GridCell.Tab.3.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493229" />
+    <state width="1874" height="351" key="GridCell.Tab.3.right" timestamp="1579882493229">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.4.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815303" />
-    <state width="1874" height="351" key="GridCell.Tab.4.center" timestamp="1579807815303">
+    <state width="1874" height="351" key="GridCell.Tab.3.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493229" />
+    <state width="1874" height="351" key="GridCell.Tab.4.bottom" timestamp="1579882493229">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.4.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815303" />
-    <state width="1874" height="351" key="GridCell.Tab.4.left" timestamp="1579807815303">
+    <state width="1874" height="351" key="GridCell.Tab.4.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493229" />
+    <state width="1874" height="351" key="GridCell.Tab.4.center" timestamp="1579882493229">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.4.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815303" />
-    <state width="1874" height="351" key="GridCell.Tab.4.right" timestamp="1579807815303">
+    <state width="1874" height="351" key="GridCell.Tab.4.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493229" />
+    <state width="1874" height="351" key="GridCell.Tab.4.left" timestamp="1579882493229">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.4.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579807815303" />
+    <state width="1874" height="351" key="GridCell.Tab.4.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493229" />
+    <state width="1874" height="351" key="GridCell.Tab.4.right" timestamp="1579882493229">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="351" key="GridCell.Tab.4.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579882493229" />
     <state x="2475" y="275" width="800" height="537" key="Rider.ProjectTemplateDialog.Size" timestamp="1579802158027">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>

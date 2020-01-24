@@ -7,4 +7,14 @@ namespace Infraestructure.EntityFramework
             return new BenchmarkDBContext(null);
         }
     }
+
+    public abstract class EntityFrameworkConnector
+    {
+        protected readonly BenchmarkDBContext Context;
+
+        public EntityFrameworkConnector(BenchmarkDBContext context)
+        {
+            Context = context;
+        }
+    }
 }
