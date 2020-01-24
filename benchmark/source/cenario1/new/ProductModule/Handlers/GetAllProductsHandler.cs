@@ -10,7 +10,7 @@ using SharedKernel;
 namespace ProductModule.Handlers
 {
     
-    public class GetAllProductsHandler : QueryHandlerBase<GetAllProducts, IEnumerable<Product>>//IQueryHandler<GetAllProducts, IEnumerable<Product>>> //, IQueryHandler<GetAllProducts, IEnumerable<Product>>  //EntityFrameworkConnector
+    public class GetAllProductsHandler : QueryHandlerBase<GetAllProducts, IEnumerable<Product>>, IQueryHandler//IQueryHandler<GetAllProducts, IEnumerable<Product>>> //, IQueryHandler<GetAllProducts, IEnumerable<Product>>  //EntityFrameworkConnector
     {
         private readonly BenchmarkDBContext _context;
 
@@ -19,11 +19,6 @@ namespace ProductModule.Handlers
         {
             _context = context;
         }
-        
-        // public GetAllProductsHandler()
-        // {
-        //     
-        // }
         
         // public IEnumerable<Product> Handle(GetAllProducts query)
         // {

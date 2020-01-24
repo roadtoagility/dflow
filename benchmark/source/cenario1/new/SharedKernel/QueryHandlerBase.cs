@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace SharedKernel
 {
-    public abstract class QueryHandlerBase<TQuery, TResult> : IQueryHandler
+    public abstract class QueryHandlerBase<TQuery, TResult>
     {
-        public virtual void Start()
+        
+        public void Start()
         {
-            
             var task3 = new Task(() => StartThread(),
                 TaskCreationOptions.LongRunning);
             task3.Start();

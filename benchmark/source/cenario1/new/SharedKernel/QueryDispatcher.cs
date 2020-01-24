@@ -18,9 +18,15 @@ namespace SharedKernel
         {
             var service = _resolver.Resolve<TQuery, TResult>();
 
+            CheckActivation<TQuery, TResult>(service);
+            return Send<TResult, TQuery>(query, service.GetName());
+        }
+
+        private TResult Send<TResult, TQuery>(TQuery query, string serviceName)
+        {
             using (var dealer = new DealerSocket())
             {
-                dealer.Connect($"inproc://{service.GetName()}");
+                dealer.Connect($"inproc://{serviceName}");
                 var message = JsonSerializer.Serialize(query);
                 
                 
@@ -34,5 +40,15 @@ namespace SharedKernel
                 return result;
             }
         }
+
+        private void CheckActivation<TQuery, TResult>(QueryHandlerBase<TQuery, TResult> service)
+        {
+            if(!QueryHandlersActivation.Instance.IsActivate(service.GetName()))
+            {
+                service.Start();
+                QueryHandlersActivation.Instance.Activate(service.GetName());
+            }
+        }
+
     }
 }

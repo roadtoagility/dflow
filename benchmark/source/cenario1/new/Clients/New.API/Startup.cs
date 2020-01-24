@@ -55,12 +55,8 @@ namespace New.API
             });
 
             services.AddScoped<IDependencyResolver, AspNetCoreDependencyResolver>();
-            //services.AddScoped<IQueryHandler<GetAllProducts, IEnumerable<Product>>  , GetAllProductsHandler>();
             services.AddScoped<QueryHandlerBase<GetAllProducts, IEnumerable<Product>>, GetAllProductsHandler>();
             services.AddScoped<IQueryDispatcher, QueryDispatcher>();
-            
-            
-            AppDomain.CurrentDomain.Load("ProductModule");
             
             services.AddControllers();
         }
@@ -71,18 +67,6 @@ namespace New.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            
-            var types = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(s => s.GetTypes())
-                .Where(p => typeof(QueryHandlerBase<GetAllProducts, IEnumerable<Product>>).IsAssignableFrom(p) && !p.IsInterface && !p.IsAbstract).ToList();
-
-            IQueryHandler query = null;
-            
-            for (var i = 0; i < types.Count; i++)
-            {
-                query = provider.GetService(typeof(QueryHandlerBase<GetAllProducts, IEnumerable<Product>>)) as QueryHandlerBase<GetAllProducts, IEnumerable<Product>>;
-                query.Start();
             }
 
             app.UseHttpsRedirection();
