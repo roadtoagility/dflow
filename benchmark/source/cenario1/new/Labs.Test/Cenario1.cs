@@ -56,6 +56,45 @@ namespace Labs.Test
             _testOutputHelper.WriteLine("Connect to command");
 
             Task.Delay(1000);
+
+            VentilatorCommand_SendCommand(ventilatorCommand, command);
+            
+            Task.Delay(1000);
+
+            var ventilatorQuery = new DealerSocket();
+            ventilatorQuery.Options.Identity = Encoding.UTF8.GetBytes("VENTILATORQUERY");
+            ventilatorQuery.Connect(endpointQuery);
+            _testOutputHelper.WriteLine("Connect to query");
+           
+            Task.Delay(1000);
+
+            VentilatorQuery_SendQuery(ventilatorQuery, query);
+            
+            Task.Delay(1000);
+            
+            var ventilator = new RouterSocket();
+            ventilator.Options.Identity = Encoding.UTF8.GetBytes("VENTILATOR");
+            ventilator.Bind(endpointVentilator);
+            
+            _testOutputHelper.WriteLine("Bind Ventilator");
+            
+            Task.Delay(1000);
+            
+            var client = new DealerSocket();
+            client.Options.Identity = Encoding.UTF8.GetBytes("CLIENT");
+            client.Connect(endpointVentilator);
+            
+            _testOutputHelper.WriteLine("Connect to Ventilator");
+            
+            Task.Delay(1000);
+
+            ClientCommand_Ventilator(client, ventilator, ventilatorCommand, command);
+
+        }
+
+        void VentilatorCommand_SendCommand( DealerSocket ventilatorCommand, RouterSocket command)
+        {
+            #region communication ventilatorCommand  to Commander
             
             var msgCommand = new NetMQMessage();
             msgCommand.AppendEmptyFrame();
@@ -70,14 +109,12 @@ namespace Labs.Test
             var messageCommandCommand = command.ReceiveFrameString();
             _testOutputHelper.WriteLine("Received Command: {0} {1}", messageCommandID, messageCommandCommand);
                       
-            Task.Delay(1000);
-
-            var ventilatorQuery = new DealerSocket();
-            ventilatorQuery.Options.Identity = Encoding.UTF8.GetBytes("VENTILATORQUERY");
-            ventilatorQuery.Connect(endpointQuery);
-            _testOutputHelper.WriteLine("Connect to query");
-           
-            Task.Delay(1000);
+            #endregion
+            
+        }
+        void VentilatorQuery_SendQuery( DealerSocket ventilatorQuery, RouterSocket query)
+        {
+            #region communication ventilatorQuery  to Querier
             
             var msgQuery = new NetMQMessage();
             msgQuery.AppendEmptyFrame();
@@ -92,12 +129,95 @@ namespace Labs.Test
             var messageQueryCommand = query.ReceiveFrameString();
             _testOutputHelper.WriteLine("Received Query: {0} {1}", messageQueryID, messageQueryCommand);
             
+            #endregion
+        }
+
+        void ClientCommand_Ventilator(DealerSocket client, RouterSocket ventilator, DealerSocket ventilatorCommand, RouterSocket command)
+        {
+            // inicialização das conexões ventilator -> command executor 
+            
+            // var commandHello = new NetMQMessage();
+            // commandHello.AppendEmptyFrame();
+            // commandHello.Append("HELLO");
+            // ventilatorCommand.SendMultipartMessage(commandHello);
+            // _testOutputHelper.WriteLine("Send Hello to command processor");
+            //
+            // Task.Delay(1000);
+            //
+            // var hello = command.ReceiveFrameString();
+            // command.ReceiveFrameString();
+            // var helloCommand = command.ReceiveFrameString();
+            // _testOutputHelper.WriteLine("Received Command: {0} {1}", hello, helloCommand);
+
+            // client envia comando 
+            
+            var commandData = new NetMQMessage();
+            commandData.AppendEmptyFrame();
+            commandData.Append("COMMAND");
+            commandData.Append("COMMAND_DATA");
+            client.SendMultipartMessage(commandData);
+            _testOutputHelper.WriteLine("Client send a command to ventilator");
+            
             Task.Delay(1000);
             
-            var ventilator = new RouterSocket();
-            ventilator.Options.Identity = Encoding.UTF8.GetBytes("VENTILATOR");
-            ventilator.Bind(endpointVentilator);
-            _testOutputHelper.WriteLine("Bind Ventilator");
+            var senderId = ventilator.ReceiveFrameString();
+            ventilator.ReceiveFrameString();
+            var requestType = ventilator.ReceiveFrameString();
+            var messageCommandData = ventilator.ReceiveFrameString();
+
+            _testOutputHelper.WriteLine("Ventilator Received Request: {0} {1} {2}", senderId, requestType, messageCommandData);
+            
+            Task.Delay(1000);
+            
+            // ventilator roteia comando 
+            
+            var routingCommandData = new NetMQMessage();
+            routingCommandData.AppendEmptyFrame();
+            routingCommandData.Append(messageCommandData);
+            ventilatorCommand.SendMultipartMessage(routingCommandData);
+            _testOutputHelper.WriteLine("Ventilator send a command to command processor");
+            
+            Task.Delay(1000);
+            
+            var sender = command.ReceiveFrameString();
+            command.ReceiveFrameString();
+            var receiveCommandData = command.ReceiveFrameString();
+            _testOutputHelper.WriteLine("Command Received sender: {0} command args: {1}", sender, receiveCommandData);
+
+            // Task.Delay(1000);
+            //
+            // var commandAnswerData = new NetMQMessage();
+            // commandAnswerData.AppendEmptyFrame();
+            // commandAnswerData.Append(messageCommandData + ": OK");
+            // command.SendMultipartMessage(commandAnswerData);
+            // _testOutputHelper.WriteLine("Command send an answer to ventilator");
+            //
+            // Task.Delay(1000);
+            
+            // var senderCommand = ventilatorCommand.ReceiveFrameString();
+            // ventilatorCommand.ReceiveFrameString();
+            // var receiveCommandAnswer = ventilatorCommand.ReceiveFrameString();
+            // _testOutputHelper.WriteLine("Ventilator Received Command Answer: {0} command args: {1}", sender, receiveCommandAnswer);
+            //
+            // Task.Delay(1000);
+            //
+            // var routeAnswerData = new NetMQMessage();
+            // routeAnswerData.AppendEmptyFrame();
+            // routeAnswerData.Append(messageCommandData + ": OK");
+            // ventilator.SendMultipartMessage(commandAnswerData);
+            // _testOutputHelper.WriteLine("Command send an answer to ventilator");
+            //
+            // Task.Delay(1000);
+            //
+            // var senderCommand = ventilatorCommand.ReceiveFrameString();
+            // ventilatorCommand.ReceiveFrameString();
+            // var receiveCommandAnswer = ventilatorCommand.ReceiveFrameString();
+            // _testOutputHelper.WriteLine("Ventilator Received Command Answer: {0} command args: {1}", sender, receiveCommandAnswer);
+        }
+        
+        void ClientQuery_Ventilator(DealerSocket client, RouterSocket ventilator, RouterSocket query)
+        {
+            
         }
     }
 }
