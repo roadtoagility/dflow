@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -6,16 +7,27 @@ using Infraestructure.EntityFramework;
 using Microsoft.Data.SqlClient;
 using ProductModule.Queries;
 using SharedKernel;
+using SharedKernel.Distribuited;
 
 namespace ProductModule.Handlers
 {
+
+    public interface IHandler
+    {
+        
+    }
+
+    public interface IGetAllProductsHandler : IHandler
+    {
+        IEnumerable<Product> Handle(GetAllProducts query);
+    }
     
-    public class GetAllProductsHandler : QueryHandlerBase<GetAllProducts, IEnumerable<Product>>, IQueryHandler//IQueryHandler<GetAllProducts, IEnumerable<Product>>> //, IQueryHandler<GetAllProducts, IEnumerable<Product>>  //EntityFrameworkConnector
+    public class GetAllProductsHandler : QueryExecutor<GetAllProducts, IEnumerable<Product>>, IGetAllProductsHandler
     {
         private readonly BenchmarkDBContext _context;
-
-        //private readonly BenchmarkDBContext _context;
+        
         public GetAllProductsHandler(BenchmarkDBContext context)
+            :base("GetAllProductsHandler", "")
         {
             _context = context;
         }
@@ -25,12 +37,7 @@ namespace ProductModule.Handlers
         //     return _context.Products.ToList();
         // }
 
-        public override string GetName()
-        {
-            return "GetAllProductsHandler";
-        }
-
-        public override IEnumerable<Product> Handler(GetAllProducts query)
+        public override IEnumerable<Product> Handle(GetAllProducts query)
         {
 
             IEnumerable<Product> products;

@@ -13,14 +13,17 @@ namespace SharedKernel
         TResult Handle<TQuery, TResult>(TQuery query) where TQuery : IQuery<TResult>;
     }
 
+
+    // public interface IQueryHandler
+    // {
+    //     // void Start();
+    //     object Handle(object query);
+    // }
+    
+    
     public interface IQueryHandler<TQuery, TResult>
     {
-        TResult Handle(TQuery query);
+        // void Start();
+        TResult Handle(TQuery query);// where TQuery : IQuery<TResult>;
     }
-
-    public interface IQueryHandler
-    {
-        void Start();
-    }
-    
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProductModule.Queries;
 using SharedKernel;
+using SharedKernel.Distribuited;
 
 namespace New.API.Controllers
 {
@@ -13,15 +14,10 @@ namespace New.API.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IQueryDispatcher _queryDispatcher;
+        private readonly IOutputTransport _queryDispatcher;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IQueryDispatcher queryDispatcher)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IOutputTransport queryDispatcher)
         {
             _logger = logger;
             _queryDispatcher = queryDispatcher;
@@ -30,7 +26,7 @@ namespace New.API.Controllers
         [HttpGet]
         public IEnumerable<Product> Get()
         {
-            return _queryDispatcher.Handle<GetAllProducts, IEnumerable<Product>>(new GetAllProducts());
+            return _queryDispatcher.Send<IEnumerable<Product>, GetAllProducts>(new GetAllProducts());
         }
     }
 }
