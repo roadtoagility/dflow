@@ -17,5 +17,10 @@ namespace SharedKernel
     {
         TResult Handle(TQuery query);
     }
+
+    public interface IQueryHandler
+    {
+        void Start();
+    }
     
 }
