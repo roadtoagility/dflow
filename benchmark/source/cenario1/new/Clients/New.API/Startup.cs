@@ -29,18 +29,6 @@ namespace New.API
             _serviceProvider = serviceProvider;
         }
 
-        // public IQueryHandler<TQuery,TResult> Resolve<TQuery, TResult>() where TQuery : IQuery<TResult>
-        // {
-        //     var service = this._serviceProvider.GetService(typeof(IQueryHandler<TQuery,TResult>)) as IQueryHandler<TQuery,TResult>;
-        //     return service;
-        // }
-        
-        public QueryHandlerBase<TQuery,TResult> Resolve<TQuery, TResult>() where TQuery : IQuery<TResult>
-        {
-            var service = this._serviceProvider.GetService(typeof(QueryHandlerBase<TQuery,TResult>)) as QueryHandlerBase<TQuery,TResult>;
-            return service;
-        }
-
         public object Resolve(Type service)
         {
             return this._serviceProvider.GetService(service);
@@ -72,7 +60,7 @@ namespace New.API
             services.AddScoped<IGetAllProductsHandler, GetAllProductsHandler>();
             
             services.AddScoped<IOutputTransport>(s => 
-                new SharedKernel.Distribuited.ClientHandler(Configuration.GetValue<string>("EndpointServer:HandlerAddress")));
+                new SharedKernel.Distribuited.ClientHandler(Configuration.GetValue<string>("EndpointServer:ExecutorAddress")));
             
             services.AddControllers();
         }

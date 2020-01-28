@@ -27,7 +27,7 @@ namespace ProductModule.Handlers
         private readonly BenchmarkDBContext _context;
         
         public GetAllProductsHandler(BenchmarkDBContext context)
-            :base("GetAllProductsHandler", "")
+            :base("inproc://GetAllProductsHandler", "")
         {
             _context = context;
         }

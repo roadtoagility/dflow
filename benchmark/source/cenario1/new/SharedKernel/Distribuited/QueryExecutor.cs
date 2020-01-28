@@ -36,7 +36,7 @@ namespace SharedKernel.Distribuited
                  {
                      server.Options.Identity = Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());
                      server.Options.RouterMandatory = true;
-                     server.Bind($"inproc://{_externalEndpoint}");
+                     server.Bind($"{_externalEndpoint}");
                   
                      server.ReceiveReady += (sender, args) =>
                      {
@@ -54,10 +54,6 @@ namespace SharedKernel.Distribuited
                          {
                              var message = server.ReceiveMultipartMessage();
 
-                             var teste = message[0].ConvertToString();
-                             var tested = message[1].ConvertToString();
-                             var tesdte = message[2].ConvertToString();
-                             
                              var json = message[2].ConvertToString();
                             
 

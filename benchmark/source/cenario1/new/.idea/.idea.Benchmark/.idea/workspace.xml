@@ -2,24 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25a0de35-a152-41b7-a204-51a34ad6e000" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/ClientHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/IOutputTransport.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/ITransport.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryExecutor.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/RequestMessage.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/dataSources/4574ef22-55f6-4bd2-998f-b522066703ba.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/dataSources/4574ef22-55f6-4bd2-998f-b522066703ba.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/dataSources/4574ef22-55f6-4bd2-998f-b522066703ba/storage_v2/_src_/database/master.YiqNvw/schema/dbo.sYMBAA.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/dataSources/4574ef22-55f6-4bd2-998f-b522066703ba/storage_v2/_src_/database/master.YiqNvw/schema/dbo.sYMBAA.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Benchmark/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Benchmark/riderModule.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Clients/New.API/Controllers/WeatherForecastController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Clients/New.API/Controllers/WeatherForecastController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Clients/New.API/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Clients/New.API/Startup.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Clients/New.API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Clients/New.API/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clients/New.API/mono_crash.mem.9468.1.blob" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProductModule/Handlers/GetAllProductsHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProductModule/Handlers/GetAllProductsHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedKernel/Distribuited/ClientHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/ClientHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedKernel/Distribuited/IOutputTransport.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/IOutputTransport.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryExecutor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryExecutor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedKernel/Distribuited/RequestMessage.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/SharedKernel/IDependencyResolver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedKernel/IDependencyResolver.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SharedKernel/IQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedKernel/IQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedKernel/QueryDispatcher.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedKernel/QueryHandlerBase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SharedKernel/QueryHandlersActivation.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,23 +56,20 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/SharedKernel/Distribuited/ITransport.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedKernel/Distribuited/QueryExecutor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/SharedKernel/Distribuited/RequestMessage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedKernel/IDependencyResolver.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Clients/New.API/WeatherForecast.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Clients/New.API/appsettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Clients/New.API/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Clients/New.API/Startup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Labs.Test/obj/Debug/netcoreapp3.1/Labs.Test.AssemblyInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5CE28C73-3988-4D2F-B2D0-645F8D3E0DEF/19/SocketOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/C866BA95-6C92-4815-BE5F-137AACAC57CE/1D8/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/C866BA95-6C92-4815-BE5F-137AACAC57CE/2E/RuntimeType.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Clients/New.API/Controllers/WeatherForecastController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedKernel/Product.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/SharedKernel/QueryHandlersActivation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SharedKernel/IQuery.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/SharedKernel/QueryHandlerBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Labs.Test/Cenario1.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProductModule/Queries/GetAllProducts.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/SharedKernel/QueryDispatcher.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProductModule/Handlers/GetAllProductsHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Labs.Test/Cenario1Componentizado.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infraestructure.EntityFramework/BenchmarkDBContext.cs" root0="FORCE_HIGHLIGHTING" />
@@ -105,18 +102,18 @@
         <option value="$PROJECT_DIR$/SharedKernel/QueryHandlerBase.cs" />
         <option value="$PROJECT_DIR$/SharedKernel/QueryDispatcher.cs" />
         <option value="$PROJECT_DIR$/SharedKernel/Distribuited/QueryDispatcher.cs" />
-        <option value="$PROJECT_DIR$/SharedKernel/Distribuited/IOutputTransport.cs" />
-        <option value="$PROJECT_DIR$/Clients/New.API/Controllers/WeatherForecastController.cs" />
-        <option value="$PROJECT_DIR$/SharedKernel/IDependencyResolver.cs" />
-        <option value="$PROJECT_DIR$/SharedKernel/IQuery.cs" />
-        <option value="$PROJECT_DIR$/ProductModule/Handlers/GetAllProductsHandler.cs" />
-        <option value="$PROJECT_DIR$/Clients/New.API/appsettings.json" />
-        <option value="$PROJECT_DIR$/Clients/New.API/Startup.cs" />
         <option value="$PROJECT_DIR$/SharedKernel/Distribuited/ITransport.cs" />
         <option value="$PROJECT_DIR$/SharedKernel/Distribuited/RequestMessage.cs" />
+        <option value="$PROJECT_DIR$/SharedKernel/Distribuited/IOutputTransport.cs" />
+        <option value="$PROJECT_DIR$/Clients/New.API/Controllers/WeatherForecastController.cs" />
+        <option value="$PROJECT_DIR$/Clients/New.API/appsettings.json" />
         <option value="$PROJECT_DIR$/SharedKernel/Distribuited/ClientHandler.cs" />
-        <option value="$PROJECT_DIR$/SharedKernel/Distribuited/QueryExecutor.cs" />
         <option value="$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs" />
+        <option value="$PROJECT_DIR$/ProductModule/Handlers/GetAllProductsHandler.cs" />
+        <option value="$PROJECT_DIR$/SharedKernel/Distribuited/QueryExecutor.cs" />
+        <option value="$PROJECT_DIR$/Clients/New.API/Startup.cs" />
+        <option value="$PROJECT_DIR$/SharedKernel/IDependencyResolver.cs" />
+        <option value="$PROJECT_DIR$/SharedKernel/IQuery.cs" />
       </list>
     </option>
   </component>
@@ -179,7 +176,7 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@4ab5f5a1" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@146b351a" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
             <select />
@@ -202,6 +199,7 @@
       <workItem from="1579796479701" duration="9023000" />
       <workItem from="1579809116554" duration="506000" />
       <workItem from="1579865601785" duration="27719000" />
+      <workItem from="1580220321367" duration="3243000" />
     </task>
     <servers />
   </component>
@@ -232,86 +230,86 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="971" height="466" key="DebuggerActiveHint/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580156539776" />
-    <state width="1874" height="351" key="GridCell.Tab.0.bottom" timestamp="1580157207173">
+    <state width="1874" height="351" key="GridCell.Tab.0.bottom" timestamp="1580221250412">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.0.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207173" />
-    <state width="1874" height="351" key="GridCell.Tab.0.center" timestamp="1580157207173">
+    <state width="1874" height="351" key="GridCell.Tab.0.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250412" />
+    <state width="1874" height="351" key="GridCell.Tab.0.center" timestamp="1580221250412">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.0.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207173" />
-    <state width="1874" height="351" key="GridCell.Tab.0.left" timestamp="1580157207173">
+    <state width="1874" height="351" key="GridCell.Tab.0.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250412" />
+    <state width="1874" height="351" key="GridCell.Tab.0.left" timestamp="1580221250412">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.0.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207173" />
-    <state width="1874" height="351" key="GridCell.Tab.0.right" timestamp="1580157207173">
+    <state width="1874" height="351" key="GridCell.Tab.0.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250412" />
+    <state width="1874" height="351" key="GridCell.Tab.0.right" timestamp="1580221250412">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.0.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207173" />
-    <state width="1874" height="351" key="GridCell.Tab.1.bottom" timestamp="1580157207173">
+    <state width="1874" height="351" key="GridCell.Tab.0.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250412" />
+    <state width="1874" height="351" key="GridCell.Tab.1.bottom" timestamp="1580221250412">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.1.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207173" />
-    <state width="1874" height="351" key="GridCell.Tab.1.center" timestamp="1580157207173">
+    <state width="1874" height="351" key="GridCell.Tab.1.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250412" />
+    <state width="1874" height="351" key="GridCell.Tab.1.center" timestamp="1580221250412">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.1.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207173" />
-    <state width="1874" height="351" key="GridCell.Tab.1.left" timestamp="1580157207173">
+    <state width="1874" height="351" key="GridCell.Tab.1.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250412" />
+    <state width="1874" height="351" key="GridCell.Tab.1.left" timestamp="1580221250412">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.1.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207173" />
-    <state width="1874" height="351" key="GridCell.Tab.1.right" timestamp="1580157207173">
+    <state width="1874" height="351" key="GridCell.Tab.1.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250412" />
+    <state width="1874" height="351" key="GridCell.Tab.1.right" timestamp="1580221250412">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.1.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207173" />
-    <state width="1874" height="351" key="GridCell.Tab.2.bottom" timestamp="1580157207174">
+    <state width="1874" height="351" key="GridCell.Tab.1.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250412" />
+    <state width="1874" height="351" key="GridCell.Tab.2.bottom" timestamp="1580221250413">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.2.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207174" />
-    <state width="1874" height="351" key="GridCell.Tab.2.center" timestamp="1580157207173">
+    <state width="1874" height="351" key="GridCell.Tab.2.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250413" />
+    <state width="1874" height="351" key="GridCell.Tab.2.center" timestamp="1580221250413">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.2.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207173" />
-    <state width="1874" height="351" key="GridCell.Tab.2.left" timestamp="1580157207173">
+    <state width="1874" height="351" key="GridCell.Tab.2.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250413" />
+    <state width="1874" height="351" key="GridCell.Tab.2.left" timestamp="1580221250412">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.2.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207173" />
-    <state width="1874" height="351" key="GridCell.Tab.2.right" timestamp="1580157207173">
+    <state width="1874" height="351" key="GridCell.Tab.2.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250412" />
+    <state width="1874" height="351" key="GridCell.Tab.2.right" timestamp="1580221250413">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.2.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207173" />
-    <state width="1874" height="351" key="GridCell.Tab.3.bottom" timestamp="1580157207174">
+    <state width="1874" height="351" key="GridCell.Tab.2.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250413" />
+    <state width="1874" height="351" key="GridCell.Tab.3.bottom" timestamp="1580221250413">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.3.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207174" />
-    <state width="1874" height="351" key="GridCell.Tab.3.center" timestamp="1580157207174">
+    <state width="1874" height="351" key="GridCell.Tab.3.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250413" />
+    <state width="1874" height="351" key="GridCell.Tab.3.center" timestamp="1580221250413">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.3.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207174" />
-    <state width="1874" height="351" key="GridCell.Tab.3.left" timestamp="1580157207174">
+    <state width="1874" height="351" key="GridCell.Tab.3.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250413" />
+    <state width="1874" height="351" key="GridCell.Tab.3.left" timestamp="1580221250413">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.3.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207174" />
-    <state width="1874" height="351" key="GridCell.Tab.3.right" timestamp="1580157207174">
+    <state width="1874" height="351" key="GridCell.Tab.3.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250413" />
+    <state width="1874" height="351" key="GridCell.Tab.3.right" timestamp="1580221250413">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.3.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207174" />
-    <state width="1874" height="351" key="GridCell.Tab.4.bottom" timestamp="1580157207174">
+    <state width="1874" height="351" key="GridCell.Tab.3.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250413" />
+    <state width="1874" height="351" key="GridCell.Tab.4.bottom" timestamp="1580221250413">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.4.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207174" />
-    <state width="1874" height="351" key="GridCell.Tab.4.center" timestamp="1580157207174">
+    <state width="1874" height="351" key="GridCell.Tab.4.bottom/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250413" />
+    <state width="1874" height="351" key="GridCell.Tab.4.center" timestamp="1580221250413">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.4.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207174" />
-    <state width="1874" height="351" key="GridCell.Tab.4.left" timestamp="1580157207174">
+    <state width="1874" height="351" key="GridCell.Tab.4.center/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250413" />
+    <state width="1874" height="351" key="GridCell.Tab.4.left" timestamp="1580221250413">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.4.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207174" />
-    <state width="1874" height="351" key="GridCell.Tab.4.right" timestamp="1580157207174">
+    <state width="1874" height="351" key="GridCell.Tab.4.left/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250413" />
+    <state width="1874" height="351" key="GridCell.Tab.4.right" timestamp="1580221250413">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="351" key="GridCell.Tab.4.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580157207174" />
+    <state width="1874" height="351" key="GridCell.Tab.4.right/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580221250413" />
     <state x="2475" y="275" width="800" height="537" key="Rider.ProjectTemplateDialog.Size" timestamp="1580141898030">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -328,128 +326,5 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2465" y="271" width="839" height="538" key="find.popup/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1580152296458" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/SharedKernel/Distribuited/ClientHandler.cs</url>
-          <line>54</line>
-          <properties documentPath="$PROJECT_DIR$/SharedKernel/Distribuited/ClientHandler.cs" initialLine="58">
-            <startOffsets>
-              <option value="1546" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1581" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/SharedKernel/Distribuited/ClientHandler.cs</url>
-          <line>52</line>
-          <properties documentPath="$PROJECT_DIR$/SharedKernel/Distribuited/ClientHandler.cs" initialLine="55">
-            <startOffsets>
-              <option value="1482" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1528" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/SharedKernel/Distribuited/QueryExecutor.cs</url>
-          <line>68</line>
-          <properties documentPath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryExecutor.cs" initialLine="64">
-            <startOffsets>
-              <option value="2863" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2904" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs</url>
-          <line>75</line>
-          <properties documentPath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs" initialLine="75">
-            <startOffsets>
-              <option value="2745" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2746" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs</url>
-          <line>109</line>
-          <properties documentPath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs" initialLine="106">
-            <startOffsets>
-              <option value="4426" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4471" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs</url>
-          <line>88</line>
-          <properties documentPath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs" initialLine="88">
-            <startOffsets>
-              <option value="3314" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3361" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs</url>
-          <line>96</line>
-          <properties documentPath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs" initialLine="96">
-            <startOffsets>
-              <option value="3789" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3829" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/SharedKernel/Distribuited/QueryExecutor.cs</url>
-          <line>56</line>
-          <properties documentPath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryExecutor.cs" initialLine="56">
-            <startOffsets>
-              <option value="2146" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2187" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs</url>
-          <line>101</line>
-          <properties documentPath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs" initialLine="101">
-            <startOffsets>
-              <option value="4041" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4082" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

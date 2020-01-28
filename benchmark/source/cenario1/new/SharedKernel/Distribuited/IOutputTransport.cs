@@ -2,6 +2,6 @@ namespace SharedKernel.Distribuited
 {
     public interface IOutputTransport
     {
-        TResult Send<TResult, TQuery>(TQuery query);
+        TResult Handle<TResult, TQuery>(TQuery query);
     }
 }

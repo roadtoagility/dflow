@@ -16,7 +16,7 @@ namespace SharedKernel.Distribuited
             _serverEndpoint = serverEndpoint;
         }
         
-        public TResult Send<TResult, TQuery>(TQuery query)
+        public TResult Handle<TResult, TQuery>(TQuery query)
         {
             return JsonSerializer.Deserialize<TResult>(SendRequest(JsonSerializer.Serialize(query)));
         }
@@ -32,7 +32,7 @@ namespace SharedKernel.Distribuited
                 {
                     try
                     {
-                        server.Connect($"inproc://{_serverEndpoint}");
+                        server.Connect($"{_serverEndpoint}");
                         ok = true;
 
                     }

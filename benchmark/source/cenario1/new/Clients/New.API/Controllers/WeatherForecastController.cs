@@ -26,7 +26,7 @@ namespace New.API.Controllers
         [HttpGet]
         public IEnumerable<Product> Get()
         {
-            return _queryDispatcher.Send<IEnumerable<Product>, GetAllProducts>(new GetAllProducts());
+            return _queryDispatcher.Handle<IEnumerable<Product>, GetAllProducts>(new GetAllProducts());
         }
     }
 }

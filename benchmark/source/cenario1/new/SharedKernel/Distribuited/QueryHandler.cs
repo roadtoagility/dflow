@@ -56,14 +56,14 @@ namespace SharedKernel.Distribuited
                 {
                     server.Options.Identity = Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());
                     server.Options.RouterMandatory = true;
-                    server.Bind($"inproc://{endpoint.ToString()}");
+                    server.Bind($"{endpoint.ToString()}");
                     var ok = false;
 
                     do
                     {
                         try
                         {
-                            _output.Connect($"inproc://{_internalEndpoint}");
+                            _output.Connect($"{_internalEndpoint}");
                             ok = true;
                         }
                         catch (NetMQException ex)
