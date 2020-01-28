@@ -57,7 +57,8 @@ namespace New.API
             services.AddSingleton<ITransport<RouterSocket, DealerSocket>>(queryHandler);
             
             services.AddScoped<IDependencyResolver, AspNetCoreDependencyResolver>();
-            services.AddScoped<IGetAllProductsHandler, GetAllProductsHandler>();
+            //services.AddScoped<IGetAllProductsHandler, GetAllProductsHandler>();
+            services.AddScoped<QueryExecutor<GetAllProducts, IEnumerable<Product>>, GetAllProductsHandler>();
             
             services.AddScoped<IOutputTransport>(s => 
                 new SharedKernel.Distribuited.ClientHandler(Configuration.GetValue<string>("EndpointServer:ExecutorAddress")));

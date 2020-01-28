@@ -11,18 +11,12 @@ using SharedKernel.Distribuited;
 
 namespace ProductModule.Handlers
 {
-
-    public interface IHandler
-    {
-        
-    }
-
-    public interface IGetAllProductsHandler : IHandler
-    {
-        IEnumerable<Product> Handle(GetAllProducts query);
-    }
+    // public interface IGetAllProductsHandler : IHandler
+    // {
+    //     IEnumerable<Product> Handle(GetAllProducts query);
+    // }
     
-    public class GetAllProductsHandler : QueryExecutor<GetAllProducts, IEnumerable<Product>>, IGetAllProductsHandler
+    public class GetAllProductsHandler : QueryExecutor<GetAllProducts, IEnumerable<Product>>, IHandler //, IGetAllProductsHandler
     {
         private readonly BenchmarkDBContext _context;
         
@@ -49,6 +43,11 @@ namespace ProductModule.Handlers
             }
 
             return products;
+        }
+
+        public string GetName()
+        {
+            return "GetAllProductsHandler";
         }
     }
 }
