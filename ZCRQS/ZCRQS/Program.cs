@@ -3,32 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.PortableExecutable;
+using Core.Shared;
 using Xunit;
 
 namespace ZCRQS
 {   
-    
-    
-    
     public class UpdateModelTests
     {
         private Guid IdPessoa;
         private MemoryWriteRepository _memoryWriteModel;
         private MemoryReadModel _memoryReadModel;
-        private GetPessoaByCpfQuery _queryByCpf;
+        private GetPessoaByIdQuery _queryByCpf;
 
         public UpdateModelTests()
         {
             _memoryWriteModel = new MemoryWriteRepository();
             _memoryReadModel = new MemoryReadModel();
-            _queryByCpf = new GetPessoaByCpfQuery(_memoryReadModel);
+            _queryByCpf = new GetPessoaByIdQuery(_memoryReadModel);
             
             IdPessoa = Guid.NewGuid();
             
             var updateCpfCommand = new AtualizarCpfCommand(_memoryWriteModel);
             updateCpfCommand.Execute(new ChangeCpfParams("11111111111", IdPessoa));
         }
-        
         
 
         [Fact]
@@ -39,68 +36,17 @@ namespace ZCRQS
             
             updateCpfCommand.Execute(new ChangeCpfParams("02866783140", IdPessoa));
 
-            var pessoa = _queryByCpf.Query(new GetPessoaByCpfParam("02866783140"));
+            var pessoa = _queryByCpf.Query(new GetPessoaByIdParam(IdPessoa));
             
             Assert.Equal("02866783140", pessoa.Cpf);
         }
     }
 
-    public sealed class EventStream
-    {
-        private List<IObserverStream> _observers = new List<IObserverStream>();
-        private Dictionary<string, List<IObserverStream>> _observersDictionary = new Dictionary<string, List<IObserverStream>>();
-        
-        private static readonly Lazy<EventStream>
-            lazy =
-                new Lazy<EventStream>
-                    (() => new EventStream());
-
-        public static EventStream Instance { get { return lazy.Value; } }
-
-        private EventStream()
-        {
-        }
-        
-        public void Subscribe(IObserverStream observer)
-        {
-            foreach (var subscriber in observer.GetEventListers())
-            {
-                if (!_observersDictionary.ContainsKey(subscriber))
-                {
-                    _observersDictionary.Add(subscriber, new List<IObserverStream>());
-                }
-                
-                _observersDictionary[subscriber].Add(observer);
-            }
-            _observers.Add(observer);
-        }
-        
-        public void Raise(params Event[] events)
-        {
-            foreach (var eventUnit in events)
-            {
-                if (_observersDictionary.ContainsKey(eventUnit.Name))
-                {
-                    foreach (var observer in _observersDictionary[eventUnit.Name])
-                    {
-                        observer.Raise(eventUnit);
-                    }
-                }
-            }
-        }
-    }
-
-    public interface IObserverStream
-    {
-        void Raise(Event eventUnit);
-        string[] GetEventListers();
-    }
-
     public class AtualizarCpfCommand
     {
-        private IWriteRepository<PessoaAggregate> _repository;
-
-        public AtualizarCpfCommand(IWriteRepository<PessoaAggregate> repository)
+        private RepositoryBase _repository;
+        
+        public AtualizarCpfCommand(RepositoryBase repository)
         {
             _repository = repository;
         }
@@ -113,15 +59,13 @@ namespace ZCRQS
         }
     }
 
-    public interface IWriteRepository<T>
-    {
-        void Update<U>(U entity);
-    }
+    
 
-    public class MemoryWriteRepository : IWriteRepository<PessoaAggregate>
+    public class MemoryWriteRepository : RepositoryBase
     {
         private IList<PessoaAggregate> pessoasDatabase = new List<PessoaAggregate>();
-        public void Update<T>(T entity)
+
+        protected override void OnUpdate<T>(T entity)
         {
             var pessoaAggregate = entity as PessoaAggregate;
             var pessoa = pessoasDatabase.Where(x => x.Id == pessoaAggregate.Id).SingleOrDefault();
@@ -132,29 +76,28 @@ namespace ZCRQS
             {
                 pessoa.Update(pessoaAggregate);
             }
-
-            EventStream.Instance.Raise(pessoaAggregate.Events.ToArray());
         }
     }
 
-    public class Event
+    public class Pessoa
     {
-        public string Name { get; private set; }
-        public object Entity { get; private set; }
-
-        public Event(string name, object entity)
-        {
-            Name = name;
-            Entity = entity;
-        }
+        public string Nome { get; protected set; }
+        public Endereco Endereco { get; set; }
     }
 
-    public class PessoaAggregate
+    public class Endereco
+    {
+        public string Logradouro { get; protected set; }
+    }
+
+    public class PessoaAggregate : IEventAggregate
     {
         public string Cpf { get; private set; }
         public Guid Id { get; private set; }
 
         public IList<Event> Events { get; private set; }
+        
+        public IList<Pessoa> Pessoas { get; private set; }
 
         public PessoaAggregate(Guid id)
         {
@@ -165,18 +108,23 @@ namespace ZCRQS
         public void UpdateCpf(string cpf)
         {
             this.Cpf = cpf;
-            this.Events.Add(new Event("CpfUpdated", this));
+            this.Events.Add(new Event(this.Id, "CpfUpdated", this));
         }
 
         public void Update(PessoaAggregate pessoa)
         {
             this.Cpf = pessoa.Cpf;
             this.Id = pessoa.Id;
-            this.Events.Add(new Event("FullPessoaUpdated", pessoa));
+            this.Events.Add(new Event(this.Id, "FullPessoaUpdated", pessoa));
+        }
+
+        public Event[] GetEvents()
+        {
+            return Events.ToArray();
         }
     }
 
-    public class MemoryReadModel : IObserverStream, IReadModel<PessoaDTO, string>
+    public class MemoryReadModel : IObserverStream, IReadModel<PessoaDTO, Guid>
     {
         private IList<PessoaAggregate> pessoasDatabase = new List<PessoaAggregate>();
 
@@ -185,9 +133,9 @@ namespace ZCRQS
             EventStream.Instance.Subscribe(this);
         }
         
-        public PessoaDTO Get(string param)
+        public PessoaDTO Get(Guid param)
         {
-            var pessoa = pessoasDatabase.Where(x => x.Cpf.Equals(param)).FirstOrDefault();
+            var pessoa = pessoasDatabase.Where(x => x.Id == param).FirstOrDefault();
 
             if (pessoa != null)
             {
@@ -229,25 +177,32 @@ namespace ZCRQS
         }
     }
 
-    public class GetPessoaByCpfQuery
+    public class GetPessoaByIdQuery
     {
-        private IReadModel<PessoaDTO, string> _readOnlyModel;
-        public GetPessoaByCpfQuery(IReadModel<PessoaDTO, string> readOnlyModel)
+        private IReadModel<PessoaDTO, Guid> _readOnlyModel;
+        public GetPessoaByIdQuery(IReadModel<PessoaDTO, Guid> readOnlyModel)
         {
             _readOnlyModel = readOnlyModel;
         }
         
-        public PessoaDTO Query(GetPessoaByCpfParam query)
+        
+        public PessoaDTO Query(GetPessoaByIdParam query)
         {
-            var pessoaDto = _readOnlyModel.Get(query.Cpf);
+            var pessoaDto = _readOnlyModel.Get(query.Id);
             return pessoaDto;
         }
     }
 
-    public interface IReadModel<T, U>
+    public class GetPessoaByIdParam
     {
-        T Get(U param);
+        public Guid Id { get; }
+
+        public GetPessoaByIdParam(Guid id)
+        {
+            Id = id;
+        }
     }
+    
 
     public class GetPessoaByCpfParam
     {

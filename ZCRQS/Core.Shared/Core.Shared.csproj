@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Library</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
@@ -11,7 +10,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Core.Shared\Core.Shared.csproj" />
+      <Folder Include="Tests" />
     </ItemGroup>
 
 </Project>
