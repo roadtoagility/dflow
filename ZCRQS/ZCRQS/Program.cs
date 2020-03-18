@@ -90,6 +90,45 @@ namespace ZCRQS
         public string Logradouro { get; protected set; }
     }
 
+    public abstract class BaseAggregate<T>
+    {
+        public T Id;
+        public IList<Event> Events { get; private set; }
+
+        public BaseAggregate(T id, IList<Event> events)
+        {
+            Id = id;
+            Events = events;
+        }
+    }
+
+    public class PurchaseOrderAggregate : BaseAggregate<Guid>
+    {
+        private PurchaseOrder Order;
+        
+        public PurchaseOrderAggregate(Guid id, IList<Event> events) : base(id, events)
+        {
+            
+        }
+    }
+    
+    public class PurchaseOrder
+    {
+        public IList<PurchaseOrderLineItem> LineItems { get; set; }
+    }
+    
+    public class Part
+    {
+        
+    }
+    
+    public class PurchaseOrderLineItem
+    {
+        public Part Part {get;set;}
+        public decimal Quantity { get; set; }
+    }
+        
+
     public class PessoaAggregate : IEventAggregate
     {
         public string Cpf { get; private set; }
