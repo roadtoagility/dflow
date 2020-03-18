@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.PortableExecutable;
+using System.Runtime.CompilerServices;
 using Core.Shared;
 using Xunit;
 
@@ -79,28 +80,66 @@ namespace ZCRQS
         }
     }
 
-    public static class AggregateFactory
+    public class AggregateFactory
     {
-        public static PurchaseOrderAggregate CreatePurchaseOrderAggregate()
+        Dictionary<AggregateType, BaseAggregate<Guid>> factory = new Dictionary<AggregateType, BaseAggregate<Guid>>();
+
+        public AggregateFactory()
+        {
+            factory.Add(AggregateType.PurchaseOrderAggregate, CreatePurchaseOrderAggregate());
+        }
+        
+        public BaseAggregate<Guid> Create(AggregateType type)
+        {
+            return factory[type];
+        }
+        
+        private BaseAggregate<Guid> CreatePurchaseOrderAggregate()
         {
             throw new NotImplementedException();
         }
     }
-    
 
-    public static class PurchaseOrderFactory
+    public enum AggregateType
     {
-        public static PurchaseOrder CreatePurchase()
+        PurchaseOrderAggregate
+    }
+
+    public enum PurchaseOrderEntitiesType
+    {
+        PurchaseOrder,
+        OrderLineItem,
+        Part
+    }
+
+    public class PurchaseOrderFactory
+    {
+        Dictionary<PurchaseOrderEntitiesType, EntityBase<Guid>> factory = new Dictionary<PurchaseOrderEntitiesType, EntityBase<Guid>>();
+
+
+        public PurchaseOrderFactory()
+        {
+            factory.Add(PurchaseOrderEntitiesType.Part, CreatePart());
+            factory.Add(PurchaseOrderEntitiesType.PurchaseOrder, CreatePurchase());
+            factory.Add(PurchaseOrderEntitiesType.OrderLineItem, CreateOrderLineItem());
+        }
+        
+        public EntityBase<Guid> Create(PurchaseOrderEntitiesType type)
+        {
+            return factory[type];
+        }
+        
+        private EntityBase<Guid> CreatePurchase()
         {
             throw new NotImplementedException();
         }
 
-        public static OrderLineItem CreateOrderLineItem()
+        private EntityBase<Guid> CreateOrderLineItem()
         {
             throw new NotImplementedException();
         }
 
-        public static Part CreatePart()
+        private EntityBase<Guid> CreatePart()
         {
             throw new NotImplementedException();
         }
