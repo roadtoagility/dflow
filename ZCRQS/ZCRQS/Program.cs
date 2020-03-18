@@ -79,6 +79,33 @@ namespace ZCRQS
         }
     }
 
+    public static class AggregateFactory
+    {
+        public static PurchaseOrderAggregate CreatePurchaseOrderAggregate()
+        {
+            throw new NotImplementedException();
+        }
+    }
+    
+
+    public static class PurchaseOrderFactory
+    {
+        public static PurchaseOrder CreatePurchase()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static OrderLineItem CreateOrderLineItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Part CreatePart()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class Pessoa
     {
         public string Nome { get; protected set; }
@@ -111,21 +138,41 @@ namespace ZCRQS
             
         }
     }
-    
-    public class PurchaseOrder
+
+    public abstract class EntityBase<T>
     {
-        public IList<PurchaseOrderLineItem> LineItems { get; set; }
+        public T RootId { get; private set; }
+
+        public EntityBase(T rootId)
+        {
+            RootId = rootId;
+        }
     }
     
-    public class Part
+    public class PurchaseOrder : EntityBase<Guid>
     {
-        
+        public IList<OrderLineItem> LineItems { get; set; }
+
+        public PurchaseOrder(Guid rootId) : base(rootId)
+        {
+        }
     }
     
-    public class PurchaseOrderLineItem
+    public class Part : EntityBase<Guid>
+    {
+        public Part(Guid rootId) : base(rootId)
+        {
+        }
+    }
+    
+    public class OrderLineItem : EntityBase<Guid>
     {
         public Part Part {get;set;}
         public decimal Quantity { get; set; }
+
+        public OrderLineItem(Guid rootId) : base(rootId)
+        {
+        }
     }
         
 
