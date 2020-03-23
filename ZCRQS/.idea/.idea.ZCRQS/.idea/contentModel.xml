@@ -9,8 +9,29 @@
     <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.utility.netcoreapp10.dll" t="Include" />
     <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="Core.Shared" t="IncludeRecursive">
+        <e p="Core.Shared.csproj" t="IncludeRecursive" />
+        <e p="Event.cs" t="Include" />
+        <e p="EventStream.cs" t="Include" />
+        <e p="IEventAggregate.cs" t="Include" />
+        <e p="IObserverStream.cs" t="Include" />
+        <e p="IReadModel.cs" t="Include" />
+        <e p="IWriteRepository.cs" t="Include" />
+        <e p="RepositoryBase.cs" t="Include" />
+        <e p="Tests" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Core.Shared.AssemblyInfo.cs" t="Include" />
+              <e p="Core.Shared.Program.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="ZCRQS" t="IncludeRecursive">
         <e p="Program.cs" t="Include" />
+        <e p="StreamTests.cs" t="Include" />
         <e p="ZCRQS.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">

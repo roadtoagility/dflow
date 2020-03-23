@@ -178,6 +178,8 @@ namespace ZCRQS
         }
     }
 
+    
+
     public abstract class EntityBase<T>
     {
         public T RootId { get; private set; }
@@ -255,7 +257,7 @@ namespace ZCRQS
 
         public MemoryReadModel()
         {
-            EventStream.Instance.Subscribe(this);
+           // EventStream.Instance.Subscribe(this);
         }
         
         public PessoaDTO Get(Guid param)

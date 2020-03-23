@@ -9,7 +9,7 @@ namespace Core.Shared
         {
             OnUpdate<T>(entity);
             
-            EventStream.Instance.Raise(entity.GetEvents());
+            //EventStream.Instance.Raise(entity.GetEvents());
         }
     }
 }
