@@ -1,11 +1,28 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
-using Core.Shared;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Input;
 
-namespace ZCRQS
+namespace Program
 {
+    public interface IEvent
+    {
+        string GetEventName();
+        string GetEntityType();
+
+        Guid GetEventId();
+
+        string GetEventType();
+
+        string GetEventDate();
+        
+        Guid GetRoot();
+    }
+    
+    
     public class Product : Entity<Guid>
     {
         public Guid Id { get; set; }
@@ -46,15 +63,33 @@ namespace ZCRQS
 
     }
 
-    public class EventStoreMessageBus
+    public class EventStore : IEventStore
     {
-        private List<IObserver> _observers = new List<IObserver>();
         private Dictionary<string, List<IObserver>> _observersDictionary = new Dictionary<string, List<IObserver>>();
         private IList<IEvent> _events;
+        readonly BinaryFormatter _formatter = new BinaryFormatter();
+        readonly IAppendOnlyStore _appendOnlyStore;
         
-        public EventStoreMessageBus()
+        public EventStore(IAppendOnlyStore appendOnlyStore)
         {
-            
+            _appendOnlyStore = appendOnlyStore;
+        }
+        
+        byte[] SerializeEvent(IEvent[] e)
+        {
+            using (var mem = new MemoryStream())
+            {
+                _formatter.Serialize(mem, e);
+                return mem.ToArray();
+            }
+        }
+        
+        IEvent[] DeserializeEvent(byte[] data)
+        {
+            using (var mem = new MemoryStream(data))
+            {
+                return (IEvent[])_formatter.Deserialize(mem);
+            }
         }
         
         public void Subscribe(IObserver observer)
@@ -82,21 +117,56 @@ namespace ZCRQS
             }
         }
 
-        public EventStreamResult LoadEventStream(Guid id)
+
+        public EventStream LoadEventStream(Guid id, int skipEvents, int maxCount)
         {
-            return new EventStreamResult(){Events = _events.Where(x => x.GetRoot() == id).ToList(), Version = 0};
+            var name = id.ToString();
+
+            var records = _appendOnlyStore.ReadRecords(name, skipEvents, maxCount).ToList();
+
+            var stream = new EventStream();
+
+            foreach (var tapeRecord in records)
+            {
+                stream.Events.AddRange(DeserializeEvent(tapeRecord.Data));
+                stream.Version = tapeRecord.Version;
+            }
+
+            return stream;
         }
 
-        public void AppendToStream(Guid rootId, long version, List<IEvent> changes)
+        public void AppendToStream(Guid id, int expectedVersion, ICollection<IEvent> events)
         {
-            
-        }
-    }
+            if (events.Count == 0)
+                return;
 
-    public class EventStreamResult
-    {
-        public List<IEvent> Events { get; set; }
-        public long Version { get; set; }
+            var name = id.ToString();
+            var data = SerializeEvent(events.ToArray());
+
+            try
+            {
+                _appendOnlyStore.Append(name, data, expectedVersion);
+            }
+            // catch(AppendOnlyStoreConcurrencyException e)
+            catch(Exception ex)
+            {
+                // load server events
+                var server = LoadEventStream(id, 0, int.MaxValue);
+
+                throw;
+                // throw a real problem
+                // throw OptimisticConcurrencyException.Create(
+                //
+                //     server.Version, e.ExpectedVersion, id, server.Events);
+
+            }
+        }
+        
+
+        EventStream IEventStore.LoadEventStream(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class EventStream
@@ -107,24 +177,16 @@ namespace ZCRQS
 
         // all events in the stream
 
-        public IList<IEvent> Events = new List<IEvent>();
+        public List<IEvent> Events = new List<IEvent>();
     }
     
     public interface IAppendOnlyStore : IDisposable
-
     {
-
         void Append(string name, byte[] data, int expectedVersion = -1);
 
-        IEnumerable<DataWithVersion> ReadRecords(
+        IEnumerable<DataWithVersion> ReadRecords(string name, int afterVersion, int maxCount);
 
-            string name, int afterVersion, int maxCount);
-
-        IEnumerable<DataWithName> ReadRecords(
-
-            int afterVersion, int maxCount);
-
-
+        IEnumerable<DataWithName> ReadRecords(int afterVersion, int maxCount);
 
         void Close();
 
@@ -155,39 +217,55 @@ namespace ZCRQS
     #region SERVICES
     public class ProductService
     {
-        private readonly EventStoreMessageBus _eventStore;
+        private readonly IEventStore _eventStore;
 
-        public ProductService(EventStoreMessageBus eventStore)
+        public ProductService(IEventStore eventStore)
         {
             _eventStore = eventStore;
         }
     }
-
-    public class OrderService
+    
+    public interface ISnapshotRepository
     {
-        private readonly EventStoreMessageBus _eventStore;
+        bool TryGetSnapshotById<TAggregate>(Guid id, out TAggregate snapshot, out int version);
+        void SaveSnapshot<TAggregate>(Guid id, TAggregate snapshot, int version);
+    }
+
+    public interface IOrderServiceCommandHandler
+    {
+        void Execute(ICommand cmd);
+    }
+    
+    public class OrderServiceCommandHandler : IOrderServiceCommandHandler
+    {
+        private readonly IEventStore _eventStore;
         private readonly ProductService _productService;
         private readonly CustomerService _customerService;
 
-        public OrderService(EventStoreMessageBus eventStore, ProductService productService, CustomerService customerService)
+        public OrderServiceCommandHandler(IEventStore eventStore, ProductService productService, CustomerService customerService)
         {
             _eventStore = eventStore;
             _productService = productService;
             _customerService = customerService;
         }
+        
+        public void Execute(ICommand command)
+        {
+            ((dynamic)this).When((dynamic)command);
+        }
 
-        public void AddProductToOrder(Guid orderId, Guid productId, decimal qtd)
+        public void When(AddProductCommand cmd)
         {
             while(true)
             {
-                var stream = _eventStore.LoadEventStream(orderId);
+                var stream = _eventStore.LoadEventStream(cmd.OrderId);
                 var order = new PurchaseOrderAggreagate(stream.Events);
                 
                 try
                 {
                     
-                    order.AddProduct(qtd, productId, _productService);
-                    _eventStore.AppendToStream(orderId, stream.Version, order.Changes);
+                    order.AddProduct(cmd.Qtd, cmd.ProductId, _productService);
+                    _eventStore.AppendToStream(cmd.OrderId, stream.Version, order.Changes);
                     return;
                 }
                 catch (EventStoreConcurrencyException)
@@ -198,11 +276,18 @@ namespace ZCRQS
         }
     }
 
+    public class AddProductCommand
+    {
+        public Guid OrderId { get; set; }
+        public Guid ProductId { get; set; }
+        public decimal Qtd { get; set; }
+    }
+
     public class CustomerService
     {
-        private readonly EventStoreMessageBus _eventStore;
+        private readonly IEventStore _eventStore;
 
-        public CustomerService(EventStoreMessageBus eventStore)
+        public CustomerService(IEventStore eventStore)
         {
             _eventStore = eventStore;
         }   
@@ -277,7 +362,6 @@ namespace ZCRQS
         private void Mutate(IEvent e)
         {
             ((dynamic) this).When((dynamic)e);
-
         }
         
         private void When(PurchaseOrderLocked e)
