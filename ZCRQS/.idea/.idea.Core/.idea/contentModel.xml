@@ -50,6 +50,8 @@
           <e p="CreditCheckFailedEvent.cs" t="Include" />
           <e p="CreditReservedEvent.cs" t="Include" />
           <e p="OrderCreatedEvent.cs" t="Include" />
+          <e p="ProductCatalogAggregateCreate.cs" t="Include" />
+          <e p="ProductCatalogAggregateCreated.cs" t="Include" />
           <e p="ProductCreated.cs" t="Include" />
           <e p="PurchaseOrderLocked.cs" t="Include" />
           <e p="PurchaseOrderUnlocked.cs" t="Include" />

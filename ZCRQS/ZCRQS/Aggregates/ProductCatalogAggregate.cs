@@ -20,6 +20,25 @@ namespace Program.Aggregates
                 Mutate(@event);
             }
         }
+
+        public static ProductCatalogAggregate CreateRoot(Guid id)
+        {
+            if(id == Guid.Empty)
+                throw new Exception("Invalid ID");
+            
+            var createEvent = new ProductCatalogAggregateCreate(id);
+            var events = new List<IEvent>();
+            events.Add(createEvent);
+            
+
+            var aggregateCreated = new ProductCatalogAggregateCreated();
+            events.Add(aggregateCreated);
+            
+            var root = new ProductCatalogAggregate(events);
+            root.Changes.Add(createEvent);
+            root.Changes.Add(aggregateCreated);
+            return root;
+        }
         
         public void CreateProduct(CreateProductCommand cmd)
         {
@@ -41,6 +60,19 @@ namespace Program.Aggregates
         {
 
 
+        }
+        
+        private void When(ProductCatalogAggregateCreated e)
+        {
+            
+        }
+        
+        private void When(ProductCatalogAggregateCreate e)
+        {
+            if (e.Id != Guid.Empty)
+            {
+                Id = e.Id;
+            }
         }
     }
 }
