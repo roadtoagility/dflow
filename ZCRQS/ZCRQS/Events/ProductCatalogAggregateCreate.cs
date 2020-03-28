@@ -3,6 +3,7 @@ using Core.Shared;
 
 namespace Program.Events
 {
+    [Serializable]
     public class ProductCatalogAggregateCreate : IEvent
     {
         public Guid Id { get; private set; }

@@ -19,7 +19,7 @@ namespace Program
         [Fact]
         public void ShouldCreateNewAggregate()
         {
-            var appendOnly = new AppendOnlyStore();
+            var appendOnly = new MemoryAppendOnlyStore();
             var eventStore = new EventStore(appendOnly);
             var rootId = Guid.NewGuid();
             var root = ProductCatalogAggregate.CreateRoot(rootId);
@@ -32,11 +32,11 @@ namespace Program
         public void ShouldSaveStream()
         {
             var rootId = Guid.NewGuid();
-            var appendOnly = new AppendOnlyStore();
+            var appendOnly = new MemoryAppendOnlyStore();
             var eventStore = new EventStore(appendOnly);
             var root = ProductCatalogAggregate.CreateRoot(rootId);
             
-            eventStore.AppendToStream(root.Id, 1, root.Changes);
+            eventStore.AppendToStream(root.Id, 0, root.Changes);
 
             var stream = eventStore.LoadEventStream(rootId);
             Assert.Equal(1, stream.Version);
@@ -48,7 +48,7 @@ namespace Program
         public void ShouldAggregateLoadStream()
         {
             var rootId = Guid.NewGuid();
-            var appendOnly = new AppendOnlyStore();
+            var appendOnly = new MemoryAppendOnlyStore();
             var eventStore = new EventStore(appendOnly);
             var rootToSave = ProductCatalogAggregate.CreateRoot(rootId);
             
@@ -64,7 +64,7 @@ namespace Program
         [Fact]
         public void ShouldAllEventsRegisteredAggregate()
         {
-            var appendOnly = new AppendOnlyStore();
+            var appendOnly = new MemoryAppendOnlyStore();
             var eventStore = new EventStore(appendOnly);
             var root = ProductCatalogAggregate.CreateRoot(Guid.NewGuid());
 
@@ -76,7 +76,7 @@ namespace Program
         [Fact]
         public void EventsAppendedToChanges()
         {
-            var appendOnly = new AppendOnlyStore();
+            var appendOnly = new MemoryAppendOnlyStore();
             var eventStore = new EventStore(appendOnly);
             var productService = new ProductService(eventStore);
             var customerService = new CustomerService(eventStore);

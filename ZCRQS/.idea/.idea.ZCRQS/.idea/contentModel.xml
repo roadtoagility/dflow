@@ -11,6 +11,16 @@
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="Core.Shared" t="IncludeRecursive">
         <e p="Core.Shared.csproj" t="IncludeRecursive" />
+        <e p="DataWithName.cs" t="Include" />
+        <e p="DataWithVersion.cs" t="Include" />
+        <e p="Entity.cs" t="Include" />
+        <e p="EventStoreConcurrencyException.cs" t="Include" />
+        <e p="EventStream.cs" t="Include" />
+        <e p="IAppendOnlyStore.cs" t="Include" />
+        <e p="ICommand.cs" t="Include" />
+        <e p="IEvent.cs" t="Include" />
+        <e p="IEventStore.cs" t="Include" />
+        <e p="ISnapshotRepository.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -22,7 +32,38 @@
         </e>
       </e>
       <e p="ZCRQS" t="IncludeRecursive">
-        <e p="Start.cs" t="Include" />
+        <e p="Aggregates" t="Include">
+          <e p="CustomerAggregate.cs" t="Include" />
+          <e p="ProductCatalogAggregate.cs" t="Include" />
+          <e p="PurchaseOrderAggreagate.cs" t="Include" />
+        </e>
+        <e p="Commands" t="Include">
+          <e p="AddProductCommand.cs" t="Include" />
+          <e p="CreateProductCommand.cs" t="Include" />
+        </e>
+        <e p="Entities" t="Include">
+          <e p="Product.cs" t="Include" />
+        </e>
+        <e p="EventStore.cs" t="Include" />
+        <e p="Events" t="Include">
+          <e p="CreditCheckFailedEvent.cs" t="Include" />
+          <e p="CreditReservedEvent.cs" t="Include" />
+          <e p="OrderCreatedEvent.cs" t="Include" />
+          <e p="ProductCatalogAggregateCreate.cs" t="Include" />
+          <e p="ProductCatalogAggregateCreated.cs" t="Include" />
+          <e p="ProductCreated.cs" t="Include" />
+          <e p="PurchaseOrderLocked.cs" t="Include" />
+          <e p="PurchaseOrderUnlocked.cs" t="Include" />
+        </e>
+        <e p="Handlers" t="Include">
+          <e p="CustomerService.cs" t="Include" />
+          <e p="IOrderServiceCommandHandler.cs" t="Include" />
+          <e p="IProducterviceCommandHandler.cs" t="Include" />
+          <e p="OrderServiceCommandHandler.cs" t="Include" />
+          <e p="ProductService.cs" t="Include" />
+        </e>
+        <e p="MemoryAppendOnlyStore.cs" t="Include" />
+        <e p="Tests.cs" t="Include" />
         <e p="ZCRQS.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">

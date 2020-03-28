@@ -2,7 +2,14 @@ namespace Core.Shared
 {
     public sealed class DataWithName
     {
-        public string Name;
-        public byte[] Data;
+        public DataWithName(string name, byte[] data)
+        {
+            Name = name;
+            Data = data;
+        }
+
+        public string Name { get; private set; }
+        public byte[] Data{ get; private set; }
+        
     }
 }

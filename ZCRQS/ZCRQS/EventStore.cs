@@ -60,7 +60,11 @@ namespace Program
 
             var name = id.ToString();
             var data = SerializeEvent(events.ToArray());
-
+            
+            
+            //TODO: Ainda não entendi como se controla a versao corretamente
+            expectedVersion++;
+            
             try
             {
                 _appendOnlyStore.Append(name, data, expectedVersion);

@@ -3,6 +3,7 @@ using Core.Shared;
 
 namespace Program.Events
 {
+    [Serializable]
     public class ProductCatalogAggregateCreated : IEvent
     {
         public string GetEventName()
