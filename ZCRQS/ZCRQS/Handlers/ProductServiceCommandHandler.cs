@@ -4,11 +4,11 @@ using Program.Commands;
 
 namespace Program.Handlers
 {
-    public class ProductService : IProducterviceCommandHandler
+    public class ProductServiceCommandHandler : IProductServiceCommandHandler
     {
         private readonly IEventStore _eventStore;
 
-        public ProductService(IEventStore eventStore)
+        public ProductServiceCommandHandler(IEventStore eventStore)
         {
             _eventStore = eventStore;
         }

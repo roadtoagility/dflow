@@ -2,7 +2,7 @@ using Core.Shared;
 
 namespace Program.Handlers
 {
-    public interface IProducterviceCommandHandler
+    public interface IProductServiceCommandHandler
     {
         void Execute(ICommand cmd);
     }

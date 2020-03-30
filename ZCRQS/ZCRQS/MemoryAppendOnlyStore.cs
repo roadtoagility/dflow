@@ -42,7 +42,7 @@ namespace Program
         }
 
         //DTO para poder inserir em qualquer modelo de banco
-        internal class EventDTO
+        private class EventDTO
         {
             public string Name { get; set; }
             public int Version { get; set; }

@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Core.Shared;
 using Program.Commands;
+using Program.Entities;
 using Program.Events;
 
 namespace Program.Aggregates
@@ -10,6 +12,8 @@ namespace Program.Aggregates
     {
         public List<IEvent> Changes { get; private set; }
         public Guid Id { get; private set; }
+
+        private List<Product> _products;
 
         public ProductCatalogAggregate(IEnumerable<IEvent> events)
         {
@@ -26,23 +30,25 @@ namespace Program.Aggregates
             if(id == Guid.Empty)
                 throw new Exception("Invalid ID");
             
-            var createEvent = new ProductCatalogAggregateCreate(id);
+            var createEvent = new ProductCatalogAggregateCreated(id);
             var events = new List<IEvent>();
             events.Add(createEvent);
             
-
-            var aggregateCreated = new ProductCatalogAggregateCreated();
-            events.Add(aggregateCreated);
-            
             var root = new ProductCatalogAggregate(events);
             root.Changes.Add(createEvent);
-            root.Changes.Add(aggregateCreated);
             return root;
         }
         
         public void CreateProduct(CreateProductCommand cmd)
         {
-            Apply(new ProductCreated(Id, cmd));
+            if(!_products.Any(x => x.Id == cmd.Id || x.Name.Equals(cmd.Name)))
+                Apply(new ProductCreated(cmd.Id, cmd.Name, cmd.Description));
+        }
+
+        //TODO: eu sei que isso não deve estar aqui, meramente para testes enquanto não crio as projeções
+        public int CountProducts()
+        {
+            return _products.Count;
         }
         
         void Apply(IEvent @event)
@@ -58,21 +64,17 @@ namespace Program.Aggregates
         
         private void When(ProductCreated e)
         {
-
-
+            _products.Add(new Product(e.Id, e.Name, e.Description));
         }
         
         private void When(ProductCatalogAggregateCreated e)
         {
-            
-        }
-        
-        private void When(ProductCatalogAggregateCreate e)
-        {
             if (e.Id != Guid.Empty)
             {
                 Id = e.Id;
+                _products = new List<Product>();
             }
         }
+        
     }
 }

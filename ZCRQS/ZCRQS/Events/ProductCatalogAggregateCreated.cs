@@ -6,39 +6,11 @@ namespace Program.Events
     [Serializable]
     public class ProductCatalogAggregateCreated : IEvent
     {
-        public string GetEventName()
+        public Guid Id { get; private set; }
+        
+        public ProductCatalogAggregateCreated(Guid id)
         {
-            throw new NotImplementedException();
-        }
-
-        public string GetEntityType()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Guid GetEventId()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetEventType()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetEventDate()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Guid GetRoot()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetEventData()
-        {
-            throw new NotImplementedException();
+            Id = id;
         }
     }
 }
