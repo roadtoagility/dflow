@@ -19,7 +19,9 @@
         <e p="ICommand.cs" t="Include" />
         <e p="IEvent.cs" t="Include" />
         <e p="IEventStore.cs" t="Include" />
+        <e p="IQueueService.cs" t="Include" />
         <e p="ISnapshotRepository.cs" t="Include" />
+        <e p="ISubscriber.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -37,7 +39,6 @@
           <e p="ProductCatalogAggregate.cs" t="Include" />
           <e p="PurchaseOrderAggreagate.cs" t="Include" />
         </e>
-        <e p="AppendOnlyStore.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Commands" t="Include">
           <e p="AddProductCommand.cs" t="Include" />
@@ -47,10 +48,6 @@
           <e p="Product.cs" t="Include" />
         </e>
         <e p="Events" t="Include">
-          <e p="CreditCheckFailedEvent.cs" t="Include" />
-          <e p="CreditReservedEvent.cs" t="Include" />
-          <e p="OrderCreatedEvent.cs" t="Include" />
-          <e p="ProductCatalogAggregateCreate.cs" t="Include" />
           <e p="ProductCatalogAggregateCreated.cs" t="Include" />
           <e p="ProductCreated.cs" t="Include" />
           <e p="PurchaseOrderLocked.cs" t="Include" />
@@ -60,10 +57,12 @@
         <e p="Handlers" t="Include">
           <e p="CustomerService.cs" t="Include" />
           <e p="IOrderServiceCommandHandler.cs" t="Include" />
-          <e p="IProducterviceCommandHandler.cs" t="Include" />
+          <e p="IProductServiceCommandHandler.cs" t="Include" />
           <e p="OrderServiceCommandHandler.cs" t="Include" />
-          <e p="ProductService.cs" t="Include" />
+          <e p="ProductServiceCommandHandler.cs" t="Include" />
         </e>
+        <e p="MemoryAppendOnlyStore.cs" t="Include" />
+        <e p="MemoryQueueService.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -72,7 +71,15 @@
             </e>
           </e>
         </e>
-        <e p="Start.cs" t="Include" />
+        <e p="Tests" t="Include">
+          <e p="BasicTests.cs" t="Include" />
+          <e p="ConcurrencyTests.cs" t="Include" />
+          <e p="EventTests.cs" t="Include" />
+          <e p="SnapshotTests.cs" t="Include" />
+        </e>
+        <e p="Views" t="Include">
+          <e p="ProductView.cs" t="Include" />
+        </e>
         <e p="ZCRQS.csproj" t="IncludeRecursive" />
       </e>
     </e>

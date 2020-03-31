@@ -11,10 +11,12 @@ namespace Program
     {
         readonly BinaryFormatter _formatter = new BinaryFormatter();
         readonly IAppendOnlyStore _appendOnlyStore;
+        readonly IQueueService _queueService;
         
-        public EventStore(IAppendOnlyStore appendOnlyStore)
+        public EventStore(IAppendOnlyStore appendOnlyStore, IQueueService queueService)
         {
             _appendOnlyStore = appendOnlyStore;
+            _queueService = queueService;
         }
         
         byte[] SerializeEvent(IEvent[] e)
@@ -68,6 +70,9 @@ namespace Program
             try
             {
                 _appendOnlyStore.Append(name, data, expectedVersion);
+                
+                //TODO: entender MUITO BEM questões de rollback, garantias, oq acontece se da erro no appendOnly?
+                _queueService.Publish(events.ToArray());
             }
             // catch(AppendOnlyStoreConcurrencyException e)
             catch(Exception ex)
