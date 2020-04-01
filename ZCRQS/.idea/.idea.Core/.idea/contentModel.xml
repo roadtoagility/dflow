@@ -8,6 +8,9 @@
     <e p="C:\Users\Douglas\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Core.-1497781228.00" t="ExcludeRecursive" />
     <e p="D:\projetos\labs\ZCRQS" t="IncludeFlat">
       <e p="Core.Shared" t="IncludeRecursive">
+        <e p="AggregateCreated.cs" t="Include" />
+        <e p="AggregateFactory.cs" t="Include" />
+        <e p="AggregateRoot.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Core.Shared.csproj" t="IncludeRecursive" />
         <e p="DataWithName.cs" t="Include" />
@@ -71,6 +74,7 @@
             </e>
           </e>
         </e>
+        <e p="SnapshotRepository.cs" t="Include" />
         <e p="Tests" t="Include">
           <e p="BasicTests.cs" t="Include" />
           <e p="ConcurrencyTests.cs" t="Include" />

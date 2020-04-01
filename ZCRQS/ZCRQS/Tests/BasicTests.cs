@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Core.Shared;
 using Program.Aggregates;
 using Program.Commands;
 using Program.Entities;
@@ -19,10 +20,12 @@ namespace Program.Tests
             var queueService = new MemoryQueueService();
             var eventStore = new EventStore(appendOnly, queueService);
             var rootId = Guid.NewGuid();
-            var root = ProductCatalogAggregate.CreateRoot(rootId);
+            var factory = new AggregateFactory(eventStore);
+            var root = factory.Create<ProductCatalogAggregate>(rootId);
 
-            Assert.Equal(1, root.Changes.Count);
             Assert.Equal(rootId,root.Id);
+            Assert.True(1 == root.Changes.Count);
+            Assert.Equal(typeof(AggregateCreated), root.Changes.ElementAt(0).GetType());
         }
         
         [Fact]
@@ -32,15 +35,14 @@ namespace Program.Tests
             var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
             var eventStore = new EventStore(appendOnly, queueService);
-            var root = ProductCatalogAggregate.CreateRoot(rootId);
+            var factory = new AggregateFactory(eventStore);
+            var root = factory.Create<ProductCatalogAggregate>(rootId);
             
             eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, 0, root.Changes);
 
             var stream = eventStore.LoadEventStream(rootId);
             Assert.Equal(1, stream.Version);
-            Assert.Equal(typeof(ProductCatalogAggregateCreated), stream.Events.ElementAt(0).GetType());
-            
-            
+            Assert.Equal(typeof(AggregateCreated), stream.Events.ElementAt(0).GetType());
         }
         
         [Fact]
@@ -50,12 +52,13 @@ namespace Program.Tests
             var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
             var eventStore = new EventStore(appendOnly, queueService);
-            var rootToSave = ProductCatalogAggregate.CreateRoot(rootId);
+            var factory = new AggregateFactory(eventStore);
+            
+            var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
             
             eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, rootToSave.Changes);
-
-            var stream = eventStore.LoadEventStream(rootId);
-            var root = new ProductCatalogAggregate(stream.Events);
+            
+            var root = factory.Load<ProductCatalogAggregate>(rootId);
             
             Assert.True(0 == root.Changes.Count);
             Assert.Equal(rootId, root.Id);
@@ -65,10 +68,11 @@ namespace Program.Tests
         [Fact]
         public void ShouldAllEventsRegisteredAggregate()
         {
-            var root = ProductCatalogAggregate.CreateRoot(Guid.NewGuid());
+            var factory = new AggregateFactory(null);
+            var root = factory.Create<ProductCatalogAggregate>(Guid.NewGuid());
 
-            Assert.Equal(1, root.Changes.Count);
-            Assert.Equal(typeof(ProductCatalogAggregateCreated), root.Changes.ElementAt(0).GetType());
+            Assert.True(1 == root.Changes.Count);
+            Assert.Equal(typeof(AggregateCreated), root.Changes.ElementAt(0).GetType());
         }
         
         //TODO: eu não lembro se apaguei os asserts?
@@ -93,12 +97,12 @@ namespace Program.Tests
             var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
             var eventStore = new EventStore(appendOnly, queueService);
-            var rootToSave = ProductCatalogAggregate.CreateRoot(rootId);
+            var factory = new AggregateFactory(eventStore);
+            var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
             
             eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 0, rootToSave.Changes);
 
-            var stream = eventStore.LoadEventStream(rootId);
-            var root = new ProductCatalogAggregate(stream.Events);
+            var root = factory.Load<ProductCatalogAggregate>(rootId);
             
             root.CreateProduct(new CreateProductCommand(Guid.NewGuid(), "Notebook", "Dell Inspiron 15000"));
             
@@ -113,7 +117,8 @@ namespace Program.Tests
             var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
             var eventStore = new EventStore(appendOnly, queueService);
-            var rootToSave = ProductCatalogAggregate.CreateRoot(rootId);
+            var factory = new AggregateFactory(eventStore);
+            var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
             
             eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, rootToSave.Changes);
 
@@ -142,7 +147,8 @@ namespace Program.Tests
             
             queueService.Subscribe<ProductCreated>(view);
             
-            var rootToSave = ProductCatalogAggregate.CreateRoot(rootId);
+            var factory = new AggregateFactory(eventStore);
+            var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
             
             eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, rootToSave.Changes);
 

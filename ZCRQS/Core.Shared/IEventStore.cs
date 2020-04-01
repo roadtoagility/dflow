@@ -8,7 +8,9 @@ namespace Core.Shared
         EventStream LoadEventStream(Guid id);
 
         EventStream LoadEventStream(Guid id, int skipEvents, int maxCount);
+
+        EventStream LoadEventStreamAfterVersion(Guid id, long snapshotVersion);
         
-        void AppendToStream<T>(Guid id, int expectedVersion, ICollection<IEvent> events);
+        void AppendToStream<T>(Guid id, int version, ICollection<IEvent> events);
     }
 }

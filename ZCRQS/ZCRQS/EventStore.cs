@@ -52,7 +52,23 @@ namespace Program
 
             return stream;
         }
-        
+
+        public EventStream LoadEventStreamAfterVersion(Guid id, long afterVersion)
+        {
+            //TODO: acabei zoando muito essa questão de long e int, tudo precisa ser long
+            var records = _appendOnlyStore.ReadRecords(id, (int)afterVersion, Int32.MaxValue).ToList();
+
+            var stream = new EventStream();
+
+            foreach (var tapeRecord in records)
+            {
+                stream.Events.AddRange(DeserializeEvent(tapeRecord.Data));
+                stream.Version = tapeRecord.Version;
+            }
+
+            return stream;
+        }
+
         public EventStream LoadEventStream<T>(int skipEvents, int maxCount)
         {
             var records = _appendOnlyStore.ReadRecords<T>(skipEvents, maxCount).ToList();
@@ -68,7 +84,7 @@ namespace Program
             return stream;
         }
 
-        public void AppendToStream<T>(Guid id, int expectedVersion, ICollection<IEvent> events)
+        public void AppendToStream<T>(Guid id, int version, ICollection<IEvent> events)
         {
             if (events.Count == 0)
                 return;
@@ -77,11 +93,11 @@ namespace Program
             var aggregateType = typeof(T).Name;
             
             //TODO: Ainda não entendi como se controla a versao corretamente
-            expectedVersion++;
+            version++;
             
             try
             {
-                _appendOnlyStore.Append(id, aggregateType, data, expectedVersion);
+                _appendOnlyStore.Append(id, aggregateType, data, version);
                 
                 //TODO: entender MUITO BEM questões de rollback, garantias, oq acontece se da erro no appendOnly?
                 _queueService.Publish(events.ToArray());

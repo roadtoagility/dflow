@@ -8,35 +8,15 @@ using Program.Events;
 
 namespace Program.Aggregates
 {
-    public class ProductCatalogAggregate
+    [Serializable]
+    public class ProductCatalogAggregate : AggregateRoot
     {
-        public List<IEvent> Changes { get; private set; }
-        public Guid Id { get; private set; }
-
         private List<Product> _products;
 
         public ProductCatalogAggregate(IEnumerable<IEvent> events)
+            : base(events)
         {
-            Changes = new List<IEvent>();
             
-            foreach (var @event in events)
-            {
-                Mutate(@event);
-            }
-        }
-
-        public static ProductCatalogAggregate CreateRoot(Guid id)
-        {
-            if(id == Guid.Empty)
-                throw new Exception("Invalid ID");
-            
-            var createEvent = new ProductCatalogAggregateCreated(id);
-            var events = new List<IEvent>();
-            events.Add(createEvent);
-            
-            var root = new ProductCatalogAggregate(events);
-            root.Changes.Add(createEvent);
-            return root;
         }
         
         public void CreateProduct(CreateProductCommand cmd)
@@ -57,7 +37,7 @@ namespace Program.Aggregates
             Mutate(@event);
         }
         
-        private void Mutate(IEvent e)
+        protected override void Mutate(IEvent e)
         {
             ((dynamic) this).When((dynamic)e);
         }
@@ -67,14 +47,10 @@ namespace Program.Aggregates
             _products.Add(new Product(e.Id, e.Name, e.Description));
         }
         
-        private void When(ProductCatalogAggregateCreated e)
+        private void When(AggregateCreated e)
         {
-            if (e.Id != Guid.Empty)
-            {
-                Id = e.Id;
-                _products = new List<Product>();
-            }
+            Id = e.Id;
+            _products = new List<Product>();
         }
-        
     }
 }

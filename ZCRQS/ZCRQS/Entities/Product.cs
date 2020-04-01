@@ -3,6 +3,7 @@ using Core.Shared;
 
 namespace Program.Entities
 {
+    [Serializable]
     public class Product : Entity<Guid>
     {
         public Product(Guid id, string name, string description)
