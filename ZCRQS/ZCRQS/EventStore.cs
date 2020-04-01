@@ -69,21 +69,7 @@ namespace Program
             return stream;
         }
 
-        public EventStream LoadEventStream<T>(int skipEvents, int maxCount)
-        {
-            var records = _appendOnlyStore.ReadRecords<T>(skipEvents, maxCount).ToList();
-
-            var stream = new EventStream();
-
-            foreach (var tapeRecord in records)
-            {
-                stream.Events.AddRange(DeserializeEvent(tapeRecord.Data));
-                stream.Version = tapeRecord.Version;
-            }
-
-            return stream;
-        }
-
+        //TODO: preciso ver o controle de versão melhor, ta muito manual ainda
         public void AppendToStream<T>(Guid id, int version, ICollection<IEvent> events)
         {
             if (events.Count == 0)

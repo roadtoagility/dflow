@@ -49,6 +49,11 @@ namespace Program
         public void SaveSnapshot<TAggregate>(Guid id, TAggregate snapshot, int version)
             where TAggregate : AggregateRoot
         {
+            /*o snapshot é a materialização da agregação, ou seja, é um arquivo desnormalizado com todas as informações
+             da agregação em um determinado ponto do tempo, só que em vez de criar um DTO pra isso, resolvi apenas remover as changes e 
+             serializar a própria agregação
+             */
+            snapshot.Changes.Clear();
             var data = Serialize(snapshot);
             _snapshotStorage.Add(new SnapshotAggregate(){Data = data, Id = id, Version = version });
         }
