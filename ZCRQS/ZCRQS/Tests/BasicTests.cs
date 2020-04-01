@@ -34,7 +34,7 @@ namespace Program.Tests
             var eventStore = new EventStore(appendOnly, queueService);
             var root = ProductCatalogAggregate.CreateRoot(rootId);
             
-            eventStore.AppendToStream(root.Id, 0, root.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, 0, root.Changes);
 
             var stream = eventStore.LoadEventStream(rootId);
             Assert.Equal(1, stream.Version);
@@ -52,7 +52,7 @@ namespace Program.Tests
             var eventStore = new EventStore(appendOnly, queueService);
             var rootToSave = ProductCatalogAggregate.CreateRoot(rootId);
             
-            eventStore.AppendToStream(rootToSave.Id, 1, rootToSave.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, rootToSave.Changes);
 
             var stream = eventStore.LoadEventStream(rootId);
             var root = new ProductCatalogAggregate(stream.Events);
@@ -95,7 +95,7 @@ namespace Program.Tests
             var eventStore = new EventStore(appendOnly, queueService);
             var rootToSave = ProductCatalogAggregate.CreateRoot(rootId);
             
-            eventStore.AppendToStream(rootToSave.Id, 1, rootToSave.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 0, rootToSave.Changes);
 
             var stream = eventStore.LoadEventStream(rootId);
             var root = new ProductCatalogAggregate(stream.Events);
@@ -115,14 +115,14 @@ namespace Program.Tests
             var eventStore = new EventStore(appendOnly, queueService);
             var rootToSave = ProductCatalogAggregate.CreateRoot(rootId);
             
-            eventStore.AppendToStream(rootToSave.Id, 1, rootToSave.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, rootToSave.Changes);
 
             var stream = eventStore.LoadEventStream(rootId);
             var root = new ProductCatalogAggregate(stream.Events);
             
             root.CreateProduct(new CreateProductCommand(Guid.NewGuid(), "Notebook", "Dell Inspiron 15000"));
             
-            eventStore.AppendToStream(rootToSave.Id, 1, root.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, root.Changes);
 
             stream = eventStore.LoadEventStream(rootId);
             root = new ProductCatalogAggregate(stream.Events);
@@ -144,14 +144,14 @@ namespace Program.Tests
             
             var rootToSave = ProductCatalogAggregate.CreateRoot(rootId);
             
-            eventStore.AppendToStream(rootToSave.Id, 1, rootToSave.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, rootToSave.Changes);
 
             var stream = eventStore.LoadEventStream(rootId);
             var root = new ProductCatalogAggregate(stream.Events);
             
             root.CreateProduct(new CreateProductCommand(Guid.NewGuid(), "Notebook", "Dell Inspiron 15000"));
             
-            eventStore.AppendToStream(rootToSave.Id, 1, root.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, root.Changes);
             
             Assert.True(1 == view.Products.Count);
             Assert.Equal("Notebook", view.Products[0].Name);

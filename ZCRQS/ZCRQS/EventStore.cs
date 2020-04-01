@@ -40,9 +40,22 @@ namespace Program
         
         public EventStream LoadEventStream(Guid id, int skipEvents, int maxCount)
         {
-            var name = id.ToString();
+            var records = _appendOnlyStore.ReadRecords(id, skipEvents, maxCount).ToList();
 
-            var records = _appendOnlyStore.ReadRecords(name, skipEvents, maxCount).ToList();
+            var stream = new EventStream();
+
+            foreach (var tapeRecord in records)
+            {
+                stream.Events.AddRange(DeserializeEvent(tapeRecord.Data));
+                stream.Version = tapeRecord.Version;
+            }
+
+            return stream;
+        }
+        
+        public EventStream LoadEventStream<T>(int skipEvents, int maxCount)
+        {
+            var records = _appendOnlyStore.ReadRecords<T>(skipEvents, maxCount).ToList();
 
             var stream = new EventStream();
 
@@ -55,36 +68,30 @@ namespace Program
             return stream;
         }
 
-        public void AppendToStream(Guid id, int expectedVersion, ICollection<IEvent> events)
+        public void AppendToStream<T>(Guid id, int expectedVersion, ICollection<IEvent> events)
         {
             if (events.Count == 0)
                 return;
 
-            var name = id.ToString();
             var data = SerializeEvent(events.ToArray());
-            
+            var aggregateType = typeof(T).Name;
             
             //TODO: Ainda não entendi como se controla a versao corretamente
             expectedVersion++;
             
             try
             {
-                _appendOnlyStore.Append(name, data, expectedVersion);
+                _appendOnlyStore.Append(id, aggregateType, data, expectedVersion);
                 
                 //TODO: entender MUITO BEM questões de rollback, garantias, oq acontece se da erro no appendOnly?
                 _queueService.Publish(events.ToArray());
             }
-            // catch(AppendOnlyStoreConcurrencyException e)
+            //TODO: ainda preciso entender como vai ser o tratamento de exceptions
             catch(Exception ex)
             {
-                // load server events
                 var server = LoadEventStream(id, 0, int.MaxValue);
 
                 throw;
-                // throw a real problem
-                // throw OptimisticConcurrencyException.Create(
-                //
-                //     server.Version, e.ExpectedVersion, id, server.Events);
 
             }
         }

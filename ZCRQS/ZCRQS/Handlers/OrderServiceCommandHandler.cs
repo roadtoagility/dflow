@@ -33,7 +33,7 @@ namespace Program.Handlers
                 {
                     
                     order.AddProduct(cmd.Qtd, cmd.ProductId, _productService);
-                    _eventStore.AppendToStream(cmd.OrderId, stream.Version, order.Changes);
+                    _eventStore.AppendToStream<PurchaseOrderAggreagate>(cmd.OrderId, stream.Version, order.Changes);
                     return;
                 }
                 catch (EventStoreConcurrencyException)
