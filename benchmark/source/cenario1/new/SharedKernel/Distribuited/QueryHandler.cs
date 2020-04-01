@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using NetMQ;
@@ -13,6 +15,7 @@ namespace SharedKernel.Distribuited
             private readonly DealerSocket _output;
 
             private readonly String _externalEndpoint;
+            private readonly IDependencyResolver _resolver;
             private readonly String _internalEndpoint;
 
             /// <summary>
@@ -31,9 +34,10 @@ namespace SharedKernel.Distribuited
                 // server.Start();   
             }
                 
-            public QueryHandler(String externalEndpoint, String internalEndpoint)
+            public QueryHandler(IDependencyResolver resolver, String externalEndpoint, String internalEndpoint)
                 :this(externalEndpoint)
             {
+                _resolver = resolver;
                 _internalEndpoint = internalEndpoint;
 
                 if (!String.IsNullOrEmpty(_internalEndpoint))

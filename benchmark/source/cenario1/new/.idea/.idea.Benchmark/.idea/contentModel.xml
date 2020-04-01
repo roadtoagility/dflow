@@ -83,10 +83,13 @@
       <e p="SharedKernel" t="IncludeRecursive">
         <e p="Distribuited" t="Include">
           <e p="ClientHandler.cs" t="Include" />
+          <e p="ExecutorManager.cs" t="Include" />
+          <e p="IHandler.cs" t="Include" />
           <e p="IOutputTransport.cs" t="Include" />
           <e p="ITransport.cs" t="Include" />
           <e p="QueryExecutor.cs" t="Include" />
           <e p="QueryHandler.cs" t="Include" />
+          <e p="QueryHandlerManager.cs" t="Include" />
         </e>
         <e p="IDependencyResolver.cs" t="Include" />
         <e p="IQuery.cs" t="Include" />

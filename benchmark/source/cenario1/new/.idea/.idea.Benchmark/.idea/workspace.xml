@@ -2,24 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25a0de35-a152-41b7-a204-51a34ad6e000" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/ExecutorManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/IHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandlerManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/dataSources/4574ef22-55f6-4bd2-998f-b522066703ba.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/dataSources/4574ef22-55f6-4bd2-998f-b522066703ba.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/dataSources/4574ef22-55f6-4bd2-998f-b522066703ba/storage_v2/_src_/database/master.YiqNvw/schema/dbo.sYMBAA.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/dataSources/4574ef22-55f6-4bd2-998f-b522066703ba/storage_v2/_src_/database/master.YiqNvw/schema/dbo.sYMBAA.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Benchmark/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clients/New.API/Controllers/WeatherForecastController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Clients/New.API/Controllers/WeatherForecastController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Clients/New.API/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Clients/New.API/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Clients/New.API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Clients/New.API/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProductModule/Handlers/GetAllProductsHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProductModule/Handlers/GetAllProductsHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedKernel/Distribuited/ClientHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/ClientHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedKernel/Distribuited/IOutputTransport.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/IOutputTransport.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryExecutor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryExecutor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedKernel/Distribuited/RequestMessage.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedKernel/IDependencyResolver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedKernel/IDependencyResolver.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedKernel/IQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SharedKernel/IQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedKernel/QueryDispatcher.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedKernel/QueryHandlerBase.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SharedKernel/QueryHandlersActivation.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +51,9 @@
     <setting file="file://$PROJECT_DIR$/Clients/New.API/appsettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Clients/New.API/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Clients/New.API/Startup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/SharedKernel/Distribuited/ExecutorManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/SharedKernel/Distribuited/IHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandlerManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Labs.Test/obj/Debug/netcoreapp3.1/Labs.Test.AssemblyInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5CE28C73-3988-4D2F-B2D0-645F8D3E0DEF/19/SocketOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/C866BA95-6C92-4815-BE5F-137AACAC57CE/1D8/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
@@ -108,12 +101,15 @@
         <option value="$PROJECT_DIR$/Clients/New.API/Controllers/WeatherForecastController.cs" />
         <option value="$PROJECT_DIR$/Clients/New.API/appsettings.json" />
         <option value="$PROJECT_DIR$/SharedKernel/Distribuited/ClientHandler.cs" />
-        <option value="$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs" />
-        <option value="$PROJECT_DIR$/ProductModule/Handlers/GetAllProductsHandler.cs" />
         <option value="$PROJECT_DIR$/SharedKernel/Distribuited/QueryExecutor.cs" />
-        <option value="$PROJECT_DIR$/Clients/New.API/Startup.cs" />
         <option value="$PROJECT_DIR$/SharedKernel/IDependencyResolver.cs" />
         <option value="$PROJECT_DIR$/SharedKernel/IQuery.cs" />
+        <option value="$PROJECT_DIR$/Clients/New.API/Startup.cs" />
+        <option value="$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandlerManager.cs" />
+        <option value="$PROJECT_DIR$/ProductModule/Handlers/GetAllProductsHandler.cs" />
+        <option value="$PROJECT_DIR$/SharedKernel/Distribuited/IHandler.cs" />
+        <option value="$PROJECT_DIR$/SharedKernel/Distribuited/QueryHandler.cs" />
+        <option value="$PROJECT_DIR$/SharedKernel/Distribuited/ExecutorManager.cs" />
       </list>
     </option>
   </component>
@@ -199,7 +195,7 @@
       <workItem from="1579796479701" duration="9023000" />
       <workItem from="1579809116554" duration="506000" />
       <workItem from="1579865601785" duration="27719000" />
-      <workItem from="1580220321367" duration="3243000" />
+      <workItem from="1580220321367" duration="8063000" />
     </task>
     <servers />
   </component>
