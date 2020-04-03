@@ -5,22 +5,22 @@ namespace Core.Shared
 {
     public class AggregateFactory
     {
-        private readonly ISnapshotRepository _snapshotRepository;
-        private readonly IEventStore _eventStore;
+        private readonly ISnapshotRepository<Guid> _snapshotRepository;
+        private readonly IEventStore<Guid> _eventStore;
 
         //summay: aplicações não são obrigadas a possuirem uma estrutura de snapshot
-        public AggregateFactory(IEventStore eventStore, ISnapshotRepository snapshotRepository = null)
+        public AggregateFactory(IEventStore<Guid> eventStore, ISnapshotRepository<Guid> snapshotRepository = null)
         {
             _snapshotRepository = snapshotRepository;
             _eventStore = eventStore;
         }
         
         public TAggregate Create<TAggregate>(Guid? id = null)
-            where TAggregate : AggregateRoot
+            where TAggregate : AggregateRoot<Guid>
         {
             id = id == null || id.Value == Guid.Empty ? Guid.NewGuid() : id;
             
-            var createEvent = new AggregateCreated(id.Value);
+            var createEvent = new AggregateCreated<Guid>(id.Value);
             var events = new List<IEvent>();
             events.Add(createEvent);
 
@@ -31,7 +31,7 @@ namespace Core.Shared
         }
         
         public TAggregate Load<TAggregate>(Guid id)
-            where TAggregate : AggregateRoot
+            where TAggregate : AggregateRoot<Guid>
         {
             TAggregate root;
             long snapshotVersion = 0;

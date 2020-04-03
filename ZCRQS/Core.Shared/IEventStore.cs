@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace Core.Shared
 {
-    public interface IEventStore
+    public interface IEventStore<TKey>
     {
-        EventStream LoadEventStream(Guid id);
+        EventStream LoadEventStream(TKey id);
 
-        EventStream LoadEventStreamAfterVersion(Guid id, long snapshotVersion);
+        EventStream LoadEventStreamAfterVersion(TKey id, long snapshotVersion);
         
-        void AppendToStream<T>(Guid id, int version, ICollection<IEvent> events);
+        void AppendToStream<TType>(TKey id, long version, ICollection<IEvent> events);
     }
 }

@@ -9,7 +9,7 @@ using Program.Events;
 namespace Program.Aggregates
 {
     [Serializable]
-    public class ProductCatalogAggregate : AggregateRoot
+    public class ProductCatalogAggregate : AggregateRoot<Guid>
     {
         private List<Product> _products;
 
@@ -47,7 +47,7 @@ namespace Program.Aggregates
             _products.Add(new Product(e.Id, e.Name, e.Description));
         }
         
-        private void When(AggregateCreated e)
+        private void When(AggregateCreated<Guid> e)
         {
             Id = e.Id;
             _products = new List<Product>();
