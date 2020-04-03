@@ -13,6 +13,8 @@ namespace Core.Shared.Interfaces
         IEnumerable<DataWithVersion> ReadRecords<T>(long afterVersion, int maxCount);
 
         IEnumerable<DataWithName> ReadRecords(long afterVersion, int maxCount);
+        
+        bool Any(TKey aggregateId);
 
         void Close();
 

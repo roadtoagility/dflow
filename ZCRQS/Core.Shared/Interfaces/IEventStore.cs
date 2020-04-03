@@ -11,5 +11,7 @@ namespace Core.Shared.Interfaces
         EventStream LoadEventStreamAfterVersion(TKey id, long snapshotVersion);
         
         void AppendToStream<TType>(TKey id, long version, ICollection<IEvent> events);
+
+        bool Any(TKey id);
     }
 }

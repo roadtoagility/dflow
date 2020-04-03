@@ -56,6 +56,11 @@ namespace Program
                 .Select(x => new DataWithName(x.AggregateType, x.Data));
         }
 
+        public bool Any(Guid aggregateId)
+        {
+            return _eventsStorage.Any(x => x.AggregateId == aggregateId);
+        }
+
         public void Close()
         {
             _eventsStorage = null;

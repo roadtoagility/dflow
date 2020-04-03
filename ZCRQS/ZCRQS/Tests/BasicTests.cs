@@ -40,7 +40,7 @@ namespace Program.Tests
             var factory = new AggregateFactory(eventStore);
             var root = factory.Create<ProductCatalogAggregate>(rootId);
             
-            eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, 0, root.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, root.Version, root.Changes);
 
             var stream = eventStore.LoadEventStream(rootId);
             Assert.Equal(1, stream.Version);
@@ -70,26 +70,14 @@ namespace Program.Tests
         [Fact]
         public void ShouldAllEventsRegisteredAggregate()
         {
-            var factory = new AggregateFactory(null);
+            var appendOnly = new MemoryAppendOnlyStore();
+            var queueService = new MemoryQueueService();
+            var eventStore = new EventStore(appendOnly, queueService);
+            var factory = new AggregateFactory(eventStore);
             var root = factory.Create<ProductCatalogAggregate>(Guid.NewGuid());
 
             Assert.True(1 == root.Changes.Count);
             Assert.Equal(typeof(AggregateCreated<Guid>), root.Changes.ElementAt(0).GetType());
-        }
-        
-        //TODO: eu não lembro se apaguei os asserts?
-        [Fact]
-        public void EventsAppendedToChanges()
-        {
-            var appendOnly = new MemoryAppendOnlyStore();
-            var queueService = new MemoryQueueService();
-            var eventStore = new EventStore(appendOnly, queueService);
-            var productService = new ProductServiceCommandHandler(eventStore);
-            var customerService = new CustomerService(eventStore);
-            var command = new OrderServiceCommandHandler(eventStore, productService, customerService);
-            
-            
-            command.Execute(new AddProductCommand(Guid.NewGuid(), Guid.NewGuid(), 2));
         }
         
         [Fact]
@@ -102,7 +90,7 @@ namespace Program.Tests
             var factory = new AggregateFactory(eventStore);
             var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
             
-            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 0, rootToSave.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, rootToSave.Version, rootToSave.Changes);
 
             var root = factory.Load<ProductCatalogAggregate>(rootId);
             
@@ -122,17 +110,17 @@ namespace Program.Tests
             var factory = new AggregateFactory(eventStore);
             var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
             
-            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, rootToSave.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, rootToSave.Version, rootToSave.Changes);
 
             var stream = eventStore.LoadEventStream(rootId);
-            var root = new ProductCatalogAggregate(stream.Events);
+            var root = new ProductCatalogAggregate(stream);
             
             root.CreateProduct(new CreateProductCommand(Guid.NewGuid(), "Notebook", "Dell Inspiron 15000"));
             
-            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, root.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, root.Version, root.Changes);
 
             stream = eventStore.LoadEventStream(rootId);
-            root = new ProductCatalogAggregate(stream.Events);
+            root = new ProductCatalogAggregate(stream);
             
             Assert.Equal(2, stream.Version);
             Assert.Equal(1, root.CountProducts());
@@ -155,7 +143,7 @@ namespace Program.Tests
             eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, rootToSave.Changes);
 
             var stream = eventStore.LoadEventStream(rootId);
-            var root = new ProductCatalogAggregate(stream.Events);
+            var root = new ProductCatalogAggregate(stream);
             
             root.CreateProduct(new CreateProductCommand(Guid.NewGuid(), "Notebook", "Dell Inspiron 15000"));
             

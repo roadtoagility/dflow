@@ -16,8 +16,8 @@ namespace Program.Aggregates
     {
         private List<Product> _products;
 
-        public ProductCatalogAggregate(IEnumerable<IEvent> events)
-            : base(events)
+        public ProductCatalogAggregate(EventStream stream)
+            : base(stream)
         {
             
         }
@@ -32,12 +32,6 @@ namespace Program.Aggregates
         public int CountProducts()
         {
             return _products.Count;
-        }
-        
-        void Apply(IEvent @event)
-        {
-            Changes.Add(@event);
-            Mutate(@event);
         }
         
         protected override void Mutate(IEvent e)

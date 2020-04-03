@@ -9,11 +9,13 @@ namespace Core.Shared.Base.Aggregate
     {
         public List<IEvent> Changes { get; protected set; }
         public T Id { get; protected set; }
+        public long Version { get; protected set; }
         
-        public AggregateRoot(IEnumerable<IEvent> events)
+        public AggregateRoot(EventStream stream)
         {
             Changes = new List<IEvent>();
-            ReplayEvents(events);
+            Version = stream.Version;
+            ReplayEvents(stream.Events);
         }
 
         public void ReplayEvents(IEnumerable<IEvent> events)
@@ -23,7 +25,15 @@ namespace Core.Shared.Base.Aggregate
                 Mutate(@event);
             }
         }
+        
+        protected void Apply(IEvent @event)
+        {
+            Changes.Add(@event);
+            Mutate(@event);
+            Version++;
+        }
 
         protected abstract void Mutate(IEvent e);
+
     }
 }

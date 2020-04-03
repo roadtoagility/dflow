@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Core.Shared;
 using Core.Shared.Base;
+using Core.Shared.Base.Exceptions;
 using Core.Shared.Interfaces;
 
 namespace Program
@@ -20,8 +21,6 @@ namespace Program
             _appendOnlyStore = appendOnlyStore;
             _queueService = queueService;
         }
-        
-        
         
         public EventStream LoadEventStream(Guid id) => LoadEventStream(id, 0, Int32.MaxValue);
         
@@ -42,7 +41,6 @@ namespace Program
 
         public EventStream LoadEventStreamAfterVersion(Guid id, long afterVersion)
         {
-            //TODO: acabei zoando muito essa questão de long e int, tudo precisa ser long
             var records = _appendOnlyStore.ReadRecords(id, afterVersion, Int32.MaxValue).ToList();
 
             var stream = new EventStream();
@@ -56,7 +54,6 @@ namespace Program
             return stream;
         }
 
-        //TODO: preciso ver o controle de versão melhor, ta muito manual ainda
         public void AppendToStream<TType>(Guid id, long version, ICollection<IEvent> events)
         {
             if (events.Count == 0)
@@ -65,26 +62,24 @@ namespace Program
             var data = SerializeEvent(events.ToArray());
             var aggregateType = typeof(TType).Name;
             
-            //TODO: Ainda não entendi como se controla a versao corretamente
-            version++;
-            
             try
             {
                 _appendOnlyStore.Append(id, aggregateType, data, version);
-                
-                //TODO: entender MUITO BEM questões de rollback, garantias, oq acontece se da erro no appendOnly?
                 _queueService.Publish(events.ToArray());
             }
             //TODO: ainda preciso entender como vai ser o tratamento de exceptions
             catch(Exception ex)
             {
                 var server = LoadEventStream(id, 0, int.MaxValue);
-
                 throw;
-
             }
         }
-        
+
+        public bool Any(Guid id)
+        {
+            return _appendOnlyStore.Any(id);
+        }
+
         byte[] SerializeEvent(IEvent[] e)
         {
             using (var mem = new MemoryStream())

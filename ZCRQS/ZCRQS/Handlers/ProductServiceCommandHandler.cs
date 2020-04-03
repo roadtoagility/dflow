@@ -27,7 +27,7 @@ namespace Program.Handlers
             while(true)
             {
                 var stream = _eventStore.LoadEventStream(cmd.Id);
-                var productCatalog = new ProductCatalogAggregate(stream.Events);
+                var productCatalog = new ProductCatalogAggregate(stream);
                 
                 try
                 {

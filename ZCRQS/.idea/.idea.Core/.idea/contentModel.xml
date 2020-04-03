@@ -19,6 +19,7 @@
           <e p="Entity.cs" t="Include" />
           <e p="EventStream.cs" t="Include" />
           <e p="Exceptions" t="Include">
+            <e p="DuplicatedRootException.cs" t="Include" />
             <e p="EventStoreConcurrencyException.cs" t="Include" />
           </e>
         </e>
