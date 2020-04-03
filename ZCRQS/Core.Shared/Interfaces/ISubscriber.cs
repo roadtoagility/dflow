@@ -1,6 +1,6 @@
 using System;
 
-namespace Core.Shared
+namespace Core.Shared.Interfaces
 {
     public interface ISubscriber
     {

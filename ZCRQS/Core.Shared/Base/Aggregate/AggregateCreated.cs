@@ -1,6 +1,7 @@
 using System;
+using Core.Shared.Interfaces;
 
-namespace Core.Shared
+namespace Core.Shared.Base.Aggregate
 {
     [Serializable]
     public sealed class AggregateCreated<TKey> : IEvent

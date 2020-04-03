@@ -1,6 +1,8 @@
 using System;
+using Core.Shared.Base;
+using Core.Shared.Base.Aggregate;
 
-namespace Core.Shared
+namespace Core.Shared.Interfaces
 {
     public interface ISnapshotRepository<TKey>
     {

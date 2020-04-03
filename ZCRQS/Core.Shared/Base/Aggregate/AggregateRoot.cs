@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Core.Shared.Interfaces;
 
-namespace Core.Shared
+namespace Core.Shared.Base.Aggregate
 {
     [Serializable]
     public abstract class AggregateRoot<T>

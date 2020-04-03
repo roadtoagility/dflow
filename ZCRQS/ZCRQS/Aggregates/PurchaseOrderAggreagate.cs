@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Core.Shared;
+using Core.Shared.Interfaces;
 using Program.Events;
 using Program.Handlers;
 

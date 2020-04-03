@@ -1,5 +1,8 @@
 using System;
 using Core.Shared;
+using Core.Shared.Base;
+using Core.Shared.Base.Exceptions;
+using Core.Shared.Interfaces;
 using Program.Aggregates;
 using Program.Commands;
 

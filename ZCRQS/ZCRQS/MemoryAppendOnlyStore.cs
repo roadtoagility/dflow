@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Shared;
+using Core.Shared.Base;
+using Core.Shared.Interfaces;
 
 namespace Program
 {
