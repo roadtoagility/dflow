@@ -1,15 +1,11 @@
 using System.Collections.Generic;
+using Core.Shared.Interfaces;
 
-namespace Core.Shared
+namespace Core.Shared.Base
 {
     public class EventStream
     {
-        // version of the event stream returned
-
         public long Version;
-
-        // all events in the stream
-
         public List<IEvent> Events = new List<IEvent>();
     }
 }

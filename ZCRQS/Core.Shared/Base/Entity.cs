@@ -1,4 +1,4 @@
-namespace Core.Shared
+namespace Core.Shared.Base
 {
     public interface Entity<T>
     {

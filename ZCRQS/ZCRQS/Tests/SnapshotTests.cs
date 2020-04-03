@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Core.Shared;
+using Core.Shared.Base;
+using Core.Shared.Base.Aggregate;
 using Program.Aggregates;
 using Program.Commands;
 using Xunit;

@@ -1,4 +1,5 @@
 using Core.Shared;
+using Core.Shared.Interfaces;
 
 namespace Program.Handlers
 {

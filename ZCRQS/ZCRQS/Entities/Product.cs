@@ -1,5 +1,6 @@
 using System;
 using Core.Shared;
+using Core.Shared.Base;
 
 namespace Program.Entities
 {

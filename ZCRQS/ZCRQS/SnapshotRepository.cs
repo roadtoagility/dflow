@@ -4,6 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Core.Shared;
+using Core.Shared.Base;
+using Core.Shared.Base.Aggregate;
+using Core.Shared.Interfaces;
 
 namespace Program
 {

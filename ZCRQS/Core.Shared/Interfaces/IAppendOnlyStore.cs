@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Core.Shared.Base;
 
-namespace Core.Shared
+namespace Core.Shared.Interfaces
 {
     public interface IAppendOnlyStore<TKey>: IDisposable
     {

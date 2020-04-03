@@ -1,4 +1,4 @@
-namespace Core.Shared
+namespace Core.Shared.Interfaces
 {
     public interface ICommand
     {

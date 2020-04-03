@@ -8,23 +8,31 @@
     <e p="C:\Users\Douglas\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Core.-1497781228.00" t="ExcludeRecursive" />
     <e p="D:\projetos\labs\ZCRQS" t="IncludeFlat">
       <e p="Core.Shared" t="IncludeRecursive">
-        <e p="AggregateCreated.cs" t="Include" />
-        <e p="AggregateFactory.cs" t="Include" />
-        <e p="AggregateRoot.cs" t="Include" />
+        <e p="Base" t="Include">
+          <e p="Aggregate" t="Include">
+            <e p="AggregateCreated.cs" t="Include" />
+            <e p="AggregateFactory.cs" t="Include" />
+            <e p="AggregateRoot.cs" t="Include" />
+          </e>
+          <e p="DataWithName.cs" t="Include" />
+          <e p="DataWithVersion.cs" t="Include" />
+          <e p="Entity.cs" t="Include" />
+          <e p="EventStream.cs" t="Include" />
+          <e p="Exceptions" t="Include">
+            <e p="EventStoreConcurrencyException.cs" t="Include" />
+          </e>
+        </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="Core.Shared.csproj" t="IncludeRecursive" />
-        <e p="DataWithName.cs" t="Include" />
-        <e p="DataWithVersion.cs" t="Include" />
-        <e p="Entity.cs" t="Include" />
-        <e p="EventStoreConcurrencyException.cs" t="Include" />
-        <e p="EventStream.cs" t="Include" />
-        <e p="IAppendOnlyStore.cs" t="Include" />
-        <e p="ICommand.cs" t="Include" />
-        <e p="IEvent.cs" t="Include" />
-        <e p="IEventStore.cs" t="Include" />
-        <e p="IQueueService.cs" t="Include" />
-        <e p="ISnapshotRepository.cs" t="Include" />
-        <e p="ISubscriber.cs" t="Include" />
+        <e p="Interfaces" t="Include">
+          <e p="IAppendOnlyStore.cs" t="Include" />
+          <e p="ICommand.cs" t="Include" />
+          <e p="IEvent.cs" t="Include" />
+          <e p="IEventStore.cs" t="Include" />
+          <e p="IQueueService.cs" t="Include" />
+          <e p="ISnapshotRepository.cs" t="Include" />
+          <e p="ISubscriber.cs" t="Include" />
+        </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
