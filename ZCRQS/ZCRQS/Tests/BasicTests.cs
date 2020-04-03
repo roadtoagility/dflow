@@ -25,7 +25,7 @@ namespace Program.Tests
 
             Assert.Equal(rootId,root.Id);
             Assert.True(1 == root.Changes.Count);
-            Assert.Equal(typeof(AggregateCreated), root.Changes.ElementAt(0).GetType());
+            Assert.Equal(typeof(AggregateCreated<Guid>), root.Changes.ElementAt(0).GetType());
         }
         
         [Fact]
@@ -42,7 +42,7 @@ namespace Program.Tests
 
             var stream = eventStore.LoadEventStream(rootId);
             Assert.Equal(1, stream.Version);
-            Assert.Equal(typeof(AggregateCreated), stream.Events.ElementAt(0).GetType());
+            Assert.Equal(typeof(AggregateCreated<Guid>), stream.Events.ElementAt(0).GetType());
         }
         
         [Fact]
@@ -72,7 +72,7 @@ namespace Program.Tests
             var root = factory.Create<ProductCatalogAggregate>(Guid.NewGuid());
 
             Assert.True(1 == root.Changes.Count);
-            Assert.Equal(typeof(AggregateCreated), root.Changes.ElementAt(0).GetType());
+            Assert.Equal(typeof(AggregateCreated<Guid>), root.Changes.ElementAt(0).GetType());
         }
         
         //TODO: eu não lembro se apaguei os asserts?

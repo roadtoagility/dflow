@@ -3,11 +3,11 @@ using System;
 namespace Core.Shared
 {
     [Serializable]
-    public sealed class AggregateCreated : IEvent
+    public sealed class AggregateCreated<TKey> : IEvent
     {
-        public Guid Id { get; private set; }
+        public TKey Id { get; private set; }
         
-        public AggregateCreated(Guid id)
+        public AggregateCreated(TKey id)
         {
             Id = id;
         }

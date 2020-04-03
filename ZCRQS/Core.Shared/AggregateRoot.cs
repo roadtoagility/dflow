@@ -4,10 +4,10 @@ using System.Collections.Generic;
 namespace Core.Shared
 {
     [Serializable]
-    public abstract class AggregateRoot
+    public abstract class AggregateRoot<T>
     {
         public List<IEvent> Changes { get; protected set; }
-        public Guid Id { get; protected set; }
+        public T Id { get; protected set; }
         
         public AggregateRoot(IEnumerable<IEvent> events)
         {

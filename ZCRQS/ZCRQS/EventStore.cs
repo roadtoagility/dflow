@@ -7,34 +7,19 @@ using Core.Shared;
 
 namespace Program
 {
-    public class EventStore : IEventStore
+    public class EventStore : IEventStore<Guid>
     {
         readonly BinaryFormatter _formatter = new BinaryFormatter();
-        readonly IAppendOnlyStore _appendOnlyStore;
+        readonly IAppendOnlyStore<Guid> _appendOnlyStore;
         readonly IQueueService _queueService;
         
-        public EventStore(IAppendOnlyStore appendOnlyStore, IQueueService queueService)
+        public EventStore(IAppendOnlyStore<Guid> appendOnlyStore, IQueueService queueService)
         {
             _appendOnlyStore = appendOnlyStore;
             _queueService = queueService;
         }
         
-        byte[] SerializeEvent(IEvent[] e)
-        {
-            using (var mem = new MemoryStream())
-            {
-                _formatter.Serialize(mem, e);
-                return mem.ToArray();
-            }
-        }
         
-        IEvent[] DeserializeEvent(byte[] data)
-        {
-            using (var mem = new MemoryStream(data))
-            {
-                return (IEvent[])_formatter.Deserialize(mem);
-            }
-        }
         
         public EventStream LoadEventStream(Guid id) => LoadEventStream(id, 0, Int32.MaxValue);
         
@@ -56,7 +41,7 @@ namespace Program
         public EventStream LoadEventStreamAfterVersion(Guid id, long afterVersion)
         {
             //TODO: acabei zoando muito essa questão de long e int, tudo precisa ser long
-            var records = _appendOnlyStore.ReadRecords(id, (int)afterVersion, Int32.MaxValue).ToList();
+            var records = _appendOnlyStore.ReadRecords(id, afterVersion, Int32.MaxValue).ToList();
 
             var stream = new EventStream();
 
@@ -70,13 +55,13 @@ namespace Program
         }
 
         //TODO: preciso ver o controle de versão melhor, ta muito manual ainda
-        public void AppendToStream<T>(Guid id, int version, ICollection<IEvent> events)
+        public void AppendToStream<TType>(Guid id, long version, ICollection<IEvent> events)
         {
             if (events.Count == 0)
                 return;
 
             var data = SerializeEvent(events.ToArray());
-            var aggregateType = typeof(T).Name;
+            var aggregateType = typeof(TType).Name;
             
             //TODO: Ainda não entendi como se controla a versao corretamente
             version++;
@@ -95,6 +80,23 @@ namespace Program
 
                 throw;
 
+            }
+        }
+        
+        byte[] SerializeEvent(IEvent[] e)
+        {
+            using (var mem = new MemoryStream())
+            {
+                _formatter.Serialize(mem, e);
+                return mem.ToArray();
+            }
+        }
+        
+        IEvent[] DeserializeEvent(byte[] data)
+        {
+            using (var mem = new MemoryStream(data))
+            {
+                return (IEvent[])_formatter.Deserialize(mem);
             }
         }
     }

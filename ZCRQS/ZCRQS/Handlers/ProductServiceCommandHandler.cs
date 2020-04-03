@@ -1,3 +1,4 @@
+using System;
 using Core.Shared;
 using Program.Aggregates;
 using Program.Commands;
@@ -6,9 +7,9 @@ namespace Program.Handlers
 {
     public class ProductServiceCommandHandler : IProductServiceCommandHandler
     {
-        private readonly IEventStore _eventStore;
+        private readonly IEventStore<Guid> _eventStore;
 
-        public ProductServiceCommandHandler(IEventStore eventStore)
+        public ProductServiceCommandHandler(IEventStore<Guid> eventStore)
         {
             _eventStore = eventStore;
         }

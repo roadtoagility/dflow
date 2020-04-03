@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace Core.Shared
 {
-    public interface IAppendOnlyStore : IDisposable
+    public interface IAppendOnlyStore<TKey>: IDisposable
     {
-        void Append(Guid aggregateId, string aggregateType, byte[] data, int expectedVersion = -1);
+        void Append(TKey aggregateId, string aggregateType, byte[] data, long expectedVersion = -1);
 
-        IEnumerable<DataWithVersion> ReadRecords(string name, int afterVersion, int maxCount);
-        IEnumerable<DataWithVersion> ReadRecords(Guid aggregateId, int afterVersion, int maxCount);
-        IEnumerable<DataWithVersion> ReadRecords<T>(int afterVersion, int maxCount);
+        IEnumerable<DataWithVersion> ReadRecords(string name, long afterVersion, int maxCount);
+        IEnumerable<DataWithVersion> ReadRecords(TKey aggregateId, long afterVersion, int maxCount);
+        IEnumerable<DataWithVersion> ReadRecords<T>(long afterVersion, int maxCount);
 
-        IEnumerable<DataWithName> ReadRecords(int afterVersion, int maxCount);
+        IEnumerable<DataWithName> ReadRecords(long afterVersion, int maxCount);
 
         void Close();
 

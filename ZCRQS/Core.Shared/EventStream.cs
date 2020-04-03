@@ -6,7 +6,7 @@ namespace Core.Shared
     {
         // version of the event stream returned
 
-        public int Version;
+        public long Version;
 
         // all events in the stream
 

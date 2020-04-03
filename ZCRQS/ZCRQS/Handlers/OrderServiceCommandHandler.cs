@@ -1,3 +1,4 @@
+using System;
 using Core.Shared;
 using Program.Aggregates;
 using Program.Commands;
@@ -6,11 +7,11 @@ namespace Program.Handlers
 {
     public class OrderServiceCommandHandler : IOrderServiceCommandHandler
     {
-        private readonly IEventStore _eventStore;
+        private readonly IEventStore<Guid> _eventStore;
         private readonly IProductServiceCommandHandler _productService;
         private readonly CustomerService _customerService;
 
-        public OrderServiceCommandHandler(IEventStore eventStore, IProductServiceCommandHandler productService, CustomerService customerService)
+        public OrderServiceCommandHandler(IEventStore<Guid> eventStore, IProductServiceCommandHandler productService, CustomerService customerService)
         {
             _eventStore = eventStore;
             _productService = productService;
