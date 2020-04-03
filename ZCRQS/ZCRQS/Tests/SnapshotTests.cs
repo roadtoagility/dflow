@@ -74,7 +74,6 @@ namespace Program.Tests
             productAggregate.CreateProduct(new CreateProductCommand(Guid.NewGuid(), "Notebook 2 em 1 Dell", "Notebook 2 em 1 Dell Inspiron i14-5481-M11F 8ª Geração Intel Core i3 4GB 128GB SSD 14' Touch Windows 10 Office 365 McAfe"));
             productAggregate.CreateProduct(new CreateProductCommand(Guid.NewGuid(), "Notebook Gamer Dell", "Notebook Gamer Dell G3-3590-M60P 9ª Geração Intel Core i7 8GB 512GB SSD Placa Vídeo NVIDIA 1660Ti 15.6' Windows 10"));
             productAggregate.CreateProduct(new CreateProductCommand(Guid.NewGuid(), "Notebook Lenovo 2 em 1 ideapad C340", "Notebook Lenovo 2 em 1 ideapad C340 i7-8565U 8GB 256GB SSD Win10 14' FHD IPS - 81RL0001BR"));
-            //TODO: preciso ver o controle de versão, ta muito manual e não tenho certeza se o objeto que vai solicitar o AppToStream deve eviar a versão que ele espera que seja a current
             eventStore.AppendToStream<ProductCatalogAggregate>(productAggregate.Id, productAggregate.Version, productAggregate.Changes);
             
             

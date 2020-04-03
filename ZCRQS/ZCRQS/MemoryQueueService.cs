@@ -15,7 +15,6 @@ namespace Program
             _subscribers = new Dictionary<Type, IList<ISubscriber>>();
         }
         
-        //TODO: mudar, precisa forçar que o generic implementa a interface T, mudar para IEvent<T>
         public void Subscribe<T>(ISubscriber subscriber) 
         {
             var type = typeof(T);
