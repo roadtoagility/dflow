@@ -94,7 +94,7 @@ namespace Program.Tests
 
             var root = factory.Load<ProductCatalogAggregate>(rootId);
             
-            root.CreateProduct(new CreateProductCommand(Guid.NewGuid(), "Notebook", "Dell Inspiron 15000"));
+            root.CreateProduct(new CreateProductCommand(rootId, Guid.NewGuid(), "Notebook", "Dell Inspiron 15000"));
             
             Assert.True(root.Changes.Count == 1);
             Assert.True(root.Changes.ElementAt(0).GetType() == typeof(ProductCreated));
@@ -115,7 +115,7 @@ namespace Program.Tests
             var stream = eventStore.LoadEventStream(rootId);
             var root = new ProductCatalogAggregate(stream);
             
-            root.CreateProduct(new CreateProductCommand(Guid.NewGuid(), "Notebook", "Dell Inspiron 15000"));
+            root.CreateProduct(new CreateProductCommand(rootId, Guid.NewGuid(), "Notebook", "Dell Inspiron 15000"));
             
             eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, root.Version, root.Changes);
 
@@ -145,9 +145,9 @@ namespace Program.Tests
             var stream = eventStore.LoadEventStream(rootId);
             var root = new ProductCatalogAggregate(stream);
             
-            root.CreateProduct(new CreateProductCommand(Guid.NewGuid(), "Notebook", "Dell Inspiron 15000"));
+            root.CreateProduct(new CreateProductCommand(rootId, Guid.NewGuid(), "Notebook", "Dell Inspiron 15000"));
             
-            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, root.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, root.Version, root.Changes);
             
             Assert.True(1 == view.Products.Count);
             Assert.Equal("Notebook", view.Products[0].Name);

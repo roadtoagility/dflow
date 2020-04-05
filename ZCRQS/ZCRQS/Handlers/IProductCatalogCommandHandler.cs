@@ -3,7 +3,7 @@ using Core.Shared.Interfaces;
 
 namespace Program.Handlers
 {
-    public interface IProductServiceCommandHandler
+    public interface IProductCatalogCommandHandler
     {
         void Execute(ICommand cmd);
     }

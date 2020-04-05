@@ -1,6 +1,7 @@
 using System;
 using Core.Shared;
 using Core.Shared.Base;
+using Core.Shared.Base.Aggregate;
 using Core.Shared.Base.Exceptions;
 using Core.Shared.Interfaces;
 using Program.Aggregates;
@@ -8,37 +9,61 @@ using Program.Commands;
 
 namespace Program.Handlers
 {
-    public class ProductServiceCommandHandler : IProductServiceCommandHandler
+    public class ProductServiceCommandHandler : Handler<IProductCatalogCommandHandler>
     {
         private readonly IEventStore<Guid> _eventStore;
+        private readonly AggregateFactory _factory;
 
-        public ProductServiceCommandHandler(IEventStore<Guid> eventStore)
+        public ProductServiceCommandHandler(IEventStore<Guid> eventStore,
+            AggregateFactory factory) : base(eventStore)
         {
             _eventStore = eventStore;
+            _factory = factory;
         }
 
-        public void Execute(ICommand command)
+        public void When(CreateProductCatalog cmd)
         {
-            ((dynamic)this).When((dynamic)command);
+            while(true)
+            {
+                var productCatalog = _factory.Create<ProductCatalogAggregate>(cmd.Id);
+                
+                try
+                {
+                    _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.Id, productCatalog.Version,
+                        productCatalog.Changes);
+                    return;
+                }
+                catch (EventStoreConcurrencyException ex)
+                {
+                    HandleConcurrencyException(ex, productCatalog);
+                }
+                catch(Exception)
+                {
+                    throw;
+                }
+            }
         }
-
+        
         public void When(CreateProductCommand cmd)
         {
             while(true)
             {
-                var stream = _eventStore.LoadEventStream(cmd.Id);
-                var productCatalog = new ProductCatalogAggregate(stream);
+                var productCatalog = _factory.Load<ProductCatalogAggregate>(cmd.RootId);
+                productCatalog.CreateProduct(cmd);
                 
                 try
                 {
-                    
-                    // order.AddProduct(cmd.Qtd, cmd.ProductId, _productService);
-                    // _eventStore.AppendToStream(cmd.OrderId, stream.Version, order.Changes);
+                    _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.RootId, productCatalog.Version,
+                        productCatalog.Changes);
                     return;
                 }
-                catch (EventStoreConcurrencyException)
+                catch (EventStoreConcurrencyException ex)
                 {
-                    
+                    HandleConcurrencyException(ex, productCatalog);
+                }
+                catch(Exception)
+                {
+                    throw;
                 }
             }
         }

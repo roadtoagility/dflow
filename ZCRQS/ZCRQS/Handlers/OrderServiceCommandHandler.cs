@@ -11,10 +11,10 @@ namespace Program.Handlers
     public class OrderServiceCommandHandler : IOrderServiceCommandHandler
     {
         private readonly IEventStore<Guid> _eventStore;
-        private readonly IProductServiceCommandHandler _productService;
+        private readonly IProductCatalogCommandHandler _productService;
         private readonly CustomerService _customerService;
 
-        public OrderServiceCommandHandler(IEventStore<Guid> eventStore, IProductServiceCommandHandler productService, CustomerService customerService)
+        public OrderServiceCommandHandler(IEventStore<Guid> eventStore, IProductCatalogCommandHandler productService, CustomerService customerService)
         {
             _eventStore = eventStore;
             _productService = productService;

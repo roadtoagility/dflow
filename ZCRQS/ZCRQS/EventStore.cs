@@ -61,18 +61,26 @@ namespace Program
 
             var data = SerializeEvent(events.ToArray());
             var aggregateType = typeof(TType).Name;
+
+            var originalVersion = version - events.Count();
+
+            if (_appendOnlyStore.Any(id))
+            {
+                var stream = new EventStream();
+                foreach (var tapeRecord in _appendOnlyStore.ReadRecords(id, originalVersion, int.MaxValue))
+                {
+                    stream.Events.AddRange(DeserializeEvent(tapeRecord.Data));
+                    stream.Version = tapeRecord.Version;
+                }
+
+                //Version = 0 significa que não existe stream anterior a versao informada no ReadRecords
+                if (stream.Version > 0 && originalVersion != stream.Version)
+                    throw new EventStoreConcurrencyException(stream.Events, stream.Version);
+            }
             
-            try
-            {
-                _appendOnlyStore.Append(id, aggregateType, data, version);
-                _queueService.Publish(events.ToArray());
-            }
-            //TODO: ainda preciso entender como vai ser o tratamento de exceptions
-            catch(Exception ex)
-            {
-                var server = LoadEventStream(id, 0, int.MaxValue);
-                throw;
-            }
+
+            _appendOnlyStore.Append(id, aggregateType, data, version);
+            _queueService.Publish(events.ToArray());
         }
 
         public bool Any(Guid id)

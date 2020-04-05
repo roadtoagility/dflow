@@ -22,7 +22,7 @@ namespace Program.Aggregates
             }
         }
 
-        public void AddProduct(decimal qtd, Guid productId, IProductServiceCommandHandler productService)
+        public void AddProduct(decimal qtd, Guid productId, IProductCatalogCommandHandler productService)
         {
             
         }

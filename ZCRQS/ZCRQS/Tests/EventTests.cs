@@ -35,9 +35,9 @@ namespace Program.Tests
             eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, root.Version, root.Changes);
             
             root = factory.Load<ProductCatalogAggregate>(rootId);
-            root.CreateProduct(new CreateProductCommand(Guid.NewGuid(), "Notebook", "Dell Inspiron 15000"));
-            root.CreateProduct(new CreateProductCommand(Guid.NewGuid(), "Notebook Asus Vivobook", "Notebook Asus Vivobook X441B-CBA6A de 14 Con AMD A6-9225/4GB Ram/500GB HD/W10"));
-            root.CreateProduct(new CreateProductCommand(Guid.NewGuid(), "Notebook 2 em 1 Dell", "Notebook 2 em 1 Dell Inspiron i14-5481-M11F 8ª Geração Intel Core i3 4GB 128GB SSD 14' Touch Windows 10 Office 365 McAfe"));
+            root.CreateProduct(new CreateProductCommand(rootId,Guid.NewGuid(), "Notebook", "Dell Inspiron 15000"));
+            root.CreateProduct(new CreateProductCommand(rootId,Guid.NewGuid(), "Notebook Asus Vivobook", "Notebook Asus Vivobook X441B-CBA6A de 14 Con AMD A6-9225/4GB Ram/500GB HD/W10"));
+            root.CreateProduct(new CreateProductCommand(rootId,Guid.NewGuid(), "Notebook 2 em 1 Dell", "Notebook 2 em 1 Dell Inspiron i14-5481-M11F 8ª Geração Intel Core i3 4GB 128GB SSD 14' Touch Windows 10 Office 365 McAfe"));
             eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, root.Version, root.Changes);
             
             root = factory.Load<ProductCatalogAggregate>(rootId);

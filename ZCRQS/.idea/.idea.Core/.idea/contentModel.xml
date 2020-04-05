@@ -22,6 +22,7 @@
             <e p="DuplicatedRootException.cs" t="Include" />
             <e p="EventStoreConcurrencyException.cs" t="Include" />
           </e>
+          <e p="Handler.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="Core.Shared.csproj" t="IncludeRecursive" />
@@ -54,6 +55,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Commands" t="Include">
           <e p="AddProductCommand.cs" t="Include" />
+          <e p="CreateProductCatalog.cs" t="Include" />
           <e p="CreateProductCommand.cs" t="Include" />
         </e>
         <e p="Entities" t="Include">
@@ -69,7 +71,7 @@
         <e p="Handlers" t="Include">
           <e p="CustomerService.cs" t="Include" />
           <e p="IOrderServiceCommandHandler.cs" t="Include" />
-          <e p="IProductServiceCommandHandler.cs" t="Include" />
+          <e p="IProductCatalogCommandHandler.cs" t="Include" />
           <e p="OrderServiceCommandHandler.cs" t="Include" />
           <e p="ProductServiceCommandHandler.cs" t="Include" />
         </e>
@@ -88,6 +90,7 @@
           <e p="BasicTests.cs" t="Include" />
           <e p="ConcurrencyTests.cs" t="Include" />
           <e p="EventTests.cs" t="Include" />
+          <e p="HandlerTests.cs" t="Include" />
           <e p="SnapshotTests.cs" t="Include" />
         </e>
         <e p="Views" t="Include">
