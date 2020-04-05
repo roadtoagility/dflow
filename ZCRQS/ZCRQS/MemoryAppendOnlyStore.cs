@@ -19,7 +19,6 @@ namespace Program
 
         public void Append(Guid aggregateId, string aggregateType, byte[] data, long expectedVersion = -1)
         {
-            //(Guid aggregateId, string aggregateType, Guid eventId, int version, byte[] data)
             _eventsStorage.Add(new EventDTO<System.Guid>(aggregateId, aggregateType, expectedVersion, data));
         }
 

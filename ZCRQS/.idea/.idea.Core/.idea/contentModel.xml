@@ -91,6 +91,7 @@
           <e p="ConcurrencyTests.cs" t="Include" />
           <e p="EventTests.cs" t="Include" />
           <e p="HandlerTests.cs" t="Include" />
+          <e p="ProjectionTests.cs" t="Include" />
           <e p="SnapshotTests.cs" t="Include" />
         </e>
         <e p="Views" t="Include">
