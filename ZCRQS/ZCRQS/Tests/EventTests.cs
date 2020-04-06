@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using Core.Infrastructure.Queue.Memory;
+using Core.Infrastructure.Write.Memory;
 using Core.Shared.Base.Aggregate;
 using Core.Shared.Base.Exceptions;
 using Program.Aggregates;

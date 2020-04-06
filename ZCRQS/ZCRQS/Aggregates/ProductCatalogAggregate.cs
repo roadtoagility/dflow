@@ -27,6 +27,12 @@ namespace Program.Aggregates
             if(!_products.Any(x => x.Id == cmd.Id || x.Name.Equals(cmd.Name)))
                 Apply(new ProductCreated(cmd.Id, cmd.Name, cmd.Description));
         }
+        
+        public void ChangeProductName(ChangeProductNameCommand cmd)
+        {
+            if(_products.Any(x => x.Id == cmd.ProductId))
+                Apply(new ProductNameChanged(cmd.ProductId, cmd.Name));
+        }
 
         //TODO: eu sei que isso não deve estar aqui, meramente para testes enquanto não crio as projeções
         public int CountProducts()
@@ -42,6 +48,13 @@ namespace Program.Aggregates
         private void When(ProductCreated e)
         {
             _products.Add(new Product(e.Id, e.Name, e.Description));
+            
+        }
+        
+        private void When(ProductNameChanged e)
+        {
+            var product = _products.Where(x => x.Id == e.Id).FirstOrDefault();
+            product.ChangeName(e.Name);
         }
         
         private void When(AggregateCreated<Guid> e)

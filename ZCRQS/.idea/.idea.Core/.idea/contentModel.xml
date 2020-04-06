@@ -7,6 +7,31 @@
     <e p="C:\Users\Douglas\.Rider2019.3\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\Douglas\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Core.-1497781228.00" t="ExcludeRecursive" />
     <e p="D:\projetos\labs\ZCRQS" t="IncludeFlat">
+      <e p="Core.Infrastructure.Queue.Memory" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Core.Infrastructure.Queue.Memory.csproj" t="IncludeRecursive" />
+        <e p="MemoryQueueService.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Core.Infrastructure.Queue.Memory.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Core.Infrastructure.Write.Memory" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Core.Infrastructure.Write.Memory.csproj" t="IncludeRecursive" />
+        <e p="MemoryAppendOnlyStore.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Core.Infrastructure.Write.Memory.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="SnapshotRepository.cs" t="Include" />
+      </e>
       <e p="Core.Shared" t="IncludeRecursive">
         <e p="Base" t="Include">
           <e p="Aggregate" t="Include">
@@ -55,6 +80,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Commands" t="Include">
           <e p="AddProductCommand.cs" t="Include" />
+          <e p="ChangeProductNameCommand.cs" t="Include" />
           <e p="CreateProductCatalog.cs" t="Include" />
           <e p="CreateProductCommand.cs" t="Include" />
         </e>
@@ -64,19 +90,13 @@
         <e p="Events" t="Include">
           <e p="ProductCatalogAggregateCreated.cs" t="Include" />
           <e p="ProductCreated.cs" t="Include" />
-          <e p="PurchaseOrderLocked.cs" t="Include" />
-          <e p="PurchaseOrderUnlocked.cs" t="Include" />
+          <e p="ProductNameChanged.cs" t="Include" />
         </e>
         <e p="EventStore.cs" t="Include" />
         <e p="Handlers" t="Include">
-          <e p="CustomerService.cs" t="Include" />
-          <e p="IOrderServiceCommandHandler.cs" t="Include" />
           <e p="IProductCatalogCommandHandler.cs" t="Include" />
-          <e p="OrderServiceCommandHandler.cs" t="Include" />
           <e p="ProductServiceCommandHandler.cs" t="Include" />
         </e>
-        <e p="MemoryAppendOnlyStore.cs" t="Include" />
-        <e p="MemoryQueueService.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -85,7 +105,6 @@
             </e>
           </e>
         </e>
-        <e p="SnapshotRepository.cs" t="Include" />
         <e p="Tests" t="Include">
           <e p="BasicTests.cs" t="Include" />
           <e p="ConcurrencyTests.cs" t="Include" />

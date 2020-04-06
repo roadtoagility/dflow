@@ -1,10 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Shared;
 using Core.Shared.Interfaces;
 
-namespace Program
+namespace Core.Infrastructure.Queue.Memory
 {
     public class MemoryQueueService : IQueueService
     {

@@ -37,19 +37,5 @@ namespace Program.Aggregates
         {
             ((dynamic) this).When((dynamic)e);
         }
-        
-        private void When(PurchaseOrderLocked e)
-        {
-
-            ConsumptionLocked = true;
-
-        }
-        
-        private void When(PurchaseOrderUnlocked e)
-        {
-
-            ConsumptionLocked = false;
-
-        }
     }
 }

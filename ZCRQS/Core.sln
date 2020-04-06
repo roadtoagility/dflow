@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZCRQS", "ZCRQS\ZCRQS.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Shared", "Core.Shared\Core.Shared.csproj", "{D5C025B8-AC7E-4C19-99EA-03732456F812}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Infrastructure.Write.Memory", "Core.Infrastructure.Write.Memory\Core.Infrastructure.Write.Memory.csproj", "{DA8C34D0-2068-419F-8493-E70CCCEFE6C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Infrastructure.Queue.Memory", "Core.Infrastructure.Queue.Memory\Core.Infrastructure.Queue.Memory.csproj", "{FF8A5188-1958-4E51-A502-C72B55B1946B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{D5C025B8-AC7E-4C19-99EA-03732456F812}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5C025B8-AC7E-4C19-99EA-03732456F812}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5C025B8-AC7E-4C19-99EA-03732456F812}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA8C34D0-2068-419F-8493-E70CCCEFE6C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA8C34D0-2068-419F-8493-E70CCCEFE6C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA8C34D0-2068-419F-8493-E70CCCEFE6C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA8C34D0-2068-419F-8493-E70CCCEFE6C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF8A5188-1958-4E51-A502-C72B55B1946B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF8A5188-1958-4E51-A502-C72B55B1946B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF8A5188-1958-4E51-A502-C72B55B1946B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF8A5188-1958-4E51-A502-C72B55B1946B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

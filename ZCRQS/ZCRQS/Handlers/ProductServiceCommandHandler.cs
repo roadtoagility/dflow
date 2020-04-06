@@ -6,6 +6,7 @@ using Core.Shared.Base.Exceptions;
 using Core.Shared.Interfaces;
 using Program.Aggregates;
 using Program.Commands;
+using Program.Events;
 
 namespace Program.Handlers
 {
@@ -36,6 +37,7 @@ namespace Program.Handlers
                 catch (EventStoreConcurrencyException ex)
                 {
                     HandleConcurrencyException(ex, productCatalog);
+                    return;
                 }
                 catch(Exception)
                 {
@@ -50,6 +52,30 @@ namespace Program.Handlers
             {
                 var productCatalog = _factory.Load<ProductCatalogAggregate>(cmd.RootId);
                 productCatalog.CreateProduct(cmd);
+                
+                try
+                {
+                    _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.RootId, productCatalog.Version,
+                        productCatalog.Changes);
+                    return;
+                }
+                catch (EventStoreConcurrencyException ex)
+                {
+                    HandleConcurrencyException(ex, productCatalog);
+                }
+                catch(Exception)
+                {
+                    throw;
+                }
+            }
+        }
+        
+        public void When(ChangeProductNameCommand cmd)
+        {
+            while(true)
+            {
+                var productCatalog = _factory.Load<ProductCatalogAggregate>(cmd.RootId);
+                productCatalog.ChangeProductName(cmd);
                 
                 try
                 {
