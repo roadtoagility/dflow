@@ -10,12 +10,10 @@ namespace Program
 {
     public class ViewFactory
     {
-        private readonly IReadModel<IList<ProductDTO>> _readModel;
         private readonly IQueueService _queueService;
         
-        public ViewFactory(IReadModel<IList<ProductDTO>> readModel, IQueueService queueService)
+        public ViewFactory(IQueueService queueService)
         {
-            _readModel = readModel;
             _queueService = queueService;
         }
 
