@@ -14,21 +14,18 @@ namespace Program.Views
         public Guid Id { get; set; }
     }
     
-    public class ProductView : ISubscriber
+    public class ProductView : IReadModel<ProductDTO>, ISubscriber
     {
         public List<ProductDTO> Products { get; set; }
-        public Guid Id { get; private set; }
 
         public ProductView()
         {
             Products = new List<ProductDTO>();
-            Id = Guid.NewGuid();
         }
         
         public ProductView(List<ProductDTO> products)
         {
             Products = products;
-            Id = Guid.NewGuid();
         }
 
         public void Update(IEvent @event)
@@ -36,9 +33,22 @@ namespace Program.Views
             ((dynamic) this).When((dynamic)@event);
         }
 
-        public Guid GetSubscriberId()
+        public string GetSubscriberId()
         {
-            return Id;
+            return this.GetType().ToString();
+        }
+        
+        public ProductDTO Query(Func<ProductDTO, bool> query)
+        {
+            return Products.Where(query).FirstOrDefault();
+        }
+        
+        public IList<ProductDTO> QueryAll(Func<ProductDTO, bool> query = null)
+        {
+            if (query != null)
+                return Products.Where(query).ToList();
+            else
+                return Products;
         }
         
         private void When(ProductCreated e)
@@ -52,5 +62,7 @@ namespace Program.Views
             var product = Products.FirstOrDefault(x => x.Id == e.Id);
             if (product != null) product.Name = e.Name;
         }
+
+        
     }
 }

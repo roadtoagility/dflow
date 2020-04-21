@@ -98,6 +98,8 @@
         </e>
         <e p="Handlers" t="Include">
           <e p="IProductCatalogCommandHandler.cs" t="Include" />
+          <e p="IProductQueryHandler.cs" t="Include" />
+          <e p="ProductQueryHandler.cs" t="Include" />
           <e p="ProductServiceCommandHandler.cs" t="Include" />
         </e>
         <e p="Tests" t="Include">
