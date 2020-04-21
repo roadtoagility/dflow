@@ -19,8 +19,8 @@ namespace Program.Tests
         [Fact]
         public void ShouldMergeEvents()
         {
-            var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
+            var appendOnly = new MemoryAppendOnlyStore(queueService);
             var eventStore = new EventStore(appendOnly, queueService);
             var snapShotRepo = new SnapshotRepository();
             var factory = new AggregateFactory(eventStore, snapShotRepo);
@@ -59,8 +59,8 @@ namespace Program.Tests
         public void ShouldThrowExceptionConflictEvents()
         {
             var rootId = Guid.NewGuid();
-            var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
+            var appendOnly = new MemoryAppendOnlyStore(queueService);
             var eventStore = new EventStore(appendOnly, queueService);
             var snapShotRepo = new SnapshotRepository();
             var factory = new AggregateFactory(eventStore, snapShotRepo);

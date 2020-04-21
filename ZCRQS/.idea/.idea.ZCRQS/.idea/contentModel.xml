@@ -13,7 +13,7 @@
         <e p="Base" t="Include">
           <e p="Aggregate" t="Include">
             <e p="AggregateCreated.cs" t="Include" />
-            <e p="AggregateFactory.cs" t="Include" />
+            <e p="AggregateFactoryBase.cs" t="Include" />
             <e p="AggregateRoot.cs" t="Include" />
           </e>
           <e p="DataWithName.cs" t="Include" />
@@ -33,6 +33,7 @@
           <e p="IEvent.cs" t="Include" />
           <e p="IEventStore.cs" t="Include" />
           <e p="IQueueService.cs" t="Include" />
+          <e p="IReadModel.cs" t="Include" />
           <e p="ISnapshotRepository.cs" t="Include" />
           <e p="ISubscriber.cs" t="Include" />
         </e>
@@ -47,6 +48,7 @@
         </e>
       </e>
       <e p="ZCRQS" t="IncludeRecursive">
+        <e p="AggregateFactory.cs" t="Include" />
         <e p="Aggregates" t="Include">
           <e p="CustomerAggregate.cs" t="Include" />
           <e p="ProductCatalogAggregate.cs" t="Include" />
@@ -79,6 +81,7 @@
           <e p="ProjectionTests.cs" t="Include" />
           <e p="SnapshotTests.cs" t="Include" />
         </e>
+        <e p="ViewFactory.cs" t="Include" />
         <e p="Views" t="Include">
           <e p="ProductView.cs" t="Include" />
         </e>

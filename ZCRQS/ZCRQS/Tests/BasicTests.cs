@@ -20,8 +20,8 @@ namespace Program.Tests
         [Fact]
         public void ShouldCreateNewAggregate()
         {
-            var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
+            var appendOnly = new MemoryAppendOnlyStore(queueService);
             var eventStore = new EventStore(appendOnly, queueService);
             var rootId = Guid.NewGuid();
             var factory = new AggregateFactory(eventStore);
@@ -36,8 +36,8 @@ namespace Program.Tests
         public void ShouldSaveStream()
         {
             var rootId = Guid.NewGuid();
-            var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
+            var appendOnly = new MemoryAppendOnlyStore(queueService);
             var eventStore = new EventStore(appendOnly, queueService);
             var factory = new AggregateFactory(eventStore);
             var root = factory.Create<ProductCatalogAggregate>(rootId);
@@ -53,8 +53,8 @@ namespace Program.Tests
         public void ShouldAggregateLoadStream()
         {
             var rootId = Guid.NewGuid();
-            var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
+            var appendOnly = new MemoryAppendOnlyStore(queueService);
             var eventStore = new EventStore(appendOnly, queueService);
             var factory = new AggregateFactory(eventStore);
             
@@ -72,8 +72,8 @@ namespace Program.Tests
         [Fact]
         public void ShouldAllEventsRegisteredAggregate()
         {
-            var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
+            var appendOnly = new MemoryAppendOnlyStore(queueService);
             var eventStore = new EventStore(appendOnly, queueService);
             var factory = new AggregateFactory(eventStore);
             var root = factory.Create<ProductCatalogAggregate>(Guid.NewGuid());
@@ -86,8 +86,8 @@ namespace Program.Tests
         public void ShouldAddProductToProductCatalog()
         {
             var rootId = Guid.NewGuid();
-            var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
+            var appendOnly = new MemoryAppendOnlyStore(queueService);
             var eventStore = new EventStore(appendOnly, queueService);
             var factory = new AggregateFactory(eventStore);
             var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
@@ -106,8 +106,8 @@ namespace Program.Tests
         public void ShouldIncrementVersionCorrectly()
         {
             var rootId = Guid.NewGuid();
-            var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
+            var appendOnly = new MemoryAppendOnlyStore(queueService);
             var eventStore = new EventStore(appendOnly, queueService);
             var factory = new AggregateFactory(eventStore);
             var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
@@ -132,8 +132,8 @@ namespace Program.Tests
         public void ShouldUpdateProductProjection()
         {
             var rootId = Guid.NewGuid();
-            var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
+            var appendOnly = new MemoryAppendOnlyStore(queueService);
             var eventStore = new EventStore(appendOnly, queueService);
             var view = new ProductView();
             

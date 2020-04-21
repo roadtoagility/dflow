@@ -41,6 +41,7 @@
             <e p="AggregateFactoryBase.cs" t="Include" />
             <e p="AggregateRoot.cs" t="Include" />
           </e>
+          <e p="AppendOnlyBase.cs" t="Include" />
           <e p="DataWithName.cs" t="Include" />
           <e p="DataWithVersion.cs" t="Include" />
           <e p="Entity.cs" t="Include" />
@@ -58,6 +59,7 @@
           <e p="IEvent.cs" t="Include" />
           <e p="IEventStore.cs" t="Include" />
           <e p="IQueueService.cs" t="Include" />
+          <e p="IReadModel.cs" t="Include" />
           <e p="ISnapshotRepository.cs" t="Include" />
           <e p="ISubscriber.cs" t="Include" />
         </e>
@@ -106,6 +108,7 @@
           <e p="ProjectionTests.cs" t="Include" />
           <e p="SnapshotTests.cs" t="Include" />
         </e>
+        <e p="ViewFactory.cs" t="Include" />
         <e p="Views" t="Include">
           <e p="ProductView.cs" t="Include" />
         </e>

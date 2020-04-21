@@ -6,7 +6,7 @@ namespace Core.Shared.Interfaces
 {
     public interface IAppendOnlyStore<TKey>: IDisposable
     {
-        void Append(TKey aggregateId, string aggregateType, byte[] data, long expectedVersion = -1);
+        void Append(Guid id, string aggregateType, long version, ICollection<IEvent> events);
 
         IEnumerable<DataWithVersion> ReadRecords(string name, long afterVersion, int maxCount);
         IEnumerable<DataWithVersion> ReadRecords(TKey aggregateId, long afterVersion, int maxCount);

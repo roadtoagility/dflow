@@ -20,8 +20,8 @@ namespace Program.Tests
         
         public HandlerTests()
         {
-            _appendOnly = new MemoryAppendOnlyStore();
             _queueService = new MemoryQueueService();
+            _appendOnly = new MemoryAppendOnlyStore(_queueService);
             _eventStore = new EventStore(_appendOnly, _queueService);
             _snapShotRepo = new SnapshotRepository();
             _factory = new AggregateFactory(_eventStore, _snapShotRepo);

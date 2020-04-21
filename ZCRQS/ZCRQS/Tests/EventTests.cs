@@ -15,8 +15,8 @@ namespace Program.Tests
         [Fact]
         public void ShouldCreateAggregateWithVersionCorrectly()
         {
-            var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
+            var appendOnly = new MemoryAppendOnlyStore(queueService);
             var eventStore = new EventStore(appendOnly, queueService);
             var rootId = Guid.NewGuid();
             var factory = new AggregateFactory(eventStore);
@@ -28,8 +28,8 @@ namespace Program.Tests
         [Fact]
         public void ShouldIncreaseVersionCorrectly()
         {
-            var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
+            var appendOnly = new MemoryAppendOnlyStore(queueService);
             var eventStore = new EventStore(appendOnly, queueService);
             var rootId = Guid.NewGuid();
             var factory = new AggregateFactory(eventStore);
@@ -50,8 +50,8 @@ namespace Program.Tests
         [Fact]
         public void ShouldNotAllowCreateAggregatesWithSameId()
         {
-            var appendOnly = new MemoryAppendOnlyStore();
             var queueService = new MemoryQueueService();
+            var appendOnly = new MemoryAppendOnlyStore(queueService);
             var eventStore = new EventStore(appendOnly, queueService);
             var rootId = Guid.NewGuid();
             var factory = new AggregateFactory(eventStore);

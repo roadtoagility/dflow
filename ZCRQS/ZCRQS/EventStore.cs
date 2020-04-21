@@ -12,9 +12,10 @@ namespace Program
 {
     public class EventStore : IEventStore<Guid>
     {
-        readonly BinaryFormatter _formatter = new BinaryFormatter();
+        
         readonly IAppendOnlyStore<Guid> _appendOnlyStore;
         readonly IQueueService _queueService;
+        readonly BinaryFormatter _formatter = new BinaryFormatter();
         
         public EventStore(IAppendOnlyStore<Guid> appendOnlyStore, IQueueService queueService)
         {
@@ -56,31 +57,8 @@ namespace Program
 
         public void AppendToStream<TType>(Guid id, long version, ICollection<IEvent> events)
         {
-            if (events.Count == 0)
-                return;
-
-            var data = SerializeEvent(events.ToArray());
             var aggregateType = typeof(TType).Name;
-
-            var originalVersion = version - events.Count();
-
-            if (_appendOnlyStore.Any(id))
-            {
-                var stream = new EventStream();
-                foreach (var tapeRecord in _appendOnlyStore.ReadRecords(id, originalVersion, int.MaxValue))
-                {
-                    stream.Events.AddRange(DeserializeEvent(tapeRecord.Data));
-                    stream.Version = tapeRecord.Version;
-                }
-
-                //Version = 0 significa que não existe stream anterior a versao informada no ReadRecords
-                if (stream.Version > 0 && originalVersion != stream.Version)
-                    throw new EventStoreConcurrencyException(stream.Events, stream.Version);
-            }
-            
-
-            _appendOnlyStore.Append(id, aggregateType, data, version);
-            _queueService.Publish(events.ToArray());
+            _appendOnlyStore.Append(id, aggregateType, version, events);
         }
 
         public bool Any(Guid id)
@@ -88,14 +66,7 @@ namespace Program
             return _appendOnlyStore.Any(id);
         }
 
-        byte[] SerializeEvent(IEvent[] e)
-        {
-            using (var mem = new MemoryStream())
-            {
-                _formatter.Serialize(mem, e);
-                return mem.ToArray();
-            }
-        }
+        
         
         IEvent[] DeserializeEvent(byte[] data)
         {

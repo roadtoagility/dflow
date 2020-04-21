@@ -1,24 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using Core.Shared.Base;
+using Core.Shared.Base.Exceptions;
 using Core.Shared.Interfaces;
 
 namespace Core.Infrastructure.Write.Memory
 {
-    public class MemoryAppendOnlyStore : IAppendOnlyStore<Guid>
+    public class MemoryAppendOnlyStore : AppendOnlyBase, IAppendOnlyStore<Guid>
     {
         //Aqui seria a infra que insere no banco
         private ICollection<EventDTO<Guid>> _eventsStorage = new List<EventDTO<Guid>>();
-        
+
+
+        public MemoryAppendOnlyStore(IQueueService queueService) : base(queueService)
+        {
+        }
+
         public void Dispose()
         {
             _eventsStorage = new List<EventDTO<Guid>>();
-        }
-
-        public void Append(Guid aggregateId, string aggregateType, byte[] data, long expectedVersion = -1)
-        {
-            _eventsStorage.Add(new EventDTO<System.Guid>(aggregateId, aggregateType, expectedVersion, data));
         }
 
         public IEnumerable<DataWithVersion> ReadRecords(string aggregateType, long afterVersion, int maxCount)
@@ -29,7 +32,7 @@ namespace Core.Infrastructure.Write.Memory
                 .Select(x => new DataWithVersion(x.Version, x.Data));
         }
 
-        public IEnumerable<DataWithVersion> ReadRecords(Guid aggregateId, long afterVersion, int maxCount)
+        public override IEnumerable<DataWithVersion> ReadRecords(Guid aggregateId, long afterVersion, int maxCount)
         {
             return _eventsStorage
                 .Where(x => x.AggregateId == aggregateId && x.Version > afterVersion)
@@ -54,7 +57,7 @@ namespace Core.Infrastructure.Write.Memory
                 .Select(x => new DataWithName(x.AggregateType, x.Data));
         }
 
-        public bool Any(Guid aggregateId)
+        public override bool Any(Guid aggregateId)
         {
             return _eventsStorage.Any(x => x.AggregateId == aggregateId);
         }
@@ -63,6 +66,12 @@ namespace Core.Infrastructure.Write.Memory
         {
             _eventsStorage = null;
         }
+        
+        protected override void Save(Guid id, string aggregateType, long version, byte[] data)
+        {
+            _eventsStorage.Add(new EventDTO<System.Guid>(id, aggregateType, version, data));
+        }
+        
 
         //DTO para poder inserir em qualquer modelo de banco
         private class EventDTO<TKey>
