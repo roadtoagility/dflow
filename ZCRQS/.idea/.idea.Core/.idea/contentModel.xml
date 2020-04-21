@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Douglas\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\Douglas\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\Douglas\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
-    <e p="C:\Users\Douglas\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Douglas\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Core.-1497781228.00" t="ExcludeRecursive" />
-    <e p="D:\projetos\labs\ZCRQS" t="IncludeFlat">
+    <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.Rider2019.3/system/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.Rider2019.3/system/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_Core.-1668345245.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.reporters.netcoreapp10.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.utility.netcoreapp10.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.1/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="Core.Infrastructure.Queue.Memory" t="IncludeRecursive">
-        <e p="bin" t="ExcludeRecursive" />
         <e p="Core.Infrastructure.Queue.Memory.csproj" t="IncludeRecursive" />
         <e p="MemoryQueueService.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -20,9 +22,10 @@
         </e>
       </e>
       <e p="Core.Infrastructure.Write.Memory" t="IncludeRecursive">
-        <e p="bin" t="ExcludeRecursive" />
         <e p="Core.Infrastructure.Write.Memory.csproj" t="IncludeRecursive" />
         <e p="MemoryAppendOnlyStore.cs" t="Include" />
+        <e p="SnapshotRepository.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -30,13 +33,12 @@
             </e>
           </e>
         </e>
-        <e p="SnapshotRepository.cs" t="Include" />
       </e>
       <e p="Core.Shared" t="IncludeRecursive">
         <e p="Base" t="Include">
           <e p="Aggregate" t="Include">
             <e p="AggregateCreated.cs" t="Include" />
-            <e p="AggregateFactory.cs" t="Include" />
+            <e p="AggregateFactoryBase.cs" t="Include" />
             <e p="AggregateRoot.cs" t="Include" />
           </e>
           <e p="DataWithName.cs" t="Include" />
@@ -49,7 +51,6 @@
           </e>
           <e p="Handler.cs" t="Include" />
         </e>
-        <e p="bin" t="ExcludeRecursive" />
         <e p="Core.Shared.csproj" t="IncludeRecursive" />
         <e p="Interfaces" t="Include">
           <e p="IAppendOnlyStore.cs" t="Include" />
@@ -60,6 +61,7 @@
           <e p="ISnapshotRepository.cs" t="Include" />
           <e p="ISubscriber.cs" t="Include" />
         </e>
+        <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -70,14 +72,13 @@
         </e>
       </e>
       <e p="Core.sln" t="IncludeFlat" />
-      <e p="packages" t="ExcludeRecursive" />
       <e p="ZCRQS" t="IncludeRecursive">
+        <e p="AggregateFactory.cs" t="Include" />
         <e p="Aggregates" t="Include">
           <e p="CustomerAggregate.cs" t="Include" />
           <e p="ProductCatalogAggregate.cs" t="Include" />
           <e p="PurchaseOrderAggreagate.cs" t="Include" />
         </e>
-        <e p="bin" t="ExcludeRecursive" />
         <e p="Commands" t="Include">
           <e p="AddProductCommand.cs" t="Include" />
           <e p="ChangeProductNameCommand.cs" t="Include" />
@@ -87,23 +88,15 @@
         <e p="Entities" t="Include">
           <e p="Product.cs" t="Include" />
         </e>
+        <e p="EventStore.cs" t="Include" />
         <e p="Events" t="Include">
           <e p="ProductCatalogAggregateCreated.cs" t="Include" />
           <e p="ProductCreated.cs" t="Include" />
           <e p="ProductNameChanged.cs" t="Include" />
         </e>
-        <e p="EventStore.cs" t="Include" />
         <e p="Handlers" t="Include">
           <e p="IProductCatalogCommandHandler.cs" t="Include" />
           <e p="ProductServiceCommandHandler.cs" t="Include" />
-        </e>
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netcoreapp3.1" t="Include">
-              <e p="ZCRQS.AssemblyInfo.cs" t="Include" />
-              <e p="ZCRQS.Program.cs" t="Include" />
-            </e>
-          </e>
         </e>
         <e p="Tests" t="Include">
           <e p="BasicTests.cs" t="Include" />
@@ -117,7 +110,17 @@
           <e p="ProductView.cs" t="Include" />
         </e>
         <e p="ZCRQS.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="ZCRQS.AssemblyInfo.cs" t="Include" />
+              <e p="ZCRQS.Program.cs" t="Include" />
+            </e>
+          </e>
+        </e>
       </e>
+      <e p="packages" t="ExcludeRecursive" />
     </e>
   </component>
 </project>

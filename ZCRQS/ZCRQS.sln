@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZCRQS", "ZCRQS\ZCRQS.csproj", "{5661DF63-B696-4227-A8C6-CEB699CBE3A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Shared", "Core.Shared\Core.Shared.csproj", "{B42DDB71-3DA7-46A3-864A-A15E832B1254}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5661DF63-B696-4227-A8C6-CEB699CBE3A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5661DF63-B696-4227-A8C6-CEB699CBE3A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5661DF63-B696-4227-A8C6-CEB699CBE3A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5661DF63-B696-4227-A8C6-CEB699CBE3A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B42DDB71-3DA7-46A3-864A-A15E832B1254}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B42DDB71-3DA7-46A3-864A-A15E832B1254}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B42DDB71-3DA7-46A3-864A-A15E832B1254}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B42DDB71-3DA7-46A3-864A-A15E832B1254}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
