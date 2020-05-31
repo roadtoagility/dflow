@@ -10,17 +10,16 @@ using Core.Shared.Interfaces;
 
 namespace Program
 {
+    //TODO: talvez isso possa ser movido pra base
     public class EventStore : IEventStore<Guid>
     {
         
         readonly IAppendOnlyStore<Guid> _appendOnlyStore;
-        readonly IQueueService _queueService;
         readonly BinaryFormatter _formatter = new BinaryFormatter();
         
-        public EventStore(IAppendOnlyStore<Guid> appendOnlyStore, IQueueService queueService)
+        public EventStore(IAppendOnlyStore<Guid> appendOnlyStore)
         {
             _appendOnlyStore = appendOnlyStore;
-            _queueService = queueService;
         }
         
         public EventStream LoadEventStream(Guid id) => LoadEventStream(id, 0, Int32.MaxValue);

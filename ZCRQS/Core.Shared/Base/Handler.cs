@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Core.Shared.Base.Aggregate;
 using Core.Shared.Base.Exceptions;
 using Core.Shared.Interfaces;
@@ -14,18 +15,18 @@ namespace Core.Shared.Base
             _eventStore = eventStore;
         }
 
-        public virtual bool HasConflict(IEvent event1, IEvent event2)
+        protected virtual bool HasConflict(IEvent event1, IEvent event2)
         {
             return event1.GetType() == event2.GetType();
         }
         
-        public virtual void Execute(ICommand command)
+        public virtual Result<object> Execute(ICommand command)
         {
-            ((dynamic)this).When((dynamic)command);
+            return ((dynamic)this).When((dynamic)command);
         }
 
         //Dessa forma, os métodos HasConflict e HandleConcurrencyException podem ser sobrescritos para se adaptar a questões de negócio
-        public virtual void HandleConcurrencyException<TAggregate>(EventStoreConcurrencyException ex, TAggregate root)
+        protected virtual void HandleConcurrencyException<TAggregate>(EventStoreConcurrencyException ex, TAggregate root)
             where TAggregate : AggregateRoot<Guid>
         {
             foreach (var changeEvent in root.Changes)

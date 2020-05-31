@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Core.Shared;
 using Core.Shared.Base;
 using Core.Shared.Base.Aggregate;
@@ -22,7 +23,7 @@ namespace Program.Handlers
             _factory = factory;
         }
 
-        public void When(CreateProductCatalog cmd)
+        public Result<object> When(CreateProductCatalog cmd)
         {
             while(true)
             {
@@ -32,12 +33,12 @@ namespace Program.Handlers
                 {
                     _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.Id, productCatalog.Version,
                         productCatalog.Changes);
-                    return;
+                    return new Result<object>(null, new List<Exception>());
                 }
                 catch (EventStoreConcurrencyException ex)
                 {
                     HandleConcurrencyException(ex, productCatalog);
-                    return;
+                    return new Result<object>(null, new List<Exception>(){ex});
                 }
                 catch(Exception)
                 {
@@ -46,7 +47,7 @@ namespace Program.Handlers
             }
         }
         
-        public void When(CreateProductCommand cmd)
+        public Result<object> When(CreateProductCommand cmd)
         {
             while(true)
             {
@@ -57,7 +58,7 @@ namespace Program.Handlers
                 {
                     _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.RootId, productCatalog.Version,
                         productCatalog.Changes);
-                    return;
+                    return new Result<object>(null, new List<Exception>());
                 }
                 catch (EventStoreConcurrencyException ex)
                 {
@@ -70,7 +71,7 @@ namespace Program.Handlers
             }
         }
         
-        public void When(ChangeProductNameCommand cmd)
+        public Result<object> When(ChangeProductNameCommand cmd)
         {
             while(true)
             {
@@ -81,7 +82,7 @@ namespace Program.Handlers
                 {
                     _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.RootId, productCatalog.Version,
                         productCatalog.Changes);
-                    return;
+                    return new Result<object>(null, new List<Exception>());
                 }
                 catch (EventStoreConcurrencyException ex)
                 {

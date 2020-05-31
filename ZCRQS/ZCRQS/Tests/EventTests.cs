@@ -17,7 +17,7 @@ namespace Program.Tests
         {
             var queueService = new MemoryQueueService();
             var appendOnly = new MemoryAppendOnlyStore(queueService);
-            var eventStore = new EventStore(appendOnly, queueService);
+            var eventStore = new EventStore(appendOnly);
             var rootId = Guid.NewGuid();
             var factory = new AggregateFactory(eventStore);
             var root = factory.Create<ProductCatalogAggregate>(rootId);
@@ -30,7 +30,7 @@ namespace Program.Tests
         {
             var queueService = new MemoryQueueService();
             var appendOnly = new MemoryAppendOnlyStore(queueService);
-            var eventStore = new EventStore(appendOnly, queueService);
+            var eventStore = new EventStore(appendOnly);
             var rootId = Guid.NewGuid();
             var factory = new AggregateFactory(eventStore);
             var root = factory.Create<ProductCatalogAggregate>(rootId);
@@ -52,7 +52,7 @@ namespace Program.Tests
         {
             var queueService = new MemoryQueueService();
             var appendOnly = new MemoryAppendOnlyStore(queueService);
-            var eventStore = new EventStore(appendOnly, queueService);
+            var eventStore = new EventStore(appendOnly);
             var rootId = Guid.NewGuid();
             var factory = new AggregateFactory(eventStore);
             

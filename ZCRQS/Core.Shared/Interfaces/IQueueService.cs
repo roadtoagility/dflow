@@ -5,5 +5,7 @@ namespace Core.Shared.Interfaces
         void Subscribe<T>(ISubscriber subscriber);
         void Unsubscribe<T>(ISubscriber subscriber); 
         void Publish(params IEvent[] events);
+
+        void RegisterSubscribers();
     }
 }

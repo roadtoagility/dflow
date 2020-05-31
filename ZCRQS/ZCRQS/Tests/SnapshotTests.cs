@@ -20,7 +20,7 @@ namespace Program.Tests
             var rootId = Guid.NewGuid();
             var queueService = new MemoryQueueService();
             var appendOnly = new MemoryAppendOnlyStore(queueService);
-            var eventStore = new EventStore(appendOnly, queueService);
+            var eventStore = new EventStore(appendOnly);
             var snapShotRepo = new SnapshotRepository();
             var factory = new AggregateFactory(eventStore, snapShotRepo);
             
@@ -59,7 +59,7 @@ namespace Program.Tests
             var rootId = Guid.NewGuid();
             var queueService = new MemoryQueueService();
             var appendOnly = new MemoryAppendOnlyStore(queueService);
-            var eventStore = new EventStore(appendOnly, queueService);
+            var eventStore = new EventStore(appendOnly);
             var snapShotRepo = new SnapshotRepository();
             var factory = new AggregateFactory(eventStore, snapShotRepo);
             
@@ -100,7 +100,7 @@ namespace Program.Tests
             var rootId = Guid.NewGuid();
             var queueService = new MemoryQueueService();
             var appendOnly = new MemoryAppendOnlyStore(queueService);
-            var eventStore = new EventStore(appendOnly, queueService);
+            var eventStore = new EventStore(appendOnly);
             var snapShotRepo = new SnapshotRepository();
             var factory = new AggregateFactory(eventStore, snapShotRepo);
             

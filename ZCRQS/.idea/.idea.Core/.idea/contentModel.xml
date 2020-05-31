@@ -51,6 +51,7 @@
             <e p="EventStoreConcurrencyException.cs" t="Include" />
           </e>
           <e p="Handler.cs" t="Include" />
+          <e p="Result.cs" t="Include" />
         </e>
         <e p="Core.Shared.csproj" t="IncludeRecursive" />
         <e p="Interfaces" t="Include">

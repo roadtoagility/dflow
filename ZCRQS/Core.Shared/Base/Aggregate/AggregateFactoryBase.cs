@@ -38,5 +38,8 @@ namespace Core.Shared.Base.Aggregate
                 return (TAggregate)Activator.CreateInstance(typeof(TAggregate), new object[] { stream });
             }
         }
+
+        public abstract TAggregate Create<TAggregate>(Guid? id = null)
+            where TAggregate : AggregateRoot<Guid>;
     }
 }

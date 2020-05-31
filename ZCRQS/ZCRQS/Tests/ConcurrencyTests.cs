@@ -21,16 +21,16 @@ namespace Program.Tests
         {
             var queueService = new MemoryQueueService();
             var appendOnly = new MemoryAppendOnlyStore(queueService);
-            var eventStore = new EventStore(appendOnly, queueService);
+            var eventStore = new EventStore(appendOnly);
             var snapShotRepo = new SnapshotRepository();
             var factory = new AggregateFactory(eventStore, snapShotRepo);
             
             var rootId = Guid.NewGuid();
             var handler = new ProductServiceCommandHandler(eventStore, factory);
             
-            handler.Execute(new CreateProductCatalog(rootId));
+            var teste = handler.Execute(new CreateProductCatalog(rootId));
             var prodId = Guid.NewGuid();
-            handler.Execute(new CreateProductCommand(rootId, prodId, "Notebook Lenovo 2 em 1 ideapad C340", "Notebook Lenovo 2 em 1 ideapad C340 i7-8565U 8GB 256GB SSD Win10 14' FHD IPS - 81RL0001BR"));
+            teste = handler.Execute(new CreateProductCommand(rootId, prodId, "Notebook Lenovo 2 em 1 ideapad C340", "Notebook Lenovo 2 em 1 ideapad C340 i7-8565U 8GB 256GB SSD Win10 14' FHD IPS - 81RL0001BR"));
 
             var threads = new List<Task>();
             
@@ -61,7 +61,7 @@ namespace Program.Tests
             var rootId = Guid.NewGuid();
             var queueService = new MemoryQueueService();
             var appendOnly = new MemoryAppendOnlyStore(queueService);
-            var eventStore = new EventStore(appendOnly, queueService);
+            var eventStore = new EventStore(appendOnly);
             var snapShotRepo = new SnapshotRepository();
             var factory = new AggregateFactory(eventStore, snapShotRepo);
             
