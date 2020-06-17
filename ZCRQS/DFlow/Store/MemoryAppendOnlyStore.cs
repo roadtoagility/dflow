@@ -13,7 +13,7 @@ namespace DFlow.Store
         private ICollection<EventDTO<Guid>> _eventsStorage = new List<EventDTO<Guid>>();
 
 
-        public MemoryAppendOnlyStore(IEventBus queueService) : base(queueService)
+        public MemoryAppendOnlyStore(IEventBus eventBus) : base(eventBus)
         {
         }
 

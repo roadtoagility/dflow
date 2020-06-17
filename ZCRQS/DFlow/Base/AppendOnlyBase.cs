@@ -12,11 +12,11 @@ namespace DFlow.Base
     public abstract class AppendOnlyBase
     {
         readonly BinaryFormatter _formatter = new BinaryFormatter();
-        private readonly IEventBus _queueService;
+        private readonly IEventBus _eventBus;
 
-        public AppendOnlyBase(IEventBus queueService)
+        public AppendOnlyBase(IEventBus eventBus)
         {
-            _queueService = queueService;
+            _eventBus = eventBus;
         }
         
         public void Append(Guid id, string aggregateType, long version, ICollection<IEvent> events)
@@ -44,7 +44,7 @@ namespace DFlow.Base
             
             Save(id, aggregateType, version, data);
             
-            _queueService.Publish(events.ToArray());
+            _eventBus.Publish(events.ToArray());
         }
 
         protected abstract void Save(Guid id, string aggregateType, long version, byte[] data);
