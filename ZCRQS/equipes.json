@@ -1,0 +1,98 @@
+[
+  {
+    "id": "5da58471-26ac-4a16-84f2-39e1b0582621",
+    "nome": "Equipe 1",
+    "sigla": "EQP1",
+    "gols": 3
+  },
+  {
+    "id": "1eafc5d8-7b45-48d8-b31f-518d8623dd32",
+    "nome": "Equipe 2",
+    "sigla": "EQP2",
+    "gols": 1
+  },
+  {
+    "id": "bb329a00-cf12-44ee-8171-04f2cb1614ec",
+    "nome": "Equipe 3",
+    "sigla": "EQP3",
+    "gols": 0
+  },
+  {
+    "id": "5466205e-df5a-4d1f-a33c-76618f82d033",
+    "nome": "Equipe 4",
+    "sigla": "EQP4",
+    "gols": 5
+  },
+  {
+    "id": "63b2c5c1-3524-4d52-81c6-0fa5cab8ad30",
+    "nome": "Equipe 5",
+    "sigla": "EQP5",
+    "gols": 10
+  },
+  {
+    "id": "5c4aaa0b-f17a-4329-b378-f20c951d0979",
+    "nome": "Equipe 6",
+    "sigla": "EQP6",
+    "gols": 7
+  },
+  {
+    "id": "c0c5c0e7-5561-47c8-b8bc-ae1d175838b1",
+    "nome": "Equipe 7",
+    "sigla": "EQP7",
+    "gols": 9
+  },
+  {
+    "id": "43698a00-7ef8-43d7-8190-d74f0a4b7724",
+    "nome": "Equipe 8",
+    "sigla": "EQP8",
+    "gols": 8
+  },
+  {
+    "id": "2dc8284e-d871-4079-8ff3-295dcbdbc32f",
+    "nome": "Equipe 9",
+    "sigla": "EQP9",
+    "gols": 5
+  },
+  {
+    "id": "717d3a51-5633-44c8-977c-345938bbf177",
+    "nome": "Equipe 10",
+    "sigla": "EQP10",
+    "gols": 4
+  },
+  {
+    "id": "a90b4fd8-9860-44d1-9420-47d4ce5da52d",
+    "nome": "Equipe 11",
+    "sigla": "EQP11",
+    "gols": 6
+  },
+  {
+    "id": "3b3a9d25-beca-4f2a-8e8b-cce0ba23bf74",
+    "nome": "Equipe 12",
+    "sigla": "EQP12",
+    "gols": 0
+  },
+  {
+    "id": "cd8f6b48-97cf-48d8-ba62-6f1d42639c55",
+    "nome": "Equipe 13",
+    "sigla": "EQP13",
+    "gols": 1
+  },
+  {
+    "id": "80625f0e-f56b-417e-9a76-f447d4460114",
+    "nome": "Equipe 14",
+    "sigla": "EQP14",
+    "gols": 3
+  },
+  {
+    "id": "0752f12d-355e-487c-9850-dee80691c6b3",
+    "nome": "Equipe 15",
+    "sigla": "EQP15",
+    "gols": 2
+  },
+  {
+    "id": "e157a902-ae0c-4ef2-b621-e5056d86ecdc",
+    "nome": "Equipe 16",
+    "sigla": "EQP16",
+    "gols": 7
+  }
+]
