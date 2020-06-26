@@ -7,6 +7,8 @@
 *.min.js
 *.map
 
+
+**/.idea/**
 _build/
 _site/
 Properties/
