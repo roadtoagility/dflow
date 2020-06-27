@@ -53,6 +53,7 @@ namespace Program.Tests
             Assert.True(dell.Count == 1);
         }
         
+        [Fact]
         public void Dispose()
         {
             _appendOnly = null;
