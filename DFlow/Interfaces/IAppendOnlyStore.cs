@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Core.Shared.Base;
+using DFlow.Base;
 
 namespace DFlow.Interfaces
 {

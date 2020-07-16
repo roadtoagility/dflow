@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Shared;
-using Core.Shared.Base;
+using DFlow.Base;
 using DFlow.Base.Aggregate;
 using DFlow.Interfaces;
-using Program.Commands;
-using Program.Entities;
-using Program.Events;
+using DFlow.Example.Commands;
+using DFlow.Example.Entities;
+using DFlow.Example.Events;
 
-namespace Program.Aggregates
+namespace DFlow.Example.Aggregates
 {
     [Serializable]
     public class ProductCatalogAggregate : AggregateRoot<Guid>

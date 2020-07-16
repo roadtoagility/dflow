@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
-using Core.Shared;
-using Core.Shared.Base;
+
 using DFlow.Bus;
 using DFlow.Store;
-using Program.Aggregates;
-using Program.Commands;
+using DFlow.Example;
+using DFlow.Example.Aggregates;
+using DFlow.Example.Commands;
 using Xunit;
 using Xunit.Sdk;
 
-namespace Program.Tests
+namespace DFlow.Tests
 {
     public class SnapshotTests
     {

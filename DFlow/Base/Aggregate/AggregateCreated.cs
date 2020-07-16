@@ -12,5 +12,6 @@ namespace DFlow.Base.Aggregate
         {
             Id = id;
         }
+        
     }
 }

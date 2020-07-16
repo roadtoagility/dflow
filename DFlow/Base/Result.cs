@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Core.Shared.Base
+namespace DFlow.Base
 {
     public class Result<T>
     {

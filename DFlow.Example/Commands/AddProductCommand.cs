@@ -1,8 +1,8 @@
 using System;
-using Core.Shared;
+
 using DFlow.Interfaces;
 
-namespace Program.Commands
+namespace DFlow.Example.Commands
 {
     public class AddProductCommand : ICommand
     {

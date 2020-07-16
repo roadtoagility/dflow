@@ -1,4 +1,4 @@
-namespace Core.Shared.Base
+namespace DFlow.Base
 {
     public sealed class DataWithName
     {

@@ -4,7 +4,7 @@ using DFlow.Base.Aggregate;
 using DFlow.Base.Exceptions;
 using DFlow.Interfaces;
 
-namespace Core.Shared.Base
+namespace DFlow.Base
 {
     public abstract class Handler<T>
     {

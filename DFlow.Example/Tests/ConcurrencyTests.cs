@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using DFlow.Base.Exceptions;
 using DFlow.Bus;
 using DFlow.Store;
-using Program.Aggregates;
-using Program.Commands;
-using Program.Events;
-using Program.Handlers;
+using DFlow.Example;
+using DFlow.Example.Aggregates;
+using DFlow.Example.Commands;
+using DFlow.Example.Events;
+using DFlow.Example.Handlers;
 using Xunit;
 
-namespace Program.Tests
+namespace DFlow.Tests
 {
     public class ConcurrencyTests
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using DFlow.Interfaces;
 
-namespace Core.Shared.Base
+namespace DFlow.Base
 {
     public class EventStream
     {

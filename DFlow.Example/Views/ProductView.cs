@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Shared;
-using DFlow.Interfaces;
-using Program.Entities;
-using Program.Events;
 
-namespace Program.Views
+using DFlow.Interfaces;
+using DFlow.Example.Entities;
+using DFlow.Example.Events;
+
+namespace DFlow.Example.Views
 {
     public class ProductDTO
     {

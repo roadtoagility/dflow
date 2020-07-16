@@ -3,11 +3,12 @@ using System.Linq;
 using DFlow.Base.Exceptions;
 using DFlow.Bus;
 using DFlow.Store;
-using Program.Aggregates;
-using Program.Commands;
+using DFlow.Example;
+using DFlow.Example.Aggregates;
+using DFlow.Example.Commands;
 using Xunit;
 
-namespace Program.Tests
+namespace DFlow.Tests
 {
     public class EventTests
     {

@@ -1,8 +1,8 @@
 using System;
-using Core.Shared;
+
 using DFlow.Interfaces;
 
-namespace Program.Events
+namespace DFlow.Example.Events
 {
     [Serializable]
     public class ProductCatalogAggregateCreated : IEvent
