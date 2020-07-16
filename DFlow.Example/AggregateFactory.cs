@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Core.Shared.Base;
+using DFlow.Base;
 using DFlow.Base.Aggregate;
 using DFlow.Base.Exceptions;
 using DFlow.Interfaces;
 
-namespace Program
+namespace DFlow.Example
 {
     public class AggregateFactory : AggregateFactoryBase
     {

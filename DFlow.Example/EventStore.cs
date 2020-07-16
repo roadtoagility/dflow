@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using Core.Shared;
-using Core.Shared.Base;
+using DFlow.Base;
 using DFlow.Interfaces;
 
-namespace Program
+namespace DFlow.Example
 {
     //TODO: talvez isso possa ser movido pra base
     public class EventStore : IEventStore<Guid>

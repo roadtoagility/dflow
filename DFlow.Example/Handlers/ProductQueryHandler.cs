@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Program.Views;
+using DFlow.Example.Views;
 
-namespace Program.Handlers
+namespace DFlow.Example.Handlers
 {
     public class ProductQueryHandler : IProductQueryHandler
     {

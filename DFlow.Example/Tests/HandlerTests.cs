@@ -2,12 +2,13 @@ using System;
 using DFlow.Bus;
 using DFlow.Interfaces;
 using DFlow.Store;
-using Program.Aggregates;
-using Program.Commands;
-using Program.Handlers;
+using DFlow.Example;
+using DFlow.Example.Aggregates;
+using DFlow.Example.Commands;
+using DFlow.Example.Handlers;
 using Xunit;
 
-namespace Program.Tests
+namespace DFlow.Tests
 {
     public class HandlerTests : IDisposable
     {

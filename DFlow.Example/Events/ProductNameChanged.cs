@@ -1,7 +1,7 @@
 using System;
 using DFlow.Interfaces;
 
-namespace Program.Events
+namespace DFlow.Example.Events
 {
     [Serializable]
     public class ProductNameChanged : IEvent

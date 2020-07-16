@@ -1,8 +1,7 @@
 using System;
-using Core.Shared;
-using Core.Shared.Base;
+using DFlow.Base;
 
-namespace Program.Entities
+namespace DFlow.Example.Entities
 {
     [Serializable]
     public class Product : Entity<Guid>

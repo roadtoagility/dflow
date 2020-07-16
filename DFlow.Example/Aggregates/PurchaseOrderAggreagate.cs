@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Core.Shared;
 using DFlow.Interfaces;
-using Program.Events;
-using Program.Handlers;
+using DFlow.Example.Events;
+using DFlow.Example.Handlers;
 
-namespace Program.Aggregates
+namespace DFlow.Example.Aggregates
 {
     public class PurchaseOrderAggreagate
     {

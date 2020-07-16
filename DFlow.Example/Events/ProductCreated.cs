@@ -1,9 +1,9 @@
 using System;
-using Core.Shared;
-using DFlow.Interfaces;
-using Program.Commands;
 
-namespace Program.Events
+using DFlow.Interfaces;
+using DFlow.Example.Commands;
+
+namespace DFlow.Example.Events
 {
     [Serializable]
     public class ProductCreated : IEvent

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Core.Shared.Base;
 using DFlow.Interfaces;
 
 namespace DFlow.Base.Aggregate

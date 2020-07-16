@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
-using Core.Shared;
-using Core.Shared.Base;
+
+using DFlow.Base;
+using DFlow.Base.Aggregate;
 using DFlow.Base.Exceptions;
 using DFlow.Interfaces;
-using Program.Aggregates;
-using Program.Commands;
-using Program.Events;
+using DFlow.Example.Aggregates;
+using DFlow.Example.Commands;
+using DFlow.Example.Events;
 
-namespace Program.Handlers
+namespace DFlow.Example.Handlers
 {
     public class ProductServiceCommandHandler : Handler<IProductCatalogCommandHandler>
     {

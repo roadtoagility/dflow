@@ -1,7 +1,7 @@
-using Core.Shared;
+
 using DFlow.Interfaces;
 
-namespace Program.Handlers
+namespace DFlow.Example.Handlers
 {
     public interface IProductCatalogCommandHandler
     {

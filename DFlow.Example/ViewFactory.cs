@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DFlow.Interfaces;
-using Program.Events;
-using Program.Handlers;
-using Program.Views;
+using DFlow.Example.Events;
+using DFlow.Example.Handlers;
+using DFlow.Example.Views;
 
-namespace Program
+namespace DFlow.Example
 {
     public class ViewFactory
     {

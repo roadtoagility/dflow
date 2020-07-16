@@ -1,7 +1,7 @@
 using System;
 using DFlow.Interfaces;
 
-namespace Program.Commands
+namespace DFlow.Example.Commands
 {
     
     public class ChangeProductNameCommand : ICommand
