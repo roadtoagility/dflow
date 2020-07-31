@@ -8,7 +8,9 @@
 
 **/.idea/
 
-.vs/**
+**/.vs/
+
+**/.vscode/
 
 # Build results
 
