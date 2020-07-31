@@ -6,6 +6,7 @@ namespace DFlow.Interfaces
         void Unsubscribe<T>(ISubscriber subscriber); 
         void Publish(params IEvent[] events);
 
+        //TODO: totalmente inutil e feio, remover, não tem função.
         void RegisterSubscribers();
     }
 }

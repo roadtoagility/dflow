@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using DFlow.Base;
 using DFlow.Base.Aggregate;
+using DFlow.Base.Events;
 using DFlow.Base.Exceptions;
 using DFlow.Interfaces;
 using DFlow.Example.Aggregates;
@@ -23,7 +24,7 @@ namespace DFlow.Example.Handlers
             _factory = factory;
         }
 
-        public Result<object> When(CreateProductCatalog cmd)
+        public CommandEvent When(CreateProductCatalog cmd)
         {
             while(true)
             {
@@ -33,12 +34,12 @@ namespace DFlow.Example.Handlers
                 {
                     _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.Id, productCatalog.Version,
                         productCatalog.Changes);
-                    return new Result<object>(null, new List<Exception>());
+                    return new CommandEvent(OperationStatus.Success);
                 }
                 catch (EventStoreConcurrencyException ex)
                 {
                     HandleConcurrencyException(ex, productCatalog);
-                    return new Result<object>(null, new List<Exception>(){ex});
+                    return new CommandEvent(OperationStatus.Success);
                 }
                 catch(Exception)
                 {
@@ -47,7 +48,7 @@ namespace DFlow.Example.Handlers
             }
         }
         
-        public Result<object> When(CreateProductCommand cmd)
+        public CommandEvent When(CreateProductCommand cmd)
         {
             while(true)
             {
@@ -58,7 +59,7 @@ namespace DFlow.Example.Handlers
                 {
                     _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.RootId, productCatalog.Version,
                         productCatalog.Changes);
-                    return new Result<object>(null, new List<Exception>());
+                    return new CommandEvent(OperationStatus.Success);
                 }
                 catch (EventStoreConcurrencyException ex)
                 {
@@ -71,7 +72,7 @@ namespace DFlow.Example.Handlers
             }
         }
         
-        public Result<object> When(ChangeProductNameCommand cmd)
+        public CommandEvent When(ChangeProductNameCommand cmd)
         {
             while(true)
             {
@@ -82,7 +83,7 @@ namespace DFlow.Example.Handlers
                 {
                     _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.RootId, productCatalog.Version,
                         productCatalog.Changes);
-                    return new Result<object>(null, new List<Exception>());
+                    return new CommandEvent(OperationStatus.Success);
                 }
                 catch (EventStoreConcurrencyException ex)
                 {
