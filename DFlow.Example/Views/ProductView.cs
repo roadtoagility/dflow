@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using DFlow.Base;
 using DFlow.Interfaces;
 using DFlow.Example.Entities;
 using DFlow.Example.Events;
@@ -14,7 +14,7 @@ namespace DFlow.Example.Views
         public Guid Id { get; set; }
     }
     
-    public class ProductView : IReadModel<ProductDTO>, ISubscriber
+    public class ProductView : SubscriberBase, IReadModel<ProductDTO>
     {
         public List<ProductDTO> Products { get; set; }
 
@@ -28,12 +28,7 @@ namespace DFlow.Example.Views
             Products = products;
         }
 
-        public void Update(IEvent @event)
-        {
-            ((dynamic) this).When((dynamic)@event);
-        }
-
-        public string GetSubscriberId()
+        public override string GetSubscriberId()
         {
             return this.GetType().ToString();
         }
@@ -51,12 +46,12 @@ namespace DFlow.Example.Views
                 return Products;
         }
         
-        private void When(ProductCreated e)
+        public void When(ProductCreated e)
         {
             Products.Add(new ProductDTO() {Name = e.Name, Id = e.Id});
         }
         
-        private void When(ProductNameChanged e)
+        public void When(ProductNameChanged e)
         {
             if (e == null) throw new ArgumentNullException(nameof(e));
             var product = Products.FirstOrDefault(x => x.Id == e.Id);
