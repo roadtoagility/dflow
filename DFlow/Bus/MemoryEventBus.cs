@@ -93,7 +93,7 @@ namespace DFlow.Bus
                 }
             }
         }
-
+        
         public void RegisterSubscribers()
         {
             var subscribers = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
