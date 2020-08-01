@@ -21,11 +21,6 @@ namespace DFlow.Base
             return event1.GetType() == event2.GetType();
         }
         
-        // public virtual Result<object> Execute(ICommand command)
-        // {
-        //     return ((dynamic)this).When((dynamic)command);
-        // }
-        
         public virtual CommandEvent Execute(ICommand command)
         {
             return ((dynamic)this).When((dynamic)command);
