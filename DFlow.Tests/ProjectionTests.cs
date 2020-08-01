@@ -11,12 +11,12 @@ namespace DFlow.Tests
 {
     public class ProjectionTests
     {
-        private IAppendOnlyStore<Guid> _appendOnly = null;
-        private IEventBus _eventBus = null;
-        private IEventStore<Guid> _eventStore = null;
-        private ISnapshotRepository<Guid> _snapShotRepo = null;
-        private AggregateFactory _factory = null;
-        private ViewFactory _viewFactory = null;
+        private IAppendOnlyStore<Guid> _appendOnly;
+        private IEventBus _eventBus;
+        private IEventStore<Guid> _eventStore;
+        private ISnapshotRepository<Guid> _snapShotRepo;
+        private AggregateFactory _factory;
+        private ViewFactory _viewFactory;
         
         public ProjectionTests()
         {
@@ -50,16 +50,6 @@ namespace DFlow.Tests
             Assert.True(product.Id == idProd2);
             Assert.True(listProducts.Count == 2);
             Assert.True(dell.Count == 1);
-        }
-        
-        [Fact]
-        public void Dispose()
-        {
-            _appendOnly = null;
-            _eventBus = null;;
-            _eventStore = null;;
-            _snapShotRepo = null;;
-            _factory = null;;
         }
     }
 }
