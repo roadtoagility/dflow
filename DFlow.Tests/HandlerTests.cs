@@ -10,13 +10,13 @@ using Xunit;
 
 namespace DFlow.Tests
 {
-    public class HandlerTests : IDisposable
+    public class HandlerTests
     {
-        private IAppendOnlyStore<Guid> _appendOnly = null;
-        private IEventBus _eventBus = null;
-        private IEventStore<Guid> _eventStore = null;
-        private ISnapshotRepository<Guid> _snapShotRepo = null;
-        private AggregateFactory _factory = null;
+        private IAppendOnlyStore<Guid> _appendOnly;
+        private IEventBus _eventBus;
+        private IEventStore<Guid> _eventStore;
+        private ISnapshotRepository<Guid> _snapShotRepo;
+        private AggregateFactory _factory;
         
         public HandlerTests()
         {
@@ -41,15 +41,6 @@ namespace DFlow.Tests
             
             Assert.True(stream.Version == 2);
             Assert.True(1 == productAggregate.CountProducts());
-        }
-
-        public void Dispose()
-        {
-            _appendOnly = null;
-            _eventBus = null;;
-            _eventStore = null;;
-            _snapShotRepo = null;;
-            _factory = null;;
         }
     }
 }
