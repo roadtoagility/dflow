@@ -1,15 +1,13 @@
 using System;
 using System.Linq;
-using DFlow.Example;
 using DFlow.Base.Aggregate;
 using DFlow.Bus;
-using DFlow.Store;
+using DFlow.Example;
 using DFlow.Example.Aggregates;
 using DFlow.Example.Commands;
-using DFlow.Example.Entities;
 using DFlow.Example.Events;
-using DFlow.Example.Handlers;
 using DFlow.Example.Views;
+using DFlow.Store;
 using Xunit;
 
 namespace DFlow.Tests
