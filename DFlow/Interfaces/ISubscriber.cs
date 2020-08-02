@@ -1,8 +1,9 @@
 namespace DFlow.Interfaces
 {
-    public interface ISubscriber
+    public interface ISubscriber<T>
+        where T: IEvent
     {
-        void Update(IEvent @event);
+        void Update(T @event);
         string GetSubscriberId();
     }
 }

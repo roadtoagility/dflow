@@ -16,7 +16,6 @@ namespace DFlow.Tests
         private IEventStore<Guid> _eventStore = null;
         private ISnapshotRepository<Guid> _snapShotRepo = null;
         private AggregateFactory _factory = null;
-        private ViewFactory _viewFactory = null;
         
         public ProjectionTests()
         {
@@ -25,7 +24,6 @@ namespace DFlow.Tests
             _eventStore = new EventStore(_appendOnly);
             _snapShotRepo = new SnapshotRepository();
             _factory = new AggregateFactory(_eventStore, _snapShotRepo);
-            _viewFactory = new ViewFactory(_eventBus);
         }
         
         [Fact]
@@ -36,7 +34,7 @@ namespace DFlow.Tests
             
             var idProd2 = Guid.NewGuid();
             
-            IProductQueryHandler queryHandler = new ProductQueryHandler(_viewFactory);
+            IProductQueryHandler queryHandler = new ProductQueryHandler();
 
             handler.Execute(new CreateProductCatalog(rootId));
             handler.Execute(new CreateProductCommand(rootId, Guid.NewGuid(), "Notebook Lenovo 2 em 1 ideapad C340", "Notebook Lenovo 2 em 1 ideapad C340 i7-8565U 8GB 256GB SSD Win10 14' FHD IPS - 81RL0001BR"));

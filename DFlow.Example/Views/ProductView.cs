@@ -14,7 +14,7 @@ namespace DFlow.Example.Views
         public Guid Id { get; set; }
     }
     
-    public class ProductView : SubscriberBase, IReadModel<ProductDTO>
+    public class ProductView : ISubscriber<ProductCreated>, ISubscriber<ProductNameChanged>
     {
         public List<ProductDTO> Products { get; set; }
 
@@ -28,7 +28,17 @@ namespace DFlow.Example.Views
             Products = products;
         }
 
-        public override string GetSubscriberId()
+        public void Update(ProductCreated @event)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(ProductNameChanged @event)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetSubscriberId()
         {
             return this.GetType().ToString();
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DFlow.Example.Views;
 using DFlow.Interfaces;
 
@@ -7,28 +8,24 @@ namespace DFlow.Example.Handlers
 {
     public class ProductQueryHandler : IProductQueryHandler
     {
-        private readonly ViewFactory _factory;
-        private IReadModel<ProductDTO> _view;
-
-        public ProductQueryHandler(ViewFactory factory)
+        private IList<ProductDTO> _products = new List<ProductDTO>();
+        public ProductQueryHandler()
         {
-            _factory = factory;
-            _view = _factory.CreateProductView();
         }
 
         public IList<ProductDTO> ListAllProducts()
         {
-            return _view.QueryAll();
+            return _products;
         }
 
         public IList<ProductDTO> ListByFilter(Func<ProductDTO, bool> query)
         {
-            return _view.QueryAll(query);
+            return _products.Where(query).ToList();
         }
 
         public ProductDTO GetById(Guid id)
         {
-            return _view.Query(x => x.Id == id);
+            return _products.FirstOrDefault(x => x.Id == id);
         }
     }
 }
