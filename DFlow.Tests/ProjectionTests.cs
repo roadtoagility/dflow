@@ -1,8 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using DFlow.Bus;
 using DFlow.Example;
 using DFlow.Example.Commands;
+using DFlow.Example.Events;
 using DFlow.Example.Handlers;
+using DFlow.Example.Views;
 using DFlow.Interfaces;
 using DFlow.Store;
 using Xunit;
@@ -11,11 +15,11 @@ namespace DFlow.Tests
 {
     public class ProjectionTests
     {
-        private IAppendOnlyStore<Guid> _appendOnly = null;
-        private IEventBus _eventBus = null;
-        private IEventStore<Guid> _eventStore = null;
-        private ISnapshotRepository<Guid> _snapShotRepo = null;
-        private AggregateFactory _factory = null;
+        private IAppendOnlyStore<Guid> _appendOnly;
+        private IEventBus _eventBus;
+        private IEventStore<Guid> _eventStore;
+        private ISnapshotRepository<Guid> _snapShotRepo;
+        private AggregateFactory _factory;
         
         public ProjectionTests()
         {
@@ -33,8 +37,10 @@ namespace DFlow.Tests
             var handler = new ProductServiceCommandHandler(_eventStore, _factory);
             
             var idProd2 = Guid.NewGuid();
+            var view = new ProductView();
+            _eventBus.Subscribe<ProductCreated>(view);
             
-            IProductQueryHandler queryHandler = new ProductQueryHandler();
+            IProductQueryHandler queryHandler = new ProductQueryHandler(view);
 
             handler.Execute(new CreateProductCatalog(rootId));
             handler.Execute(new CreateProductCommand(rootId, Guid.NewGuid(), "Notebook Lenovo 2 em 1 ideapad C340", "Notebook Lenovo 2 em 1 ideapad C340 i7-8565U 8GB 256GB SSD Win10 14' FHD IPS - 81RL0001BR"));
@@ -48,16 +54,6 @@ namespace DFlow.Tests
             Assert.True(product.Id == idProd2);
             Assert.True(listProducts.Count == 2);
             Assert.True(dell.Count == 1);
-        }
-        
-        [Fact]
-        public void Dispose()
-        {
-            _appendOnly = null;
-            _eventBus = null;;
-            _eventStore = null;;
-            _snapShotRepo = null;;
-            _factory = null;;
         }
     }
 }

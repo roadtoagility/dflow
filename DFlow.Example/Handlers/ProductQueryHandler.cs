@@ -8,24 +8,26 @@ namespace DFlow.Example.Handlers
 {
     public class ProductQueryHandler : IProductQueryHandler
     {
-        private IList<ProductDTO> _products = new List<ProductDTO>();
-        public ProductQueryHandler()
+        private readonly ProductView _view;
+
+        public ProductQueryHandler(ProductView view)
         {
+            _view = view;
         }
 
         public IList<ProductDTO> ListAllProducts()
         {
-            return _products;
+            return _view.Products;
         }
 
         public IList<ProductDTO> ListByFilter(Func<ProductDTO, bool> query)
         {
-            return _products.Where(query).ToList();
+            return _view.Products.Where(query).ToList();
         }
 
         public ProductDTO GetById(Guid id)
         {
-            return _products.FirstOrDefault(x => x.Id == id);
+            return _view.Products.FirstOrDefault(x => x.Id == id);
         }
     }
 }

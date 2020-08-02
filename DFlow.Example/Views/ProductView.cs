@@ -28,46 +28,21 @@ namespace DFlow.Example.Views
             Products = products;
         }
 
-        public void Update(ProductCreated @event)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(ProductNameChanged @event)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetSubscriberId()
-        {
-            return this.GetType().ToString();
-        }
-        
-        public ProductDTO Query(Func<ProductDTO, bool> query)
-        {
-            return Products.Where(query).FirstOrDefault();
-        }
-        
-        public IList<ProductDTO> QueryAll(Func<ProductDTO, bool> query = null)
-        {
-            if (query != null)
-                return Products.Where(query).ToList();
-            else
-                return Products;
-        }
-        
-        public void When(ProductCreated e)
+        public void Update(ProductCreated e)
         {
             Products.Add(new ProductDTO() {Name = e.Name, Id = e.Id});
         }
         
-        public void When(ProductNameChanged e)
+        public void Update(ProductNameChanged e)
         {
             if (e == null) throw new ArgumentNullException(nameof(e));
             var product = Products.FirstOrDefault(x => x.Id == e.Id);
             if (product != null) product.Name = e.Name;
         }
 
-        
+        public string GetSubscriberId()
+        {
+            return this.GetType().ToString();
+        }
     }
 }

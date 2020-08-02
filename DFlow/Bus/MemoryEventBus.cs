@@ -7,13 +7,11 @@ namespace DFlow.Bus
 {
     public class MemoryEventBus : IEventBus
     {
-        private readonly IDictionary<Type, IList<ISubscriber<IEvent>>> _subscribers;
-        private readonly IDictionary<string, IList<IEvent>> _messages;
-
+        private readonly IDictionary<Type, List<object>> _subscribers;
+        
         public MemoryEventBus()
         {
-            _messages = new Dictionary<string, IList<IEvent>>();
-            _subscribers = null;
+            _subscribers = new Dictionary<Type, List<object>>();
         }
         
         // public void Subscribe<T>(ISubscriber<IEvent> subscriber) 
@@ -33,23 +31,7 @@ namespace DFlow.Bus
         //     
         //     ReplayEvents<T>(subscriber);
         // }
-        //
-        // public void ReplayEvents<T>(ISubscriber subscriber)
-        // {
-        //     var key = $"{typeof(T).ToString()}{subscriber.GetSubscriberId()}";
-        //     if (_messages.ContainsKey(key))
-        //     {
-        //         var messages = _messages[subscriber.GetSubscriberId()];
-        //
-        //         foreach (var message in messages)
-        //         {
-        //             subscriber.Update(message);
-        //         }
-        //     
-        //         _messages[subscriber.GetSubscriberId()] = new IEvent[0];
-        //     }
-        // }
-        //
+        
         // public void Unsubscribe<T>(ISubscriber subscriber) 
         // {
         //     var type = typeof(T);
@@ -81,26 +63,35 @@ namespace DFlow.Bus
         // }
 
         public void Subscribe<T>(ISubscriber<T> subscriber)
-        where T : IEvent
         {
-            throw new NotImplementedException();
+            var type = typeof(T);
+            if (!_subscribers.ContainsKey(type))
+            {
+                _subscribers.Add(type, new List<object>());
+            }
+            
+            _subscribers[type].Add(subscriber);
         }
 
-        public void Unsubscribe<T>(ISubscriber<T> subscriber) where T : IEvent
+        public void Unsubscribe<T>(ISubscriber<T> subscriber)
         {
-            throw new NotImplementedException();
+            var type = typeof(T);
+            if (_subscribers.ContainsKey(type))
+            {
+                var subscriberToRemove = _subscribers[type].FirstOrDefault(x => ((ISubscriber<T>)x).GetSubscriberId().Equals(subscriber.GetSubscriberId()));
+                if (subscriberToRemove != null) _subscribers[type].Remove(subscriberToRemove);
+            }
         }
 
         public void Publish(params IEvent[] events)
         {
-            //TODO: ficou horrível isso, melhorar
             foreach (var @event in events)
             {
                 if (_subscribers.ContainsKey(@event.GetType()))
                 {
                     foreach (var subscriber in _subscribers[@event.GetType()])
                     {
-                        subscriber.Update(@event);
+                        ((dynamic)subscriber).Update((dynamic)@event);
                     }
                 }
             }
