@@ -13,8 +13,8 @@ build_script:
   - dotnet pack DFlow\DFlow.csproj -c Release --no-build /p:PackageVersion=%APPVEYOR_BUILD_VERSION%-pre /p:Version=%APPVEYOR_BUILD_VERSION%
 
 test_script:
-  - dotnet test -v n -p:ParallelizeTestCollections=false --configuration Release --no-build -f netcoreapp3.1 DFlow.Example\DFlow.Example.csproj
-  - OpenCover.Console.exe -register:user -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test --no-build --configuration Release -f netcoreapp3.1 --logger:trx;LogFileName=results.trx /p:DebugType=full DFlow.Example\DFlow.Example.csproj" -filter:"+[DFlow*]* -[DFlow.Tests*]*" -output:".\DFlow_coverage.xml" -oldStyle
+  - dotnet test -v n -p:ParallelizeTestCollections=false --configuration Release --no-build -f netcoreapp3.1 DFlow.Tests\DFlow.Tests.csproj
+  - OpenCover.Console.exe -register:user -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test --no-build --configuration Release -f netcoreapp3.1 --logger:trx;LogFileName=results.trx /p:DebugType=full DFlow.Tests\DFlow.Tests.csproj" -filter:"+[DFlow*]* -[DFlow.Tests*]*" -output:".\DFlow_coverage.xml" -oldStyle 
   - codecov -f "DFlow_coverage.xml"
 
 artifacts:
