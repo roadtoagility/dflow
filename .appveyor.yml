@@ -14,7 +14,7 @@ build_script:
   - dotnet pack DFlow\DFlow.csproj -c Release --no-build /p:PackageVersion=%APPVEYOR_BUILD_VERSION%-pre /p:Version=%APPVEYOR_BUILD_VERSION%
 
 test_script:
- - OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:"DFlow.Tests\bin\Debug\DFlow.Tests.dll -noshadow" -filter:"+[DFlow*]* -[Tests*]*" -output:".\DFlow_coverage.xml"
+ - OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:"DFlow.Tests\bin\Release\DFlow.Tests.dll -noshadow" -filter:"+[DFlow*]* -[Tests*]*" -output:".\DFlow_coverage.xml"
  
 after_test:
  - codecov -f "DFlow_coverage.xml"
