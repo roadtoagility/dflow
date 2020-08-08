@@ -5,7 +5,7 @@ configuration: Release
 
 before_build:
  - nuget restore
- - nuget install OpenCover -OutputDirectory packages -Version 4.6.519
+ - choco install opencover.portable
  - choco install codecov
 
 build_script:
@@ -14,7 +14,7 @@ build_script:
   - dotnet pack DFlow\DFlow.csproj -c Release --no-build /p:PackageVersion=%APPVEYOR_BUILD_VERSION%-pre /p:Version=%APPVEYOR_BUILD_VERSION%
 
 test_script:
- - .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test --no-build --configuration Release -f netcoreapp3.1 --logger:trx;LogFileName=results.trx /p:DebugType=full DFlow.Tests\DFlow.Tests.csproj" -filter:"+[DFlow*]* -[Tests*]*" -output:".\DFlow_coverage.xml"
+ - OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:"DFlow.Tests\bin\Debug\DFlow.Tests.dll -noshadow" -filter:"+[DFlow*]* -[Tests*]*" -output:".\DFlow_coverage.xml"
  
 after_test:
  - codecov -f "DFlow_coverage.xml"
