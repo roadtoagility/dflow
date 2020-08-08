@@ -4,8 +4,9 @@ image: Visual Studio 2019
 configuration: Release
 
 before_build:
-  - choco install opencover.portable
-  - choco install codecov
+ - nuget restore
+ - nuget install OpenCover -OutputDirectory packages -Version 4.6.519
+
 
 build_script:
   - dotnet restore DFlow.sln
@@ -14,8 +15,12 @@ build_script:
 
 test_script:
   - dotnet test -v n -p:ParallelizeTestCollections=false --configuration Release --no-build -f netcoreapp3.1 DFlow.Tests\DFlow.Tests.csproj
-  - OpenCover.Console.exe -register:user -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test --no-build --configuration Release -f netcoreapp3.1 --logger:trx;LogFileName=results.trx /p:DebugType=full DFlow.Tests\DFlow.Tests.csproj" -filter:"+[DFlow*]* -[DFlow.Tests*]*" -output:".\DFlow_coverage.xml" -oldStyle 
-  - codecov -f "DFlow_coverage.xml"
+  - OpenCover.Console.exe -register:user -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test --no-build --configuration Release -f netcoreapp3.1 --logger:trx;LogFileName=results.trx /p:DebugType=full DFlow.Tests\DFlow.Tests.csproj" -filter:"+[DFlow*]* -[Tests*]*" -output:".\DFlow_coverage.xml" 
+after_test:
+  - ps: |
+      $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
+      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+      bash codecov.sh -f "DFlow_coverage.xml"
 
 artifacts:
   - path: '**\*.nupkg'
