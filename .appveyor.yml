@@ -6,7 +6,7 @@ configuration: Release
 before_build:
  - nuget restore
  - nuget install OpenCover -OutputDirectory packages -Version 4.6.519
-
+ - choco install codecov
 
 build_script:
   - dotnet restore DFlow.sln
@@ -14,13 +14,10 @@ build_script:
   - dotnet pack DFlow\DFlow.csproj -c Release --no-build /p:PackageVersion=%APPVEYOR_BUILD_VERSION%-pre /p:Version=%APPVEYOR_BUILD_VERSION%
 
 test_script:
- - .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test --no-build --configuration Release -f netcoreapp3.1 --logger:trx;LogFileName=results.trx /p:DebugType=full DFlow.Tests\DFlow.Tests.csproj" -filter:"+[DFlow*]* -[Tests*]*" -output:"DFlow_coverage.xml"
+ - .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test --no-build --configuration Release -f netcoreapp3.1 --logger:trx;LogFileName=results.trx /p:DebugType=full DFlow.Tests\DFlow.Tests.csproj" -filter:"+[DFlow*]* -[Tests*]*" -output:".\DFlow_coverage.xml"
  
 after_test:
- - ps: |
-      $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
-      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
-      bash codecov.sh -f "DFlow_coverage.xml"
+ - codecov -f "DFlow_coverage.xml"
 
 artifacts:
   - path: '**\*.nupkg'
