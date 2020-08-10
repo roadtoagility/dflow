@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow", "DFlow\DFlow.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Tests", "DFlow.Tests\DFlow.Tests.csproj", "{E592B474-F073-41A8-8AEE-C24A7AD19586}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.DependencyInjection.SimpleInjector", "DFlow.DependencyInjection.SimpleInjector\DFlow.DependencyInjection.SimpleInjector.csproj", "{AE714C76-3519-49DB-8B0E-484F363311FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.EntryPoint.AspNetCore", "DFlow.EntryPoint.AspNetCore\DFlow.EntryPoint.AspNetCore.csproj", "{34373A2F-1057-4163-AB9A-6A2F1D60CD5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,5 +35,17 @@ Global
 		{E592B474-F073-41A8-8AEE-C24A7AD19586}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E592B474-F073-41A8-8AEE-C24A7AD19586}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
 		{E592B474-F073-41A8-8AEE-C24A7AD19586}.Tests|Any CPU.Build.0 = Debug|Any CPU
+		{AE714C76-3519-49DB-8B0E-484F363311FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE714C76-3519-49DB-8B0E-484F363311FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE714C76-3519-49DB-8B0E-484F363311FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE714C76-3519-49DB-8B0E-484F363311FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE714C76-3519-49DB-8B0E-484F363311FB}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE714C76-3519-49DB-8B0E-484F363311FB}.Tests|Any CPU.Build.0 = Debug|Any CPU
+		{34373A2F-1057-4163-AB9A-6A2F1D60CD5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34373A2F-1057-4163-AB9A-6A2F1D60CD5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34373A2F-1057-4163-AB9A-6A2F1D60CD5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34373A2F-1057-4163-AB9A-6A2F1D60CD5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34373A2F-1057-4163-AB9A-6A2F1D60CD5E}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
+		{34373A2F-1057-4163-AB9A-6A2F1D60CD5E}.Tests|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal

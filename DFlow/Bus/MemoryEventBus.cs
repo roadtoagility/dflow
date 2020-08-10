@@ -14,54 +14,6 @@ namespace DFlow.Bus
             _subscribers = new Dictionary<Type, List<object>>();
         }
         
-        // public void Subscribe<T>(ISubscriber<IEvent> subscriber) 
-        // where T: IEvent
-        // {
-        //     var type = typeof(T);
-        //     if (!_subscribers.ContainsKey(type))
-        //     {
-        //         _subscribers.Add(type, new List<ISubscriber<T>());
-        //     }
-        //     
-        //     //TODO: eu sei que a verificação é desnecessária, só fiz pra garantir que ninguem vai se inscrever várias vezes para o mesmo evento... pode ser removido
-        //     if(!_subscribers[type].Any(x => x.GetSubscriberId().Equals(subscriber.GetSubscriberId())))
-        //     {
-        //         _subscribers[type].Add(subscriber);
-        //     }
-        //     
-        //     ReplayEvents<T>(subscriber);
-        // }
-        
-        // public void Unsubscribe<T>(ISubscriber subscriber) 
-        // {
-        //     var type = typeof(T);
-        //     if (_subscribers.ContainsKey(type))
-        //     {
-        //         var subscriberToRemove = _subscribers[type].FirstOrDefault(x => x.GetSubscriberId().Equals(subscriber.GetSubscriberId()));
-        //         if (subscriberToRemove != null) _subscribers[type].Remove(subscriberToRemove);
-        //     }
-        //     //TODO: testar isso aqui :)
-        //     var key = $"{typeof(T).ToString()}{subscriber.GetSubscriberId()}";
-        //     if (_messages.ContainsKey(key))
-        //     {
-        //         var messages = _messages[key];
-        //         var messagesToRemove = new List<IEvent>();
-        //         
-        //         foreach (var message in messages)
-        //         {
-        //             if (message.GetType() == typeof(T))
-        //             {
-        //                 messagesToRemove.Add(message);
-        //             }
-        //         }
-        //
-        //         foreach (var message in messagesToRemove)
-        //         {
-        //             _messages[key].Remove(message);
-        //         }
-        //     }
-        // }
-
         public void Subscribe<T>(ISubscriber<T> subscriber)
         {
             var type = typeof(T);
