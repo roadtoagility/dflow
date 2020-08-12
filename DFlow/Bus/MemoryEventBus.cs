@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DFlow.Configuration;
 using DFlow.Interfaces;
 
 namespace DFlow.Bus
@@ -23,6 +24,21 @@ namespace DFlow.Bus
             }
             
             _subscribers[type].Add(subscriber);
+        }
+
+        public void Subscribe(params object[] subscribers)
+        {
+            foreach (var subscriber in subscribers)
+            {
+                var type = subscriber.GetType();
+                
+                if (!_subscribers.ContainsKey(type))
+                {
+                    _subscribers.Add(type, new List<object>());
+                }
+            
+                _subscribers[type].Add(subscriber);
+            }
         }
 
         public void Unsubscribe<T>(ISubscriber<T> subscriber)

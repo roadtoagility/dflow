@@ -3,18 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using DFlow.Base;
 using DFlow.Interfaces;
 
 namespace DFlow.Configuration.Startup
 {
-    // public static class SubscriberFactory
-    // {
-    //     public static void RegisterSubscribers(IEventBus eventBus)
-    //     {
-    //         
-    //     }
-    // }
-    
     public sealed class SubscriberFactory
     {
         private SubscriberFactory()
@@ -39,21 +32,14 @@ namespace DFlow.Configuration.Startup
                       y != null && y.IsGenericType &&
                       y.GetGenericTypeDefinition() == typeof(ISubscriber<>)
                 select x;
-
+            
             foreach (var subType in subscribers)
             {
-                var constructor = subType.GetConstructors();
-                var parameters = constructor[0].GetParameters();
-                var parametersConcrete = new List<object>();
-
-                foreach (var parameter in parameters)
-                {
-                    parametersConcrete.Add(provider.Resolve(parameter.GetType()));
-                }
-
-                var concreteSubscribe = Activator.CreateInstance(subType, parametersConcrete.ToArray());
-                
-                eventBus.Subscribe(concreteSubscribe);
+                var bigType = typeof(ISubscriber<>);
+                Type[] args = { @subType.GetType() };
+                var subscriber = bigType.MakeGenericType(args);
+                var instance = provider.Resolve(subscriber);
+                eventBus.Subscribe(instance);
             }
         }
     }

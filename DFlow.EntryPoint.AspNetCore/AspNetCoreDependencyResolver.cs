@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using DFlow.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DFlow.EntryPoint.AspNetCore
 {
@@ -12,9 +15,9 @@ namespace DFlow.EntryPoint.AspNetCore
             _provider = provider;
         }
 
-        public object Resolve(Type service)
+        public IEnumerable<object> Resolve(Type service)
         {
-            return _provider.GetService(service);
+            return _provider.GetServices(service);
         }
     }
 }

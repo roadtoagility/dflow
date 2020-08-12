@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using DFlow.Configuration;
 using SimpleInjector;
 
@@ -13,9 +15,9 @@ namespace DFlow.DependencyInjection
             _container = container;
         }
 
-        public object Resolve(Type service)
+        public IEnumerable<object> Resolve(Type service)
         {
-            return _container.GetInstance(service);
+            return _container.GetAllInstances(service);
         }
     }
 }

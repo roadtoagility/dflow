@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace DFlow.Configuration
 {
     public interface IDependencyResolver
     {
-        object Resolve(Type service);
+        IEnumerable<object> Resolve(Type service);
     }
 }
