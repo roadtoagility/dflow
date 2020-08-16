@@ -19,7 +19,7 @@ namespace DFlow.Tests
         {
             var eventBus = new MemoryEventBus();
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var rootId = Guid.NewGuid();
             var factory = new AggregateFactory(eventStore);
             var root = factory.Create<ProductCatalogAggregate>(rootId);
@@ -35,7 +35,7 @@ namespace DFlow.Tests
             var rootId = Guid.NewGuid();
             var eventBus = new MemoryEventBus();
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var factory = new AggregateFactory(eventStore);
             var root = factory.Create<ProductCatalogAggregate>(rootId);
             
@@ -52,7 +52,7 @@ namespace DFlow.Tests
             var rootId = Guid.NewGuid();
             var eventBus = new MemoryEventBus();
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var factory = new AggregateFactory(eventStore);
             
             var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
@@ -71,7 +71,7 @@ namespace DFlow.Tests
         {
             var eventBus = new MemoryEventBus();
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var factory = new AggregateFactory(eventStore);
             var root = factory.Create<ProductCatalogAggregate>(Guid.NewGuid());
 
@@ -85,7 +85,7 @@ namespace DFlow.Tests
             var rootId = Guid.NewGuid();
             var eventBus = new MemoryEventBus();
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var factory = new AggregateFactory(eventStore);
             var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
             
@@ -105,7 +105,7 @@ namespace DFlow.Tests
             var rootId = Guid.NewGuid();
             var eventBus = new MemoryEventBus();
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var factory = new AggregateFactory(eventStore);
             var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
             
@@ -131,7 +131,7 @@ namespace DFlow.Tests
             var rootId = Guid.NewGuid();
             var eventBus = new MemoryEventBus();
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var view = new ProductView();
             
             eventBus.Subscribe<ProductCreated>(view);

@@ -21,7 +21,7 @@ namespace DFlow.Tests
         {
             var eventBus = new MemoryEventBus();
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var snapShotRepo = new SnapshotRepository();
             var factory = new AggregateFactory(eventStore, snapShotRepo);
             
@@ -61,7 +61,7 @@ namespace DFlow.Tests
             var rootId = Guid.NewGuid();
             var eventBus = new MemoryEventBus();
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var snapShotRepo = new SnapshotRepository();
             var factory = new AggregateFactory(eventStore, snapShotRepo);
             

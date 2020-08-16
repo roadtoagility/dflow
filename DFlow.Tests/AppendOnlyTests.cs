@@ -20,7 +20,7 @@ namespace DFlow.Tests
             var rootId = Guid.NewGuid();
             var eventBus = new MemoryEventBus();
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             
             appendOnly.Append(rootId, "NyAggregateType", 1, new List<IEvent>()
             {
@@ -41,7 +41,7 @@ namespace DFlow.Tests
             var productId = Guid.NewGuid();
             var eventBus = new MemoryEventBus();
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             
             var productView = new ProductView();
             eventBus.Subscribe<ProductCreated>(productView);

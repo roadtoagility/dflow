@@ -1,7 +1,8 @@
 ﻿using System;
-using DFlow.Configuration.Startup;
+using DFlow.Configuration;
 using DFlow.Interfaces;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using SimpleInjector;
 
 namespace DFlow.DependencyInjection
@@ -11,15 +12,8 @@ namespace DFlow.DependencyInjection
         public static void InitDlow(
             this IApplicationBuilder builder, Container provider)
         {
-            RegisterSubscribers(provider);
-            // builder.UseMiddleware<MonitorMiddleware>();
-        }
-
-        private static void RegisterSubscribers(Container provider)
-        {
-            var eventBus = provider.GetInstance<IEventBus>();
-            var resolver = new SimpleInjectorDependencyResolver(provider);
-            SubscriberFactory.Instance.RegisterSubscribers(eventBus, resolver);
+            var container = new SimpleInjectorDependencyResolver(provider);
+            provider.RegisterInstance<IDependencyResolver>(container);
         }
     }
 }
