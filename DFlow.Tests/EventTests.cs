@@ -14,7 +14,7 @@ namespace DFlow.Tests
         [Fact]
         public void ShouldCreateAggregateWithVersionCorrectly()
         {
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
             var eventStore = new EventStore(appendOnly, eventBus);
             var rootId = Guid.NewGuid();
@@ -27,7 +27,7 @@ namespace DFlow.Tests
         [Fact]
         public void ShouldIncreaseVersionCorrectly()
         {
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
             var eventStore = new EventStore(appendOnly, eventBus);
             var rootId = Guid.NewGuid();
@@ -49,7 +49,7 @@ namespace DFlow.Tests
         [Fact]
         public void ShouldNotAllowCreateAggregatesWithSameId()
         {
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
             var eventStore = new EventStore(appendOnly, eventBus);
             var rootId = Guid.NewGuid();

@@ -20,10 +20,12 @@ namespace DFlow.Tests
         private IEventStore<Guid> _eventStore;
         private ISnapshotRepository<Guid> _snapShotRepo;
         private AggregateFactory _factory;
+        private MemoryResolver _resolver;
         
         public ProjectionTests()
         {
-            _eventBus = new MemoryEventBus();
+            _resolver = new MemoryResolver();
+            _eventBus = new MemoryEventBus(_resolver);
             _appendOnly = new MemoryAppendOnlyStore(_eventBus);
             _eventStore = new EventStore(_appendOnly, _eventBus);
             _snapShotRepo = new SnapshotRepository();
@@ -38,7 +40,7 @@ namespace DFlow.Tests
             
             var idProd2 = Guid.NewGuid();
             var view = new ProductView();
-            _eventBus.Subscribe<ProductCreated>(view);
+            _resolver.Register<ProductCreated>(view);
             
             IProductQueryHandler queryHandler = new ProductQueryHandler(view);
 

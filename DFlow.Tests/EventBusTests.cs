@@ -1,5 +1,6 @@
 using System;
 using DFlow.Bus;
+using DFlow.Example;
 using DFlow.Example.Events;
 using DFlow.Example.Views;
 using DFlow.Interfaces;
@@ -10,10 +11,12 @@ namespace DFlow.Tests
     public class EventBusTests
     {
         private IEventBus _eventBus;
+        private MemoryResolver _resolver;
         
         public EventBusTests()
         {
-            _eventBus = new MemoryEventBus();
+            _resolver = new MemoryResolver();
+            _eventBus = new MemoryEventBus(_resolver);
         }
         
         [Fact]
@@ -21,7 +24,9 @@ namespace DFlow.Tests
         {
             var view = new ProductView();
             
-            _eventBus.Subscribe<ProductCreated>(view);
+            //DI resolver
+            _resolver.Register<ProductCreated>(view);
+            
             var productId = Guid.NewGuid();
             _eventBus.Publish(new ProductCreated(productId, "name", "description"));
             
@@ -34,10 +39,10 @@ namespace DFlow.Tests
         {
             var view = new ProductView();
             
-            _eventBus.Subscribe<ProductCreated>(view);
+            _resolver.Register<ProductCreated>(view);
             var productId = Guid.NewGuid();
             _eventBus.Publish(new ProductCreated(productId, "name", "description"));
-            _eventBus.Unsubscribe<ProductCreated>(view);
+            _resolver.Unregister<ProductCreated>(view);
             _eventBus.Publish(new ProductCreated(Guid.NewGuid(), "name", "description"));
             
             Assert.True(view.Products.Count == 1);

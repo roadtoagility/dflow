@@ -8,59 +8,32 @@ namespace DFlow.Bus
 {
     public class MemoryEventBus : IEventBus
     {
-        private readonly IDictionary<Type, List<object>> _subscribers;
-        
-        public MemoryEventBus()
-        {
-            _subscribers = new Dictionary<Type, List<object>>();
-        }
-        
-        public void Subscribe<T>(ISubscriber<T> subscriber)
-        {
-            var type = typeof(T);
-            if (!_subscribers.ContainsKey(type))
-            {
-                _subscribers.Add(type, new List<object>());
-            }
-            
-            _subscribers[type].Add(subscriber);
-        }
+        private readonly IDependencyResolver _resolver;
 
-        public void Subscribe(params object[] subscribers)
+        public MemoryEventBus(IDependencyResolver resolver)
         {
-            foreach (var subscriber in subscribers)
-            {
-                var type = subscriber.GetType();
-                
-                if (!_subscribers.ContainsKey(type))
-                {
-                    _subscribers.Add(type, new List<object>());
-                }
-            
-                _subscribers[type].Add(subscriber);
-            }
+            _resolver = resolver;
         }
-
-        public void Unsubscribe<T>(ISubscriber<T> subscriber)
-        {
-            var type = typeof(T);
-            if (_subscribers.ContainsKey(type))
-            {
-                var subscriberToRemove = _subscribers[type].FirstOrDefault(x => ((ISubscriber<T>)x).GetSubscriberId().Equals(subscriber.GetSubscriberId()));
-                if (subscriberToRemove != null) _subscribers[type].Remove(subscriberToRemove);
-            }
-        }
+        
+        // public void Subscribe<T>(ISubscriber<T> subscriber)
+        // {
+        //     _resolver.Register(subscriber);
+        // }
+        //
+        // public void Unsubscribe<T>(ISubscriber<T> subscriber)
+        // {
+        //     _resolver.Unregister(subscriber);
+        // }
 
         public void Publish(params IEvent[] events)
         {
             foreach (var @event in events)
             {
-                if (_subscribers.ContainsKey(@event.GetType()))
+                var subscribers = _resolver.Resolve(@event.GetType());
+                
+                foreach (var subscriber in subscribers)
                 {
-                    foreach (var subscriber in _subscribers[@event.GetType()])
-                    {
-                        ((dynamic)subscriber).Update((dynamic)@event);
-                    }
+                    ((dynamic)subscriber).Update((dynamic)@event);
                 }
             }
         }

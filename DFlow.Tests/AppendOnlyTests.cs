@@ -18,7 +18,7 @@ namespace DFlow.Tests
         public void AppendOnlyShouldSave()
         {
             var rootId = Guid.NewGuid();
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
             var eventStore = new EventStore(appendOnly, eventBus);
             
@@ -39,18 +39,19 @@ namespace DFlow.Tests
         {
             var rootId = Guid.NewGuid();
             var productId = Guid.NewGuid();
-            var eventBus = new MemoryEventBus();
+            var resolver = new MemoryResolver();
+            var eventBus = new MemoryEventBus(resolver);
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
             var eventStore = new EventStore(appendOnly, eventBus);
             
             var productView = new ProductView();
-            eventBus.Subscribe<ProductCreated>(productView);
+            resolver.Register<ProductCreated>(productView);
             
-            appendOnly.Append(rootId, "NyAggregateType", 1, new List<IEvent>()
+            eventStore.AppendToStream<Guid>(rootId, 0, new List<IEvent>()
             {
                 new ProductCreated(productId, "test", "")
             });
-
+            
             Assert.True(productView.Products.Count == 1);
             Assert.True(productView.Products.ElementAt(0).Id == productId);
         }

@@ -1,10 +1,9 @@
-using System;
+﻿using System;
 using DFlow.Configuration;
-using DFlow.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DFlow.EntryPoint.AspNetCore
+namespace DFlow.DependencyInjection.AspNetDependencyInjector
 {
     public static class Initialize
     {

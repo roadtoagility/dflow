@@ -14,7 +14,7 @@ namespace DFlow.Tests
         public void RetrieveAggregateLoadedFromSnapshot()
         {
             var rootId = Guid.NewGuid();
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
             var eventStore = new EventStore(appendOnly, eventBus);
             var snapShotRepo = new SnapshotRepository();
@@ -53,7 +53,7 @@ namespace DFlow.Tests
         public void ShouldApplyEventsAfterSnapshot()
         {
             var rootId = Guid.NewGuid();
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
             var eventStore = new EventStore(appendOnly, eventBus);
             var snapShotRepo = new SnapshotRepository();
@@ -94,7 +94,7 @@ namespace DFlow.Tests
         public void ShouldCreateMultiplesSnapshots()
         {
             var rootId = Guid.NewGuid();
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
             var eventStore = new EventStore(appendOnly, eventBus);
             var snapShotRepo = new SnapshotRepository();

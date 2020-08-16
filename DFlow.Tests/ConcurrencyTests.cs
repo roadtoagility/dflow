@@ -19,7 +19,7 @@ namespace DFlow.Tests
         [Fact]
         public void ShouldMergeEvents()
         {
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
             var eventStore = new EventStore(appendOnly, eventBus);
             var snapShotRepo = new SnapshotRepository();
@@ -59,7 +59,7 @@ namespace DFlow.Tests
         public void ShouldThrowExceptionConflictEvents()
         {
             var rootId = Guid.NewGuid();
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
             var eventStore = new EventStore(appendOnly, eventBus);
             var snapShotRepo = new SnapshotRepository();
