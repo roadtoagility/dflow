@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DFlow.Base;
 using DFlow.Interfaces;
 
-namespace DFlow.Store
+namespace DFlow.Example
 {
     public class MemoryAppendOnlyStore : AppendOnlyBase, IAppendOnlyStore<Guid>
     {

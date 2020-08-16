@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using DFlow.Configuration;
-using DFlow.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-namespace DFlow.DependencyInjection.AspNetDependencyInjector
+
+namespace DFlow.AspNetCore
 {
     public class AspNetCoreDependencyResolver : IDependencyResolver
     {

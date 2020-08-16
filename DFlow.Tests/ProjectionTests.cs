@@ -8,7 +8,6 @@ using DFlow.Example.Events;
 using DFlow.Example.Handlers;
 using DFlow.Example.Views;
 using DFlow.Interfaces;
-using DFlow.Store;
 using Xunit;
 
 namespace DFlow.Tests

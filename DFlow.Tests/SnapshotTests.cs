@@ -3,7 +3,6 @@ using DFlow.Bus;
 using DFlow.Example;
 using DFlow.Example.Aggregates;
 using DFlow.Example.Commands;
-using DFlow.Store;
 using Xunit;
 
 namespace DFlow.Tests

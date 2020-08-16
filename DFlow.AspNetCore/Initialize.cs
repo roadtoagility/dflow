@@ -3,7 +3,7 @@ using DFlow.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DFlow.DependencyInjection.AspNetDependencyInjector
+namespace DFlow.AspNetCore
 {
     public static class Initialize
     {

@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using DFlow.Base.Aggregate;
 using DFlow.Interfaces;
 
-namespace DFlow.Store
+namespace DFlow.Example
 {
     public class SnapshotRepository : ISnapshotRepository<Guid>
     {
