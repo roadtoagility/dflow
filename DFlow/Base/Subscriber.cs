@@ -2,9 +2,9 @@ using DFlow.Interfaces;
 
 namespace DFlow.Base
 {
-    public abstract class SubscriberBase : ISubscriber
+    public abstract class Subscriber
     {
-        public virtual void Update(IEvent @event)
+        public virtual void Update<T>(T @event)  where T: IEvent
         {
             ((dynamic) this).When((dynamic)@event);
         }

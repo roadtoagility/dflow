@@ -7,7 +7,6 @@ using DFlow.Example.Aggregates;
 using DFlow.Example.Commands;
 using DFlow.Example.Events;
 using DFlow.Example.Views;
-using DFlow.Store;
 using Xunit;
 
 namespace DFlow.Tests
@@ -17,9 +16,9 @@ namespace DFlow.Tests
         [Fact]
         public void ShouldCreateNewAggregate()
         {
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var rootId = Guid.NewGuid();
             var factory = new AggregateFactory(eventStore);
             var root = factory.Create<ProductCatalogAggregate>(rootId);
@@ -33,9 +32,9 @@ namespace DFlow.Tests
         public void ShouldSaveStream()
         {
             var rootId = Guid.NewGuid();
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var factory = new AggregateFactory(eventStore);
             var root = factory.Create<ProductCatalogAggregate>(rootId);
             
@@ -50,9 +49,9 @@ namespace DFlow.Tests
         public void ShouldAggregateLoadStream()
         {
             var rootId = Guid.NewGuid();
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var factory = new AggregateFactory(eventStore);
             
             var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
@@ -69,9 +68,9 @@ namespace DFlow.Tests
         [Fact]
         public void ShouldAllEventsRegisteredAggregate()
         {
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var factory = new AggregateFactory(eventStore);
             var root = factory.Create<ProductCatalogAggregate>(Guid.NewGuid());
 
@@ -83,9 +82,9 @@ namespace DFlow.Tests
         public void ShouldAddProductToProductCatalog()
         {
             var rootId = Guid.NewGuid();
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var factory = new AggregateFactory(eventStore);
             var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
             
@@ -103,9 +102,9 @@ namespace DFlow.Tests
         public void ShouldIncrementVersionCorrectly()
         {
             var rootId = Guid.NewGuid();
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var factory = new AggregateFactory(eventStore);
             var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
             
@@ -129,12 +128,13 @@ namespace DFlow.Tests
         public void ShouldUpdateProductProjection()
         {
             var rootId = Guid.NewGuid();
-            var eventBus = new MemoryEventBus();
+            var resolver = new MemoryResolver();
+            var eventBus = new MemoryEventBus(resolver);
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var view = new ProductView();
             
-            eventBus.Subscribe<ProductCreated>(view);
+            resolver.Register<ProductCreated>(view);
             
             var factory = new AggregateFactory(eventStore);
             var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);

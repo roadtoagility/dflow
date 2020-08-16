@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DFlow.Base;
 using DFlow.Interfaces;
 
-namespace DFlow.Store
+namespace DFlow.Example
 {
     public class MemoryAppendOnlyStore : AppendOnlyBase, IAppendOnlyStore<Guid>
     {
@@ -12,7 +12,7 @@ namespace DFlow.Store
         private ICollection<EventDTO<Guid>> _eventsStorage = new List<EventDTO<Guid>>();
 
 
-        public MemoryAppendOnlyStore(IEventBus eventBus) : base(eventBus)
+        public MemoryAppendOnlyStore(IEventBus eventBus) : base()
         {
         }
 

@@ -5,24 +5,23 @@ using DFlow.Example.Aggregates;
 using DFlow.Example.Commands;
 using DFlow.Example.Handlers;
 using DFlow.Interfaces;
-using DFlow.Store;
 using Xunit;
 
 namespace DFlow.Tests
 {
-    public class HandlerTests : IDisposable
+    public class HandlerTests
     {
-        private IAppendOnlyStore<Guid> _appendOnly = null;
-        private IEventBus _eventBus = null;
-        private IEventStore<Guid> _eventStore = null;
-        private ISnapshotRepository<Guid> _snapShotRepo = null;
-        private AggregateFactory _factory = null;
+        private IAppendOnlyStore<Guid> _appendOnly;
+        private IEventBus _eventBus;
+        private IEventStore<Guid> _eventStore;
+        private ISnapshotRepository<Guid> _snapShotRepo;
+        private AggregateFactory _factory;
         
         public HandlerTests()
         {
-            _eventBus = new MemoryEventBus();
+            _eventBus = new MemoryEventBus(new MemoryResolver());
             _appendOnly = new MemoryAppendOnlyStore(_eventBus);
-            _eventStore = new EventStore(_appendOnly);
+            _eventStore = new EventStore(_appendOnly, _eventBus);
             _snapShotRepo = new SnapshotRepository();
             _factory = new AggregateFactory(_eventStore, _snapShotRepo);
         }
@@ -41,15 +40,6 @@ namespace DFlow.Tests
             
             Assert.True(stream.Version == 2);
             Assert.True(1 == productAggregate.CountProducts());
-        }
-
-        public void Dispose()
-        {
-            _appendOnly = null;
-            _eventBus = null;;
-            _eventStore = null;;
-            _snapShotRepo = null;;
-            _factory = null;;
         }
     }
 }

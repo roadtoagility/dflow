@@ -1,31 +1,34 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using DFlow.Bus;
 using DFlow.Example;
 using DFlow.Example.Commands;
+using DFlow.Example.Events;
 using DFlow.Example.Handlers;
+using DFlow.Example.Views;
 using DFlow.Interfaces;
-using DFlow.Store;
 using Xunit;
 
 namespace DFlow.Tests
 {
     public class ProjectionTests
     {
-        private IAppendOnlyStore<Guid> _appendOnly = null;
-        private IEventBus _eventBus = null;
-        private IEventStore<Guid> _eventStore = null;
-        private ISnapshotRepository<Guid> _snapShotRepo = null;
-        private AggregateFactory _factory = null;
-        private ViewFactory _viewFactory = null;
+        private IAppendOnlyStore<Guid> _appendOnly;
+        private IEventBus _eventBus;
+        private IEventStore<Guid> _eventStore;
+        private ISnapshotRepository<Guid> _snapShotRepo;
+        private AggregateFactory _factory;
+        private MemoryResolver _resolver;
         
         public ProjectionTests()
         {
-            _eventBus = new MemoryEventBus();
+            _resolver = new MemoryResolver();
+            _eventBus = new MemoryEventBus(_resolver);
             _appendOnly = new MemoryAppendOnlyStore(_eventBus);
-            _eventStore = new EventStore(_appendOnly);
+            _eventStore = new EventStore(_appendOnly, _eventBus);
             _snapShotRepo = new SnapshotRepository();
             _factory = new AggregateFactory(_eventStore, _snapShotRepo);
-            _viewFactory = new ViewFactory(_eventBus);
         }
         
         [Fact]
@@ -35,8 +38,10 @@ namespace DFlow.Tests
             var handler = new ProductServiceCommandHandler(_eventStore, _factory);
             
             var idProd2 = Guid.NewGuid();
+            var view = new ProductView();
+            _resolver.Register<ProductCreated>(view);
             
-            IProductQueryHandler queryHandler = new ProductQueryHandler(_viewFactory);
+            IProductQueryHandler queryHandler = new ProductQueryHandler(view);
 
             handler.Execute(new CreateProductCatalog(rootId));
             handler.Execute(new CreateProductCommand(rootId, Guid.NewGuid(), "Notebook Lenovo 2 em 1 ideapad C340", "Notebook Lenovo 2 em 1 ideapad C340 i7-8565U 8GB 256GB SSD Win10 14' FHD IPS - 81RL0001BR"));
@@ -50,16 +55,6 @@ namespace DFlow.Tests
             Assert.True(product.Id == idProd2);
             Assert.True(listProducts.Count == 2);
             Assert.True(dell.Count == 1);
-        }
-        
-        [Fact]
-        public void Dispose()
-        {
-            _appendOnly = null;
-            _eventBus = null;;
-            _eventStore = null;;
-            _snapShotRepo = null;;
-            _factory = null;;
         }
     }
 }
