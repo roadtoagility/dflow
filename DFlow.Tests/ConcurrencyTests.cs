@@ -9,7 +9,6 @@ using DFlow.Example.Aggregates;
 using DFlow.Example.Commands;
 using DFlow.Example.Events;
 using DFlow.Example.Handlers;
-using DFlow.Store;
 using Xunit;
 
 namespace DFlow.Tests
@@ -19,9 +18,9 @@ namespace DFlow.Tests
         [Fact]
         public void ShouldMergeEvents()
         {
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var snapShotRepo = new SnapshotRepository();
             var factory = new AggregateFactory(eventStore, snapShotRepo);
             
@@ -59,9 +58,9 @@ namespace DFlow.Tests
         public void ShouldThrowExceptionConflictEvents()
         {
             var rootId = Guid.NewGuid();
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var snapShotRepo = new SnapshotRepository();
             var factory = new AggregateFactory(eventStore, snapShotRepo);
             

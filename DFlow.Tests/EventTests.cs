@@ -4,7 +4,6 @@ using DFlow.Bus;
 using DFlow.Example;
 using DFlow.Example.Aggregates;
 using DFlow.Example.Commands;
-using DFlow.Store;
 using Xunit;
 
 namespace DFlow.Tests
@@ -14,9 +13,9 @@ namespace DFlow.Tests
         [Fact]
         public void ShouldCreateAggregateWithVersionCorrectly()
         {
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var rootId = Guid.NewGuid();
             var factory = new AggregateFactory(eventStore);
             var root = factory.Create<ProductCatalogAggregate>(rootId);
@@ -27,9 +26,9 @@ namespace DFlow.Tests
         [Fact]
         public void ShouldIncreaseVersionCorrectly()
         {
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var rootId = Guid.NewGuid();
             var factory = new AggregateFactory(eventStore);
             var root = factory.Create<ProductCatalogAggregate>(rootId);
@@ -49,9 +48,9 @@ namespace DFlow.Tests
         [Fact]
         public void ShouldNotAllowCreateAggregatesWithSameId()
         {
-            var eventBus = new MemoryEventBus();
+            var eventBus = new MemoryEventBus(new MemoryResolver());
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
-            var eventStore = new EventStore(appendOnly);
+            var eventStore = new EventStore(appendOnly, eventBus);
             var rootId = Guid.NewGuid();
             var factory = new AggregateFactory(eventStore);
             

@@ -13,11 +13,13 @@ namespace DFlow.Example
     {
         
         readonly IAppendOnlyStore<Guid> _appendOnlyStore;
+        private readonly IEventBus _eventBus;
         readonly BinaryFormatter _formatter = new BinaryFormatter();
         
-        public EventStore(IAppendOnlyStore<Guid> appendOnlyStore)
+        public EventStore(IAppendOnlyStore<Guid> appendOnlyStore, IEventBus eventBus)
         {
             _appendOnlyStore = appendOnlyStore;
+            _eventBus = eventBus;
         }
         
         public EventStream LoadEventStream(Guid id) => LoadEventStream(id, 0, Int32.MaxValue);
@@ -56,6 +58,7 @@ namespace DFlow.Example
         {
             var aggregateType = typeof(TType).Name;
             _appendOnlyStore.Append(id, aggregateType, version, events);
+            _eventBus.Publish(events.ToArray());
         }
 
         public bool Any(Guid id)

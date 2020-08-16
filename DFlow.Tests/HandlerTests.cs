@@ -5,7 +5,6 @@ using DFlow.Example.Aggregates;
 using DFlow.Example.Commands;
 using DFlow.Example.Handlers;
 using DFlow.Interfaces;
-using DFlow.Store;
 using Xunit;
 
 namespace DFlow.Tests
@@ -20,9 +19,9 @@ namespace DFlow.Tests
         
         public HandlerTests()
         {
-            _eventBus = new MemoryEventBus();
+            _eventBus = new MemoryEventBus(new MemoryResolver());
             _appendOnly = new MemoryAppendOnlyStore(_eventBus);
-            _eventStore = new EventStore(_appendOnly);
+            _eventStore = new EventStore(_appendOnly, _eventBus);
             _snapShotRepo = new SnapshotRepository();
             _factory = new AggregateFactory(_eventStore, _snapShotRepo);
         }
