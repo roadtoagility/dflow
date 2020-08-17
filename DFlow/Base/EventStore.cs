@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using DFlow.Base;
+using System.Transactions;
 using DFlow.Interfaces;
 
-namespace DFlow.Example
+namespace DFlow.Base
 {
-    //TODO: talvez isso possa ser movido pra base
     public class EventStore : IEventStore<Guid>
     {
         
@@ -65,8 +64,6 @@ namespace DFlow.Example
         {
             return _appendOnlyStore.Any(id);
         }
-
-        
         
         IEvent[] DeserializeEvent(byte[] data)
         {

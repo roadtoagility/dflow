@@ -23,7 +23,16 @@ namespace DFlow.Base
         
         public virtual CommandEvent Execute(ICommand command)
         {
-            return ((dynamic)this).When((dynamic)command);
+            var keep = true;
+            CommandEvent result = null;
+            
+            while(keep)
+            {
+                result = ((dynamic)this).When((dynamic)command);
+                keep = result == null;
+            }
+
+            return result;
         }
 
         //Dessa forma, os métodos HasConflict e HandleConcurrencyException podem ser sobrescritos para se adaptar a questões de negócio

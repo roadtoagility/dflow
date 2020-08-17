@@ -1,4 +1,5 @@
 ﻿using System;
+using DFlow.Base;
 using DFlow.Configuration;
 using DFlow.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -14,6 +15,7 @@ namespace DFlow.DependencyInjection
         {
             var container = new SimpleInjectorDependencyResolver(provider);
             provider.RegisterInstance<IDependencyResolver>(container);
+            provider.Register<IEventStore<Guid>, EventStore>();
         }
     }
 }

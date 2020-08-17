@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using DFlow.Base;
 using DFlow.Base.Aggregate;
 using DFlow.Bus;
 using DFlow.Example;

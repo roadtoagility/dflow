@@ -26,73 +26,66 @@ namespace DFlow.Example.Handlers
 
         public CommandEvent When(CreateProductCatalog cmd)
         {
-            while(true)
-            {
-                var productCatalog = _factory.Create<ProductCatalogAggregate>(cmd.Id);
+            var productCatalog = _factory.Create<ProductCatalogAggregate>(cmd.Id);
                 
-                try
-                {
-                    _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.Id, productCatalog.Version,
-                        productCatalog.Changes);
-                    return new CommandEvent(OperationStatus.Success);
-                }
-                catch (EventStoreConcurrencyException ex)
-                {
-                    HandleConcurrencyException(ex, productCatalog);
-                    return new CommandEvent(OperationStatus.Success);
-                }
-                catch(Exception)
-                {
-                    throw;
-                }
+            try
+            {
+                _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.Id, productCatalog.Version,
+                    productCatalog.Changes);
+                return new CommandEvent(OperationStatus.Success);
+            }
+            catch (EventStoreConcurrencyException ex)
+            {
+                HandleConcurrencyException(ex, productCatalog);
+                return new CommandEvent(OperationStatus.Success);
+            }
+            catch(Exception)
+            {
+                throw;
             }
         }
         
         public CommandEvent When(CreateProductCommand cmd)
         {
-            while(true)
-            {
-                var productCatalog = _factory.Load<ProductCatalogAggregate>(cmd.RootId);
-                productCatalog.CreateProduct(cmd);
+            var productCatalog = _factory.Load<ProductCatalogAggregate>(cmd.RootId);
+            productCatalog.CreateProduct(cmd);
                 
-                try
-                {
-                    _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.RootId, productCatalog.Version,
-                        productCatalog.Changes);
-                    return new CommandEvent(OperationStatus.Success);
-                }
-                catch (EventStoreConcurrencyException ex)
-                {
-                    HandleConcurrencyException(ex, productCatalog);
-                }
-                catch(Exception)
-                {
-                    throw;
-                }
+            try
+            {
+                _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.RootId, productCatalog.Version,
+                    productCatalog.Changes);
+                return new CommandEvent(OperationStatus.Success);
+            }
+            catch (EventStoreConcurrencyException ex)
+            {
+                HandleConcurrencyException(ex, productCatalog);
+                return new CommandEvent(OperationStatus.Success);
+            }
+            catch(Exception)
+            {
+                throw;
             }
         }
         
         public CommandEvent When(ChangeProductNameCommand cmd)
         {
-            while(true)
-            {
-                var productCatalog = _factory.Load<ProductCatalogAggregate>(cmd.RootId);
-                productCatalog.ChangeProductName(cmd);
+            var productCatalog = _factory.Load<ProductCatalogAggregate>(cmd.RootId);
+            productCatalog.ChangeProductName(cmd);
                 
-                try
-                {
-                    _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.RootId, productCatalog.Version,
-                        productCatalog.Changes);
-                    return new CommandEvent(OperationStatus.Success);
-                }
-                catch (EventStoreConcurrencyException ex)
-                {
-                    HandleConcurrencyException(ex, productCatalog);
-                }
-                catch(Exception)
-                {
-                    throw;
-                }
+            try
+            {
+                _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.RootId, productCatalog.Version,
+                    productCatalog.Changes);
+                return new CommandEvent(OperationStatus.Success);
+            }
+            catch (EventStoreConcurrencyException ex)
+            {
+                HandleConcurrencyException(ex, productCatalog);
+                return new CommandEvent(OperationStatus.Success);
+            }
+            catch(Exception)
+            {
+                throw;
             }
         }
     }
