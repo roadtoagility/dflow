@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DFlow\DFlow.csproj" />
+      <ProjectReference Include="..\..\src\DFlow\DFlow.csproj" />
     </ItemGroup>
 
 </Project>
