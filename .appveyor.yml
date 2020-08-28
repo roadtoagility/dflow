@@ -1,30 +1,31 @@
-version: 0.1.0.{build}
-skip_tags: true
-image: Visual Studio 2019
-configuration: Release
-
-before_build:
-  - choco install opencover.portable
-  - choco install codecov
-
+version: '{build}'
+branches:
+  only:
+  - master
 build_script:
-  - dotnet restore DFlow.sln
-  - dotnet build Dflow.sln /p:Configuration=Release /p:PackageVersion=%APPVEYOR_BUILD_VERSION%-pre /p:Version=%APPVEYOR_BUILD_VERSION% /p:ContinuousIntegrationBuild=true /verbosity:minimal
-  - dotnet pack DFlow\DFlow.csproj -c Release --no-build /p:PackageVersion=%APPVEYOR_BUILD_VERSION%-pre /p:Version=%APPVEYOR_BUILD_VERSION%
-
-test_script:
-  - dotnet test -v n -p:ParallelizeTestCollections=false --configuration Release --no-build -f netcoreapp3.1 DFlow.Example\DFlow.Example.csproj
-  - OpenCover.Console.exe -register:user -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test --no-build --configuration Release -f netcoreapp3.1 --logger:trx;LogFileName=results.trx /p:DebugType=full DFlow.Example\DFlow.Example.csproj" -filter:"+[DFlow*]* -[DFlow.Tests*]*" -output:".\DFlow_coverage.xml" -oldStyle
-  - codecov -f "DFlow_coverage.xml"
+- ps: .\build.ps1
+test: off
 
 artifacts:
   - path: '**\*.nupkg'
   
 deploy:
-  provider: NuGet
+- provider: NuGet
+  name: production
+  api_key:
+    secure: dFcmS+mlxTX3gzuewhTXCEeDTtZTTNx4jJox+Gg7s5crfdZj0jKzJYDqwusg7gFp
+  on:
+    branch: master
+    appveyor_repo_tag: true
+
+- provider: NuGet
+  name: pre-release
   api_key:
     secure: nZHO3MlU3tR9ATVQIwsJKWwyALW3YVdmhgP+09+xhE9AVxDh9PwI+ZS/R1zq+tbr
-  skip_symbols: false
-  symbol_server:           # remove to push symbols to SymbolSource.org
-  artifact: /.*(\.|\.s)nupkg/
+  skip_symbols: true
+  on:
+    branch: master
 
+artifacts:
+- path: .\artifacts\**\*.nupkg
+  name: NuGet

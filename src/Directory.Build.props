@@ -5,5 +5,6 @@
     <Authors>Road to Agility Team</Authors>
     <Copyright>Copyright © Road to Agility 2020</Copyright>
     <PackageProjectUrl>https://github.com/roadtoagility/dflow</PackageProjectUrl>
+        <PackageIconUrl>https://github.com/roadtoagility/dflow/raw/master/docs/img/logodflow_200x200.png</PackageIconUrl>
   </PropertyGroup>
 </Project>
