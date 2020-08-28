@@ -1,5 +1,5 @@
 version: '{build}'
-image: Visual Studio 2019
+image: Ubuntu1804
 branches:
   only:
   - master
