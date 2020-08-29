@@ -1,13 +1,22 @@
 version: '{build}'
-image: Ubuntu1804
-branches:
+pull_requests:  
+  do_not_increment_build_number: true
+branches:  
   only:
   - master
+nuget:  
+  disable_publish_on_pr: true
 build_script:
 - ps: .\build.ps1
 test: off
-
 deploy:
+- provider: NuGet
+  api_key:
+    secure: nZHO3MlU3tR9ATVQIwsJKWwyALW3YVdmhgP+09+xhE9AVxDh9PwI+ZS/R1zq+tbr
+  skip_symbols: true
+  on:
+    branch: master
+
 - provider: NuGet
   name: production
   api_key:
@@ -15,14 +24,6 @@ deploy:
   on:
     branch: master
     appveyor_repo_tag: true
-
-- provider: NuGet
-  name: pre-release
-  api_key:
-    secure: nZHO3MlU3tR9ATVQIwsJKWwyALW3YVdmhgP+09+xhE9AVxDh9PwI+ZS/R1zq+tbr
-  skip_symbols: true
-  # on:
-  #   branch: master
 
 artifacts:
 - path: .\artifacts\**\*.nupkg
