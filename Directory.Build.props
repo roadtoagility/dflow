@@ -1,9 +1,0 @@
-<Project>
-  <PropertyGroup>
-    <VersionPrefix>0.1.0</VersionPrefix>
-    <VersionSuffix>pre-00001</VersionSuffix>
-    <Authors>Road to Agility Team</Authors>
-    <Copyright>Copyright © Road to Agility 2020</Copyright>
-    <PackageProjectUrl>https://github.com/roadtoagility/dflow</PackageProjectUrl>
-  </PropertyGroup>
-</Project>
