@@ -10,6 +10,10 @@ branches:
 build_script:
 - ps: .\build.ps1
 test: off
+artifacts:
+- path: .\artifacts\**\*.nupkg
+  name: NuGet
+
 # deploy:
 # - provider: NuGet
 #   api_key:
@@ -25,7 +29,3 @@ test: off
 #   on:
 #     branch: master
 #     appveyor_repo_tag: true
-
-artifacts:
-- path: .\artifacts\**\*.nupkg
-  name: NuGet
