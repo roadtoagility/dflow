@@ -1,4 +1,4 @@
-# Taken from https://github.com/jbogard/MediatR/blob/master/Build.ps1
+# Taken from https://github.com/connellw/Firestorm/blob/master/build.ps1
 
 <#
 .SYNOPSIS
@@ -67,7 +67,7 @@ ForEach ($folder in $testDirs) {
     $i++
     $format = @{ $true = "/p:CoverletOutputFormat=opencover"; $false = ""}[$i -eq $testDirs.Length ]
 
-    exec { & dotnet test $folder.FullName -c Release --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutput=$root\coverage /p:MergeWith=$root\coverage.json /p:Include="[*]Firestorm.*" /p:Exclude="[*]Firestorm.Testing.*" $format }
+    exec { & dotnet test $folder.FullName -c Release --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutput=$root\coverage /p:MergeWith=$root\coverage.json /p:Include="[*]DFlow.*" /p:Exclude="[*]DFlow.Tests.*" $format }
 }
 
 choco install codecov --no-progress
