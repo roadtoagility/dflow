@@ -38,7 +38,7 @@ echo "Build: Package version suffix is $suffix"
 echo "Build: Build version suffix is $buildSuffix"
 
 # Update Appveyor version
-if (Test-Path env:APPVEYOR -or (Test env:APPVEYOR_REPO_TAG)) {
+if ((Test-Path env:APPVEYOR) -or (Test env:APPVEYOR_REPO_TAG)) {
     $props = [xml](Get-Content "src\Directory.Build.props")
     $prefix = $props.Project.PropertyGroup.VersionPrefix
     
