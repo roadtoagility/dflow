@@ -28,9 +28,9 @@ namespace DFlow.Tests
             var rootId = Guid.NewGuid();
             var handler = new ProductServiceCommandHandler(eventStore, factory);
             
-            var teste = handler.Execute(new CreateProductCatalog(rootId));
+            handler.Execute(new CreateProductCatalog(rootId));
             var prodId = Guid.NewGuid();
-            teste = handler.Execute(new CreateProductCommand(rootId, prodId, "Notebook Lenovo 2 em 1 ideapad C340", "Notebook Lenovo 2 em 1 ideapad C340 i7-8565U 8GB 256GB SSD Win10 14' FHD IPS - 81RL0001BR"));
+            handler.Execute(new CreateProductCommand(rootId, prodId, "Notebook Lenovo 2 em 1 ideapad C340", "Notebook Lenovo 2 em 1 ideapad C340 i7-8565U 8GB 256GB SSD Win10 14' FHD IPS - 81RL0001BR"));
 
             var threads = new List<Task>();
             

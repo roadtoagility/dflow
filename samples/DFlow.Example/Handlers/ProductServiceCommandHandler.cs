@@ -12,7 +12,7 @@ using DFlow.Example.Events;
 
 namespace DFlow.Example.Handlers
 {
-    public class ProductServiceCommandHandler : Handler<IProductCatalogCommandHandler>
+    public class ProductServiceCommandHandler : Handler
     {
         private readonly IEventStore<Guid> _eventStore;
         private readonly AggregateFactory _factory;

@@ -12,7 +12,7 @@ namespace DFlow.Base.Aggregate
         public T Id { get; protected set; }
         public long Version { get; protected set; }
         
-        public AggregateRoot(EventStream stream)
+        protected AggregateRoot(EventStream stream)
         {
             Changes = new List<IEvent>();
             DomainEvents = new List<IDomainEvent>();

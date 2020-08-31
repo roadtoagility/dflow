@@ -8,7 +8,7 @@ using DFlow.Interfaces;
 
 namespace DFlow.Base
 {
-    public abstract class Handler<T>
+    public abstract class Handler
     {
         private readonly IEventStore<Guid> _eventStore;
 

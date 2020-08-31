@@ -12,10 +12,6 @@ namespace DFlow.Base
     {
         readonly BinaryFormatter _formatter = new BinaryFormatter();
 
-        public AppendOnlyBase()
-        {
-        }
-        
         public void Append(Guid id, string aggregateType, long version, ICollection<IEvent> events)
         {
             if (events.Count == 0)

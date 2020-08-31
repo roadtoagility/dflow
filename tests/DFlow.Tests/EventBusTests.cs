@@ -10,8 +10,8 @@ namespace DFlow.Tests
 {
     public class EventBusTests
     {
-        private IEventBus _eventBus;
-        private MemoryResolver _resolver;
+        private readonly IEventBus _eventBus;
+        private readonly MemoryResolver _resolver;
         
         public EventBusTests()
         {

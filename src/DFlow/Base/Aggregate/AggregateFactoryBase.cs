@@ -1,5 +1,5 @@
 using System;
-
+using System.Diagnostics.Tracing;
 using DFlow.Interfaces;
 
 namespace DFlow.Base.Aggregate
@@ -10,10 +10,15 @@ namespace DFlow.Base.Aggregate
         private readonly IEventStore<Guid> _eventStore;
 
         //aplicações não são obrigadas a possuirem uma estrutura de snapshot
-        public AggregateFactoryBase(IEventStore<Guid> eventStore, ISnapshotRepository<Guid>? snapshotRepository = null)
+        public AggregateFactoryBase(IEventStore<Guid> eventStore)
+        {
+            _eventStore = eventStore;
+        }
+        
+        public AggregateFactoryBase(IEventStore<Guid> eventStore, ISnapshotRepository<Guid> snapshotRepository)
+         : this(eventStore)
         {
             _snapshotRepository = snapshotRepository;
-            _eventStore = eventStore;
         }
         
         public TAggregate Load<TAggregate>(Guid id)

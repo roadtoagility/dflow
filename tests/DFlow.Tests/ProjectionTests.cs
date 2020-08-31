@@ -17,10 +17,10 @@ namespace DFlow.Tests
     {
         private IAppendOnlyStore<Guid> _appendOnly;
         private IEventBus _eventBus;
-        private IEventStore<Guid> _eventStore;
+        private readonly IEventStore<Guid> _eventStore;
         private ISnapshotRepository<Guid> _snapShotRepo;
-        private AggregateFactory _factory;
-        private MemoryResolver _resolver;
+        private readonly AggregateFactory _factory;
+        private readonly MemoryResolver _resolver;
         
         public ProjectionTests()
         {
