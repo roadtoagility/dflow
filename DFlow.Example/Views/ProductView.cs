@@ -23,6 +23,11 @@ namespace DFlow.Example.Views
             Products = new List<ProductDTO>();
         }
         
+        // public ProductView(ILiteDbViewModel model, IEntityFrameworkRepository)
+        // {
+        //     Products = new List<ProductDTO>();
+        // }
+        
         public ProductView(List<ProductDTO> products)
         {
             Products = products;

@@ -53,11 +53,12 @@ namespace DFlow.Base
             return stream;
         }
 
-        public void AppendToStream<TType>(Guid id, long version, ICollection<IEvent> events)
+        public void AppendToStream<TType>(Guid id, long version, ICollection<IEvent> events, params IDomainEvent[] domainEvents)
         {
+            //salvar os dados em uma lista interna
             var aggregateType = typeof(TType).Name;
             _appendOnlyStore.Append(id, aggregateType, version, events);
-            _eventBus.Publish(events.ToArray());
+            _eventBus.Publish(domainEvents);
         }
 
         public bool Any(Guid id)

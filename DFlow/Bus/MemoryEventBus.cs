@@ -14,16 +14,6 @@ namespace DFlow.Bus
         {
             _resolver = resolver;
         }
-        
-        // public void Subscribe<T>(ISubscriber<T> subscriber)
-        // {
-        //     _resolver.Register(subscriber);
-        // }
-        //
-        // public void Unsubscribe<T>(ISubscriber<T> subscriber)
-        // {
-        //     _resolver.Unregister(subscriber);
-        // }
 
         public void Publish(params IEvent[] events)
         {

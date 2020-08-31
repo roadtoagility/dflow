@@ -9,8 +9,8 @@ namespace DFlow.Base.Aggregate
         private readonly ISnapshotRepository<Guid>? _snapshotRepository;
         private readonly IEventStore<Guid> _eventStore;
 
-        //summay: aplicações não são obrigadas a possuirem uma estrutura de snapshot
-        public AggregateFactoryBase(IEventStore<Guid> eventStore, ISnapshotRepository<Guid> snapshotRepository = null)
+        //aplicações não são obrigadas a possuirem uma estrutura de snapshot
+        public AggregateFactoryBase(IEventStore<Guid> eventStore, ISnapshotRepository<Guid>? snapshotRepository = null)
         {
             _snapshotRepository = snapshotRepository;
             _eventStore = eventStore;

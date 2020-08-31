@@ -39,7 +39,7 @@ namespace DFlow.Tests
             var factory = new AggregateFactory(eventStore);
             var root = factory.Create<ProductCatalogAggregate>(rootId);
             
-            eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, root.Version, root.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, root.Version, root.Changes, root.DomainEvents.ToArray());
 
             var stream = eventStore.LoadEventStream(rootId);
             Assert.Equal(1, stream.Version);
@@ -57,7 +57,7 @@ namespace DFlow.Tests
             
             var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
             
-            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, rootToSave.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, rootToSave.Changes, rootToSave.DomainEvents.ToArray());
             
             var root = factory.Load<ProductCatalogAggregate>(rootId);
             
@@ -89,7 +89,7 @@ namespace DFlow.Tests
             var factory = new AggregateFactory(eventStore);
             var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
             
-            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, rootToSave.Version, rootToSave.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, rootToSave.Version, rootToSave.Changes, rootToSave.DomainEvents.ToArray());
 
             var root = factory.Load<ProductCatalogAggregate>(rootId);
             
@@ -103,26 +103,31 @@ namespace DFlow.Tests
         public void ShouldIncrementVersionCorrectly()
         {
             var rootId = Guid.NewGuid();
-            var eventBus = new MemoryEventBus(new MemoryResolver());
+            var resolver = new MemoryResolver();
+            var eventBus = new MemoryEventBus(resolver);
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
             var eventStore = new EventStore(appendOnly, eventBus);
             var factory = new AggregateFactory(eventStore);
-            var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
             
-            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, rootToSave.Version, rootToSave.Changes);
+            var view = new ProductView();
+            resolver.Register<ProductCreated>(view);
+            
+            var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
+
+            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, rootToSave.Version, rootToSave.Changes, rootToSave.DomainEvents.ToArray());
 
             var stream = eventStore.LoadEventStream(rootId);
             var root = new ProductCatalogAggregate(stream);
             
             root.CreateProduct(new CreateProductCommand(rootId, Guid.NewGuid(), "Notebook", "Dell Inspiron 15000"));
             
-            eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, root.Version, root.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, root.Version, root.Changes, root.DomainEvents.ToArray());
 
             stream = eventStore.LoadEventStream(rootId);
             root = new ProductCatalogAggregate(stream);
             
-            Assert.Equal(2, stream.Version);
-            Assert.Equal(1, root.CountProducts());
+            Assert.True(2 == stream.Version);
+            Assert.True(1 == view.Products.Count);
         }
         
         [Fact]
@@ -140,14 +145,14 @@ namespace DFlow.Tests
             var factory = new AggregateFactory(eventStore);
             var rootToSave = factory.Create<ProductCatalogAggregate>(rootId);
             
-            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, rootToSave.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(rootToSave.Id, 1, rootToSave.Changes, rootToSave.DomainEvents.ToArray());
 
             var stream = eventStore.LoadEventStream(rootId);
             var root = new ProductCatalogAggregate(stream);
             
             root.CreateProduct(new CreateProductCommand(rootId, Guid.NewGuid(), "Notebook", "Dell Inspiron 15000"));
             
-            eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, root.Version, root.Changes);
+            eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, root.Version, root.Changes, root.DomainEvents.ToArray());
             
             Assert.True(1 == view.Products.Count);
             Assert.Equal("Notebook", view.Products[0].Name);

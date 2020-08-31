@@ -8,7 +8,6 @@ namespace DFlow.Example
 {
     public class MemoryAppendOnlyStore : AppendOnlyBase, IAppendOnlyStore<Guid>
     {
-        //Aqui seria a infra que insere no banco
         private ICollection<EventDTO<Guid>> _eventsStorage = new List<EventDTO<Guid>>();
 
 
@@ -61,7 +60,7 @@ namespace DFlow.Example
 
         public void Close()
         {
-            _eventsStorage = null;
+            
         }
         
         protected override void Save(Guid id, string aggregateType, long version, byte[] data)

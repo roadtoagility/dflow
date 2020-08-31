@@ -24,19 +24,21 @@ namespace DFlow.Example.Aggregates
         public void CreateProduct(CreateProductCommand cmd)
         {
             if(!_products.Any(x => x.Id == cmd.Id || x.Name.Equals(cmd.Name)))
-                Apply(new ProductCreated(cmd.Id, cmd.Name, cmd.Description));
+            {
+                var @event = new ProductCreated(cmd.Id, cmd.Name, cmd.Description);
+                Apply(@event);
+                Dispatch(@event);
+            }
         }
         
         public void ChangeProductName(ChangeProductNameCommand cmd)
         {
             if(_products.Any(x => x.Id == cmd.ProductId))
-                Apply(new ProductNameChanged(cmd.ProductId, cmd.Name));
-        }
-
-        //TODO: eu sei que isso não deve estar aqui, meramente para testes enquanto não crio as projeções
-        public int CountProducts()
-        {
-            return _products.Count;
+            {
+                var @event = new ProductNameChanged(cmd.ProductId, cmd.Name);
+                Apply(@event);
+                Dispatch(@event);
+            }
         }
         
         protected override void Mutate(IEvent e)
@@ -52,7 +54,7 @@ namespace DFlow.Example.Aggregates
         
         private void When(ProductNameChanged e)
         {
-            var product = _products.Where(x => x.Id == e.Id).FirstOrDefault();
+            var product = _products.FirstOrDefault(x => x.Id == e.Id);
             product.ChangeName(e.Name);
         }
         

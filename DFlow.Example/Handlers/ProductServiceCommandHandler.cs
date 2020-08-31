@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using DFlow.Base;
 using DFlow.Base.Aggregate;
 using DFlow.Base.Events;
@@ -31,7 +31,10 @@ namespace DFlow.Example.Handlers
             try
             {
                 _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.Id, productCatalog.Version,
-                    productCatalog.Changes);
+                    productCatalog.Changes, productCatalog.DomainEvents.ToArray());
+                
+                //_eventStore.AppendToStream<ProductCatalogAggregate>(cmd.Id, productCatalog.Version,
+                //productCatalog.Changes, IDomainEvents[] events);
                 return new CommandEvent(OperationStatus.Success);
             }
             catch (EventStoreConcurrencyException ex)
@@ -53,7 +56,9 @@ namespace DFlow.Example.Handlers
             try
             {
                 _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.RootId, productCatalog.Version,
-                    productCatalog.Changes);
+                    productCatalog.Changes, productCatalog.DomainEvents.ToArray());
+                
+                //_publisher.Publish(arry<IDomainEvent> event)
                 return new CommandEvent(OperationStatus.Success);
             }
             catch (EventStoreConcurrencyException ex)
@@ -75,7 +80,7 @@ namespace DFlow.Example.Handlers
             try
             {
                 _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.RootId, productCatalog.Version,
-                    productCatalog.Changes);
+                    productCatalog.Changes, productCatalog.DomainEvents.ToArray());
                 return new CommandEvent(OperationStatus.Success);
             }
             catch (EventStoreConcurrencyException ex)

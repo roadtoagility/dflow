@@ -2,6 +2,19 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <PackageVersion>0.0.2-pre</PackageVersion>
+        <Title>AspNetCore container for Dflow</Title>
+        <Authors>Adriano Ribeiro, Douglas Ramalho</Authors>
+        <Description>Asp.net Core initialization</Description>
+        <Copyright>2020</Copyright>
+        <PackageProjectUrl>https://github.com/roadtoagility/dflow</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/roadtoagility/dflow</RepositoryUrl>
+        <PackageTags>#ddd #eventdriven #auditlog #domaindriven #domaindrivendesign</PackageTags>
+        <PackageReleaseNotes>Initial version</PackageReleaseNotes>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseUrl></PackageLicenseUrl>
+        <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>

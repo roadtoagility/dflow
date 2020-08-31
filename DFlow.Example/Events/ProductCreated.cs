@@ -6,7 +6,7 @@ using DFlow.Example.Commands;
 namespace DFlow.Example.Events
 {
     [Serializable]
-    public class ProductCreated : IEvent
+    public class ProductCreated : IDomainEvent
     {
         public Guid Id { get; private set; }
         public string Name { get; private set; }

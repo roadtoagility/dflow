@@ -47,10 +47,17 @@ namespace DFlow.Tests
             var productView = new ProductView();
             resolver.Register<ProductCreated>(productView);
             
-            eventStore.AppendToStream<Guid>(rootId, 0, new List<IEvent>()
+            var events = new List<IEvent>()
             {
                 new ProductCreated(productId, "test", "")
-            });
+            };
+            
+            var domainEvents = new List<IDomainEvent>()
+            {
+                new ProductCreated(productId, "test", "")
+            };
+            
+            eventStore.AppendToStream<Guid>(rootId, 0, events, domainEvents.ToArray());
             
             Assert.True(productView.Products.Count == 1);
             Assert.True(productView.Products.ElementAt(0).Id == productId);

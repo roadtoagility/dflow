@@ -4,7 +4,7 @@ using DFlow.Interfaces;
 namespace DFlow.Example.Events
 {
     [Serializable]
-    public class ProductNameChanged : IEvent
+    public class ProductNameChanged : IDomainEvent
     {
         public Guid Id { get; private set; }
         public string Name { get; private set; }

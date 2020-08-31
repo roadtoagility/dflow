@@ -9,7 +9,7 @@ namespace DFlow.Interfaces
 
         EventStream LoadEventStreamAfterVersion(TKey id, long snapshotVersion);
         
-        void AppendToStream<TType>(TKey id, long version, ICollection<IEvent> events);
+        void AppendToStream<TType>(TKey id, long version, ICollection<IEvent> events, params IDomainEvent[] domainEvents);
 
         bool Any(TKey id);
     }

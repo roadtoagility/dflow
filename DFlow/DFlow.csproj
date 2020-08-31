@@ -23,6 +23,7 @@
         <PackageLicenseUrl></PackageLicenseUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Copyright>2020</Copyright>
+        <PackageVersion>0.1.78-pre</PackageVersion>
         
     </PropertyGroup>
 

@@ -1,5 +1,5 @@
 using System;
-
+using DFlow.Example.Exceptions;
 using DFlow.Interfaces;
 
 namespace DFlow.Example.Commands
@@ -18,17 +18,25 @@ namespace DFlow.Example.Commands
 
         public CreateProductCommand(Guid rootId, Guid id, string name, string description)
         {
-            if(id == Guid.Empty)
-                throw new Exception("não é possível criar produtos com ID vazio");
-            
-            if(string.IsNullOrEmpty(name))
-                throw new Exception("não é possível criar produtos sem nome");
-            
-            if(string.IsNullOrEmpty(description))
-                throw new Exception("não é possível criar produtos sem descrição");
-            
-            if(rootId == Guid.Empty)
-                throw new Exception("não é possível criar produtos sem adiciona-lo a um cátalogo existente");
+            if (id == Guid.Empty)
+            {
+                throw new BusinesException("não é possível criar produtos com ID vazio");
+            }
+
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new BusinesException("não é possível criar produtos sem nome");
+            }
+
+            if (string.IsNullOrEmpty(description))
+            {
+                throw new BusinesException("não é possível criar produtos sem descrição");
+            }
+
+            if (rootId == Guid.Empty)
+            {
+                throw new BusinesException("não é possível criar produtos sem adiciona-lo a um cátalogo existente");
+            }
             
             Description = description;
             RootId = rootId;

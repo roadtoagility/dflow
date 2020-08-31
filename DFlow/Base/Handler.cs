@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DFlow.Base.Aggregate;
 using DFlow.Base.Events;
 using DFlow.Base.Exceptions;
@@ -26,11 +27,16 @@ namespace DFlow.Base
             var keep = true;
             CommandEvent result = null;
             
+            //pre
+            
             while(keep)
             {
                 result = ((dynamic)this).When((dynamic)command);
                 keep = result == null;
             }
+            //var domainEvents = _eventStore.Commit();
+            //_publisher.Publish(IDomainEvents[] domainEvents)
+            //pos
 
             return result;
         }
@@ -54,7 +60,7 @@ namespace DFlow.Base
                     
             var actualVersion = root.Version - root.Changes.Count;
             actualVersion += actualVersion;
-            _eventStore.AppendToStream<TAggregate>(root.Id, actualVersion, root.Changes);
+            _eventStore.AppendToStream<TAggregate>(root.Id, actualVersion, root.Changes, root.DomainEvents.ToArray());
         }
     }
 }

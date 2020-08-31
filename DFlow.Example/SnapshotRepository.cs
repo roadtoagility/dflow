@@ -53,6 +53,7 @@ namespace DFlow.Example
              serializar a própria agregação
              */
             snapshot.Changes.Clear();
+            snapshot.DomainEvents.Clear();
             var data = Serialize(snapshot);
             _snapshotStorage.Add(new SnapshotAggregate<Guid>(){Data = data, Id = id, Version = version });
         }
