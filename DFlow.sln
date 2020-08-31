@@ -1,14 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Example", "DFlow.Example\DFlow.Example.csproj", "{3CE7D4D0-58BF-44C5-AC84-7CA1FBD17E03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Example", "samples\DFlow.Example\DFlow.Example.csproj", "{3CE7D4D0-58BF-44C5-AC84-7CA1FBD17E03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow", "DFlow\DFlow.csproj", "{D5C025B8-AC7E-4C19-99EA-03732456F812}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow", "src\DFlow\DFlow.csproj", "{D5C025B8-AC7E-4C19-99EA-03732456F812}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Tests", "DFlow.Tests\DFlow.Tests.csproj", "{E592B474-F073-41A8-8AEE-C24A7AD19586}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Tests", "tests\DFlow.Tests\DFlow.Tests.csproj", "{E592B474-F073-41A8-8AEE-C24A7AD19586}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.DependencyInjection.SimpleInjector", "DFlow.DependencyInjection.SimpleInjector\DFlow.DependencyInjection.SimpleInjector.csproj", "{AE714C76-3519-49DB-8B0E-484F363311FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.DependencyInjection.SimpleInjector", "src\contrib\DFlow.DependencyInjection.SimpleInjector\DFlow.DependencyInjection.SimpleInjector.csproj", "{AE714C76-3519-49DB-8B0E-484F363311FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.AspNetCore", "DFlow.AspNetCore\DFlow.AspNetCore.csproj", "{F370775C-FA29-4340-BCE5-CB71304C58A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.AspNetCore", "src\contrib\DFlow.AspNetCore\DFlow.AspNetCore.csproj", "{F370775C-FA29-4340-BCE5-CB71304C58A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

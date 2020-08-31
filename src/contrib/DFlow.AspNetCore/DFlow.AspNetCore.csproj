@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <PackageVersion>0.0.2-pre</PackageVersion>
+        <Title>AspNetCore container for Dflow</Title>
+        <Authors>Adriano Ribeiro, Douglas Ramalho</Authors>
+        <Description>Asp.net Core initialization</Description>
+        <Copyright>2020</Copyright>
+        <PackageProjectUrl>https://github.com/roadtoagility/dflow</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/roadtoagility/dflow</RepositoryUrl>
+        <PackageTags>#ddd #eventdriven #auditlog #domaindriven #domaindrivendesign</PackageTags>
+        <PackageReleaseNotes>Initial version</PackageReleaseNotes>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseUrl></PackageLicenseUrl>
+        <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.7" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\DFlow\DFlow.csproj" />
+    </ItemGroup>
+
+</Project>

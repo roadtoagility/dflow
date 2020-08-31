@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <IsPackable>true</IsPackable>
+        <Configurations>Debug;Release;Tests</Configurations>
+        <Platforms>AnyCPU</Platforms>
+        <RootNamespace>DFlow</RootNamespace>
+        <AssemblyName>DFlow</AssemblyName>
+        <OutputType>Library</OutputType>
+        <ApplicationIcon />
+        <StartupObject />
+        <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/roadtoagility/dflow</RepositoryUrl>
+        <RepositoryType>GIT</RepositoryType>
+        <PackageReleaseNotes>Initial version</PackageReleaseNotes>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Description>A C# library for DDD architecture</Description>
+        <PackageTags>#ddd #eventdriven #auditlog #domaindriven #domaindrivendesign</PackageTags>
+        <PackageProjectUrl>https://github.com/roadtoagility/dflow</PackageProjectUrl>
+        <Title>DFlow</Title>
+        <Authors>Adriano Ribeiro, Douglas Ramalho</Authors>
+        <PackageLicenseUrl></PackageLicenseUrl>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <Copyright>2020</Copyright>
+        <PackageVersion>0.1.78-pre</PackageVersion>
+        
+    </PropertyGroup>
+</Project>
