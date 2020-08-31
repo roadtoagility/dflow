@@ -1,9 +1,9 @@
 # DFlow - Domain Events Flow
 
-<img src="" width="350" />
+<img src="docs/img/logodflow_200x200.png" width="350" />
 
-[![DFlow AppVeyor Build](https://ci.appveyor.com/api/projects/status/481jwy9pnyh0fv41/branch/master?svg=true)](https://ci.appveyor.com/project/drr00t/dflow/branch/master)
- [![codecov](https://codecov.io/gh/roadtoagility/dflow/branch/master/graph/badge.svg)](https://codecov.io/gh/roadtoagility/dflow) [![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.svg)](https://www.nuget.org/packages/DFlow/) [![DFlow NuGet prerelease version](https://img.shields.io/nuget/vpre/DFlow.svg)](https://www.nuget.org/packages/DFlow/)
+[![DFlow AppVeyor Build](https://ci.appveyor.com/api/projects/status/481jwy9pnyh0fv41/branch/develop?svg=true)](https://ci.appveyor.com/project/drr00t/dflow/branch/develop)
+ [![codecov](https://codecov.io/gh/roadtoagility/dflow/branch/develop/graph/badge.svg)](https://codecov.io/gh/roadtoagility/dflow) [![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.svg)](https://www.nuget.org/packages/DFlow/) [![DFlow NuGet prerelease version](https://img.shields.io/nuget/vpre/DFlow.svg)](https://www.nuget.org/packages/DFlow/)
 
 
 ## About Project
