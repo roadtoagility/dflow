@@ -27,17 +27,12 @@ namespace DFlow.Base
             var keep = true;
             CommandEvent result = null;
             
-            //pre
-            
             while(keep)
             {
                 result = ((dynamic)this).When((dynamic)command);
                 keep = result == null;
             }
-            //var domainEvents = _eventStore.Commit();
-            //_publisher.Publish(IDomainEvents[] domainEvents)
-            //pos
-
+            
             return result;
         }
 
