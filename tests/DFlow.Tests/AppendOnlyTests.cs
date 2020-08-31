@@ -47,12 +47,12 @@ namespace DFlow.Tests
             var productView = new ProductView();
             resolver.Register<ProductCreated>(productView);
             
-            var events = new List<IEvent>()
+            var events = new List<IEvent>
             {
                 new ProductCreated(productId, "test", "")
             };
             
-            var domainEvents = new List<IDomainEvent>()
+            var domainEvents = new List<IDomainEvent>
             {
                 new ProductCreated(productId, "test", "")
             };
