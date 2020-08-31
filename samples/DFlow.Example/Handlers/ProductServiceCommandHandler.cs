@@ -33,8 +33,6 @@ namespace DFlow.Example.Handlers
                 _eventStore.AppendToStream<ProductCatalogAggregate>(cmd.Id, productCatalog.Version,
                     productCatalog.Changes, productCatalog.DomainEvents.ToArray());
                 
-                //_eventStore.AppendToStream<ProductCatalogAggregate>(cmd.Id, productCatalog.Version,
-                //productCatalog.Changes, IDomainEvents[] events);
                 return new CommandEvent(OperationStatus.Success);
             }
             catch (EventStoreConcurrencyException ex)
