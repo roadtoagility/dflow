@@ -15,7 +15,7 @@ namespace DFlow.Tests
     public class HandlerTests
     {
         private readonly IAppendOnlyStore<Guid> _appendOnly;
-        private IEventBus _eventBus;
+        private readonly IEventBus _eventBus;
         private readonly IEventStore<Guid> _eventStore;
         private ISnapshotRepository<Guid> _snapShotRepo;
         private readonly AggregateFactory _factory;

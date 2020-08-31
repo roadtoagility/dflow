@@ -22,7 +22,7 @@ namespace DFlow.Tests
             var appendOnly = new MemoryAppendOnlyStore(eventBus);
             var eventStore = new EventStore(appendOnly, eventBus);
             
-            appendOnly.Append(rootId, "NyAggregateType", 1, new List<IEvent>()
+            appendOnly.Append(rootId, "NyAggregateType", 1, new List<IEvent>
             {
                 new ProductCreated(Guid.NewGuid(), "test", "")
             });

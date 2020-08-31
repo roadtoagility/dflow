@@ -12,8 +12,6 @@ namespace DFlow.AspNetCore
         public static void InitDlow(
             this IApplicationBuilder builder, IServiceCollection collection)
         {
-            var serviceProvider = builder.ApplicationServices;
-            var container = new AspNetCoreDependencyResolver(serviceProvider);
             collection.AddScoped<IDependencyResolver, AspNetCoreDependencyResolver>();
             collection.AddScoped<IEventStore<Guid>, EventStore>();
         }

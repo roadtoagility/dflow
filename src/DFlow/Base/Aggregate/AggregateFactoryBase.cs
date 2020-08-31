@@ -43,7 +43,10 @@ namespace DFlow.Base.Aggregate
             }
         }
 
-        public abstract TAggregate Create<TAggregate>(Guid? id = null)
+        public abstract TAggregate Create<TAggregate>() 
+            where TAggregate : AggregateRoot<Guid>;
+        
+        public abstract TAggregate Create<TAggregate>(Guid id)
             where TAggregate : AggregateRoot<Guid>;
     }
 }

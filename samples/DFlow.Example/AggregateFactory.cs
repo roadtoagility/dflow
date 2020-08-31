@@ -17,16 +17,22 @@ namespace DFlow.Example
         {
             _eventStore = eventStore;
         }
-        
-        public override TAggregate Create<TAggregate>(Guid? id = null)
+
+        public override TAggregate Create<TAggregate>()
         {
-            id = id == null || id.Value == Guid.Empty ? Guid.NewGuid() : id;
+            return Create<TAggregate>(Guid.NewGuid());
+        }
+
+        public override TAggregate Create<TAggregate>(Guid id)
+        {
+            var existStream = _eventStore.Any(id);
             
-            var existStream = _eventStore.Any(id.Value);
-            if(existStream)
+            if (existStream)
+            {
                 throw new DuplicatedRootException(id.ToString());
+            }
             
-            var createEvent = new AggregateCreated<Guid>(id.Value);
+            var createEvent = new AggregateCreated<Guid>(id);
             var events = new List<IEvent>() { createEvent};
             
             var stream = new EventStream(){ Version = INITIAL_VERSION, Events = events};
