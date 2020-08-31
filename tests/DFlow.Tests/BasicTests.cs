@@ -124,7 +124,6 @@ namespace DFlow.Tests
             eventStore.AppendToStream<ProductCatalogAggregate>(root.Id, root.Version, root.Changes, root.DomainEvents.ToArray());
 
             stream = eventStore.LoadEventStream(rootId);
-            root = new ProductCatalogAggregate(stream);
             
             Assert.True(2 == stream.Version);
             Assert.True(1 == view.Products.Count);

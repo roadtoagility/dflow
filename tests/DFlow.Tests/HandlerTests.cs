@@ -43,7 +43,6 @@ namespace DFlow.Tests
             handler.Execute(new CreateProductCommand(rootId, Guid.NewGuid(), "Notebook Lenovo 2 em 1 ideapad C340", "Notebook Lenovo 2 em 1 ideapad C340 i7-8565U 8GB 256GB SSD Win10 14' FHD IPS - 81RL0001BR"));
 
             var stream = _eventStore.LoadEventStream(rootId);
-            var productAggregate = new ProductCatalogAggregate(stream);
             
             Assert.True(stream.Version == 2);
             Assert.True(1 == view.Products.Count);
