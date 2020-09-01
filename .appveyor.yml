@@ -1,6 +1,9 @@
 version: '{build}'
 image: 
   - Visual Studio 2019
+branches:
+  only:
+    - master
 nuget:
   disable_publish_on_pr: true
 build_script:
@@ -12,7 +15,9 @@ artifacts:
 deploy:
 - provider: NuGet
   name: production
+  skip_symbols: true
   api_key:
     secure: 4sXzWeUabBHXzt9scM2bCaUCW1sXDqVMj5jKxtnKOr25pyaTcrfxcnhC+hmEYBQR
   on:
-    appveyor_repo_tag: true
+    branch: master 
+    # appveyor_repo_tag: true
