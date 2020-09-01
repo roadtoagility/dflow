@@ -34,19 +34,20 @@ $buildSuffix = @{ $true = "$($suffix)-$($commitHash)"; $false = "$($branch)-$($c
 $versionSuffix = @{ $true = "--version-suffix=$($suffix)"; $false = ""}[$suffix -ne ""];
 
 echo "Build: Package version suffix is $suffix"
-echo "Build: Build version suffix is $buildSuffix"
+echo "Build: Build suffix is $buildSuffix"
+echo "Build: Build version suffix is $versionSuffix"
 
 # Update Appveyor version
-# if (Test-Path env:APPVEYOR) {
-#     $props = [xml](Get-Content "src\Directory.Build.props")
-#     $prefix = $props.Project.PropertyGroup.VersionPrefix
+if (Test-Path env:APPVEYOR) {
+    $props = [xml](Get-Content "src\Directory.Build.props")
+    $prefix = $props.Project.PropertyGroup.VersionPrefix
     
-#     $avSuffix = @{ $true = $($suffix); $false = $props.Project.PropertyGroup.VersionSuffix }[$suffix -ne ""]
-#     $full = @{ $true = "$($prefix)-$($avSuffix)"; $false = $($prefix) }[-not ([string]::IsNullOrEmpty($avSuffix))]
+    $avSuffix = @{ $true = $($suffix); $false = $props.Project.PropertyGroup.VersionSuffix }[$suffix -ne ""]
+    $full = @{ $true = "$($prefix)-$($avSuffix)"; $false = $($prefix) }[-not ([string]::IsNullOrEmpty($avSuffix))]
     
-#     echo "Build: Full version is $full"
-#     Update-AppveyorBuild -Version $full
-# }
+    echo "Build: Full version is $full"
+    Update-AppveyorBuild -Version $full
+}
 
 # Build
 echo "`n`n----- BUILD -----`n"
