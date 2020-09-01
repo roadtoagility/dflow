@@ -27,15 +27,16 @@ $artifactsPath = $root + "\artifacts"
 if(Test-Path $artifactsPath) { Remove-Item $artifactsPath -Force -Recurse }
 
 $branch = @{ $true = $env:APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH; $false = @{ $true = $env:APPVEYOR_REPO_BRANCH; $false = $(git symbolic-ref --short -q HEAD) }[$env:APPVEYOR_REPO_BRANCH -ne $NULL] }[$env:APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH -ne $NULL];
-$revision = @{$true="";$false=@{ $true = "{0:####}" -f [convert]::ToInt32("0" + $env:APPVEYOR_BUILD_NUMBER, 10); $false = "" }[$env:APPVEYOR_BUILD_NUMBER -ne $NULL]}[$env:APPVEYOR_REPO_TAG -eq 'true'];
-$suffix = @{ $true = "$($revision)"; $false =@{ $true = ""; $false = "build$($revision)"}[$branch -eq "master"]}[$env:APPVEYOR_REPO_TAG -eq 'true'];
-$commitHash = $(git rev-parse --short HEAD);
-$buildSuffix = @{ $true = "$($suffix)-$($commitHash)"; $false = "$($branch)-$($commitHash)" }[$suffix -ne ""];
-$versionSuffix = @{ $true = "--version-suffix=$($suffix)"; $false = ""}[$suffix -ne ""];
+$revision = @{ $true = "{0:####}" -f [convert]::ToInt32("0" + $env:APPVEYOR_BUILD_NUMBER, 10); $false = "local" }[("false" -eq $env:APPVEYOR_REPO_TAG) -and ($env:APPVEYOR_BUILD_NUMBER -ne $NULL)];
+$suffix = @{ $true = ""; $false = "build$($revision)"}[($branch -eq "master") -and ($revision -ne "local")]
+$commitHash = $(git rev-parse --short HEAD)
+$buildSuffix = @{ $true = "$($suffix)-$($commitHash)"; $false = "$($branch)-$($commitHash)" }[$suffix -ne ""]
+$versionSuffix = @{ $true = "--version-suffix=$($suffix)"; $false = ""}[$suffix -ne ""]
+
+$suffix = @{ $true = "$($env:APPVEYOR_REPO_TAG_NAME)"; $false = $suffix}[$env:APPVEYOR_REPO_TAG -eq "true"]
 
 echo "Build: Package version suffix is $suffix"
-echo "Build: Build suffix is $buildSuffix"
-echo "Build: Build version suffix is $versionSuffix"
+echo "Build: Build version suffix is $buildSuffix"
 
 # Update Appveyor version
 if (Test-Path env:APPVEYOR) {
