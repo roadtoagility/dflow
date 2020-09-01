@@ -19,11 +19,13 @@
         <PackageTags>#ddd #eventdriven #auditlog #domaindriven #domaindrivendesign</PackageTags>
         <PackageProjectUrl>https://github.com/roadtoagility/dflow</PackageProjectUrl>
         <Title>DFlow</Title>
-        <Authors>Adriano Ribeiro, Douglas Ramalho</Authors>
+        <!-- <Authors>Adriano Ribeiro, Douglas Ramalho</Authors> -->
         <PackageLicenseUrl></PackageLicenseUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Copyright>2020</Copyright>
-        <PackageVersion>0.1.78-pre</PackageVersion>
+        <VersionPrefix>0.1.0</VersionPrefix>
+        <PackageVersion></PackageVersion>
+        <VersionSuffix></VersionSuffix>
         
     </PropertyGroup>
 </Project>

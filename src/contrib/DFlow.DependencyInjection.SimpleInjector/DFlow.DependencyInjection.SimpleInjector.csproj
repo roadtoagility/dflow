@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <RootNamespace>DFlow.DependencyInjection</RootNamespace>
+                <VersionPrefix>0.1.0</VersionPrefix>
+        <PackageVersion></PackageVersion>
+        <VersionSuffix></VersionSuffix>
     </PropertyGroup>
 
     <ItemGroup>

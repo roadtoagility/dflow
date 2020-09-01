@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <PackageVersion>0.0.2-pre</PackageVersion>
         <Title>AspNetCore container for Dflow</Title>
         <Authors>Adriano Ribeiro, Douglas Ramalho</Authors>
         <Description>Asp.net Core initialization</Description>
@@ -15,6 +14,9 @@
         <PackageLicenseUrl></PackageLicenseUrl>
         <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+                <VersionPrefix>0.1.0</VersionPrefix>
+        <PackageVersion></PackageVersion>
+        <VersionSuffix></VersionSuffix>
     </PropertyGroup>
 
     <ItemGroup>
