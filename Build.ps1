@@ -41,10 +41,10 @@ if (Test-Path env:APPVEYOR) {
     $props = [xml](Get-Content "src\Directory.Build.props")
     $prefix = $props.Project.PropertyGroup.VersionPrefix
     
-    $avSuffix = @{ $true = $($suffix); $false = "$($prefix).$($revision)-$($props.Project.PropertyGroup.VersionSuffix)" }[$suffix -ne ""]
+    $avSuffix = @{ $true = $($suffix); $false = "$($prefix)-$($props.Project.PropertyGroup.VersionSuffix)$($revision)" }[$suffix -ne ""]
     $full = @{ $true = "$($avSuffix)"; $false = $($prefix) }[-not ([string]::IsNullOrEmpty($avSuffix))]
     
-    $buildSuffix = "$($revision)-$($props.Project.PropertyGroup.VersionSuffix)"
+    $buildSuffix = "$($props.Project.PropertyGroup.VersionSuffix)$($revision)"
 
     $versionSuffix = "--version-suffix=$($buildSuffix)"
 
