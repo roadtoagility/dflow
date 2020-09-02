@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <!-- <VersionPrefix>0.1.0</VersionPrefix> -->
+    <VersionPrefix>0.1.0</VersionPrefix>
     <VersionSuffix>pre</VersionSuffix>
     <!-- <PackageProjectUrl>https://github.com/roadtoagility/dflow</PackageProjectUrl>
         <PackageIconUrl>https://github.com/roadtoagility/dflow/raw/master/docs/img/logodflow_200x200.png</PackageIconUrl> -->
