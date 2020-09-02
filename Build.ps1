@@ -46,6 +46,8 @@ if (Test-Path env:APPVEYOR) {
     
     $buildSuffix = "$($revision)-$($props.Project.PropertyGroup.VersionSuffix)"
 
+    $versionSuffix = "--version-suffix=$($buildSuffix)"
+
     echo "Build: AV version is $avSuffix"
     echo "Build: Full version is $full"
     Update-AppveyorBuild -Version $full
