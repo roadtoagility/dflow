@@ -19,29 +19,22 @@
 using System;
 using AutoFixture;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Tests.Domain.BusinessObjects.Supporting;
 using Xunit;
 using Version = DFlow.Domain.BusinessObjects.Version;
 
-namespace DFlow.Tests.Domain.BusinessObjects
+namespace DFlow.Tests.Domain.DomainEvents
 {
-    public sealed class AggregatesWithAutoFixture
+    public sealed class DomainEventsTests
     {
         [Fact]
-        public void Aggregate_create_a_valid()
+        public void EntityId_create_a_valid()
         {
-            var agg = TestAggregateRoot.Create();
+            var fixture = new Fixture();
+            fixture.Register<EntityId>(() => EntityId.From(fixture.Create<Guid>()));
 
-            Assert.True(agg.ValidationResults.IsValid);
-        }
-        
-        [Fact]
-        public void Aggregate_reconstruct_a_valid()
-        {
-            var be = BusinessEntity.From(EntityId.GetNext(), Version.New());
-            var agg = TestAggregateRoot.ReconstructFrom(be);
-
-            Assert.True(agg.ValidationResults.IsValid);
+            var entityId = fixture.Create<EntityId>();
+            
+            Assert.True(entityId.ValidationResults.IsValid);
         }
     }
 }

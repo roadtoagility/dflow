@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>DFlow.Samples.BusinessObjects</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Aggregates" />
+      <Folder Include="BusinessObjects" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\DFlow.Domain\DFlow.Domain.csproj" />
+    </ItemGroup>
+
+</Project>
