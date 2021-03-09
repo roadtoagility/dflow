@@ -7,7 +7,6 @@
 
 using System;
 using AutoFixture;
-using DFlow.Domain.BusinessObjects;
 using Xunit;
 using Version = DFlow.Domain.BusinessObjects.Version;
 
@@ -19,9 +18,9 @@ namespace DFlow.Tests.Domain.DomainObjects
         public void EntityId_create_a_valid()
         {
             var fixture = new Fixture();
-            fixture.Register<EntityId>(() => EntityId.From(fixture.Create<Guid>()));
+            fixture.Register<EntityTestId>(() => EntityTestId.From(fixture.Create<Guid>()));
 
-            var entityId = fixture.Create<EntityId>();
+            var entityId = fixture.Create<EntityTestId>();
             
             Assert.True(entityId.ValidationResults.IsValid);
         }
@@ -30,9 +29,9 @@ namespace DFlow.Tests.Domain.DomainObjects
         public void EntityId_create_an_empty()
         {
             var fixture = new Fixture();
-            fixture.Register<EntityId>(() => EntityId.Empty());
+            fixture.Register<EntityTestId>(() => EntityTestId.Empty());
 
-            var entityId = fixture.Create<EntityId>();
+            var entityId = fixture.Create<EntityTestId>();
             
             Assert.False(entityId.ValidationResults.IsValid);
         }
@@ -41,9 +40,9 @@ namespace DFlow.Tests.Domain.DomainObjects
         public void EntityId_create_an_invalid()
         {
             var fixture = new Fixture();
-            fixture.Register<EntityId>(() => EntityId.From(Guid.Empty));
+            fixture.Register<EntityTestId>(() => EntityTestId.From(Guid.Empty));
 
-            var entityId = fixture.Create<EntityId>();
+            var entityId = fixture.Create<EntityTestId>();
             
             Assert.False(entityId.ValidationResults.IsValid);
         }

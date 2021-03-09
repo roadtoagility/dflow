@@ -63,7 +63,7 @@ echo "`n`n----- TEST -----`n"
 
 exec { & dotnet tool install --global coverlet.console }
 
-$testDirs  = @(Get-ChildItem -Path tests /p:Include="*.Tests,*.Tests.*" -Directory -Recurse)
+$testDirs  = @(Get-ChildItem -Path tests -Include "*.Tests.*" -Directory -Recurse)
 
 $i = 0
 ForEach ($folder in $testDirs) { 

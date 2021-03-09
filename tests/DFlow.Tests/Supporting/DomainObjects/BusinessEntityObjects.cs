@@ -6,30 +6,30 @@
 
 using System.Collections.Generic;
 using DFlow.Domain.Aggregates;
-using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Validation;
+using DFlow.Tests.Supporting.DomainObjects.Events;
 using FluentValidation;
 using Version = DFlow.Domain.BusinessObjects.Version;
 
-namespace DFlow.Tests.Domain.DomainObjects.Supporting
+namespace DFlow.Tests.Supporting.DomainObjects
 {
     public class BusinessEntity : ValidationStatus
     {
-        private BusinessEntity(EntityId businessId, Version version)
+        private BusinessEntity(EntityTestId businessTestId, Version version)
         {
-            BusinessId = businessId;
+            BusinessTestId = businessTestId;
             Version = version;
         }
 
-        public EntityId BusinessId { get; }
+        public EntityTestId BusinessTestId { get; }
 
         public Version Version { get; }
 
         public bool IsNew() => Version.Value == 1; 
 
-        public static BusinessEntity From(EntityId id, Version version)
+        public static BusinessEntity From(EntityTestId testId, Version version)
         {
-            var bobj = new BusinessEntity(id, version);
+            var bobj = new BusinessEntity(testId, version);
             var validator = new BusinessEntityValidator();
             bobj.SetValidationResult(validator.Validate(bobj));
             
@@ -38,12 +38,12 @@ namespace DFlow.Tests.Domain.DomainObjects.Supporting
         
         public static BusinessEntity New()
         {
-            return From(EntityId.GetNext(), Version.New());
+            return From(EntityTestId.GetNext(), Version.New());
         }
         
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            yield return BusinessId;
+            yield return BusinessTestId;
             yield return Version;
         }
     }
@@ -52,30 +52,35 @@ namespace DFlow.Tests.Domain.DomainObjects.Supporting
     {
         public BusinessEntityValidator()
         {
-            RuleFor(id => id.BusinessId).NotNull();            
+            RuleFor(id => id.BusinessTestId).NotNull();            
         }
     }
     
-    public sealed class TestAggregateRoot:AggregationRoot<BusinessEntity>
+    public sealed class BusinessEntityAggregateRoot:AggregationRoot<BusinessEntity>
     {
-        private TestAggregateRoot(BusinessEntity businessEntity)
+        private BusinessEntityAggregateRoot(BusinessEntity businessEntity)
         {
             if (businessEntity.ValidationResults.IsValid)
             {
                 Apply(businessEntity);
+
+                if (businessEntity.IsNew())
+                {
+                    Raise(EntityAddedEvent.For(businessEntity));                    
+                }
             }
 
             ValidationResults = businessEntity.ValidationResults;
         }
 
-        public static TestAggregateRoot Create()
+        public static BusinessEntityAggregateRoot Create()
         {
-            return new TestAggregateRoot(BusinessEntity.New());
+            return new BusinessEntityAggregateRoot(BusinessEntity.New());
         }
         
-        public static TestAggregateRoot ReconstructFrom(BusinessEntity entity)
+        public static BusinessEntityAggregateRoot ReconstructFrom(BusinessEntity entity)
         {
-            return new TestAggregateRoot(BusinessEntity.From(entity.BusinessId, Version.Next(entity.Version)));
+            return new BusinessEntityAggregateRoot(BusinessEntity.From(entity.BusinessTestId, Version.Next(entity.Version)));
         }
     }
 }

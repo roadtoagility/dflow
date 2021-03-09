@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DFlow.Domain.Framework.BusinessObjects
+namespace DFlow.Domain.BusinessObjects
 {
     public abstract class ValueObject
     {

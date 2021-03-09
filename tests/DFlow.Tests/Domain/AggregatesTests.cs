@@ -5,17 +5,17 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using DFlow.Domain.BusinessObjects;
-using DFlow.Tests.Domain.DomainObjects.Supporting;
+using DFlow.Tests.Supporting.DomainObjects;
 using Xunit;
 
-namespace DFlow.Tests.Domain.DomainObjects
+namespace DFlow.Tests.Domain
 {
-    public sealed class AggregatesWithAutoFixture
+    public sealed class AggregatesTests
     {
         [Fact]
         public void Aggregate_create_a_valid()
         {
-            var agg = TestAggregateRoot.Create();
+            var agg = BusinessEntityAggregateRoot.Create();
 
             Assert.True(agg.ValidationResults.IsValid);
         }
@@ -23,8 +23,8 @@ namespace DFlow.Tests.Domain.DomainObjects
         [Fact]
         public void Aggregate_reconstruct_a_valid()
         {
-            var be = BusinessEntity.From(EntityId.GetNext(), Version.New());
-            var agg = TestAggregateRoot.ReconstructFrom(be);
+            var be = BusinessEntity.From(EntityTestId.GetNext(), Version.New());
+            var agg = BusinessEntityAggregateRoot.ReconstructFrom(be);
 
             Assert.True(agg.ValidationResults.IsValid);
         }

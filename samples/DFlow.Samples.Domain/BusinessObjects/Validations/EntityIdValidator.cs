@@ -5,10 +5,9 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
-using DFlow.Domain.BusinessObjects;
 using FluentValidation;
 
-namespace DFlow.Domain.Validation
+namespace DFlow.Samples.BusinessObjects.BusinessObjects.Validations
 {
     public sealed class EntityIdValidator: AbstractValidator<EntityId>
     {

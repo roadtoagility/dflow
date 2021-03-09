@@ -7,34 +7,35 @@
 using System;
 using System.Collections.Generic;
 using DFlow.Domain.Validation;
+using DFlow.Tests.Domain.DomainObjects.Validators;
 
-namespace DFlow.Domain.BusinessObjects
+namespace DFlow.Tests.Domain.DomainObjects
 {
-    public sealed class EntityId : ValidationStatus
+    public sealed class EntityTestId : ValidationStatus
     {
         public Guid Value { get; }
         
-        private EntityId(Guid id)
+        private EntityTestId(Guid id)
         {
             Value = id;
         }
 
-        public static EntityId From(Guid id)
+        public static EntityTestId From(Guid id)
         {
-            var entityId = new EntityId(id);
-            var validator = new EntityIdValidator();
+            var entityId = new EntityTestId(id);
+            var validator = new EntityIdTestValidator();
 
             entityId.SetValidationResult(validator.Validate(entityId));
             
             return entityId;
         }
         
-        public static EntityId Empty()
+        public static EntityTestId Empty()
         {
-            return EntityId.From(Guid.Empty);
+            return EntityTestId.From(Guid.Empty);
         }
         
-        public static EntityId GetNext()
+        public static EntityTestId GetNext()
         {
             return From(Guid.NewGuid());
         }
@@ -54,7 +55,7 @@ namespace DFlow.Domain.BusinessObjects
 
         #region IComparable
 
-        public int CompareTo(EntityId other)
+        public int CompareTo(EntityTestId other)
         {
             if (ReferenceEquals(this, other))
             {

@@ -5,7 +5,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-using DFlow.Domain.Framework.BusinessObjects;
+using DFlow.Domain.BusinessObjects;
 using FluentValidation.Results;
 
 namespace DFlow.Domain.Validation

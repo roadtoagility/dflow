@@ -6,11 +6,10 @@
 
 using System;
 using AutoFixture;
-using DFlow.Domain.BusinessObjects;
+using DFlow.Tests.Supporting.DomainObjects;
 using Xunit;
-using Version = DFlow.Domain.BusinessObjects.Version;
 
-namespace DFlow.Tests.Domain.DomainEvents
+namespace DFlow.Tests.Domain
 {
     public sealed class DomainEventsTests
     {
@@ -18,9 +17,9 @@ namespace DFlow.Tests.Domain.DomainEvents
         public void EntityId_create_a_valid()
         {
             var fixture = new Fixture();
-            fixture.Register<EntityId>(() => EntityId.From(fixture.Create<Guid>()));
+            fixture.Register<EntityTestId>(() => EntityTestId.From(fixture.Create<Guid>()));
 
-            var entityId = fixture.Create<EntityId>();
+            var entityId = fixture.Create<EntityTestId>();
             
             Assert.True(entityId.ValidationResults.IsValid);
         }

@@ -6,10 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="BusinessObjects" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\src\DFlow.Domain\DFlow.Domain.csproj" />
     </ItemGroup>
 

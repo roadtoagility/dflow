@@ -13,26 +13,16 @@ namespace DFlow.Business.Cqrs
 {
     public abstract class CommandHandler<TCommand, TResult> : ICommandHandler<TCommand, TResult>
     {
-        private readonly ILogger _logger;
         protected IDomainEventBus Publisher { get; }
-        
-        protected CommandHandler(ILogger logger, IDomainEventBus publisher)
+
+        protected CommandHandler(IDomainEventBus publisher)
         {
-            _logger = logger;
             Publisher = publisher;
         }
 
         public TResult Execute(TCommand command)
         {
-            try
-            {
-                return ExecuteCommand(command);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex,$"Command Execution Failed with exception {ex.Message}");
-                throw;
-            }
+            return ExecuteCommand(command);
         }
 
         protected abstract TResult ExecuteCommand(TCommand command);
