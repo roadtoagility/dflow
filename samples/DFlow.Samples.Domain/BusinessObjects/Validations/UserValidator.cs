@@ -5,15 +5,18 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+using DFlow.Domain.Validation;
 using FluentValidation;
 
 namespace DFlow.Samples.BusinessObjects.BusinessObjects.Validations
 {
-    public sealed class EmailValidator: AbstractValidator<Email>
+    public sealed class UserValidator: AbstractValidator<User>
     {
-        public EmailValidator()
+        public UserValidator()
         {
-            RuleFor(item => item.Value).EmailAddress();
+            RuleFor(user => user.Id).SetValidator(new EntityIdValidator());
+            RuleFor(user => user.Name).SetValidator(new NameValidator());
+            RuleFor(user => user.Mail).SetValidator(new EmailValidator());
         }
     }
 }

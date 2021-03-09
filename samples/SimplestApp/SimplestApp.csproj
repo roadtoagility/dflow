@@ -10,4 +10,8 @@
       <ProjectReference Include="..\DFlow.Samples.Domain\DFlow.Samples.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Operations" />
+    </ItemGroup>
+
 </Project>

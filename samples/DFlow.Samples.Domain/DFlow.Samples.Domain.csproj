@@ -6,7 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Aggregates" />
       <Folder Include="BusinessObjects" />
     </ItemGroup>
 

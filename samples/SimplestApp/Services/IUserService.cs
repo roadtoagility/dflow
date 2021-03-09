@@ -5,15 +5,13 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-using FluentValidation;
+using DFlow.Samples.BusinessObjects.BusinessObjects;
+using SimplestApp.Operations;
 
-namespace DFlow.Samples.BusinessObjects.BusinessObjects.Validations
+namespace SimplestApp.Services
 {
-    public sealed class EmailValidator: AbstractValidator<Email>
+    public interface IUserService
     {
-        public EmailValidator()
-        {
-            RuleFor(item => item.Value).EmailAddress();
-        }
+        User Add(AddUser user);
     }
 }

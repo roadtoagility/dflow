@@ -15,13 +15,18 @@
 // Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
 // Boston, MA  02110-1301, USA.
 //
+// Copyright (C) 2020  Road to Agility
+//
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
 using System.Collections.Generic;
-using AppFabric.Domain.BusinessObjects.Validations;
-using AppFabric.Domain.Framework.Validation;
+using DFlow.Domain.Validation;
+using DFlow.Samples.BusinessObjects.BusinessObjects.Validations;
 
-namespace AppFabric.Domain.BusinessObjects
+namespace DFlow.Samples.BusinessObjects.BusinessObjects
 {
     public sealed class Name : ValidationStatus
     {
