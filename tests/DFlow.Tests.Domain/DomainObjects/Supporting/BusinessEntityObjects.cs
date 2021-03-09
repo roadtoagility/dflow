@@ -63,21 +63,10 @@ namespace DFlow.Tests.Domain.DomainObjects.Supporting
             if (businessEntity.ValidationResults.IsValid)
             {
                 Apply(businessEntity);
-                
-                if (businessEntity.IsNew())
-                {
-                    // Raise(ProjectAddedEvent.For(project));
-                }
             }
 
             ValidationResults = businessEntity.ValidationResults;
         }
-        
-        // private TestAggregateRoot(EntityId id, ProjectName name, ProjectCode code, 
-        //     Money budget, DateAndTime startDate, EntityId clientId)
-        //     : this(Project.NewRequest(id, name,code,startDate,budget,clientId))
-        // {
-        // }
 
         public static TestAggregateRoot Create()
         {
