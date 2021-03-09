@@ -20,7 +20,7 @@ namespace DFlow.Tests.Business.Cqrs
         [Fact]
         public void Add_valid_entity_command()
         {
-            var fixture = new Fixture().Customize(new AutoNSubstituteCustomization(){ ConfigureMembers = true });
+            var fixture = new Fixture().Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
 
             
             var command = fixture.Create<AddEntityCommand>();
