@@ -72,7 +72,7 @@ ForEach ($folder in $testDirs) {
     $i++
     $format = @{ $true = "/p:CoverletOutputFormat=opencover"; $false = ""}[$i -eq $testDirs.Length ]
 
-    exec { & dotnet test $folder.FullName -c Release --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutput=$root\coverage /p:MergeWith=$root\coverage.json /p:Include="[*]DFlow.*" /p:Exclude="[*]DFlow.Tests.*%2c[*]DFlow.Example.*" $format }
+    exec { & dotnet test $folder.FullName -c Release --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutput=$root\coverage /p:MergeWith=$root\coverage.json /p:Include="[*]DFlow.*" /p:Exclude="[*]DFlow.Tests.*%2c[*]DFlow.Example.*%2c[*]DFlow.Samples.*%2c[*]SimplestApp" $format }
 }
 
 choco install codecov --no-progress
