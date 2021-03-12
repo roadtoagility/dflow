@@ -6,7 +6,14 @@
 
 using System;
 using AutoFixture;
+using AutoFixture.AutoNSubstitute;
+using DFlow.Domain.DomainEvents;
+using DFlow.Domain.EventBus.FluentMediator;
+using DFlow.Domain.Events;
 using DFlow.Tests.Supporting.DomainObjects;
+using FluentMediator;
+using NSubstitute;
+using NSubstitute.ReceivedExtensions;
 using Xunit;
 
 namespace DFlow.Tests.Domain
@@ -14,14 +21,17 @@ namespace DFlow.Tests.Domain
     public sealed class DomainEventsTests
     {
         [Fact]
-        public void EntityId_create_a_valid()
+        public void DomainEvent_Publishing()
         {
-            var fixture = new Fixture();
-            fixture.Register<EntityTestId>(() => EntityTestId.From(fixture.Create<Guid>()));
+            var fixture = new Fixture()
+                .Customize(new AutoNSubstituteCustomization(){ ConfigureMembers = true });
 
-            var entityId = fixture.Create<EntityTestId>();
+            var realEventBus = fixture.Create<IMediator>();
+            var myEventBus = new FluentMediatorDomainEventBus(realEventBus);
+            var myEvent = fixture.Create<IDomainEvent>();
+            myEventBus.Publish(myEvent);
             
-            Assert.True(entityId.ValidationResults.IsValid);
+            realEventBus.Received().Publish(Arg.Any<IDomainEvent>());
         }
     }
 }

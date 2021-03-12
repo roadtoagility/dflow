@@ -4,7 +4,13 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using AutoFixture;
+using AutoFixture.AutoNSubstitute;
 using DFlow.Domain.BusinessObjects;
+using DFlow.Domain.DomainEvents;
+using DFlow.Domain.Events;
 using DFlow.Tests.Supporting.DomainObjects;
 using Xunit;
 
@@ -27,6 +33,20 @@ namespace DFlow.Tests.Domain
             var agg = BusinessEntityAggregateRoot.ReconstructFrom(be);
 
             Assert.True(agg.ValidationResults.IsValid);
+        }
+        
+        [Fact]
+        public void Aggregate_EventBased_create_a_valid_one()
+        {
+            var fixture = new Fixture()
+                .Customize(new AutoNSubstituteCustomization(){ ConfigureMembers = true });
+
+            var myEvent = fixture.Create<IDomainEvent>();
+            var events = new List<IDomainEvent>{ myEvent };
+            var agg = EventStreamBusinessEntityAggregateRoot
+                .Create(EntityTestId.GetNext(), events.ToImmutableList());
+            
+            Assert.True(agg.ValidationResults == null);
         }
     }
 }

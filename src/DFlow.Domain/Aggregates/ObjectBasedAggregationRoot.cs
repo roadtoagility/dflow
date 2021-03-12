@@ -11,7 +11,7 @@ using FluentValidation.Results;
 
 namespace DFlow.Domain.Aggregates
 {
-    public abstract class AggregationRoot<TChange> : IChangeSet<TChange>
+    public abstract class ObjectBasedAggregationRoot<TChange> : IChangeSet<TChange>
     {
         protected TChange AggregateRootEntity { get; set; }
         private readonly IList<IDomainEvent> _changes = new List<IDomainEvent>();

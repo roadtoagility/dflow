@@ -15,7 +15,7 @@ namespace SimplestApp.Services
     {
         public User Add(AddUser user)
         {
-            var agg = UserAggregationRoot.CreateFrom(Name.From(user.Name), Email.From(user.Mail));
+            var agg = UserObjectBasedAggregationRoot.CreateFrom(Name.From(user.Name), Email.From(user.Mail));
 
             if (!agg.ValidationResults.IsValid)
             {

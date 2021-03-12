@@ -16,22 +16,34 @@ namespace DFlow.Domain.Aggregates
     {
         private readonly TEntityId _aggregateId;
         private readonly Version _version;
-        private readonly List<IDomainEvent> _changes = new List<IDomainEvent>();
+        private readonly List<IDomainEvent> _currentStream;
+        private readonly List<IDomainEvent> _changes;
 
-        protected EventBasedAggregationRoot(TEntityId aggregateId, Version version, IImmutableList<IDomainEvent> events)
+        protected EventBasedAggregationRoot(TEntityId aggregateId, Version version)
         {
             _aggregateId = aggregateId;
             _version = version;
-            _changes.AddRange(events);
+            _currentStream = new List<IDomainEvent>();
+            _changes = new List<IDomainEvent>();
         }
         
-        protected void Apply(IDomainEvent item)
+        protected void Apply(IImmutableList<IDomainEvent> domainEvents)
         {
-            _changes.Add(item);
+            foreach (var ev in domainEvents)
+            {
+                Apply(ev);                
+            }
         }
         
+        protected void Apply(IDomainEvent domainEvent)
+        {
+            _currentStream.Add(domainEvent);
+        }
+        
+        //Need to check tath
         protected void Raise(IDomainEvent @event)
         {
+            //this isint right
             _changes.Add(@event);
         }
         
@@ -46,10 +58,5 @@ namespace DFlow.Domain.Aggregates
         }
 
         public ValidationResult ValidationResults { get; protected set; }
-
-        public EventBasedAggregationRoot<TEntityId> Create(TEntityId aggregateId, IImmutableList<IDomainEvent> events)
-        {
-            return new EventBasedAggregationRoot<TEntityId>(aggregateId, Version.New(), events);
-        }
     }
 }

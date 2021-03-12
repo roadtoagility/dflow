@@ -10,10 +10,10 @@ using DFlow.Samples.BusinessObjects.BusinessObjects;
 
 namespace DFlow.Samples.BusinessObjects.Aggregates
 {
-    public sealed class UserAggregationRootWithoutEvent : AggregationRoot<User>
+    public sealed class UserObjectBasedAggregationRootWithoutEvent : ObjectBasedAggregationRoot<User>
     {
 
-        private UserAggregationRootWithoutEvent(User user)
+        private UserObjectBasedAggregationRootWithoutEvent(User user)
         {
             if (user.ValidationResults.IsValid)
             {
@@ -25,10 +25,10 @@ namespace DFlow.Samples.BusinessObjects.Aggregates
 
         #region Aggregation contruction
        
-        public static UserAggregationRootWithoutEvent CreateFrom(Name name, Email commercialEmail)
+        public static UserObjectBasedAggregationRootWithoutEvent CreateFrom(Name name, Email commercialEmail)
         {
             var user = User.From(EntityId.GetNext(), name, commercialEmail, Version.New());
-            return new UserAggregationRootWithoutEvent(user);
+            return new UserObjectBasedAggregationRootWithoutEvent(user);
         }
 
         #endregion
