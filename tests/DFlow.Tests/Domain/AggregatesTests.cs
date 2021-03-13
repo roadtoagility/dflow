@@ -42,9 +42,10 @@ namespace DFlow.Tests.Domain
                 .Customize(new AutoNSubstituteCustomization(){ ConfigureMembers = true });
 
             var myEvent = fixture.Create<IDomainEvent>();
-            var events = new List<IDomainEvent>{ myEvent };
+            var name = fixture.Create<Name>();
+            var email = fixture.Create<Email>();
             var agg = EventStreamBusinessEntityAggregateRoot
-                .Create(EntityTestId.GetNext(), events.ToImmutableList());
+                .Create(EntityTestId.GetNext(), name, email);
             var change = agg.GetChange();
             Assert.Equal(1,change.Events.Count);
         }

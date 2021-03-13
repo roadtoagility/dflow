@@ -50,7 +50,7 @@ namespace DFlow.Domain.Aggregates
         
         public EventStream<TEntityId> GetChange()
         {
-            return EventStream<TEntityId>.From(_aggregateId,_version, _changes.ToImmutableList());
+            return EventStream<TEntityId>.From(AggregateId,Version, _changes.ToImmutableList());
         }
 
         public IReadOnlyList<IDomainEvent> GetEvents()
