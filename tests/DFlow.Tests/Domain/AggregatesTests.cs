@@ -45,8 +45,8 @@ namespace DFlow.Tests.Domain
             var events = new List<IDomainEvent>{ myEvent };
             var agg = EventStreamBusinessEntityAggregateRoot
                 .Create(EntityTestId.GetNext(), events.ToImmutableList());
-            
-            Assert.True(agg.ValidationResults == null);
+            var change = agg.GetChange();
+            Assert.Equal(1,change.Events.Count);
         }
     }
 }

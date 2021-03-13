@@ -1,4 +1,4 @@
-// Copyright (C) 2020  Road to Agility
+﻿// Copyright (C) 2020  Road to Agility
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Library General Public
@@ -16,23 +16,15 @@
 // Boston, MA  02110-1301, USA.
 //
 
-using System;
-using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.DomainEvents;
-using Version = DFlow.Domain.BusinessObjects.Version;
+using FluentValidation;
 
-namespace DFlow.Tests.Supporting.DomainObjects.Events
+namespace DFlow.Tests.Supporting.DomainObjects.Validators
 {
-    public class TestEntityAggregateAddedDomainEvent : AggregateAddedDomainEvent<EntityTestId>
+    public sealed class EmailValidator: AbstractValidator<Email>
     {
-        private TestEntityAggregateAddedDomainEvent(EntityTestId aggregateId, Name name, Email email, Version version)
-        :base(aggregateId,version)
+        public EmailValidator()
         {
-        }
-       
-        public static TestEntityAggregateAddedDomainEvent From(EntityTestId aggregateId, Name name, Email email, Version version)
-        {
-            return new TestEntityAggregateAddedDomainEvent(aggregateId, name,email, version);
+            RuleFor(item => item.Value).EmailAddress();
         }
     }
 }

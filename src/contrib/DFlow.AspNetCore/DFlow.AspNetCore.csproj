@@ -17,6 +17,12 @@
                 <VersionPrefix>0.1.0</VersionPrefix>
         <PackageVersion></PackageVersion>
         <VersionSuffix></VersionSuffix>
+        <Configurations>Debug;Release;Release Profilling</Configurations>
+        <Platforms>AnyCPU</Platforms>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release Profilling' ">
+      <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
     </PropertyGroup>
 
     <ItemGroup>

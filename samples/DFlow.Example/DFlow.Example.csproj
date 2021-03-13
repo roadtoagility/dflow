@@ -3,13 +3,17 @@
     <PropertyGroup>
         <OutputType>Library</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <Configurations>Debug;Release;Tests</Configurations>
+        <Configurations>Debug;Release;Tests;Release Profilling</Configurations>
         <Platforms>AnyCPU</Platforms>
         <RootNamespace>ZCRQS</RootNamespace>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Tests' ">
       <DefineConstants>TRACE;TEST_BUILD</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release Profilling' ">
+      <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
     </PropertyGroup>
 
     <ItemGroup>

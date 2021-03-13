@@ -1,4 +1,4 @@
-// Copyright (C) 2020  Road to Agility
+﻿// Copyright (C) 2020  Road to Agility
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Library General Public
@@ -16,23 +16,14 @@
 // Boston, MA  02110-1301, USA.
 //
 
-using System;
-using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.DomainEvents;
-using Version = DFlow.Domain.BusinessObjects.Version;
 
-namespace DFlow.Tests.Supporting.DomainObjects.Events
+using System;
+
+namespace DFlow.Tests.Supporting.Commands
 {
-    public class TestEntityAggregateAddedDomainEvent : AggregateAddedDomainEvent<EntityTestId>
+    public class UpdateEntityCommand
     {
-        private TestEntityAggregateAddedDomainEvent(EntityTestId aggregateId, Name name, Email email, Version version)
-        :base(aggregateId,version)
-        {
-        }
-       
-        public static TestEntityAggregateAddedDomainEvent From(EntityTestId aggregateId, Name name, Email email, Version version)
-        {
-            return new TestEntityAggregateAddedDomainEvent(aggregateId, name,email, version);
-        }
+        public string Name { get; set; }
+        public Guid AggregateId { get; set; }
     }
 }

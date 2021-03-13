@@ -18,7 +18,24 @@ namespace DFlow.Tests.Business.Cqrs
     public sealed class CommandHandlerTests
     {
         [Fact]
-        public void Add_valid_entity_command()
+        public void Add_entity_valid_command()
+        {
+            var fixture = new Fixture().Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
+
+            
+            var command = fixture.Create<AddEntityCommand>();
+            var eventBus = fixture.Create<IDomainEventBus>();
+
+            var handler = new AddEntityCommandHandler(eventBus);
+
+            var result = handler.Execute(command);
+
+            eventBus.Received(1).Publish(Arg.Any<EntityAddedEvent>());
+            Assert.True(result.IsSucceed);
+        }
+        
+        [Fact]
+        public void Add_entity_eventbased_valid_command()
         {
             var fixture = new Fixture().Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
 

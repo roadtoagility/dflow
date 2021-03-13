@@ -1,32 +1,49 @@
 using System.Collections.Immutable;
 using DFlow.Domain.Aggregates;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.Events;
 using DFlow.Tests.Supporting.DomainObjects.Events;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
     public sealed class EventStreamBusinessEntityAggregateRoot:EventBasedAggregationRoot<EntityTestId>
     {
+        private EventStreamBusinessEntityAggregateRoot(EntityTestId aggregationId, Name name, Email email, Version version)
+            :base(aggregationId,version)
+        {
+            if (name.ValidationResults.IsValid && email.ValidationResults.IsValid)
+            {
+                var change = TestEntityAggregateAddedDomainEvent.From(aggregationId, name, email, version);
+                Apply(change);
+                
+                // it is always new
+                Raise(change);
+            }
+            ValidationResults = name.ValidationResults;
+        }
+        
         private EventStreamBusinessEntityAggregateRoot(EventStream<EntityTestId> eventStream)
         :base(eventStream.AggregationId,eventStream.Version)
         {
             // if (eventStream.ValidationResults.IsValid)
             // {
                 Apply(eventStream.Events);
-
-                if (eventStream.IsNew())
-                {
-                    Raise(TestEntityAggregateAddedDomainEvent.For(eventStream));                    
-                }
             // }
-
             // ValidationResults = eventStream.ValidationResults;
         }
 
-        public static EventStreamBusinessEntityAggregateRoot Create(EntityTestId id, ImmutableList<IDomainEvent> events)
+        public void UpdateName(EntityTestId aggregateId, Name name)
         {
-            return new EventStreamBusinessEntityAggregateRoot(EventStream<EntityTestId>.From(id, Version.New(), events));
+            if (name.ValidationResults.IsValid && !AggregateId.Equals(aggregateId))
+            {
+                Apply(TestEntityAggregateUpdatedDomainEvent.From(AggregateId,name,Version));
+            }
+
+            ValidationResults = name.ValidationResults;
+        }
+
+        public static EventStreamBusinessEntityAggregateRoot Create(EntityTestId aggregateId, Name name, Email email)
+        {
+            return new EventStreamBusinessEntityAggregateRoot(aggregateId,name,email, Version.New());
         }
         
         public static EventStreamBusinessEntityAggregateRoot ReconstructFrom(EventStream<EntityTestId> eventStream)

@@ -23,7 +23,6 @@ namespace DFlow.Domain.BusinessObjects
         public static EventStream<TEntityId> From(TEntityId aggregateId, Version version, IImmutableList<IDomainEvent> events)
         {
             var eventStream = new EventStream<TEntityId>(aggregateId,version,events);
-            //events.ForEach(ev => { });
             return eventStream;
         }
 

@@ -23,16 +23,16 @@ using Version = DFlow.Domain.BusinessObjects.Version;
 
 namespace DFlow.Tests.Supporting.DomainObjects.Events
 {
-    public class TestEntityAggregateAddedDomainEvent : AggregateAddedDomainEvent<EntityTestId>
+    public class TestEntityAggregateUpdatedDomainEvent : AggregateAddedDomainEvent<EntityTestId>
     {
-        private TestEntityAggregateAddedDomainEvent(EntityTestId aggregateId, Name name, Email email, Version version)
+        private TestEntityAggregateUpdatedDomainEvent(EntityTestId aggregateId, Name name, Version version)
         :base(aggregateId,version)
         {
         }
        
-        public static TestEntityAggregateAddedDomainEvent From(EntityTestId aggregateId, Name name, Email email, Version version)
+        public static TestEntityAggregateUpdatedDomainEvent From(EntityTestId aggregateId, Name name, Version version)
         {
-            return new TestEntityAggregateAddedDomainEvent(aggregateId, name,email, version);
+            return new TestEntityAggregateUpdatedDomainEvent(aggregateId, name, version);
         }
     }
 }

@@ -13,12 +13,12 @@ namespace DFlow.Domain.DomainEvents
 {
     public class AggregateAddedDomainEvent<TEntityId> : DomainEvent
     {
-        protected AggregateAddedDomainEvent(EventStream<TEntityId> stream)
-        :base(DateTime.Now, stream.Version)
+        protected AggregateAddedDomainEvent(TEntityId aggregateId, Version version)
+        :base(DateTime.Now, version)
         {
-            EventStream = stream;
+            AggregateId = aggregateId;
         }
 
-        public EventStream<TEntityId> EventStream { get; }
+        public TEntityId AggregateId { get; }
     }
 }
