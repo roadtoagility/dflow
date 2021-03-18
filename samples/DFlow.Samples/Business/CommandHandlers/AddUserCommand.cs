@@ -4,16 +4,18 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-
-using DFlow.Samples.BusinessObjects.BusinessObjects;
 using DFlow.Samples.BusinessObjects.Domain.BusinessObjects;
-using DFlow.Samples.Domain.BusinessObjects;
-using SimplestApp.Operations;
 
-namespace SimplestApp.Services
+namespace DFlow.Samples.Business.CommandHandlers
 {
-    public interface IUserService
+    public class AddUserCommand
     {
-        User Add(AddUser user);
+        public AddUserCommand(string name, string email)
+        {
+            Name = Name.From(name);
+            Mail = Email.From(email);
+        }
+        public Name Name { get; set; }
+        public Email Mail { get; set; }
     }
 }

@@ -44,10 +44,10 @@ namespace DFlow.Tests.Domain
             var myEvent = fixture.Create<IDomainEvent>();
             var name = fixture.Create<Name>();
             var email = fixture.Create<Email>();
-            var agg = EventStreamBusinessEntityAggregateRoot
-                .Create(EntityTestId.GetNext(), name, email);
+            var agg = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), name, email);
             var change = agg.GetChange();
             Assert.Equal(1,change.Events.Count);
+            Assert.Equal(nameof(EventStreamBusinessEntityAggregateRoot),change.Name.Value);
         }
     }
 }

@@ -5,8 +5,10 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
-using DFlow.Samples.BusinessObjects.Aggregates;
 using DFlow.Samples.BusinessObjects.BusinessObjects;
+using DFlow.Samples.BusinessObjects.Domain.BusinessObjects;
+using DFlow.Samples.Domain.Aggregates;
+using DFlow.Samples.Domain.BusinessObjects;
 using SimplestApp.Operations;
 
 namespace SimplestApp.Services
@@ -15,7 +17,7 @@ namespace SimplestApp.Services
     {
         public User Add(AddUser user)
         {
-            var agg = UserObjectBasedAggregationRoot.CreateFrom(Name.From(user.Name), Email.From(user.Mail));
+            var agg = UserEntityBasedAggregationRoot.CreateFrom(Name.From(user.Name), Email.From(user.Mail));
 
             if (!agg.ValidationResults.IsValid)
             {

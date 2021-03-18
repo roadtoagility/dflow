@@ -12,12 +12,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\DFlow.Domain.EventBus.FluentMediator\DFlow.Domain.EventBus.FluentMediator.csproj" />
       <ProjectReference Include="..\..\src\DFlow.Domain\DFlow.Domain.csproj" />
       <ProjectReference Include="..\DFlow.Samples\DFlow.Samples.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Operations" />
+      <PackageReference Include="FluentMediator.Microsoft.Extensions.DependencyInjection" Version="0.4.7" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
     </ItemGroup>
 
 </Project>

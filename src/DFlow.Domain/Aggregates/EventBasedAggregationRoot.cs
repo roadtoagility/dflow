@@ -17,8 +17,9 @@ namespace DFlow.Domain.Aggregates
         private readonly List<IDomainEvent> _currentStream;
         private readonly List<IDomainEvent> _changes;
 
-        protected EventBasedAggregationRoot(TEntityId aggregateId, Version version)
+        protected EventBasedAggregationRoot(TEntityId aggregateId, Version version, AggregationName name)
         {
+            Name = name;
             AggregateId = aggregateId;
             Version = version;
             _currentStream = new List<IDomainEvent>();
@@ -32,6 +33,9 @@ namespace DFlow.Domain.Aggregates
                 Apply(ev);                
             }
         }
+        
+        protected AggregationName Name { get; }
+        
         protected TEntityId AggregateId { get; }
         
         protected Version Version { get; }
@@ -50,7 +54,7 @@ namespace DFlow.Domain.Aggregates
         
         public EventStream<TEntityId> GetChange()
         {
-            return EventStream<TEntityId>.From(AggregateId,Version, _changes.ToImmutableList());
+            return EventStream<TEntityId>.From(AggregateId,Name ,Version,  _changes.ToImmutableList());
         }
 
         public IReadOnlyList<IDomainEvent> GetEvents()
