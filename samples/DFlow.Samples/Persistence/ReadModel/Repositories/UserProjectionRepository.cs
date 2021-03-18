@@ -28,7 +28,7 @@ namespace DFlow.Samples.Persistence.ReadModel.Repositories
             
             if (user == null)
             {
-                UserProjection.Empty();
+                return UserProjection.Empty();
             }
             
             return user;
@@ -51,12 +51,6 @@ namespace DFlow.Samples.Persistence.ReadModel.Repositories
 
         public void Remove(UserProjection entity)
         {
-            var oldState =
-                _context.UsersProjection
-                    .OrderByDescending(or => or.RowVersion)
-                    .FirstOrDefault(b => b.Id.Equals(entity.Id) &&
-                                         b.RowVersion.Equals(entity.RowVersion));
-           
             _context.UsersProjection.Remove(entity);
         }
 

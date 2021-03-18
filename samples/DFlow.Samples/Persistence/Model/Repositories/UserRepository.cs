@@ -83,8 +83,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
         public IEnumerable<User> Find(Expression<Func<UserState, bool>> predicate)
         {
             return DbContext.Users.Where(predicate).AsNoTracking()
-                .Select(t =>  t.ToUser());
-            ;
+                .Select(t => t.ToUser());
         }
     }
 }
