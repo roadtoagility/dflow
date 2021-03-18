@@ -4,7 +4,7 @@
 
 [![DFlow AppVeyor Build](https://ci.appveyor.com/api/projects/status/481jwy9pnyh0fv41/branch/master?svg=true)](https://ci.appveyor.com/project/drr00t/dflow/branch/master)
  [![codecov](https://codecov.io/gh/roadtoagility/dflow/branch/master/graph/badge.svg)](https://codecov.io/gh/roadtoagility/dflow) [![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.svg)](https://www.nuget.org/packages/DFlow/) [![DFlow NuGet prerelease version](https://img.shields.io/nuget/vpre/DFlow.svg)](https://www.nuget.org/packages/DFlow/)
-
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/008ea00243504ac5ab31a24ebed9e5e8)](https://www.codacy.com/gh/roadtoagility/dflow/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=roadtoagility/dflow&amp;utm_campaign=Badge_Grade)
 
 ## About Project
 A C# reference implementation DDD architecture
