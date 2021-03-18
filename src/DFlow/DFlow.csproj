@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <IsPackable>true</IsPackable>
-        <Configurations>Debug;Release;Tests</Configurations>
+        <Configurations>Debug;Release;Tests;Release Profilling</Configurations>
         <Platforms>AnyCPU</Platforms>
         <RootNamespace>DFlow</RootNamespace>
         <AssemblyName>DFlow</AssemblyName>
@@ -27,5 +27,9 @@
         <PackageVersion></PackageVersion>
         <VersionSuffix></VersionSuffix>
         
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release Profilling' ">
+      <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
     </PropertyGroup>
 </Project>
