@@ -24,7 +24,7 @@ namespace DFlow.Tests.Domain
         public void DomainEvent_Publishing()
         {
             var fixture = new Fixture()
-                .Customize(new AutoNSubstituteCustomization(){ ConfigureMembers = true });
+                .Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
 
             var realEventBus = fixture.Create<IMediator>();
             var myEventBus = new FluentMediatorDomainEventBus(realEventBus);

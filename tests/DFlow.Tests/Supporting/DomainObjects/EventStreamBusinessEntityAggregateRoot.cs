@@ -20,15 +20,17 @@ namespace DFlow.Tests.Supporting.DomainObjects
             }
             ValidationResults = name.ValidationResults;
         }
-        
+
         private EventStreamBusinessEntityAggregateRoot(EventStream<EntityTestId> eventStream)
-        :base(eventStream.AggregationId,eventStream.Version, AggregationName.From(nameof(EventStreamBusinessEntityAggregateRoot)))
+            : base(eventStream.AggregationId, eventStream.Version,
+                AggregationName.From(nameof(EventStreamBusinessEntityAggregateRoot)))
         {
-            // if (eventStream.ValidationResults.IsValid)
-            // {
+            if (eventStream.ValidationResults.IsValid)
+            {
                 Apply(eventStream.Events);
-            // }
-            // ValidationResults = eventStream.ValidationResults;
+            }
+
+            ValidationResults = eventStream.ValidationResults;
         }
 
         public void UpdateName(EntityTestId aggregateId, Name name)

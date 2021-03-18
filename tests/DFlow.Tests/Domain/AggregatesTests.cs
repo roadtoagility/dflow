@@ -39,9 +39,8 @@ namespace DFlow.Tests.Domain
         public void Aggregate_EventBased_create_a_valid_one()
         {
             var fixture = new Fixture()
-                .Customize(new AutoNSubstituteCustomization(){ ConfigureMembers = true });
-
-            var myEvent = fixture.Create<IDomainEvent>();
+                .Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
+            
             var name = fixture.Create<Name>();
             var email = fixture.Create<Email>();
             var agg = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), name, email);
