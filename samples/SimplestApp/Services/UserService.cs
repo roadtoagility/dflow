@@ -5,7 +5,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
-using DFlow.Samples.BusinessObjects.BusinessObjects;
 using DFlow.Samples.BusinessObjects.Domain.BusinessObjects;
 using DFlow.Samples.Domain.Aggregates;
 using DFlow.Samples.Domain.BusinessObjects;

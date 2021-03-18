@@ -1,22 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DFlow.Persistence.EventStore.Model;
 
-namespace DFlow.Persistence.EventStore.Model
+namespace DFlow.Persistence.EventStore
 {
     public class MemoryAppendOnlyStore //: AppendOnlyBase, IAppendOnlyStore<Guid>
     {
-        private ICollection<EventData<Guid>> _eventsStorage = new List<EventData<Guid>>();
-
-
-        public MemoryAppendOnlyStore() : base()
-        {
-        }
-
-        public void Dispose()
-        {
-            _eventsStorage = new List<EventData<Guid>>();
-        }
+        private readonly ICollection<EventData<Guid>> _eventsStorage = new List<EventData<Guid>>();
 
         public IEnumerable<DataWithVersion> ReadRecords(string aggregateType, long afterVersion, int maxCount)
         {
@@ -56,11 +47,6 @@ namespace DFlow.Persistence.EventStore.Model
             return _eventsStorage.Any(x => x.AggregateId == aggregateId);
         }
 
-        public void Close()
-        {
-            
-        }
-        
         protected  void Save(Guid id, string aggregateType, long version, byte[] data)
         {
             _eventsStorage.Add(new EventData<System.Guid>(id, aggregateType, version, data));
