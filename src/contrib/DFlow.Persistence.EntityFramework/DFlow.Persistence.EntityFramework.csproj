@@ -9,7 +9,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DFlow.Persistence\DFlow.Persistence.csproj" />
+      <ProjectReference Include="..\..\DFlow.Persistence\DFlow.Persistence.csproj" />
     </ItemGroup>
     <PropertyGroup>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>

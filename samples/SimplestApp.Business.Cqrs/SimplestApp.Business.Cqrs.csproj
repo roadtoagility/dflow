@@ -12,7 +12,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\DFlow.Domain.EventBus.FluentMediator\DFlow.Domain.EventBus.FluentMediator.csproj" />
+      <ProjectReference Include="..\..\src\contrib\DFlow.Domain.EventBus.FluentMediator\DFlow.Domain.EventBus.FluentMediator.csproj" />
       <ProjectReference Include="..\..\src\DFlow.Domain\DFlow.Domain.csproj" />
       <ProjectReference Include="..\DFlow.Samples\DFlow.Samples.csproj" />
     </ItemGroup>

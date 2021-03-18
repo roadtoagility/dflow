@@ -13,7 +13,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\DFlow.Business.Cqrs\DFlow.Business.Cqrs.csproj" />
       <ProjectReference Include="..\..\src\DFlow.Domain\DFlow.Domain.csproj" />
-      <ProjectReference Include="..\..\src\DFlow.Persistence.EntityFramework\DFlow.Persistence.EntityFramework.csproj" />
+      <ProjectReference Include="..\..\src\contrib\DFlow.Persistence.EntityFramework\DFlow.Persistence.EntityFramework.csproj" />
       <ProjectReference Include="..\..\src\DFlow.Persistence\DFlow.Persistence.csproj" />
     </ItemGroup>
 

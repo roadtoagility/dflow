@@ -14,8 +14,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Domain", "src\DFlow.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Domain.Events", "src\DFlow.Domain.Events\DFlow.Domain.Events.csproj", "{82AB6062-B521-48AF-9611-F632251077D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Domain.EventBus.FluentMediator", "src\DFlow.Domain.EventBus.FluentMediator\DFlow.Domain.EventBus.FluentMediator.csproj", "{16718BD0-82A7-48D0-A827-17176802858D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Business.Cqrs", "src\DFlow.Business.Cqrs\DFlow.Business.Cqrs.csproj", "{7057935D-2C6A-4CF7-B083-613441EA40AE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FirstImpl", "FirstImpl", "{085060D8-3CA9-4165-AFB3-A11EBF5746E6}"
@@ -30,13 +28,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1D9940E4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Persistence", "src\DFlow.Persistence\DFlow.Persistence.csproj", "{A9F3BA94-9543-4148-919C-39ED9640D5BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Persistence.EntityFramework", "src\DFlow.Persistence.EntityFramework\DFlow.Persistence.EntityFramework.csproj", "{7A015099-AA1E-470B-B400-FAB03CB87474}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contrib", "Contrib", "{6717E82A-B0EA-4FCA-8A2C-31A46D4999A4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplestApp.Business.Cqrs", "samples\SimplestApp.Business.Cqrs\SimplestApp.Business.Cqrs.csproj", "{7C3FA12E-C1AB-4937-BB91-D3D32366672F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplestApp.Persistence.EntityFramework", "samples\SimplestApp.Persistence.EntityFramework\SimplestApp.Persistence.EntityFramework.csproj", "{86B8F8D6-303C-4888-8F62-500399EFF82E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Domain.EventBus.FluentMediator", "src\contrib\DFlow.Domain.EventBus.FluentMediator\DFlow.Domain.EventBus.FluentMediator.csproj", "{24A7697A-FC70-40A8-A6EB-3A5F634A9A1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Persistence.EntityFramework", "src\contrib\DFlow.Persistence.EntityFramework\DFlow.Persistence.EntityFramework.csproj", "{9DB514B5-3C00-472F-BB25-E484978ED5D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -96,15 +96,6 @@ Global
 		{82AB6062-B521-48AF-9611-F632251077D0}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{82AB6062-B521-48AF-9611-F632251077D0}.Release Profilling|Any CPU.ActiveCfg = Release Profilling|Any CPU
 		{82AB6062-B521-48AF-9611-F632251077D0}.Release Profilling|Any CPU.Build.0 = Release Profilling|Any CPU
-		{16718BD0-82A7-48D0-A827-17176802858D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16718BD0-82A7-48D0-A827-17176802858D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16718BD0-82A7-48D0-A827-17176802858D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16718BD0-82A7-48D0-A827-17176802858D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16718BD0-82A7-48D0-A827-17176802858D}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
-		{16718BD0-82A7-48D0-A827-17176802858D}.Tests|Any CPU.Build.0 = Debug|Any CPU
-		{16718BD0-82A7-48D0-A827-17176802858D}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{16718BD0-82A7-48D0-A827-17176802858D}.Release Profilling|Any CPU.ActiveCfg = Release Profilling|Any CPU
-		{16718BD0-82A7-48D0-A827-17176802858D}.Release Profilling|Any CPU.Build.0 = Release Profilling|Any CPU
 		{7057935D-2C6A-4CF7-B083-613441EA40AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7057935D-2C6A-4CF7-B083-613441EA40AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7057935D-2C6A-4CF7-B083-613441EA40AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -133,14 +124,6 @@ Global
 		{A9F3BA94-9543-4148-919C-39ED9640D5BC}.Tests|Any CPU.Build.0 = Debug|Any CPU
 		{A9F3BA94-9543-4148-919C-39ED9640D5BC}.Release Profilling|Any CPU.ActiveCfg = Debug|Any CPU
 		{A9F3BA94-9543-4148-919C-39ED9640D5BC}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{7A015099-AA1E-470B-B400-FAB03CB87474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A015099-AA1E-470B-B400-FAB03CB87474}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A015099-AA1E-470B-B400-FAB03CB87474}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A015099-AA1E-470B-B400-FAB03CB87474}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A015099-AA1E-470B-B400-FAB03CB87474}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A015099-AA1E-470B-B400-FAB03CB87474}.Tests|Any CPU.Build.0 = Debug|Any CPU
-		{7A015099-AA1E-470B-B400-FAB03CB87474}.Release Profilling|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A015099-AA1E-470B-B400-FAB03CB87474}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{7C3FA12E-C1AB-4937-BB91-D3D32366672F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7C3FA12E-C1AB-4937-BB91-D3D32366672F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C3FA12E-C1AB-4937-BB91-D3D32366672F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -155,6 +138,22 @@ Global
 		{86B8F8D6-303C-4888-8F62-500399EFF82E}.Tests|Any CPU.Build.0 = Debug|Any CPU
 		{86B8F8D6-303C-4888-8F62-500399EFF82E}.Release Profilling|Any CPU.ActiveCfg = Release Profilling|Any CPU
 		{86B8F8D6-303C-4888-8F62-500399EFF82E}.Release Profilling|Any CPU.Build.0 = Release Profilling|Any CPU
+		{24A7697A-FC70-40A8-A6EB-3A5F634A9A1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24A7697A-FC70-40A8-A6EB-3A5F634A9A1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24A7697A-FC70-40A8-A6EB-3A5F634A9A1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24A7697A-FC70-40A8-A6EB-3A5F634A9A1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24A7697A-FC70-40A8-A6EB-3A5F634A9A1E}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
+		{24A7697A-FC70-40A8-A6EB-3A5F634A9A1E}.Tests|Any CPU.Build.0 = Debug|Any CPU
+		{24A7697A-FC70-40A8-A6EB-3A5F634A9A1E}.Release Profilling|Any CPU.ActiveCfg = Release Profilling|Any CPU
+		{24A7697A-FC70-40A8-A6EB-3A5F634A9A1E}.Release Profilling|Any CPU.Build.0 = Release Profilling|Any CPU
+		{9DB514B5-3C00-472F-BB25-E484978ED5D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB514B5-3C00-472F-BB25-E484978ED5D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DB514B5-3C00-472F-BB25-E484978ED5D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DB514B5-3C00-472F-BB25-E484978ED5D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DB514B5-3C00-472F-BB25-E484978ED5D9}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB514B5-3C00-472F-BB25-E484978ED5D9}.Tests|Any CPU.Build.0 = Debug|Any CPU
+		{9DB514B5-3C00-472F-BB25-E484978ED5D9}.Release Profilling|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB514B5-3C00-472F-BB25-E484978ED5D9}.Release Profilling|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D5C025B8-AC7E-4C19-99EA-03732456F812} = {085060D8-3CA9-4165-AFB3-A11EBF5746E6}
@@ -164,9 +163,9 @@ Global
 		{BDF24821-36AA-43D8-A55F-DF960D88E349} = {96AC39D1-C074-4993-B3E2-F190B2B3E5D4}
 		{ECB83291-4308-440B-863E-A4BFDDC46D36} = {96AC39D1-C074-4993-B3E2-F190B2B3E5D4}
 		{E592B474-F073-41A8-8AEE-C24A7AD19586} = {1D9940E4-09D4-42B9-B72D-2DA4D1AA00EB}
-		{16718BD0-82A7-48D0-A827-17176802858D} = {6717E82A-B0EA-4FCA-8A2C-31A46D4999A4}
-		{7A015099-AA1E-470B-B400-FAB03CB87474} = {6717E82A-B0EA-4FCA-8A2C-31A46D4999A4}
 		{7C3FA12E-C1AB-4937-BB91-D3D32366672F} = {96AC39D1-C074-4993-B3E2-F190B2B3E5D4}
 		{86B8F8D6-303C-4888-8F62-500399EFF82E} = {96AC39D1-C074-4993-B3E2-F190B2B3E5D4}
+		{24A7697A-FC70-40A8-A6EB-3A5F634A9A1E} = {6717E82A-B0EA-4FCA-8A2C-31A46D4999A4}
+		{9DB514B5-3C00-472F-BB25-E484978ED5D9} = {6717E82A-B0EA-4FCA-8A2C-31A46D4999A4}
 	EndGlobalSection
 EndGlobal
