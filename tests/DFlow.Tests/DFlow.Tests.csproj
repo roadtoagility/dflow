@@ -15,6 +15,7 @@
       <ProjectReference Include="..\..\src\DFlow.Business.Cqrs\DFlow.Business.Cqrs.csproj" />
       <ProjectReference Include="..\..\src\DFlow.Domain.EventBus.FluentMediator\DFlow.Domain.EventBus.FluentMediator.csproj" />
       <ProjectReference Include="..\..\src\DFlow.Domain\DFlow.Domain.csproj" />
+      <ProjectReference Include="..\..\src\DFlow.Persistence\DFlow.Persistence.csproj" />
       <ProjectReference Include="..\..\src\DFlow\DFlow.csproj" />
     </ItemGroup>
 
