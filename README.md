@@ -40,11 +40,11 @@ SimplestApp.Persistence.EntityFramework|It is a basic application using all libr
 
 ## Roadmap
 
-- Finish suport to Event Sourcing in Persistence Layer
-- Test a 100% of code
-- Finish the performance tests support
-- Improve documentation
-- much more...
+  - Finish suport to Event Sourcing in Persistence Layer
+  - Test a 100% of code
+  - Finish the performance tests support
+  - Improve documentation
+  - much more...
 
 ## License
   This Source Code Form is subject to the terms of the Mozilla Public
