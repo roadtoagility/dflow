@@ -2,7 +2,7 @@
 
 # DFlow - Domain Events Flow
 
-Domain events Flow is a platform to suport development with agility in mind based on Domain-Driven Dsign tools.
+Domain events Flow is a platform to support development with agility in mind based on Domain-Driven Design tools.
 
 ## Project Informations
 [![GitHub issues](https://img.shields.io/github/issues/roadtoagility/dflow)](https://img.shields.io/github/issues/roadtoagility/dflow)
