@@ -10,7 +10,6 @@ Domain events Flow is a platform to suport development with agility in mind base
 [![GitHub forks](https://img.shields.io/github/forks/roadtoagility/dflow)](https://github.com/roadtoagility/dflow/network)
 [![GitHub license](https://img.shields.io/github/license/roadtoagility/dflow)](https://github.com/roadtoagility/dflow/blob/master/LICENSE.TXT)
 
-
 ## Code Quality
 [![codecov](https://codecov.io/gh/roadtoagility/dflow/branch/master/graph/badge.svg)](https://codecov.io/gh/roadtoagility/dflow) 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/008ea00243504ac5ab31a24ebed9e5e8)](https://www.codacy.com/gh/roadtoagility/dflow/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=roadtoagility/dflow&amp;utm_campaign=Badge_Grade)
