@@ -1,10 +1,25 @@
+<center><img src="docs/img/logodflow_200x200.png" width="350" /></center>
+
 # DFlow - Domain Events Flow
 
-<img src="docs/img/logodflow_200x200.png" width="350" />
+Domain events Flow is a platform to suport development with agility in mind based on Domain-Driven Dsign tools.
+
+## Project Informations
+[![GitHub issues](https://img.shields.io/github/issues/roadtoagility/dflow)](https://img.shields.io/github/issues/roadtoagility/dflow)
+[![GitHub stars](https://img.shields.io/github/stars/roadtoagility/dflow)](https://github.com/roadtoagility/dflow/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/roadtoagility/dflow)](https://github.com/roadtoagility/dflow/network)
+[![GitHub license](https://img.shields.io/github/license/roadtoagility/dflow)](https://github.com/roadtoagility/dflow/blob/master/LICENSE.TXT)
+
+## Code Quality
+[![codecov](https://codecov.io/gh/roadtoagility/dflow/branch/master/graph/badge.svg)](https://codecov.io/gh/roadtoagility/dflow) 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/008ea00243504ac5ab31a24ebed9e5e8)](https://www.codacy.com/gh/roadtoagility/dflow/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=roadtoagility/dflow&amp;utm_campaign=Badge_Grade)
+
+## Build Status
 
 [![DFlow AppVeyor Build](https://ci.appveyor.com/api/projects/status/481jwy9pnyh0fv41/branch/master?svg=true)](https://ci.appveyor.com/project/drr00t/dflow/branch/master)
- [![codecov](https://codecov.io/gh/roadtoagility/dflow/branch/master/graph/badge.svg)](https://codecov.io/gh/roadtoagility/dflow) 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/008ea00243504ac5ab31a24ebed9e5e8)](https://www.codacy.com/gh/roadtoagility/dflow/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=roadtoagility/dflow&amp;utm_campaign=Badge_Grade)
+
+## Tests Passing
+![AppVeyor tests](https://img.shields.io/appveyor/tests/drr00t/dfow)
 
 ## Nuget packages from DFlow Platform
 Core Packages|Description|Dependencies|Latest Version|
