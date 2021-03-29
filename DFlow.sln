@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Domain.EventBus.Fluen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Persistence.EntityFramework", "src\contrib\DFlow.Persistence.EntityFramework\DFlow.Persistence.EntityFramework.csproj", "{9DB514B5-3C00-472F-BB25-E484978ED5D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Persistence.EventStore", "src\DFlow.Persistence.EventStore\DFlow.Persistence.EventStore.csproj", "{45580E17-7487-488C-8B47-A3A3FD86D221}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -154,6 +156,14 @@ Global
 		{9DB514B5-3C00-472F-BB25-E484978ED5D9}.Tests|Any CPU.Build.0 = Debug|Any CPU
 		{9DB514B5-3C00-472F-BB25-E484978ED5D9}.Release Profilling|Any CPU.ActiveCfg = Debug|Any CPU
 		{9DB514B5-3C00-472F-BB25-E484978ED5D9}.Release Profilling|Any CPU.Build.0 = Debug|Any CPU
+		{45580E17-7487-488C-8B47-A3A3FD86D221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45580E17-7487-488C-8B47-A3A3FD86D221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45580E17-7487-488C-8B47-A3A3FD86D221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45580E17-7487-488C-8B47-A3A3FD86D221}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45580E17-7487-488C-8B47-A3A3FD86D221}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
+		{45580E17-7487-488C-8B47-A3A3FD86D221}.Tests|Any CPU.Build.0 = Debug|Any CPU
+		{45580E17-7487-488C-8B47-A3A3FD86D221}.Release Profilling|Any CPU.ActiveCfg = Debug|Any CPU
+		{45580E17-7487-488C-8B47-A3A3FD86D221}.Release Profilling|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D5C025B8-AC7E-4C19-99EA-03732456F812} = {085060D8-3CA9-4165-AFB3-A11EBF5746E6}

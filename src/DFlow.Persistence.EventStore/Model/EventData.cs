@@ -11,7 +11,6 @@ namespace DFlow.Persistence.EventStore.Model
         }
 
         public TKey AggregateId { get; set; }
-
         public string AggregateType { get; set; }
         public long Version { get; set; }
         public byte[] Data { get; set; }

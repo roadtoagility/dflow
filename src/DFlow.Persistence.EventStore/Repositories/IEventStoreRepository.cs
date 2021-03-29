@@ -13,12 +13,8 @@ namespace DFlow.Persistence.EventStore.Repositories
 {
     public interface IEventStoreRepository<TKey>
     {
-        EventStream<TKey> LoadEventStream(TKey id);
+        EventStream<TKey> LoadEventStream(TKey aggregateId, int version);
 
-        EventStream<TKey> LoadEventStreamAfterVersion(TKey id, long snapshotVersion);
-        
-        void AppendToStream<TType>(TKey id, long version, ICollection<IDomainEvent> events, params IDomainEvent[] domainEvents);
-
-        bool Any(TKey id);
+        void Append(TKey id, EventStream<TKey> aggregateStream);
     }
 }
