@@ -31,19 +31,20 @@ DFlow.Business.Cqrs|CQRS framework to implement command and query handlers event
 DFlow.Persistence|Base framework providing an Unity of Work and Repository design patterns to support persistence layer implementation|- DFlow.Domain </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Persistence.svg)|
 
 Contrib Packages|Description|Dependencies|Latest Version|
--|-|-|-|
+-|-|-|-|-
 DFlow.Persistence.EntityFramework|Specialization of DFlow.Persistence to support EntityFramework based persistence layers abstraction|- DFlow.Domain </br>- DFlow.Domain.Persistence </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Persistence.EntityFramework.svg)|
 DFlow.Domain.EventBus.FluentMediator|Implementation of IDomainEventBus to be used to DomainEvents publishing |- DFlow.Domain.Events </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Domain.EventBus.FluentMediator.svg)|
+DFlow.Persistence.LiteDB|Specialization of DFlow.Persistence to support LiteDB |- DFlow.Domain </br>- DFlow.Domain.Persistence </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Persistence.LiteDB.svg)|
 
 ## About Project
-DFlow was born as a reference implementation of Domain-Drive Desing architecture based with aggregates supporting EventSourcing design pattern but evolves to a full flaged platform to helps you to implementa your own framework based on DFlow Domani-Driven concepts supported by Domain_Driven Design tools.
+DFlow was born as a reference implementation of Domain-Drive Design architecture based with aggregates supporting Event Sourcing design pattern but evolves to a full flagged platform to helps you to implement your own framework based on DFlow Domain-Driven concepts supported by Domain-Driven Design tools.
 
-Do you have a lot of flexibility to evolve yout applications. Each platform library inforce just de concept used by each specific layer, do you pay for what you use but you can implement your view of DFlow interfaces and evolve as your desire.
+Do you have a lot of flexibility to evolve your applications. Each platform library enforce just few concepts used by each specific layer, do you pay for what you use but you can implement your view of DFlow interfaces and evolve as your desire.
 
-As an example do we provide two contrib packages Dflow.Persistence.EntityFramework that enables yout tu use ORM based approach to your persistence layer using EntityFramework with any database driver that you want and DFlow.EventBus.FluentMediator that is a interface to used the excelent framework FluentMediator.
+As an example, we provide contrib packages like **Dflow.Persistence.EntityFramework** that enables you to use ORM based approach to your persistence layer using EntityFramework with any database driver that you want and DFlow.EventBus.FluentMediator that is a interface to used the excellent framework FluentMediator.
 
 ## Documentation
-For now we implementd few example projects that you can look at in [samples](https://github.com/roadtoagility/dflow/tree/master/samples) folder
+For now we implement few example projects that you can look at in [samples](https://github.com/roadtoagility/dflow/tree/master/samples) folder
 
 Sample|Description|Link|
 -|-|-|
@@ -52,7 +53,7 @@ SimplestApp.Business.Cqrs| It is a basic implementation of CQRS-base application
 SimplestApp.Persistence.EntityFramework|It is a basic application using all libraries of DFlow platform for CQRS + DDD + ORM|[SimplestApp.Persistence.EntityFramework](https://github.com/roadtoagility/dflow/tree/master/samples/SimplestApp.Persistence.EntityFramework)|
 
 ## Roadmap
-  * Finish suport to Event Sourcing in Persistence Layer
+  * Finish support to Event Sourcing in Persistence Layer
   * Test a 100% of code
   * Finish the performance tests support
   * Improve documentation
