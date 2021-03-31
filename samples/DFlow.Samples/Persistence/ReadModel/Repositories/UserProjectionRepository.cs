@@ -15,16 +15,15 @@ namespace DFlow.Samples.Persistence.ReadModel.Repositories
 {
     public sealed class UserProjectionRepository : IUserProjectionRepository
     {
-        private readonly SampleAppDbContext _context;
-        public UserProjectionRepository(SampleAppDbContext context)
+        private readonly SampleAppProjectionDbContext _context;
+        public UserProjectionRepository(SampleAppProjectionDbContext context)
         {
             _context = context;
         }
 
         public UserProjection Get(IIdentity<Guid> id)
         {
-            var user = _context.UsersProjection
-                .FirstOrDefault(ac => ac.Id.Equals(id.Value));
+            var user = _context.Users.FindById(id.Value);
             
             if (user == null)
             {
@@ -36,27 +35,17 @@ namespace DFlow.Samples.Persistence.ReadModel.Repositories
 
         public void Add(UserProjection entity)
         {
-            var oldState =
-                _context.UsersProjection.FirstOrDefault(b => b.Id == entity.Id);
-
-            if (oldState == null)
-            {
-                _context.UsersProjection.Add(entity);
-            }
-            else
-            {
-                _context.Entry(oldState).CurrentValues.SetValues(entity);
-            }
+            _context.Users.Upsert(entity);
         }
 
         public void Remove(UserProjection entity)
         {
-            _context.UsersProjection.Remove(entity);
+            _context.Users.Delete(entity.Id);
         }
 
         public IReadOnlyList<UserProjection> Find(Expression<Func<UserProjection, bool>> predicate)
         {
-            return _context.UsersProjection.Where(predicate).ToList();
+            return _context.Users.Find(predicate).ToList();
         }
     }
 }
