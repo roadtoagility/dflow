@@ -31,7 +31,7 @@ DFlow.Business.Cqrs|CQRS framework to implement command and query handlers event
 DFlow.Persistence|Base framework providing an Unity of Work and Repository design patterns to support persistence layer implementation|- DFlow.Domain </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Persistence.svg)|
 
 Contrib Packages|Description|Dependencies|Latest Version|
--|-|-|-|-
+-|-|-|-|
 DFlow.Persistence.EntityFramework|Specialization of DFlow.Persistence to support EntityFramework based persistence layers abstraction|- DFlow.Domain </br>- DFlow.Domain.Persistence </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Persistence.EntityFramework.svg)|
 DFlow.Domain.EventBus.FluentMediator|Implementation of IDomainEventBus to be used to DomainEvents publishing |- DFlow.Domain.Events </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Domain.EventBus.FluentMediator.svg)|
 DFlow.Persistence.LiteDB|Specialization of DFlow.Persistence to support LiteDB |- DFlow.Domain </br>- DFlow.Domain.Persistence </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Persistence.LiteDB.svg)|
