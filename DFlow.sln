@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Domain.EventBus.Fluen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Persistence.EntityFramework", "src\contrib\DFlow.Persistence.EntityFramework\DFlow.Persistence.EntityFramework.csproj", "{9DB514B5-3C00-472F-BB25-E484978ED5D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Persistence.LiteDB", "src\contrib\DFlow.Persistence.LiteDB\DFlow.Persistence.LiteDB.csproj", "{6A62BA94-4710-4FBD-BCC5-3B4A3087317F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -154,6 +156,14 @@ Global
 		{9DB514B5-3C00-472F-BB25-E484978ED5D9}.Tests|Any CPU.Build.0 = Debug|Any CPU
 		{9DB514B5-3C00-472F-BB25-E484978ED5D9}.Release Profilling|Any CPU.ActiveCfg = Debug|Any CPU
 		{9DB514B5-3C00-472F-BB25-E484978ED5D9}.Release Profilling|Any CPU.Build.0 = Debug|Any CPU
+		{6A62BA94-4710-4FBD-BCC5-3B4A3087317F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A62BA94-4710-4FBD-BCC5-3B4A3087317F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A62BA94-4710-4FBD-BCC5-3B4A3087317F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A62BA94-4710-4FBD-BCC5-3B4A3087317F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A62BA94-4710-4FBD-BCC5-3B4A3087317F}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A62BA94-4710-4FBD-BCC5-3B4A3087317F}.Tests|Any CPU.Build.0 = Debug|Any CPU
+		{6A62BA94-4710-4FBD-BCC5-3B4A3087317F}.Release Profilling|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A62BA94-4710-4FBD-BCC5-3B4A3087317F}.Release Profilling|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D5C025B8-AC7E-4C19-99EA-03732456F812} = {085060D8-3CA9-4165-AFB3-A11EBF5746E6}
@@ -167,5 +177,6 @@ Global
 		{86B8F8D6-303C-4888-8F62-500399EFF82E} = {96AC39D1-C074-4993-B3E2-F190B2B3E5D4}
 		{24A7697A-FC70-40A8-A6EB-3A5F634A9A1E} = {6717E82A-B0EA-4FCA-8A2C-31A46D4999A4}
 		{9DB514B5-3C00-472F-BB25-E484978ED5D9} = {6717E82A-B0EA-4FCA-8A2C-31A46D4999A4}
+		{6A62BA94-4710-4FBD-BCC5-3B4A3087317F} = {6717E82A-B0EA-4FCA-8A2C-31A46D4999A4}
 	EndGlobalSection
 EndGlobal

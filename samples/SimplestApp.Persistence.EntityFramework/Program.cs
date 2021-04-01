@@ -47,10 +47,11 @@ namespace SimplestApp.Persistence.EntityFramework
             serviceCollection.AddDbContext<SampleAppDbContext>(options =>
                 options.UseSqlite("Data Source=samplesdb_dev.sqlite;"));
 
+            serviceCollection.AddSingleton(new SampleAppProjectionDbContext("Filename=sample_projection.db;Connection=shared"));
             serviceCollection.AddScoped<IUserRepository, UserRepository>();
             serviceCollection.AddScoped<IUserProjectionRepository, UserProjectionRepository>();
             serviceCollection.AddScoped<IDbSession<IUserRepository>, SampleDbSession<IUserRepository>>();
-            serviceCollection.AddScoped<IDbSession<IUserProjectionRepository>, SampleDbSession<IUserProjectionRepository>>();
+            serviceCollection.AddScoped<IDbSession<IUserProjectionRepository>, SampleProjectionDbSession<IUserProjectionRepository>>();
             serviceCollection.AddScoped<IDomainEventBus, FluentMediatorDomainEventBus>();
             serviceCollection.AddScoped<AddUserPersistentCommandHandler>();
             serviceCollection.AddScoped<GetUsersByQueryHandler>();
