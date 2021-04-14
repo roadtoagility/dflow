@@ -5,13 +5,17 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using DFlow.Business.Cqrs.CommandHandlers;
 using DFlow.Domain.Events;
 using Microsoft.Extensions.Logging;
 
 namespace DFlow.Business.Cqrs
 {
-    public abstract class CommandHandler<TCommand, TResult> : ICommandHandler<TCommand, TResult>
+    public abstract class CommandHandler<TCommand, TResult> : 
+        ICommandHandler<TCommand, TResult>, 
+        ICommandHandlerAsync<TCommand, TResult>
     {
         protected IDomainEventBus Publisher { get; }
 
@@ -19,12 +23,26 @@ namespace DFlow.Business.Cqrs
         {
             Publisher = publisher;
         }
-
         public TResult Execute(TCommand command)
         {
             return ExecuteCommand(command);
         }
+        
+        public async Task<TResult> ExecuteAsync(TCommand command)
+        {
+            var cancellationSource = new CancellationTokenSource();
+            return await ExecuteCommandAsync(command, cancellationSource.Token)
+                .ConfigureAwait(false);
+        }
 
-        protected abstract TResult ExecuteCommand(TCommand command);
+        protected virtual TResult ExecuteCommand(TCommand command)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual Task<TResult> ExecuteCommandAsync(TCommand command, CancellationToken cancellatioToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

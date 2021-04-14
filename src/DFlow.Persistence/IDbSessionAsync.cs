@@ -4,10 +4,14 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-namespace DFlow.Domain.Events
+
+using System.Threading.Tasks;
+
+namespace DFlow.Persistence
 {
-    public interface IDomainEventHandler<in TDomainEvent>
+    public interface IDbSessionAsync<out TRepository>
     {
-        void Handle(TDomainEvent @event);
+        TRepository Repository { get; }
+        Task SaveChangesAsync();
     }
 }

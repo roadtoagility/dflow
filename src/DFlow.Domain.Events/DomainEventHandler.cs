@@ -5,10 +5,14 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DFlow.Domain.Events
 {
-    public abstract class DomainEventHandler<TDomainEvent> : IDomainEventHandler<TDomainEvent> where TDomainEvent:IDomainEvent
+    public abstract class DomainEventHandler<TDomainEvent> : IDomainEventHandler<TDomainEvent>,
+        IDomainEventHandlerAsync<TDomainEvent>
+        
     {
         protected Exception Exception { get; set; }
 
@@ -26,6 +30,28 @@ namespace DFlow.Domain.Events
             }
         }
 
-        protected abstract void ExecuteHandle(TDomainEvent @event);
+        public Task HandleAsync(TDomainEvent @event, CancellationToken cancellationToken)
+        {
+            try
+            {
+                return ExecuteHandleAsync(@event,cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                //TODO: log here
+                Exception = ex;
+                throw;
+            }
+        }
+
+        protected virtual void ExecuteHandle(TDomainEvent @event)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual Task ExecuteHandleAsync(TDomainEvent @event, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

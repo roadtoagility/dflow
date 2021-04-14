@@ -17,12 +17,16 @@
 //
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Threading;
+using System.Threading.Tasks;
 using DFlow.Business.Cqrs;
 using DFlow.Business.Cqrs.CommandHandlers;
 using DFlow.Domain.Events;
 using DFlow.Tests.Supporting.Commands;
 using DFlow.Tests.Supporting.DomainObjects;
+using FluentValidation.Results;
 
 namespace DFlow.Tests.Supporting
 {
@@ -54,6 +58,34 @@ namespace DFlow.Tests.Supporting
             }
             
             return new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList());
+        }
+        
+        protected override Task<CommandResult<Guid>> ExecuteCommandAsync(AddEntityCommand command, CancellationToken cancellationToken)
+        {
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return Task.FromResult<CommandResult<Guid>>(new CommandResult<Guid>(false,
+                    Guid.Empty, new List<ValidationFailure>()));
+            }
+            
+            var agg = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), 
+                Name.From(command.Name), Email.From(command.Mail));
+            
+            var isSucceed = false;
+            var okId = Guid.Empty;
+      
+            //validation is not working nice yet
+            if (agg.ValidationResults.IsValid)
+            {
+                isSucceed = true;
+                
+                agg.GetEvents().ToImmutableList()
+                    .ForEach( ev => Publisher.Publish(ev));
+                
+                okId = agg.GetChange().AggregationId.Value;
+            }
+            
+            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList()));
         }
     }
 }

@@ -4,10 +4,12 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-namespace DFlow.Domain.Events
+using System.Threading.Tasks;
+
+namespace DFlow.Business.Cqrs.CommandHandlers
 {
-    public interface IDomainEventHandler<in TDomainEvent>
+    public interface ICommandHandlerAsync<in TCommand, TResult>
     {
-        void Handle(TDomainEvent @event);
+        Task<TResult> ExecuteAsync(TCommand command);
     }
 }
