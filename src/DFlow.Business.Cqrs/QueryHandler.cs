@@ -4,18 +4,27 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-using DFlow.Business.Cqrs.CommandHandlers;
+using System.Threading;
+using System.Threading.Tasks;
+using DFlow.Business.Cqrs.QueryHandlers;
 
 namespace DFlow.Business.Cqrs
 {
-    public abstract class QueryHandler<TFilter, TResult> : ICommandHandler<TFilter, TResult>
+    public abstract class QueryHandler<TFilter, TResult> : IQueryHandler<TFilter, TResult>
     {
-      
-        public TResult Execute(TFilter filter)
+        public async Task<TResult> Execute(TFilter filter)
         {
-            return ExecuteQuery(filter);
+            var cancellationToken = new CancellationTokenSource();
+            return await Execute(filter, cancellationToken.Token)
+                .ConfigureAwait(false);
+        }
+        
+        public async Task<TResult> Execute(TFilter filter, CancellationToken cancellationToken)
+        {
+            return await ExecuteQuery(filter, cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        protected abstract TResult ExecuteQuery(TFilter filter);
+        protected abstract Task<TResult> ExecuteQuery(TFilter filter, CancellationToken cancellationToken);
     }
 }

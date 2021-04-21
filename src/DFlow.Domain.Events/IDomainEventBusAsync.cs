@@ -7,11 +7,12 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DFlow.Business.Cqrs.QueryHandlers
+namespace DFlow.Domain.Events
 {
-    public interface IQueryHandler<in TFilter, TResult>
+    public interface IDomainEventBusAsync
     {
-        Task<TResult> Execute(TFilter filter);
-        Task<TResult> Execute(TFilter filter, CancellationToken cancellationToken);
+        Task PublishAsync<TEvent>(TEvent request, CancellationToken cancellationToken);
+
+        Task<TResult> SendAsync<TResult,TRequest>(TRequest request, CancellationToken cancellationToken);
     }
 }

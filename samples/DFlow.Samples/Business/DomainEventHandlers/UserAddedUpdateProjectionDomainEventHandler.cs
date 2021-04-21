@@ -4,6 +4,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+using System.Threading;
+using System.Threading.Tasks;
 using DFlow.Domain.Events;
 using DFlow.Persistence;
 using DFlow.Samples.Domain.Aggregates.Events;
@@ -19,11 +21,13 @@ namespace DFlow.Samples.Business.DomainEventHandlers
         {
             _dbSession = dbSession;
         }
-        protected override void ExecuteHandle(UserAddedEvent @event)
+        protected override Task ExecuteHandle(UserAddedEvent @event, CancellationToken cancellationToken)
         {
             _dbSession.Repository.Add(new UserProjection(@event.Id.Value, @event.Name.Value, 
                 @event.Mail.Value, @event.Version.Value));
             _dbSession.SaveChanges();
+            
+            return Task.CompletedTask;
         }
     }
 }
