@@ -5,8 +5,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 using DFlow.Business.Cqrs.CommandHandlers;
 using DFlow.Domain.EventBus.FluentMediator;
 using DFlow.Domain.Events;
@@ -26,25 +24,25 @@ namespace SimplestApp.Persistence.EntityFramework
 {
     class Program
     {
-        async static Task Main(string[] args)
+        static void Main(string[] args)
         {
             Console.WriteLine("== Simple Cqrs App to Create a User");
             
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddFluentMediator(builder =>
             {
-                builder.On<AddUserCommand>().PipelineAsync()
-                    .Call<AddUserPersistentCommandHandler>(
-                        async(handler, request) => await handler.Execute(request));
+                builder.On<AddUserCommand>().Pipeline()
+                    .Return<CommandResult<Guid>, AddUserPersistentCommandHandler>(
+                        (handler, request) => handler.Execute(request));
                 
                 builder.On<UserAddedEvent>()
-                    .PipelineAsync()
+                    .Pipeline()
                     .Call<IDomainEventHandler<UserAddedEvent>>(
-                        async(handler, request) => await handler.Handle(request));
+                        (handler, request) => handler.Handle(request));
                 
-                builder.On<GetUsersByFilter>().PipelineAsync()
-                    .Call<GetUsersByQueryHandler>(
-                        async(handler, request) => await handler.Execute(request));
+                builder.On<GetUsersByFilter>().Pipeline()
+                    .Return<GetUsersResponse, GetUsersByQueryHandler>(
+                        (handler, request) => handler.Execute(request));
             });
             serviceCollection.AddDbContext<SampleAppDbContext>(options =>
                 options.UseSqlite("Data Source=samplesdb_dev.sqlite;"));
@@ -61,13 +59,11 @@ namespace SimplestApp.Persistence.EntityFramework
 
             var provider = serviceCollection.BuildServiceProvider();
             var mediator = provider.GetService<IMediator>();
-            
-            mediator?.PublishAsync(new AddUserCommand("my name", "mail@test.com"))
-                .GetAwaiter()
-                .GetResult();
+
+            var result = mediator?.Send<CommandResult<Guid>>(new AddUserCommand("my name", "mail@test.com"));
                 
             Console.WriteLine();
-            // Console.WriteLine($"Add user request id {result.Id} operation succed: {result.IsSucceed}");
+            Console.WriteLine($"Add user request id {result.Id} operation succed: {result.IsSucceed}");
 
             var query = mediator?.Send<GetUsersResponse>(GetUsersByFilter.From("my name"));
             Console.WriteLine($"Add user request id {query.Data.Count} operation succed: {query.Data[0].Name}");

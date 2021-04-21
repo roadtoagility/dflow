@@ -8,8 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace DFlow.Persistence.Repositories
 {
@@ -17,6 +15,7 @@ namespace DFlow.Persistence.Repositories
     {
         void Add(TModel entity);
         void Remove(TModel entity);
+        
         IEnumerable<TModel> Find(Expression<Func<TState, bool>> predicate);
     }
 }

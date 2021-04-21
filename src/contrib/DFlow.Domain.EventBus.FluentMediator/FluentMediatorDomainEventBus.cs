@@ -4,8 +4,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-using System.Threading;
-using System.Threading.Tasks;
 using DFlow.Domain.Events;
 using FluentMediator;
 
@@ -20,30 +18,14 @@ namespace DFlow.Domain.EventBus.FluentMediator
             _mediator = mediator;
         }
 
-        public async Task Publish<TEvent>(TEvent request)
+        public void Publish<TEvent>(TEvent request)
         {
-            var cancellationToken = new CancellationTokenSource();
-            await Publish<TEvent>(request, cancellationToken.Token)
-                .ConfigureAwait(false);
-        }
-        
-        public async Task Publish<TEvent>(TEvent request, CancellationToken cancellationToken)
-        {
-            await _mediator.PublishAsync(request, cancellationToken)
-                .ConfigureAwait(false);
+            _mediator.Publish(request);
         }
 
-        public async Task<TResult> Send<TResult, TRequest>(TRequest request)
+        public TResult Send<TResult,TRequest>(TRequest request)
         {
-            var cancellationToken = new CancellationTokenSource();
-            return await Send<TResult, TRequest>(request,cancellationToken.Token)
-                .ConfigureAwait(false);
-        }
-        
-        public async Task<TResult> Send<TResult,TRequest>(TRequest request, CancellationToken cancellationToken)
-        {
-            return await _mediator.SendAsync<TResult>(request, cancellationToken)
-                .ConfigureAwait(false);
+            return _mediator.Send<TResult>(request);
         }
     }
 }

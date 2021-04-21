@@ -18,8 +18,6 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Threading;
-using System.Threading.Tasks;
 using DFlow.Business.Cqrs;
 using DFlow.Business.Cqrs.CommandHandlers;
 using DFlow.Domain.Events;
@@ -35,7 +33,7 @@ namespace DFlow.Tests.Supporting
         {
         }
         
-        protected override Task<CommandResult<Guid>> ExecuteCommand(AddEntityCommand command, CancellationToken cancellationToken)
+        protected override CommandResult<Guid> ExecuteCommand(AddEntityCommand command)
         {
             var agg = BusinessEntityAggregateRoot.Create();
             
@@ -52,7 +50,7 @@ namespace DFlow.Tests.Supporting
                 okId = agg.GetChange().BusinessTestId.Value;
             }
             
-            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList()));
+            return new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList());
         }
     }
 }

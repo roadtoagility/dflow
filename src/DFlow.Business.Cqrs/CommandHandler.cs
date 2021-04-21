@@ -5,8 +5,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 using DFlow.Business.Cqrs.CommandHandlers;
 using DFlow.Domain.Events;
 using Microsoft.Extensions.Logging;
@@ -21,19 +19,12 @@ namespace DFlow.Business.Cqrs
         {
             Publisher = publisher;
         }
-        public async Task<TResult> Execute(TCommand command)
+
+        public TResult Execute(TCommand command)
         {
-            var cancellationToken = new CancellationTokenSource();
-            return await Execute(command, cancellationToken.Token)
-                .ConfigureAwait(false);
-        }
-        
-        public async Task<TResult> Execute(TCommand command, CancellationToken cancellationToken)
-        {
-            return await ExecuteCommand(command, cancellationToken)
-                .ConfigureAwait(false);
+            return ExecuteCommand(command);
         }
 
-        protected abstract Task<TResult> ExecuteCommand(TCommand command, CancellationToken cancellationToken);
+        protected abstract TResult ExecuteCommand(TCommand command);
     }
 }

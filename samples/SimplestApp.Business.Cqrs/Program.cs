@@ -5,7 +5,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
-using System.Threading.Tasks;
 using DFlow.Business.Cqrs.CommandHandlers;
 using DFlow.Domain.EventBus.FluentMediator;
 using DFlow.Domain.Events;
@@ -24,21 +23,21 @@ namespace SimplestApp.Business.Cqrs
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             Console.WriteLine("== Simple Cqrs App to Create a User");
             
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddFluentMediator(builder =>
             {
-                builder.On<AddUserCommand>().PipelineAsync()
+                builder.On<AddUserCommand>().Pipeline()
                     .Return<CommandResult<Guid>, AddUserCommandHandler>(
                         (handler, request) => handler.Execute(request));
                 
                 builder.On<UserAddedEvent>()
-                    .CancellablePipelineAsync()
+                    .Pipeline()
                     .Call<IDomainEventHandler<UserAddedEvent>>(
-                        (handler, request, ct) => handler.Handle(request, ct));
+                        (handler, request) => handler.Handle(request));
             });
             
             serviceCollection.AddScoped<IDomainEventBus, FluentMediatorDomainEventBus>();
@@ -48,7 +47,7 @@ namespace SimplestApp.Business.Cqrs
             var provider = serviceCollection.BuildServiceProvider();
             var mediator = provider.GetService<IMediator>();
 
-            var result = await mediator?.SendAsync<CommandResult<Guid>>(new AddUserCommand("my name", "mail@test.com"));
+            var result = mediator?.Send<CommandResult<Guid>>(new AddUserCommand("my name", "mail@test.com"));
             
             Console.WriteLine();
             Console.WriteLine($"Add user request id {result.Id} operation succed: {result.IsSucceed}");
