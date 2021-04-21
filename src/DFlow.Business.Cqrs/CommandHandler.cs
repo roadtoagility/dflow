@@ -24,7 +24,8 @@ namespace DFlow.Business.Cqrs
         public async Task<TResult> Execute(TCommand command)
         {
             var cancellationToken = new CancellationTokenSource();
-            return await Execute(command, cancellationToken.Token);
+            return await Execute(command, cancellationToken.Token)
+                .ConfigureAwait(false);
         }
         
         public async Task<TResult> Execute(TCommand command, CancellationToken cancellationToken)

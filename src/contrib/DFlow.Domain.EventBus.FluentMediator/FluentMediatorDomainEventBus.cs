@@ -23,7 +23,8 @@ namespace DFlow.Domain.EventBus.FluentMediator
         public async Task Publish<TEvent>(TEvent request)
         {
             var cancellationToken = new CancellationTokenSource();
-            await Publish<TEvent>(request, cancellationToken.Token);
+            await Publish<TEvent>(request, cancellationToken.Token)
+                .ConfigureAwait(false);;
         }
         
         public async Task Publish<TEvent>(TEvent request, CancellationToken cancellationToken)

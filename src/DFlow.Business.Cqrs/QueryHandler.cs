@@ -15,7 +15,8 @@ namespace DFlow.Business.Cqrs
         public async Task<TResult> Execute(TFilter filter)
         {
             var cancellationToken = new CancellationTokenSource();
-            return await Execute(filter, cancellationToken.Token);
+            return await Execute(filter, cancellationToken.Token)
+                .ConfigureAwait(false);
         }
         
         public async Task<TResult> Execute(TFilter filter, CancellationToken cancellationToken)

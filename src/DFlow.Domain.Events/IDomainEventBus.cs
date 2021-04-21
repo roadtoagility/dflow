@@ -17,6 +17,6 @@ namespace DFlow.Domain.Events
 
         Task<TResult> Send<TResult, TRequest>(TRequest request);
         
-        Task<TResult> Send<TResult,TRequest>(TRequest request, CancellationToken cancellationToken = default);
+        Task<TResult> Send<TResult,TRequest>(TRequest request, CancellationToken cancellationToken);
     }
 }
