@@ -37,37 +37,8 @@ namespace DFlow.Tests.Supporting
         {
         }
         
-        protected override CommandResult<Guid> ExecuteCommand(AddEntityCommand command)
+        protected override Task<CommandResult<Guid>> ExecuteCommand(AddEntityCommand command, CancellationToken cancellationToken)
         {
-            
-            var agg = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), 
-                Name.From(command.Name), Email.From(command.Mail));
-            
-            var isSucceed = false;
-            var okId = Guid.Empty;
-      
-            //validation is not working nice yet
-            if (agg.ValidationResults.IsValid)
-            {
-                isSucceed = true;
-                
-                agg.GetEvents().ToImmutableList()
-                    .ForEach( ev => Publisher.Publish(ev));
-                
-                okId = agg.GetChange().AggregationId.Value;
-            }
-            
-            return new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList());
-        }
-        
-        protected override Task<CommandResult<Guid>> ExecuteCommandAsync(AddEntityCommand command, CancellationToken cancellationToken)
-        {
-            if (cancellationToken.IsCancellationRequested)
-            {
-                return Task.FromResult<CommandResult<Guid>>(new CommandResult<Guid>(false,
-                    Guid.Empty, new List<ValidationFailure>()));
-            }
-            
             var agg = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), 
                 Name.From(command.Name), Email.From(command.Mail));
             

@@ -7,6 +7,8 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Threading;
+using System.Threading.Tasks;
 using DFlow.Business.Cqrs;
 using DFlow.Business.Cqrs.CommandHandlers;
 using DFlow.Domain.Events;
@@ -25,7 +27,7 @@ namespace DFlow.Samples.Business.CommandHandlers
             _sessionDb = sessionDb;
         }
         
-        protected override CommandResult<Guid> ExecuteCommand(AddUserCommand command)
+        protected override Task<CommandResult<Guid>> ExecuteCommand(AddUserCommand command, CancellationToken cancellationToken)
         {
             var agg = UserEntityBasedAggregationRoot.CreateFrom(command.Name,command.Mail);
             
@@ -43,7 +45,7 @@ namespace DFlow.Samples.Business.CommandHandlers
                 okId = agg.GetChange().Id.Value;
             }
             
-            return new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList());
+            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList()));
         }
     }
 }

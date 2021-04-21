@@ -11,7 +11,7 @@ using FluentMediator;
 
 namespace DFlow.Domain.EventBus.FluentMediator
 {
-    public class FluentMediatorDomainEventBus:IDomainEventBus, IDomainEventBusAsync
+    public class FluentMediatorDomainEventBus:IDomainEventBus
     {
         private readonly IMediator _mediator;
         
@@ -20,24 +20,16 @@ namespace DFlow.Domain.EventBus.FluentMediator
             _mediator = mediator;
         }
 
-        public void Publish<TEvent>(TEvent request)
+        public async Task Publish<TEvent>(TEvent request, CancellationToken cancellationToken = default)
         {
-            _mediator.Publish(request);
+            await _mediator.PublishAsync(request, cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        public TResult Send<TResult,TRequest>(TRequest request)
+        public async Task<TResult> Send<TResult,TRequest>(TRequest request, CancellationToken cancellationToken = default)
         {
-            return _mediator.Send<TResult>(request);
-        }
-
-        public Task PublishAsync<TEvent>(TEvent request, CancellationToken cancellationToken)
-        {
-            return _mediator.PublishAsync(request,cancellationToken);
-        }
-
-        public Task<TResult> SendAsync<TResult, TRequest>(TRequest request, CancellationToken cancellationToken)
-        {
-            return _mediator.SendAsync<TResult>(request,cancellationToken);
+            return await _mediator.SendAsync<TResult>(request, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

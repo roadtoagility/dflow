@@ -13,9 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DFlow.Business.Cqrs
 {
-    public abstract class CommandHandler<TCommand, TResult> : 
-        ICommandHandler<TCommand, TResult>, 
-        ICommandHandlerAsync<TCommand, TResult>
+    public abstract class CommandHandler<TCommand, TResult> : ICommandHandler<TCommand, TResult>
     {
         protected IDomainEventBus Publisher { get; }
 
@@ -23,26 +21,12 @@ namespace DFlow.Business.Cqrs
         {
             Publisher = publisher;
         }
-        public TResult Execute(TCommand command)
+        public async Task<TResult> Execute(TCommand command, CancellationToken cancellationToken = default)
         {
-            return ExecuteCommand(command);
-        }
-        
-        public async Task<TResult> ExecuteAsync(TCommand command)
-        {
-            var cancellationSource = new CancellationTokenSource();
-            return await ExecuteCommandAsync(command, cancellationSource.Token)
+            return await ExecuteCommand(command, cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        protected virtual TResult ExecuteCommand(TCommand command)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected virtual Task<TResult> ExecuteCommandAsync(TCommand command, CancellationToken cancellatioToken)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract Task<TResult> ExecuteCommand(TCommand command, CancellationToken cancellationToken);
     }
 }

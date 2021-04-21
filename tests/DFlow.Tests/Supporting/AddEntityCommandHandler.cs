@@ -35,27 +35,7 @@ namespace DFlow.Tests.Supporting
         {
         }
         
-        protected override CommandResult<Guid> ExecuteCommand(AddEntityCommand command)
-        {
-            var agg = BusinessEntityAggregateRoot.Create();
-            
-            var isSucceed = false;
-            var okId = Guid.Empty;
-      
-            if (agg.ValidationResults.IsValid)
-            {
-                isSucceed = true;
-                
-                agg.GetEvents().ToImmutableList()
-                    .ForEach( ev => Publisher.Publish(ev));
-                
-                okId = agg.GetChange().BusinessTestId.Value;
-            }
-            
-            return new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList());
-        }
-        
-        protected override Task<CommandResult<Guid>> ExecuteCommandAsync(AddEntityCommand command, CancellationToken cancellationToken)
+        protected override Task<CommandResult<Guid>> ExecuteCommand(AddEntityCommand command, CancellationToken cancellationToken)
         {
             var agg = BusinessEntityAggregateRoot.Create();
             

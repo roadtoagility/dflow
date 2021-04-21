@@ -59,7 +59,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             {
                 throw new DbUpdateConcurrencyException("This version is not the most updated for this object.");
             }
-            
+
             var entry = entity.ToUserState();
             
             DbContext.Users.Remove(entry);

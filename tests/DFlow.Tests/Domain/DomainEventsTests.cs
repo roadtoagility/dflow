@@ -5,6 +5,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
+using System.Threading;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using DFlow.Domain.DomainEvents;
@@ -21,7 +22,7 @@ namespace DFlow.Tests.Domain
     public sealed class DomainEventsTests
     {
         [Fact]
-        public void DomainEvent_Publishing()
+        public async void DomainEvent_Publishing()
         {
             var fixture = new Fixture()
                 .Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
@@ -29,9 +30,10 @@ namespace DFlow.Tests.Domain
             var realEventBus = fixture.Create<IMediator>();
             var myEventBus = new FluentMediatorDomainEventBus(realEventBus);
             var myEvent = fixture.Create<IDomainEvent>();
-            myEventBus.Publish(myEvent);
-            
-            realEventBus.Received().Publish(Arg.Any<IDomainEvent>());
+            var ct = fixture.Create<CancellationTokenSource>();
+            await myEventBus.Publish(myEvent,ct.Token);
+            await realEventBus.Received().PublishAsync(Arg.Any<IDomainEvent>(),
+                Arg.Any<CancellationToken>());
         }
     }
 }

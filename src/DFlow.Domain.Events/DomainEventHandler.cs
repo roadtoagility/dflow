@@ -10,17 +10,15 @@ using System.Threading.Tasks;
 
 namespace DFlow.Domain.Events
 {
-    public abstract class DomainEventHandler<TDomainEvent> : IDomainEventHandler<TDomainEvent>,
-        IDomainEventHandlerAsync<TDomainEvent>
-        
+    public abstract class DomainEventHandler<TDomainEvent> : IDomainEventHandler<TDomainEvent>
     {
         protected Exception Exception { get; set; }
 
-        public void Handle(TDomainEvent @event)
+        public async Task Handle(TDomainEvent @event, CancellationToken cancellationToken = default)
         {
             try
             {
-                ExecuteHandle(@event);
+                await ExecuteHandle(@event, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -30,28 +28,6 @@ namespace DFlow.Domain.Events
             }
         }
 
-        public Task HandleAsync(TDomainEvent @event, CancellationToken cancellationToken)
-        {
-            try
-            {
-                return ExecuteHandleAsync(@event,cancellationToken);
-            }
-            catch (Exception ex)
-            {
-                //TODO: log here
-                Exception = ex;
-                throw;
-            }
-        }
-
-        protected virtual void ExecuteHandle(TDomainEvent @event)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected virtual Task ExecuteHandleAsync(TDomainEvent @event, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract Task ExecuteHandle(TDomainEvent @event, CancellationToken cancellationToken);
     }
 }

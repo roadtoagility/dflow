@@ -4,12 +4,13 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DFlow.Business.Cqrs.CommandHandlers
 {
-    public interface ICommandHandler<in TCommand, out TResult>
+    public interface ICommandHandler<in TCommand, TResult>
     {
-        TResult Execute(TCommand command);
+        Task<TResult> Execute(TCommand command, CancellationToken cancellationToken);
     }
 }
