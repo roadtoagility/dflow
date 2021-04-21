@@ -17,7 +17,8 @@ namespace DFlow.Domain.Events
         public async Task Handle(TDomainEvent @event)
         {
             var cancellationToken = new CancellationTokenSource();
-            await Handle(@event, cancellationToken.Token);
+            await Handle(@event, cancellationToken.Token)
+                .ConfigureAwait(false);
         }
         
         public async Task Handle(TDomainEvent @event, CancellationToken cancellationToken)

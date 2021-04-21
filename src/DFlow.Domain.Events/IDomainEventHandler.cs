@@ -11,6 +11,7 @@ namespace DFlow.Domain.Events
 {
     public interface IDomainEventHandler<in TDomainEvent>
     {
-        Task Handle(TDomainEvent @event, CancellationToken cancellationToken = default);
+        Task Handle(TDomainEvent @event);
+        Task Handle(TDomainEvent @event, CancellationToken cancellationToken);
     }
 }

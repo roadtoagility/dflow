@@ -6,6 +6,7 @@
 
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using DFlow.Domain.DomainEvents;
@@ -22,7 +23,7 @@ namespace DFlow.Tests.Domain
     public sealed class DomainEventsTests
     {
         [Fact]
-        public async void DomainEvent_Publishing()
+        public async Task DomainEvent_Publishing()
         {
             var fixture = new Fixture()
                 .Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
