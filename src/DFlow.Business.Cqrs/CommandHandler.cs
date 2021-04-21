@@ -21,7 +21,13 @@ namespace DFlow.Business.Cqrs
         {
             Publisher = publisher;
         }
-        public async Task<TResult> Execute(TCommand command, CancellationToken cancellationToken = default)
+        public async Task<TResult> Execute(TCommand command)
+        {
+            var cancellationToken = new CancellationTokenSource();
+            return await Execute(command, cancellationToken.Token);
+        }
+        
+        public async Task<TResult> Execute(TCommand command, CancellationToken cancellationToken)
         {
             return await ExecuteCommand(command, cancellationToken)
                 .ConfigureAwait(false);

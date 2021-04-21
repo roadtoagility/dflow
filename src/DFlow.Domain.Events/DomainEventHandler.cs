@@ -14,7 +14,13 @@ namespace DFlow.Domain.Events
     {
         protected Exception Exception { get; set; }
 
-        public async Task Handle(TDomainEvent @event, CancellationToken cancellationToken = default)
+        public async Task Handle(TDomainEvent @event)
+        {
+            var cancellationToken = new CancellationTokenSource();
+            await Handle(@event, cancellationToken.Token);
+        }
+        
+        public async Task Handle(TDomainEvent @event, CancellationToken cancellationToken)
         {
             try
             {

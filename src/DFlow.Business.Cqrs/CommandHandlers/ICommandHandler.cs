@@ -11,6 +11,7 @@ namespace DFlow.Business.Cqrs.CommandHandlers
 {
     public interface ICommandHandler<in TCommand, TResult>
     {
+        Task<TResult> Execute(TCommand command);
         Task<TResult> Execute(TCommand command, CancellationToken cancellationToken);
     }
 }

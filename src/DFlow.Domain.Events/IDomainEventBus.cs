@@ -11,8 +11,12 @@ namespace DFlow.Domain.Events
 {
     public interface IDomainEventBus
     {
-        Task Publish<TEvent>(TEvent request, CancellationToken cancellationToken = default);
+        Task Publish<TEvent>(TEvent request);
+        
+        Task Publish<TEvent>(TEvent request, CancellationToken cancellationToken);
 
+        Task<TResult> Send<TResult, TRequest>(TRequest request);
+        
         Task<TResult> Send<TResult,TRequest>(TRequest request, CancellationToken cancellationToken = default);
     }
 }

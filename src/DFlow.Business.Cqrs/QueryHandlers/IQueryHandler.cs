@@ -11,6 +11,7 @@ namespace DFlow.Business.Cqrs.QueryHandlers
 {
     public interface IQueryHandler<in TFilter, TResult>
     {
+        Task<TResult> Execute(TFilter filter);
         Task<TResult> Execute(TFilter filter, CancellationToken cancellationToken);
     }
 }

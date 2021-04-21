@@ -12,9 +12,16 @@ namespace DFlow.Business.Cqrs
 {
     public abstract class QueryHandler<TFilter, TResult> : IQueryHandler<TFilter, TResult>
     {
-        public async Task<TResult> Execute(TFilter filter, CancellationToken cancellationToken = default)
+        public async Task<TResult> Execute(TFilter filter)
         {
-            return await ExecuteQuery(filter, cancellationToken).ConfigureAwait(false);
+            var cancellationToken = new CancellationTokenSource();
+            return await Execute(filter, cancellationToken.Token);
+        }
+        
+        public async Task<TResult> Execute(TFilter filter, CancellationToken cancellationToken)
+        {
+            return await ExecuteQuery(filter, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         protected abstract Task<TResult> ExecuteQuery(TFilter filter, CancellationToken cancellationToken);

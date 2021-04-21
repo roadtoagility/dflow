@@ -4,6 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+using System.Threading.Tasks;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using DFlow.Domain.Events;
@@ -18,7 +19,7 @@ namespace DFlow.Tests.Business.Cqrs
     public sealed class CommandHandlerTests
     {
         [Fact]
-        public async void Add_entity_valid_command()
+        public async Task Add_entity_valid_command()
         {
             var fixture = new Fixture().Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
 
@@ -30,12 +31,12 @@ namespace DFlow.Tests.Business.Cqrs
 
             var result = await handler.Execute(command);
 
-            eventBus.Received(1).Publish(Arg.Any<EntityAddedEvent>());
+            await eventBus.Received(1).Publish(Arg.Any<EntityAddedEvent>());
             Assert.True(result.IsSucceed);
         }
         
         [Fact]
-        public async void Add_entity_eventbased_valid_command()
+        public async Task Add_entity_eventbased_valid_command()
         {
             var fixture = new Fixture().Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
 
@@ -47,7 +48,7 @@ namespace DFlow.Tests.Business.Cqrs
 
             var result = await handler.Execute(command);
 
-            eventBus.Received(1).Publish(Arg.Any<EntityAddedEvent>());
+            await eventBus.Received(1).Publish(Arg.Any<EntityAddedEvent>());
             Assert.True(result.IsSucceed);
         }
     }
