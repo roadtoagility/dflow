@@ -19,6 +19,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Threading;
+using System.Threading.Tasks;
 using DFlow.Business.Cqrs;
 using DFlow.Business.Cqrs.CommandHandlers;
 using DFlow.Domain.BusinessObjects;
@@ -37,7 +39,7 @@ namespace DFlow.Tests.Supporting
         {
         }
         
-        protected override CommandResult<Guid> ExecuteCommand(UpdateEntityCommand command)
+        protected override Task<CommandResult<Guid>> ExecuteCommand(UpdateEntityCommand command, CancellationToken cancellationToken)
         {
             // FIXME: remove this after clear my mind, i do need port the persistence event sourcing infrastructure now :)
             var aggOld = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), 
@@ -62,7 +64,7 @@ namespace DFlow.Tests.Supporting
                 okId = agg.GetChange().AggregationId.Value;
             }
             
-            return new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList());
+            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList()));
         }
     }
 }
