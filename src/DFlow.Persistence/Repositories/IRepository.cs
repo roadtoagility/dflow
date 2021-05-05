@@ -18,5 +18,7 @@ namespace DFlow.Persistence.Repositories
         void Add(TModel entity);
         void Remove(TModel entity);
         IEnumerable<TModel> Find(Expression<Func<TState, bool>> predicate);
+        Task<IEnumerable<TModel>> FindAsync(Expression<Func<TState, bool>> predicate);
+        Task<IEnumerable<TModel>> FindAsync(Expression<Func<TState, bool>> predicate, CancellationToken cancellationToken);
     }
 }

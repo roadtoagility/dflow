@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
 using DFlow.Domain.BusinessObjects;
 
 namespace DFlow.Samples.Persistence.ReadModel.Repositories
@@ -46,6 +48,16 @@ namespace DFlow.Samples.Persistence.ReadModel.Repositories
         public IReadOnlyList<UserProjection> Find(Expression<Func<UserProjection, bool>> predicate)
         {
             return _context.Users.Find(predicate).ToList();
+        }
+
+        public Task<IReadOnlyList<UserProjection>> FindAsync(Expression<Func<UserProjection, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IReadOnlyList<UserProjection>> FindAsync(Expression<Func<UserProjection, bool>> predicate, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }
