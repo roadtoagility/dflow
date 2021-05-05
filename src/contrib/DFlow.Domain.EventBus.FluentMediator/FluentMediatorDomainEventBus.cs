@@ -22,28 +22,24 @@ namespace DFlow.Domain.EventBus.FluentMediator
 
         public async Task Publish<TEvent>(TEvent request)
         {
-            var cancellationToken = new CancellationTokenSource();
-            await Publish<TEvent>(request, cancellationToken.Token)
-                .ConfigureAwait(false);
-        }
-        
-        public async Task Publish<TEvent>(TEvent request, CancellationToken cancellationToken)
-        {
-            await _mediator.PublishAsync(request, cancellationToken)
-                .ConfigureAwait(false);
+            var cancellation = new CancellationToken();
+            await Publish(request, cancellation).ConfigureAwait(false);
         }
 
-        public async Task<TResult> Send<TResult, TRequest>(TRequest request)
+        public async Task Publish<TEvent>(TEvent request, CancellationToken cancellationToken)
         {
-            var cancellationToken = new CancellationTokenSource();
-            return await Send<TResult, TRequest>(request,cancellationToken.Token)
-                .ConfigureAwait(false);
+            await _mediator.PublishAsync(request, cancellationToken).ConfigureAwait(false);
         }
-        
-        public async Task<TResult> Send<TResult,TRequest>(TRequest request, CancellationToken cancellationToken)
+
+        public async Task<TResult> Send<TResult,TRequest>(TRequest request)
         {
-            return await _mediator.SendAsync<TResult>(request, cancellationToken)
-                .ConfigureAwait(false);
+            var cancellation = new CancellationToken();
+            return await Send<TResult, TRequest>(request, cancellation).ConfigureAwait(false);
+        }
+
+        public async Task<TResult> Send<TResult, TRequest>(TRequest request, CancellationToken cancellationToken)
+        {
+            return await _mediator.SendAsync<TResult>(request, cancellationToken).ConfigureAwait(false);
         }
     }
 }
