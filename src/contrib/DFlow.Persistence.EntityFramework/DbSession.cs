@@ -6,6 +6,8 @@
 
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace DFlow.Persistence.EntityFramework
@@ -26,7 +28,17 @@ namespace DFlow.Persistence.EntityFramework
         {
             Context.SaveChanges();
         }
-
+        
+        public async Task SaveChangesAsync()
+        {
+            var cancellationToken = new CancellationToken();
+            await SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        }
+        public async Task SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            await Context.SaveChangesAsync(cancellationToken)
+                .ConfigureAwait(false);
+        }
         public void Dispose()
         {
             Context?.Dispose();

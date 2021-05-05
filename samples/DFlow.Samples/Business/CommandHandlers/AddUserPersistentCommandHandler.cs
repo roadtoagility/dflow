@@ -27,7 +27,7 @@ namespace DFlow.Samples.Business.CommandHandlers
             _sessionDb = sessionDb;
         }
         
-        protected override Task<CommandResult<Guid>> ExecuteCommand(AddUserCommand command, CancellationToken cancellationToken)
+        protected override async Task<CommandResult<Guid>> ExecuteCommand(AddUserCommand command, CancellationToken cancellationToken)
         {
             var agg = UserEntityBasedAggregationRoot.CreateFrom(command.Name,command.Mail);
             
@@ -37,15 +37,16 @@ namespace DFlow.Samples.Business.CommandHandlers
             if (agg.ValidationResults.IsValid)
             {
                 _sessionDb.Repository.Add(agg.GetChange());
-                _sessionDb.SaveChanges();
+                await _sessionDb.SaveChangesAsync(cancellationToken);
                 
                 agg.GetEvents().ToImmutableList()
-                    .ForEach( ev => Publisher.Publish(ev));
+                    .ForEach( async ev => await Publisher.Publish(ev, cancellationToken));
                 
                 okId = agg.GetChange().Id.Value;
             }
             
-            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList()));
+            return await Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList()))
+                .ConfigureAwait(false);
         }
     }
 }

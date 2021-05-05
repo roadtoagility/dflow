@@ -8,6 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DFlow.Persistence.ReadModel.Repositories
 {
@@ -16,5 +18,8 @@ namespace DFlow.Persistence.ReadModel.Repositories
         void Add(TModel entity);
         void Remove(TModel entity);
         IReadOnlyList<TModel> Find(Expression<Func<TModel, bool>> predicate);
+        Task<IReadOnlyList<TModel>> FindAsync(Expression<Func<TModel, bool>> predicate);
+        
+        Task<IReadOnlyList<TModel>> FindAsync(Expression<Func<TModel, bool>> predicate, CancellationToken cancellationToken);
     }
 }

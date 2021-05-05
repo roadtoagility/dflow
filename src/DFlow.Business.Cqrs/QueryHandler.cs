@@ -6,12 +6,13 @@
 
 using System.Threading;
 using System.Threading.Tasks;
-using DFlow.Business.Cqrs.QueryHandlers;
+using DFlow.Business.Cqrs.CommandHandlers;
 
 namespace DFlow.Business.Cqrs
 {
-    public abstract class QueryHandler<TFilter, TResult> : IQueryHandler<TFilter, TResult>
+    public abstract class QueryHandler<TFilter, TResult> : ICommandHandler<TFilter, TResult>
     {
+      
         public async Task<TResult> Execute(TFilter filter)
         {
             var cancellationToken = new CancellationTokenSource();

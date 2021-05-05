@@ -33,12 +33,12 @@ namespace SimplestApp.Business.Cqrs
             {
                 builder.On<AddUserCommand>().PipelineAsync()
                     .Return<CommandResult<Guid>, AddUserCommandHandler>(
-                        (handler, request) => handler.Execute(request));
+                        async(handler, request) => await handler.Execute(request));
                 
                 builder.On<UserAddedEvent>()
-                    .CancellablePipelineAsync()
+                    .Pipeline()
                     .Call<IDomainEventHandler<UserAddedEvent>>(
-                        (handler, request, ct) => handler.Handle(request, ct));
+                        (handler, request) => handler.Handle(request));
             });
             
             serviceCollection.AddScoped<IDomainEventBus, FluentMediatorDomainEventBus>();
@@ -48,7 +48,10 @@ namespace SimplestApp.Business.Cqrs
             var provider = serviceCollection.BuildServiceProvider();
             var mediator = provider.GetService<IMediator>();
 
-            var result = await mediator?.SendAsync<CommandResult<Guid>>(new AddUserCommand("my name", "mail@test.com"));
+            
+            var result = mediator?.SendAsync<CommandResult<Guid>>(new AddUserCommand("my name", "mail@test.com"))
+                .GetAwaiter()
+                .GetResult();
             
             Console.WriteLine();
             Console.WriteLine($"Add user request id {result.Id} operation succed: {result.IsSucceed}");

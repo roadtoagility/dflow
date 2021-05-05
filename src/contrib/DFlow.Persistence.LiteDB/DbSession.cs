@@ -6,6 +6,8 @@
 
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using DFlow.Persistence.LiteDB.Model;
 using LiteDB;
 
@@ -13,6 +15,8 @@ namespace DFlow.Persistence.LiteDB
 {
     public class ProjectionDbSession<TRepository>: IDbSession<TRepository>, IDisposable
     {
+        private IDbSession<TRepository> _dbSessionImplementation;
+
         public ProjectionDbSession(LiteDbContext context, TRepository repository)
         {
             Context = context;
@@ -26,6 +30,16 @@ namespace DFlow.Persistence.LiteDB
         public void SaveChanges()
         {
             Context.Database.Commit();
+        }
+
+        public Task SaveChangesAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
 
         public void Dispose()

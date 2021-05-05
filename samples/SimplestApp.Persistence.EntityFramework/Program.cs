@@ -5,7 +5,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using DFlow.Business.Cqrs.CommandHandlers;
 using DFlow.Domain.EventBus.FluentMediator;
@@ -26,7 +25,7 @@ namespace SimplestApp.Persistence.EntityFramework
 {
     class Program
     {
-        async static Task Main(string[] args)
+        static async Task Main(string[] args)
         {
             Console.WriteLine("== Simple Cqrs App to Create a User");
             
@@ -34,16 +33,16 @@ namespace SimplestApp.Persistence.EntityFramework
             serviceCollection.AddFluentMediator(builder =>
             {
                 builder.On<AddUserCommand>().PipelineAsync()
-                    .Call<AddUserPersistentCommandHandler>(
+                    .Return<CommandResult<Guid>, AddUserPersistentCommandHandler>(
                         async(handler, request) => await handler.Execute(request));
                 
                 builder.On<UserAddedEvent>()
-                    .PipelineAsync()
+                    .CancellablePipelineAsync()
                     .Call<IDomainEventHandler<UserAddedEvent>>(
-                        async(handler, request) => await handler.Handle(request));
+                        async(handler, request, ct) => await handler.Handle(request, ct));
                 
                 builder.On<GetUsersByFilter>().PipelineAsync()
-                    .Call<GetUsersByQueryHandler>(
+                    .Return<GetUsersResponse, GetUsersByQueryHandler>(
                         async(handler, request) => await handler.Execute(request));
             });
             serviceCollection.AddDbContext<SampleAppDbContext>(options =>
@@ -61,16 +60,18 @@ namespace SimplestApp.Persistence.EntityFramework
 
             var provider = serviceCollection.BuildServiceProvider();
             var mediator = provider.GetService<IMediator>();
-            
-            mediator?.PublishAsync(new AddUserCommand("my name", "mail@test.com"))
+
+            var result = mediator?.SendAsync<CommandResult<Guid>>(new AddUserCommand("my name", "mail@test.com"))
                 .GetAwaiter()
                 .GetResult();
                 
             Console.WriteLine();
-            // Console.WriteLine($"Add user request id {result.Id} operation succed: {result.IsSucceed}");
+            Console.WriteLine($"Add user request id {result?.Id} operation succed: {result?.IsSucceed}");
 
-            var query = mediator?.Send<GetUsersResponse>(GetUsersByFilter.From("my name"));
-            Console.WriteLine($"Add user request id {query.Data.Count} operation succed: {query.Data[0].Name}");
+            var query = mediator?.SendAsync<GetUsersResponse>(GetUsersByFilter.From("my name"))
+                .GetAwaiter()
+                .GetResult();
+            Console.WriteLine($"Add user request id {query?.Data.Count} operation succed: {query?.Data[0].Name}");
             
             Console.WriteLine("press any key to exit.");
             Console.ReadKey();
