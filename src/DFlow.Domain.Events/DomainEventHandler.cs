@@ -5,6 +5,8 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DFlow.Domain.Events
 {
@@ -12,11 +14,18 @@ namespace DFlow.Domain.Events
     {
         protected Exception Exception { get; set; }
 
-        public void Handle(TDomainEvent @event)
+        public async Task Handle(TDomainEvent @event)
+        {
+            var cancellationToken = new CancellationTokenSource();
+            await Handle(@event, cancellationToken.Token)
+                .ConfigureAwait(false);
+        }
+        
+        public async Task Handle(TDomainEvent @event, CancellationToken cancellationToken)
         {
             try
             {
-                ExecuteHandle(@event);
+                await ExecuteHandle(@event, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -26,6 +35,6 @@ namespace DFlow.Domain.Events
             }
         }
 
-        protected abstract void ExecuteHandle(TDomainEvent @event);
+        protected abstract Task ExecuteHandle(TDomainEvent @event, CancellationToken cancellationToken);
     }
 }
