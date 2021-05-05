@@ -25,6 +25,7 @@ namespace DFlow.Samples.Business.QueryHandlers
         {
             var clients = _dbSession.Repository
                 .Find(up=>  up.Name.Contains(filter.Name));
+
             return Task.FromResult(GetUsersResponse.From(clients.Count>0, clients));
         }
     }

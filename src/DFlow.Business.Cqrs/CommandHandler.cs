@@ -21,6 +21,7 @@ namespace DFlow.Business.Cqrs
         {
             Publisher = publisher;
         }
+
         public async Task<TResult> Execute(TCommand command)
         {
             var cancellationToken = new CancellationTokenSource();
