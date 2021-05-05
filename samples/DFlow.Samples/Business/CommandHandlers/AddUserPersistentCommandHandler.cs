@@ -45,7 +45,8 @@ namespace DFlow.Samples.Business.CommandHandlers
                 okId = agg.GetChange().Id.Value;
             }
             
-            return await Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList()));
+            return await Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList()))
+                .ConfigureAwait(false);
         }
     }
 }
