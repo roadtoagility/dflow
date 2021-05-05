@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
 using DFlow.Domain.BusinessObjects;
 using DFlow.Samples.Domain.BusinessObjects;
 using DFlow.Samples.Persistence.ExtensionMethods;
@@ -79,11 +81,24 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             
             return user.ToUser();
         }
-
         public IEnumerable<User> Find(Expression<Func<UserState, bool>> predicate)
         {
             return DbContext.Users.Where(predicate).AsNoTracking()
-                .Select(t => t.ToUser());
+                .Select(t => t.ToUser()).ToList();
+        }
+
+        
+        public async Task<IEnumerable<User>> FindAsync(Expression<Func<UserState, bool>> predicate)
+        {
+            var cancellationToken = new CancellationToken();
+            return await FindAsync(predicate, cancellationToken)
+                .ConfigureAwait(false);
+        }
+        public async Task<IEnumerable<User>> FindAsync(Expression<Func<UserState, bool>> predicate, CancellationToken cancellationToken)
+        {
+            return await DbContext.Users.Where(predicate).AsNoTracking()
+                .Select(t => t.ToUser()).ToListAsync()
+                .ConfigureAwait(false);
         }
     }
 }

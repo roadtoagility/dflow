@@ -37,9 +37,9 @@ namespace SimplestApp.Persistence.EntityFramework
                         async(handler, request) => await handler.Execute(request));
                 
                 builder.On<UserAddedEvent>()
-                    .Pipeline()
+                    .CancellablePipelineAsync()
                     .Call<IDomainEventHandler<UserAddedEvent>>(
-                        (handler, request) => handler.Handle(request));
+                        async(handler, request, ct) => await handler.Handle(request, ct));
                 
                 builder.On<GetUsersByFilter>().PipelineAsync()
                     .Return<GetUsersResponse, GetUsersByQueryHandler>(
