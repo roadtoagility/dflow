@@ -63,7 +63,7 @@ SimplestApp.Persistence.EntityFramework|It is a basic application using all libr
 
 | Supporter | Description |      |
 | ---- | ----- | ----------- |
-| <img src="/home/adriano/Projects/roadtoagility/dflow/img/jetbrains-variant-4.png" alt="./img/" style="zoom:20%;" /> | All Products Pack License for Open Source under program [**Free License Programs**](https://www.jetbrains.com/community/education/) |             |
+| <img src="img/jetbrains-variant-4.png" alt="./img/" width="300px" /> | All Products Pack License for Open Source under program [**Free License Programs**](https://www.jetbrains.com/community/education/) |             |
 
 ### Thank You for all **supporters** of this project
 
