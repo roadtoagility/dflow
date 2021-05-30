@@ -59,7 +59,17 @@ SimplestApp.Persistence.EntityFramework|It is a basic application using all libr
   * Improve documentation
   * much more...
 
+## Supporters
+
+| Supporter | Description |      |
+| ---- | ----- | ----------- |
+| <img src="/home/adriano/Projects/roadtoagility/dflow/img/jetbrains-variant-4.png" alt="./img/" style="zoom:20%;" /> | All Products Pack License for Open Source under program [**Free License Programs**](https://www.jetbrains.com/community/education/) |             |
+
+### Thank You for all **supporters** of this project.
+
 ## License
+
 This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
