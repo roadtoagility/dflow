@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2020  Road to Agility
+// Copyright (C) 2020  Road to Agility
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -37,7 +37,7 @@ namespace DFlow.Samples.Domain.BusinessObjects
             var user = new User(clientId,name,commercialEmail, version);
             var validator = new UserValidator();
             user.SetValidationResult(validator.Validate(user));
-            return user;        
+            return user;    
         }
 
         public static User Empty()

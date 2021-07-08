@@ -12,6 +12,7 @@ namespace DFlow.Domain.Validation
 {
     public abstract class ValidationStatus: ValueObject
     {
+        //Expor os erros, hj não tem como pegar
         public void SetValidationResult(ValidationResult result)
         {
             //avoid results overriding
