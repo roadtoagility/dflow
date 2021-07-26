@@ -32,9 +32,70 @@ namespace DFlow.Domain.BusinessObjects
         where TThis : ValueOf<TValue, TThis, TValidator>
         where TValidator: AbstractValidator<TThis>, new()
     {
+        private static readonly Func<TValue,TThis> Factory;
+
         public ValidationResult ValidationStatus { get; private set; }
 
-        private static readonly Func<TThis> Factory;
+        static ValueOf()
+        {
+            ConstructorInfo ctor = typeof(TThis)
+                .GetTypeInfo()
+                .DeclaredConstructors
+                .Where(ctr=> ctr.GetParameters().Length == 1)
+                .Select(ctr=> ctr)
+                .First();
+
+            var argExpr = Expression.Parameter(typeof(TValue), "value");
+            var argsExp = Expression.Add(argExpr,Expression.Constant(1));
+            var newExp = Expression.New(ctor, argsExp);
+            var lambda = Expression.Lambda(typeof(Func<TValue,TThis>), newExp, 
+                new List<ParameterExpression>() { argExpr });
+
+            Factory = (Func<TValue,TThis>)lambda.Compile();
+        }
+
+        public TValue Value { get;}
+
+        public static TThis From(TValue item)
+        {
+            TThis realVo = Factory(item);
+            realVo.Validate();
+
+            return realVo;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (ReferenceEquals(this, obj))
+                return true;
+
+            return obj.GetType() == GetType() && Equals((ValueOf<TValue, TThis, TValidator>)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Value);
+        }
+
+        // Implicit operator removed. See issue #14.
+
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
+
+        protected ValueOf(TValue value)
+        {
+            Value = value;
+        }
+        
+        protected virtual bool Equals(ValueOf<TValue, TThis,TValidator> other)
+        {
+            return EqualityComparer<TValue>.Default.Equals(Value, other.Value);
+        }
 
         /// <summary>
         /// WARNING - THIS FEATURE IS EXPERIMENTAL. I may change it to do
@@ -47,73 +108,5 @@ namespace DFlow.Domain.BusinessObjects
             ValidationStatus = new TValidator().Validate((TThis)this);
         }
 
-        static ValueOf()
-        {
-            ConstructorInfo ctor = typeof(TThis)
-                .GetTypeInfo()
-                .DeclaredConstructors
-                .First();
-
-            var argsExp = new Expression[0];
-            NewExpression newExp = Expression.New(ctor, argsExp);
-            LambdaExpression lambda = Expression.Lambda(typeof(Func<TThis>), newExp);
-
-            Factory = (Func<TThis>)lambda.Compile();
-        }
-
-        public TValue Value { get; protected set; }
-
-        public static TThis From(TValue item)
-        {
-            TThis x = Factory();
-            x.Value = item;
-            x.Validate();
-
-            return x;
-        }
-
-        protected virtual bool Equals(ValueOf<TValue, TThis,TValidator> other)
-        {
-            return EqualityComparer<TValue>.Default.Equals(Value, other.Value);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj is null)
-                return false;
-
-            if (ReferenceEquals(this, obj))
-                return true;
-
-            return obj.GetType() == GetType() && Equals((ValueOf<TValue, TThis, TValidator>)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return EqualityComparer<TValue>.Default.GetHashCode(Value);
-        }
-
-        public static bool operator ==(ValueOf<TValue, TThis, TValidator> a, ValueOf<TValue, TThis, TValidator> b)
-        {
-            if (a is null && b is null)
-                return true;
-
-            if (a is null || b is null)
-                return false;
-
-            return a.Equals(b);
-        }
-
-        public static bool operator !=(ValueOf<TValue, TThis, TValidator> a, ValueOf<TValue, TThis, TValidator> b)
-        {
-            return !(a == b);
-        }
-
-        // Implicit operator removed. See issue #14.
-
-        public override string ToString()
-        {
-            return Value.ToString();
-        }
     }
 }

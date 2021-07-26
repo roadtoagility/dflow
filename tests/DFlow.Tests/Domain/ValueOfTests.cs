@@ -19,7 +19,7 @@ namespace DFlow.Tests.Domain
         [Fact]
         public void ValueOf_create_Vo_isValid()
         {
-            var vo = Vo.From("teste");
+            var vo = SimpleVo.From("teste");
 
             Assert.True(vo.ValidationStatus.IsValid);
         }
@@ -27,15 +27,32 @@ namespace DFlow.Tests.Domain
         [Fact]
         public void ValueOf_create_Vo_not_Valid()
         {
-            var vo = Vo.From("");
-
+            var vo = SimpleVo.From("");
             Assert.False(vo.ValidationStatus.IsValid);
         }
+        
+        [Fact]
+        public void ValueOf_create_Vo_is_the_same()
+        {
+            var vo1 = SimpleVo.From("testes");
+            var vo2 = SimpleVo.From("testes");
 
+            Assert.True(vo1.Equals(vo2));
+        }
+        
+        [Fact]
+        public void ValueOf_create_Vo_is_not_the_same()
+        {
+            var vo1 = SimpleVo.From("testes 1");
+            var vo2 = SimpleVo.From("testes");
+
+            Assert.False(vo1.Equals(vo2));
+        }
+        
         [Fact]
         public void ValueOf_create_ComplexVo_isValid()
         {
-            var vo = ComplexVo.From(("teste", Vo.From("outro vo")));
+            var vo = ComplexVo.From(("teste", SimpleVo.From("outro vo")));
 
             Assert.True(vo.ValidationStatus.IsValid);
         }
@@ -43,13 +60,15 @@ namespace DFlow.Tests.Domain
         [Fact]
         public void ValueOf_create_ComplexVo_not_Valid()
         {
-            var vo = ComplexVo.From(("", Vo.From("")));
+            var vo = ComplexVo.From(("", SimpleVo.From("")));
 
             Assert.False(vo.ValidationStatus.IsValid);
         }
         
-        class ComplexVo : ValueOf<(string,Vo), ComplexVo, ComplexVoValidator>
+        class ComplexVo : ValueOf<(string,SimpleVo), ComplexVo, ComplexVoValidator>
         {
+            private ComplexVo((string,SimpleVo) data)
+            :base(data){}
         }
         
         class ComplexVoValidator : AbstractValidator<ComplexVo>
@@ -58,15 +77,17 @@ namespace DFlow.Tests.Domain
             {
                 RuleFor(x => x.Value.Item1).NotEmpty();
                 RuleFor(x => x.Value.Item1).NotNull();
-                RuleFor(x => x.Value.Item2).SetValidator(new VoValidator());
+                RuleFor(x => x.Value.Item2).SetValidator(new SimpleVoValidator());
             }   
         }
-        class Vo : ValueOf<string, Vo, VoValidator>
+        class SimpleVo : ValueOf<string, SimpleVo, SimpleVoValidator>
         {
+            private SimpleVo(string data)
+                :base(data){}
         }
-        class VoValidator : AbstractValidator<Vo>
+        class SimpleVoValidator : AbstractValidator<SimpleVo>
         {
-            public VoValidator()
+            public SimpleVoValidator()
             {
                 RuleFor(x => x.Value).NotEmpty();
                 RuleFor(x => x.Value).NotNull();
