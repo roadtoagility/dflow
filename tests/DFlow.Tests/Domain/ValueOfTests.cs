@@ -64,11 +64,31 @@ namespace DFlow.Tests.Domain
 
             Assert.False(vo.ValidationStatus.IsValid);
         }
+
+        [Fact]
+        public void ValueOf_create_ComplexVoNamedTuple_Valid()
+        {
+            var vo = ComplexVo.From(("", SimpleVo.From("")));
+
+            Assert.False(vo.ValidationStatus.IsValid);
+        }
+        
+        class ComplexNamedTupleVo : ValueOf<(string name,SimpleVo Svo), ComplexVo, ComplexVoValidator>
+        {
+        }
+
+        class ComplexNamedTupleVoValidator : AbstractValidator<ComplexNamedTupleVo>
+        {
+            public ComplexNamedTupleVoValidator()
+            {
+                RuleFor(x => x.Value.name).NotEmpty();
+                RuleFor(x => x.Value.name).NotNull();
+                RuleFor(x => x.Value.Svo).SetValidator(new SimpleVoValidator());
+            }   
+        }
         
         class ComplexVo : ValueOf<(string,SimpleVo), ComplexVo, ComplexVoValidator>
         {
-            private ComplexVo((string,SimpleVo) data)
-            :base(data){}
         }
         
         class ComplexVoValidator : AbstractValidator<ComplexVo>
@@ -82,8 +102,6 @@ namespace DFlow.Tests.Domain
         }
         class SimpleVo : ValueOf<string, SimpleVo, SimpleVoValidator>
         {
-            private SimpleVo(string data)
-                :base(data){}
         }
         class SimpleVoValidator : AbstractValidator<SimpleVo>
         {
