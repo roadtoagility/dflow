@@ -36,7 +36,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
         {
             var entry = entity.ToUserState();
 
-            var oldState = Get(entity.Id);
+            var oldState = Get(entity);
 
             if (oldState.Equals(User.Empty()))
             {
@@ -55,7 +55,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
 
         public void Remove(User entity)
         {
-            var oldState = Get(entity.Id);
+            var oldState = Get(entity);
 
             if (Version.Next(oldState.Version) > entity.Version)
             {
@@ -67,12 +67,12 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             DbContext.Users.Remove(entry);
         }
 
-        public User Get(IIdentity<Guid> id)
+        public User Get(IEntityIdentity<Guid> id)
         {
             var user = DbContext.Users.AsNoTracking()
                 .OrderByDescending(ob => ob.Id)
                 .ThenByDescending(ob => ob.RowVersion)
-                .FirstOrDefault(t =>t.Id.Equals(id.Value));
+                .FirstOrDefault(t =>t.Id.Equals(id.Identity));
             
             if (user == null)
             {

@@ -13,10 +13,11 @@ using DFlow.Samples.BusinessObjects.Domain.BusinessObjects.Validations;
 
 namespace DFlow.Samples.Domain.BusinessObjects
 {
-    public sealed class User : ValidationStatus
+    public sealed class User : ValidationStatus, IEntityIdentity<EntityId>
     {
         private User(EntityId clientId, Name name, Email commercialEmail, Version version)
         {
+            Identity = clientId;
             Id = clientId;
             Name = name;
             Mail = commercialEmail;
@@ -55,5 +56,7 @@ namespace DFlow.Samples.Domain.BusinessObjects
             yield return Id;
             yield return Mail;
         }
+
+        public EntityId Identity { get; }
     }
 }

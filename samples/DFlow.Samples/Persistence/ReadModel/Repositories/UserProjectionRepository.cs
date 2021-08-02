@@ -23,9 +23,9 @@ namespace DFlow.Samples.Persistence.ReadModel.Repositories
             _context = context;
         }
 
-        public UserProjection Get(IIdentity<Guid> id)
+        public UserProjection Get(IEntityIdentity<Guid> id)
         {
-            var user = _context.Users.FindById(id.Value);
+            var user = _context.Users.FindById(id.Identity);
             
             if (user == null)
             {

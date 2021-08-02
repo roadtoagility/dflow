@@ -14,6 +14,6 @@ namespace DFlow.Samples.Persistence.Model.Repositories
 {
     public interface IUserRepository: IRepository<UserState, User>
     {
-        User Get(IIdentity<Guid> entityId);
+        User Get(IEntityIdentity<Guid> entityId);
     }
 }
