@@ -13,7 +13,7 @@ namespace DFlow.Domain.DomainEvents
 {
     public class AggregateAddedDomainEvent<TEntityId> : DomainEvent
     {
-        protected AggregateAddedDomainEvent(TEntityId aggregateId, Version version)
+        protected AggregateAddedDomainEvent(TEntityId aggregateId, VersionId version)
         :base(DateTime.Now, version)
         {
             AggregateId = aggregateId;

@@ -6,46 +6,17 @@
 
 using System;
 using System.Collections.Generic;
+using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Validation;
 using DFlow.Samples.BusinessObjects.Domain.BusinessObjects.Validations;
 
-namespace DFlow.Samples.BusinessObjects.Domain.BusinessObjects
+namespace DFlow.Samples.Domain.BusinessObjects
 {
-    public sealed class Email : ValidationStatus
+    public sealed class Email : ValueOf<string, Email, EmailValidator>
     {
-        public string Value { get; }
-        
-        private Email(string name)
-        {
-            Value = name;
-        }
-
-        public static Email From(string name)
-        {
-            var email = new Email(name);
-            var validator = new EmailValidator();
-
-            email.SetValidationResult(validator.Validate(email));
-            
-            return email;
-        }
-        
         public static Email Empty()
         {
-            return new Email(String.Empty);
+            return From(String.Empty);
         }
-        
-        public override string ToString()
-        {
-            return $"{Value}";
-        }
-
-        #region IEquatable
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value;
-        }
-        #endregion
     }
 }

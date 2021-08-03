@@ -13,15 +13,20 @@ using FluentValidation.Results;
 
 namespace DFlow.Domain.Aggregates
 {
-    public abstract class ObjectBasedAggregationRoot<TChange, TEntityId>:BaseValidation,
-        IChangeSet<TChange> where TChange: BaseEntity<TEntityId>
+    public abstract class BasedAggregationRoot<TAggregateId>: BaseValidation //, IChangeSet<TChange>
     {
-        protected TChange AggregateRootEntity { get; set; }
+        // protected TChange AggregateRootEntity { get; set; }
         private readonly IList<IDomainEvent> _changes = new List<IDomainEvent>();
 
-        protected void Apply(TChange item)
+        // protected void Apply(TChange item)
+        // {
+        //     AggregateRootEntity = item;
+        // }
+
+        protected BasedAggregationRoot(IEntityIdentity<TAggregateId> aggregateId, VersionId versionId)
         {
-            AggregateRootEntity = item;
+            AggregateId = aggregateId;
+            Version = versionId;
         }
         
         protected void Raise(IDomainEvent @event)
@@ -29,14 +34,19 @@ namespace DFlow.Domain.Aggregates
             _changes.Add(@event);
         }
         
-        public TChange GetChange()
-        {
-            return AggregateRootEntity;
-        }
+        // public TChange GetChange()
+        // {
+        //     return AggregateRootEntity;
+        // }
 
         public IReadOnlyList<IDomainEvent> GetEvents()
         {
             return _changes.ToImmutableList();
         }
+        
+        protected IEntityIdentity<TAggregateId> AggregateId { get; }
+        
+        protected VersionId Version { get; }
+
     }
 }

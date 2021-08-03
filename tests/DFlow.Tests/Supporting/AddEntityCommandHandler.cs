@@ -42,17 +42,17 @@ namespace DFlow.Tests.Supporting
             var isSucceed = false;
             var okId = Guid.Empty;
       
-            if (agg.ValidationResults.IsValid)
+            if (agg.IsValid)
             {
                 isSucceed = true;
                 
                 agg.GetEvents().ToImmutableList()
                     .ForEach( ev => Publisher.Publish(ev));
                 
-                okId = agg.GetChange().BusinessTestId.Value;
+                okId = agg.GetChange().Identity.Value;
             }
             
-            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList()));
+            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.Failures));
         }
     }
 }

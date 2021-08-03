@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Validation;
 
@@ -18,8 +19,8 @@ namespace DFlow.Tests.Supporting.DomainObjects
         private NewBusinessEntity(NewEntityTestId businessTestId, VersionId version)
         :base(businessTestId, version)
         {
-            AppendValidationResult(businessTestId.ValidationStatus);
-            AppendValidationResult(version.ValidationStatus);
+            AppendValidationResult(businessTestId.ValidationStatus.Errors.ToImmutableList());
+            AppendValidationResult(version.ValidationStatus.Errors.ToImmutableList());
         }
     }
 }

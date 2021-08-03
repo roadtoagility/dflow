@@ -31,10 +31,10 @@ namespace DFlow.Samples.Business.CommandHandlers
         {
             var agg = UserEntityBasedAggregationRoot.CreateFrom(command.Name,command.Mail);
             
-            var isSucceed = agg.ValidationResults.IsValid;
+            var isSucceed = agg.IsValid;
             var okId = Guid.Empty;
       
-            if (agg.ValidationResults.IsValid)
+            if (agg.IsValid)
             {
                 _sessionDb.Repository.Add(agg.GetChange());
                 await _sessionDb.SaveChangesAsync(cancellationToken);
@@ -42,10 +42,10 @@ namespace DFlow.Samples.Business.CommandHandlers
                 agg.GetEvents().ToImmutableList()
                     .ForEach( async ev => await Publisher.Publish(ev, cancellationToken));
                 
-                okId = agg.GetChange().Id.Value;
+                okId = agg.GetChange().Identity.Value;
             }
             
-            return await Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList()))
+            return await Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.Failures))
                 .ConfigureAwait(false);
         }
     }

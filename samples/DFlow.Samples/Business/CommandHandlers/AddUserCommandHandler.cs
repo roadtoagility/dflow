@@ -27,19 +27,18 @@ namespace DFlow.Samples.Business.CommandHandlers
         {
             var agg = UserEntityBasedAggregationRoot.CreateFrom(command.Name,command.Mail);
             
-            var isSucceed = agg.ValidationResults.IsValid;
+            var isSucceed = agg.IsValid;
             var okId = Guid.Empty;
       
-            if (agg.ValidationResults.IsValid)
+            if (agg.IsValid)
             {
                 agg.GetEvents().ToImmutableList()
                     .ForEach( ev => Publisher.Publish(ev));
                 
-                okId = agg.GetChange().Id.Value;
+                okId = agg.GetChange().Identity.Value;
             }
 
-            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,
-                agg.ValidationResults.Errors.ToImmutableList()));
+            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId, agg.Failures));
         }
     }
 }

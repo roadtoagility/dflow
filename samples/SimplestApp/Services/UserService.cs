@@ -18,7 +18,7 @@ namespace SimplestApp.Services
         {
             var agg = UserEntityBasedAggregationRoot.CreateFrom(Name.From(user.Name), Email.From(user.Mail));
 
-            if (!agg.ValidationResults.IsValid)
+            if (!agg.IsValid)
             {
                 throw new ArgumentException("One or more parameters informed to create a user are not valid.");
             }

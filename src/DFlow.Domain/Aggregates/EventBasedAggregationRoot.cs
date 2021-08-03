@@ -8,16 +8,17 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Events;
+using DFlow.Domain.Validation;
 using FluentValidation.Results;
 
 namespace DFlow.Domain.Aggregates
 {
-    public class EventBasedAggregationRoot<TEntityId> : IChangeSet<EventStream<TEntityId>>
+    public class EventBasedAggregationRoot<TEntityId>: BaseValidation, IChangeSet<EventStream<TEntityId>>
     {
         private readonly List<IDomainEvent> _currentStream;
         private readonly List<IDomainEvent> _changes;
 
-        protected EventBasedAggregationRoot(TEntityId aggregateId, Version version, AggregationName name)
+        protected EventBasedAggregationRoot(TEntityId aggregateId, VersionId version, AggregationName name)
         {
             Name = name;
             AggregateId = aggregateId;
@@ -38,7 +39,7 @@ namespace DFlow.Domain.Aggregates
         
         protected TEntityId AggregateId { get; }
         
-        protected Version Version { get; }
+        protected VersionId Version { get; }
         
         protected void Apply(IDomainEvent domainEvent)
         {

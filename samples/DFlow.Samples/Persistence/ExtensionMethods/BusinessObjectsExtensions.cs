@@ -18,6 +18,7 @@
 
 
 using System;
+using DFlow.Domain.BusinessObjects;
 using DFlow.Samples.BusinessObjects.Domain.BusinessObjects;
 using DFlow.Samples.Domain.BusinessObjects;
 using DFlow.Samples.Persistence.Model;
@@ -27,7 +28,7 @@ namespace DFlow.Samples.Persistence.ExtensionMethods
     public static class BusinessObjectsExtensions
     {
         public static UserState ToUserState(this User user)
-            => new UserState(user.Id.Value,
+            => new UserState(user.Identity.Value,
                 user.Name.Value, 
                 user.Mail.Value,
                 BitConverter.GetBytes(user.Version.Value));
@@ -37,7 +38,7 @@ namespace DFlow.Samples.Persistence.ExtensionMethods
                     EntityId.From(state.Id),
                     Name.From(state.Name),
                     Email.From(state.Mail),
-                    DFlow.Domain.BusinessObjects.Version.From(BitConverter.ToInt32(state.RowVersion)));
+                    VersionId.From(BitConverter.ToInt32(state.RowVersion)));
 
 
     }

@@ -44,7 +44,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             }
             else
             {
-                if (Version.Next(oldState.Version) > entity.Version)
+                if (VersionId.Next(oldState.Version) > entity.Version)
                 {
                     throw new DbUpdateConcurrencyException("This version is not the most updated for this object.");
                 }
@@ -57,7 +57,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
         {
             var oldState = Get(entity);
 
-            if (Version.Next(oldState.Version) > entity.Version)
+            if (VersionId.Next(oldState.Version) > entity.Version)
             {
                 throw new DbUpdateConcurrencyException("This version is not the most updated for this object.");
             }
@@ -67,7 +67,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             DbContext.Users.Remove(entry);
         }
 
-        public User Get(IEntityIdentity<Guid> id)
+        public User Get(IEntityIdentity<EntityId> id)
         {
             var user = DbContext.Users.AsNoTracking()
                 .OrderByDescending(ob => ob.Id)

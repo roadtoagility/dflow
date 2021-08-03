@@ -7,7 +7,7 @@ namespace DFlow.Tests.Supporting.DomainObjects
 {
     public sealed class EventStreamBusinessEntityAggregateRoot:EventBasedAggregationRoot<EntityTestId>
     {
-        private EventStreamBusinessEntityAggregateRoot(EntityTestId aggregationId, Name name, Email email, Version version)
+        private EventStreamBusinessEntityAggregateRoot(EntityTestId aggregationId, Name name, Email email, VersionId version)
             :base(aggregationId,version, AggregationName.From(nameof(EventStreamBusinessEntityAggregateRoot)))
         {
             if (name.ValidationResults.IsValid && email.ValidationResults.IsValid)
@@ -45,13 +45,13 @@ namespace DFlow.Tests.Supporting.DomainObjects
 
         public static EventStreamBusinessEntityAggregateRoot Create(EntityTestId aggregateId, Name name, Email email)
         {
-            return new EventStreamBusinessEntityAggregateRoot(aggregateId, name, email, Version.New());
+            return new EventStreamBusinessEntityAggregateRoot(aggregateId, name, email, VersionId.New());
         }
         
         public static EventStreamBusinessEntityAggregateRoot ReconstructFrom(EventStream<EntityTestId> eventStream)
         {
             return new EventStreamBusinessEntityAggregateRoot(EventStream<EntityTestId>.From(eventStream.AggregationId, 
-                eventStream.Name,Version.Next(eventStream.Version), eventStream.Events));
+                eventStream.Name,VersionId.Next(eventStream.Version), eventStream.Events));
         }
     }
 }

@@ -23,16 +23,16 @@ namespace DFlow.Tests.Domain
         {
             var agg = BusinessEntityAggregateRoot.Create();
 
-            Assert.True(agg.ValidationResults.IsValid);
+            Assert.True(agg.IsValid);
         }
         
         [Fact]
         public void Aggregate_reconstruct_a_valid()
         {
-            var be = BusinessEntity.From(EntityTestId.GetNext(), Version.New());
+            var be = BusinessEntity.From(EntityTestId.GetNext(), VersionId.New());
             var agg = BusinessEntityAggregateRoot.ReconstructFrom(be);
 
-            Assert.True(agg.ValidationResults.IsValid);
+            Assert.True(agg.IsValid);
         }
         
         [Fact]

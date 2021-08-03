@@ -5,6 +5,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+using System.Collections.Generic;
 using FluentValidation.Results;
 
 namespace DFlow.Domain.Validation
@@ -12,6 +13,6 @@ namespace DFlow.Domain.Validation
     public interface IValidable
     {
         bool IsValid { get; }
-        void AppendValidationResult(ValidationResult result);
+        void AppendValidationResult(IReadOnlyList<ValidationFailure> failures);
     }
 }

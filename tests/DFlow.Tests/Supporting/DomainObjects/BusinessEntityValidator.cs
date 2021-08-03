@@ -12,7 +12,7 @@ namespace DFlow.Tests.Supporting.DomainObjects
     {
         public BusinessEntityValidator()
         {
-            RuleFor(id => id.BusinessTestId).NotNull();            
+            RuleFor(id => id.Identity).NotNull();            
         }
     }
 }

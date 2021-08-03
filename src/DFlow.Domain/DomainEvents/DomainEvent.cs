@@ -5,6 +5,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
+using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Events;
 using Version = DFlow.Domain.BusinessObjects.Version;
 
@@ -12,13 +13,13 @@ namespace DFlow.Domain.DomainEvents
 {
     public class DomainEvent : IDomainEvent
     {
-        protected DomainEvent(DateTime when, Version version)
+        protected DomainEvent(DateTime when, VersionId version)
         {
             When = when;
             Version = version;
         }
 
         public DateTime When { get; }
-        public Version Version { get; }
+        public VersionId Version { get; }
     }
 }

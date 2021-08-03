@@ -15,9 +15,9 @@ namespace DFlow.Domain.Validation
     public abstract class BaseValidation: IValidable
     {
         private readonly List<ValidationFailure> _failures = new List<ValidationFailure>();
-        public void AppendValidationResult(ValidationResult result)
+        public void AppendValidationResult(IReadOnlyList<ValidationFailure> failures)
         {
-            _failures.AddRange(result.Errors);
+            _failures.AddRange(failures);
         }
 
         public IReadOnlyList<ValidationFailure> Failures => _failures.ToImmutableList();

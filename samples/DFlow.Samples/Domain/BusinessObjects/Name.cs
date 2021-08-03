@@ -5,48 +5,16 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
-using System.Collections.Generic;
-using DFlow.Domain.Validation;
+using DFlow.Domain.BusinessObjects;
 using DFlow.Samples.BusinessObjects.Domain.BusinessObjects.Validations;
 
-namespace DFlow.Samples.BusinessObjects.Domain.BusinessObjects
+namespace DFlow.Samples.Domain.BusinessObjects
 {
-    public sealed class Name : ValidationStatus
+    public sealed class Name : ValueOf<string,Name, NameValidator>
     {
-        public string Value { get; }
-        
-        private Name(string name)
-        {
-            Value = name;
-        }
-
-        public static Name From(string name)
-        {
-            var userName = new Name(name);
-            var validator = new NameValidator();
-
-            userName.SetValidationResult(validator.Validate(userName));
-            
-            return userName;
-        }
-
         public static Name Empty()
         {
-            return new Name(String.Empty);
+            return From(String.Empty);
         }
-        
-        public override string ToString()
-        {
-            return $"{Value}";
-        }
-
-        #region IEquatable
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value;
-        }
-        #endregion
-
     }
 }

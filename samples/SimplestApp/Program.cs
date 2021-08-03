@@ -21,7 +21,7 @@ namespace SimplestApp
             var user = us.Add(new AddUser {Name = "My name", Mail = "my@mail.com"});
             
             Console.WriteLine();
-            Console.WriteLine($"My name is {user.Name}, my mail is {user.Mail} i'm a valid {user.ValidationResults.IsValid}");
+            Console.WriteLine($"My name is {user.Name}, my mail is {user.Mail} i'm a valid {user.IsValid}");
             Console.WriteLine();
             Console.WriteLine("press any key to exit.");
             Console.ReadKey();
