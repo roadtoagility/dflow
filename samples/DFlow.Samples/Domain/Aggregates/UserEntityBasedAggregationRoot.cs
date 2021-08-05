@@ -12,12 +12,12 @@ using DFlow.Samples.Domain.BusinessObjects;
 
 namespace DFlow.Samples.Domain.Aggregates
 {
-    public sealed class UserEntityBasedAggregationRoot : ObjectBasedAggregationRoot<User>
+    public sealed class UserEntityBasedAggregationRoot : ObjectBasedAggregationRoot<User, EntityId>
     {
 
         private UserEntityBasedAggregationRoot(User user)
         {
-            if (user.ValidationResults.IsValid)
+            if (user.IsValid)
             {
                 Apply(user);
 
@@ -27,14 +27,14 @@ namespace DFlow.Samples.Domain.Aggregates
                 }
             }
 
-            ValidationResults = user.ValidationResults;
+            AppendValidationResult(user.Failures);
         }
 
         #region Aggregation contruction
        
         public static UserEntityBasedAggregationRoot CreateFrom(Name name, Email commercialEmail)
         {
-            var user = User.From(EntityId.GetNext(), name, commercialEmail, Version.New());
+            var user = User.From(EntityId.GetNext(), name, commercialEmail, VersionId.New());
             return new UserEntityBasedAggregationRoot(user);
         }
 

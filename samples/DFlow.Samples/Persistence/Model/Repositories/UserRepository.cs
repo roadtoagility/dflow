@@ -14,7 +14,6 @@ using DFlow.Domain.BusinessObjects;
 using DFlow.Samples.Domain.BusinessObjects;
 using DFlow.Samples.Persistence.ExtensionMethods;
 using Microsoft.EntityFrameworkCore;
-using Version = DFlow.Domain.BusinessObjects.Version;
 
 namespace DFlow.Samples.Persistence.Model.Repositories
 {
@@ -36,7 +35,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
         {
             var entry = entity.ToUserState();
 
-            var oldState = Get(entity.Id);
+            var oldState = Get(entity);
 
             if (oldState.Equals(User.Empty()))
             {
@@ -44,7 +43,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             }
             else
             {
-                if (Version.Next(oldState.Version) > entity.Version)
+                if (VersionId.Next(oldState.Version) > entity.Version)
                 {
                     throw new DbUpdateConcurrencyException("This version is not the most updated for this object.");
                 }
@@ -55,9 +54,9 @@ namespace DFlow.Samples.Persistence.Model.Repositories
 
         public void Remove(User entity)
         {
-            var oldState = Get(entity.Id);
+            var oldState = Get(entity);
 
-            if (Version.Next(oldState.Version) > entity.Version)
+            if (VersionId.Next(oldState.Version) > entity.Version)
             {
                 throw new DbUpdateConcurrencyException("This version is not the most updated for this object.");
             }
@@ -67,12 +66,12 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             DbContext.Users.Remove(entry);
         }
 
-        public User Get(IIdentity<Guid> id)
+        public User Get(IEntityIdentity<EntityId> id)
         {
             var user = DbContext.Users.AsNoTracking()
                 .OrderByDescending(ob => ob.Id)
                 .ThenByDescending(ob => ob.RowVersion)
-                .FirstOrDefault(t =>t.Id.Equals(id.Value));
+                .FirstOrDefault(t =>t.Id.Equals(id.Identity.Value));
             
             if (user == null)
             {

@@ -12,6 +12,6 @@ namespace DFlow.Samples.Persistence.ReadModel.Repositories
 {
     public interface IUserProjectionRepository : IProjectionRepository<UserProjection>
     {
-        UserProjection Get(IIdentity<Guid> entityId);
+        UserProjection Get(IEntityIdentity<Guid> entityId);
     }
 }

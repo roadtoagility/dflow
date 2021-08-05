@@ -27,8 +27,6 @@ using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Events;
 using DFlow.Tests.Supporting.Commands;
 using DFlow.Tests.Supporting.DomainObjects;
-using DFlow.Tests.Supporting.DomainObjects.Events;
-using Version = DFlow.Domain.BusinessObjects.Version;
 
 namespace DFlow.Tests.Supporting
 {
@@ -48,7 +46,7 @@ namespace DFlow.Tests.Supporting
             var currentstream = aggOld.GetChange();  
             var agg = EventStreamBusinessEntityAggregateRoot.ReconstructFrom(currentstream);
             
-            var isSucceed = agg.ValidationResults.IsValid;
+            var isSucceed = agg.IsValid;
             var okId = Guid.Empty;
             
             
@@ -56,7 +54,7 @@ namespace DFlow.Tests.Supporting
             {
                 agg.UpdateName(EntityTestId.From(command.AggregateId), Name.From(command.Name));
 
-                isSucceed = agg.ValidationResults.IsValid;
+                isSucceed = agg.IsValid;
                 
                 agg.GetEvents().ToImmutableList()
                     .ForEach( ev => Publisher.Publish(ev));
@@ -64,7 +62,7 @@ namespace DFlow.Tests.Supporting
                 okId = agg.GetChange().AggregationId.Value;
             }
             
-            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList()));
+            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.Failures.ToImmutableList()));
         }
     }
 }

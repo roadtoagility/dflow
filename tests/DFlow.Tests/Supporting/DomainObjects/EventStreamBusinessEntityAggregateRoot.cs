@@ -7,10 +7,10 @@ namespace DFlow.Tests.Supporting.DomainObjects
 {
     public sealed class EventStreamBusinessEntityAggregateRoot:EventBasedAggregationRoot<EntityTestId>
     {
-        private EventStreamBusinessEntityAggregateRoot(EntityTestId aggregationId, Name name, Email email, Version version)
+        private EventStreamBusinessEntityAggregateRoot(EntityTestId aggregationId, Name name, Email email, VersionId version)
             :base(aggregationId,version, AggregationName.From(nameof(EventStreamBusinessEntityAggregateRoot)))
         {
-            if (name.ValidationResults.IsValid && email.ValidationResults.IsValid)
+            if (name.ValidationStatus.IsValid && email.ValidationStatus.IsValid)
             {
                 var change = TestEntityAggregateAddedDomainEvent.From(aggregationId, name, email, version);
                 Apply(change);
@@ -18,40 +18,41 @@ namespace DFlow.Tests.Supporting.DomainObjects
                 // it is always new
                 Raise(change);
             }
-            ValidationResults = name.ValidationResults;
+            
+            AppendValidationResult(name.ValidationStatus.Errors.ToImmutableList());
+            AppendValidationResult(email.ValidationStatus.Errors.ToImmutableList());
         }
 
         private EventStreamBusinessEntityAggregateRoot(EventStream<EntityTestId> eventStream)
             : base(eventStream.AggregationId, eventStream.Version,
                 AggregationName.From(nameof(EventStreamBusinessEntityAggregateRoot)))
         {
-            if (eventStream.ValidationResults.IsValid)
+            if (eventStream.IsValid)
             {
                 Apply(eventStream.Events);
             }
-
-            ValidationResults = eventStream.ValidationResults;
+            AppendValidationResult(eventStream.Failures.ToImmutableList());
         }
 
         public void UpdateName(EntityTestId aggregateId, Name name)
         {
-            if (name.ValidationResults.IsValid && !AggregateId.Equals(aggregateId))
+            if (name.ValidationStatus.IsValid && !AggregateId.Equals(aggregateId))
             {
                 Apply(TestEntityAggregateUpdatedDomainEvent.From(AggregateId,name,Version));
             }
 
-            ValidationResults = name.ValidationResults;
+            AppendValidationResult(name.ValidationStatus.Errors.ToImmutableList());
         }
 
         public static EventStreamBusinessEntityAggregateRoot Create(EntityTestId aggregateId, Name name, Email email)
         {
-            return new EventStreamBusinessEntityAggregateRoot(aggregateId, name, email, Version.New());
+            return new EventStreamBusinessEntityAggregateRoot(aggregateId, name, email, VersionId.New());
         }
         
         public static EventStreamBusinessEntityAggregateRoot ReconstructFrom(EventStream<EntityTestId> eventStream)
         {
             return new EventStreamBusinessEntityAggregateRoot(EventStream<EntityTestId>.From(eventStream.AggregationId, 
-                eventStream.Name,Version.Next(eventStream.Version), eventStream.Events));
+                eventStream.Name,VersionId.Next(eventStream.Version), eventStream.Events));
         }
     }
 }

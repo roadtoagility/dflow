@@ -6,12 +6,15 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Events;
+using DFlow.Domain.Validation;
 using FluentValidation.Results;
 
 namespace DFlow.Domain.Aggregates
 {
-    public abstract class ObjectBasedAggregationRoot<TChange> : IChangeSet<TChange>
+    public abstract class ObjectBasedAggregationRoot<TChange, TEntityId>:BaseValidation,
+        IChangeSet<TChange> where TChange: BaseEntity<TEntityId>
     {
         protected TChange AggregateRootEntity { get; set; }
         private readonly IList<IDomainEvent> _changes = new List<IDomainEvent>();
@@ -35,7 +38,5 @@ namespace DFlow.Domain.Aggregates
         {
             return _changes.ToImmutableList();
         }
-
-        public ValidationResult ValidationResults { get; protected set; }
     }
 }

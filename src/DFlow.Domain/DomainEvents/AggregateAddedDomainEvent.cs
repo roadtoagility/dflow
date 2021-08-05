@@ -6,14 +6,12 @@
 
 using System;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.Events;
-using Version = DFlow.Domain.BusinessObjects.Version;
 
 namespace DFlow.Domain.DomainEvents
 {
     public class AggregateAddedDomainEvent<TEntityId> : DomainEvent
     {
-        protected AggregateAddedDomainEvent(TEntityId aggregateId, Version version)
+        protected AggregateAddedDomainEvent(TEntityId aggregateId, VersionId version)
         :base(DateTime.Now, version)
         {
             AggregateId = aggregateId;

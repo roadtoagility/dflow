@@ -9,13 +9,13 @@ using FluentValidation;
 
 namespace DFlow.Domain.Validation
 {
-    public sealed class VersionValidator: AbstractValidator<Version>
+    public sealed class VersionIdValidator: AbstractValidator<VersionId>
     {
         
-        public VersionValidator()
+        public VersionIdValidator()
         {
             RuleFor(version => version.Value).NotNull();
-            RuleFor(version => version.Value).GreaterThanOrEqualTo(0);
+            RuleFor(version => version.Value).GreaterThan(VersionId.VersionEmpty);
             RuleFor(version => version.Value).LessThanOrEqualTo(int.MaxValue);
         }
     }

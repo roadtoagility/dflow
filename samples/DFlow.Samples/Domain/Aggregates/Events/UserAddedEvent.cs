@@ -6,16 +6,15 @@
 
 
 using System;
+using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.DomainEvents;
-using DFlow.Samples.BusinessObjects.Domain.BusinessObjects;
 using DFlow.Samples.Domain.BusinessObjects;
-using Version = DFlow.Domain.BusinessObjects.Version;
 
 namespace DFlow.Samples.Domain.Aggregates.Events
 {
     public class UserAddedEvent : DomainEvent
     {
-        private UserAddedEvent(EntityId clientId, Name name, Email mail, Version version)
+        private UserAddedEvent(EntityId clientId, Name name, Email mail, VersionId version)
             : base(DateTime.Now, version)
         {
             Id = clientId;
@@ -30,7 +29,7 @@ namespace DFlow.Samples.Domain.Aggregates.Events
         
         public static UserAddedEvent For(User user)
         {
-            return new UserAddedEvent(user.Id,user.Name,user.Mail, user.Version);
+            return new UserAddedEvent(user.Identity,user.Name,user.Mail, user.Version);
         }
     }
 }

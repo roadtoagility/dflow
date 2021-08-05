@@ -46,7 +46,7 @@ namespace DFlow.Tests.Supporting
             var okId = Guid.Empty;
       
             //validation is not working nice yet
-            if (agg.ValidationResults.IsValid)
+            if (agg.IsValid)
             {
                 isSucceed = true;
                 
@@ -56,7 +56,7 @@ namespace DFlow.Tests.Supporting
                 okId = agg.GetChange().AggregationId.Value;
             }
             
-            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.ValidationResults.Errors.ToImmutableList()));
+            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.Failures.ToImmutableList()));
         }
     }
 }

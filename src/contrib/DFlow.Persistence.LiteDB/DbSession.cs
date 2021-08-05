@@ -15,8 +15,6 @@ namespace DFlow.Persistence.LiteDB
 {
     public class ProjectionDbSession<TRepository>: IDbSession<TRepository>, IDisposable
     {
-        private IDbSession<TRepository> _dbSessionImplementation;
-
         public ProjectionDbSession(LiteDbContext context, TRepository repository)
         {
             Context = context;

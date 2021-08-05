@@ -18,47 +18,18 @@
 
 using System;
 using System.Collections.Generic;
+using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Validation;
 using DFlow.Tests.Supporting.DomainObjects.Validators;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
-    public sealed class Name : ValidationStatus
+    public sealed class Name : ValueOf<string, Name, NameValidator>
     {
-        public string Value { get; }
-        
-        private Name(string name)
-        {
-            Value = name;
-        }
-
-        public static Name From(string name)
-        {
-            var userName = new Name(name);
-            var validator = new NameValidator();
-
-            userName.SetValidationResult(validator.Validate(userName));
-            
-            return userName;
-        }
-
+        private static readonly string NameEmpty = string.Empty;
         public static Name Empty()
         {
-            return new Name(String.Empty);
+            return From(NameEmpty);
         }
-        
-        public override string ToString()
-        {
-            return $"{Value}";
-        }
-
-        #region IEquatable
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value;
-        }
-        #endregion
-
     }
 }

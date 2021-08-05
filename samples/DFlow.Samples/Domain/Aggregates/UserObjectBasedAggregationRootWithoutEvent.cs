@@ -11,24 +11,24 @@ using DFlow.Samples.Domain.BusinessObjects;
 
 namespace DFlow.Samples.Domain.Aggregates
 {
-    public sealed class UserObjectBasedAggregationRootWithoutEvent : ObjectBasedAggregationRoot<User>
+    public sealed class UserObjectBasedAggregationRootWithoutEvent : ObjectBasedAggregationRoot<User, EntityId>
     {
 
         private UserObjectBasedAggregationRootWithoutEvent(User user)
         {
-            if (user.ValidationResults.IsValid)
+            if (user.IsValid)
             {
                 Apply(user);
             }
 
-            ValidationResults = user.ValidationResults;
+            AppendValidationResult(user.Failures);
         }
 
         #region Aggregation contruction
        
         public static UserObjectBasedAggregationRootWithoutEvent CreateFrom(Name name, Email commercialEmail)
         {
-            var user = User.From(EntityId.GetNext(), name, commercialEmail, Version.New());
+            var user = User.From(EntityId.GetNext(), name, commercialEmail, VersionId.New());
             return new UserObjectBasedAggregationRootWithoutEvent(user);
         }
 

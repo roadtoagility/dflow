@@ -5,23 +5,20 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
-using System.Collections.Generic;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.Validation;
 using DFlow.Tests.Supporting.DomainObjects.Validators;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
-    public sealed class EntityTestId : ValueOf<Guid,EntityTestId, EntityIdTestValidator>
+    public sealed class NewEntityTestId : ValueOf<Guid,NewEntityTestId,NewEntityTestIdValidator>
     {
-       private static readonly Guid EmptyId = Guid.Empty;
-       
-        public static EntityTestId Empty()
+
+        public static NewEntityTestId Empty()
         {
-            return From(EmptyId);
+            return From(Guid.Empty);
         }
         
-        public static EntityTestId GetNext()
+        public static NewEntityTestId GetNext()
         {
             return From(Guid.NewGuid());
         }

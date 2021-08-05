@@ -19,18 +19,17 @@
 using System;
 using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.DomainEvents;
-using Version = DFlow.Domain.BusinessObjects.Version;
 
 namespace DFlow.Tests.Supporting.DomainObjects.Events
 {
     public class TestEntityAggregateUpdatedDomainEvent : AggregateAddedDomainEvent<EntityTestId>
     {
-        private TestEntityAggregateUpdatedDomainEvent(EntityTestId aggregateId, Name name, Version version)
+        private TestEntityAggregateUpdatedDomainEvent(EntityTestId aggregateId, Name name, VersionId version)
         :base(aggregateId,version)
         {
         }
        
-        public static TestEntityAggregateUpdatedDomainEvent From(EntityTestId aggregateId, Name name, Version version)
+        public static TestEntityAggregateUpdatedDomainEvent From(EntityTestId aggregateId, Name name, VersionId version)
         {
             return new TestEntityAggregateUpdatedDomainEvent(aggregateId, name, version);
         }

@@ -17,14 +17,14 @@
 //
 
 using System;
+using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.DomainEvents;
-using Version = DFlow.Domain.BusinessObjects.Version;
 
 namespace DFlow.Tests.Supporting.DomainObjects.Events
 {
     public class EntityAddedEvent : DomainEvent
     {
-        private EntityAddedEvent(EntityTestId clientId, Version version)
+        private EntityAddedEvent(EntityTestId clientId, VersionId version)
             : base(DateTime.Now, version)
         {
             Id = clientId;
@@ -33,7 +33,7 @@ namespace DFlow.Tests.Supporting.DomainObjects.Events
         
         public static EntityAddedEvent For(BusinessEntity user)
         {
-            return new EntityAddedEvent(user.BusinessTestId, user.Version);
+            return new EntityAddedEvent(user.Identity, user.Version);
         }
     }
 }

@@ -5,20 +5,34 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-// Reference implementation for this version
-// https://docs.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/implement-value-objects
-// https://leanpub.com/tdd-ebook/read#leanpub-auto-value-objects
-// https://enterprisecraftsmanship.com/posts/value-object-better-implementation/
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DFlow.Domain.Validation;
+using FluentValidation.Results;
 
 namespace DFlow.Domain.BusinessObjects
 {
-    public abstract class ValueObject
+    public abstract class BaseEntity<TIdentity>: BaseValidation, 
+        IEntityIdentity<TIdentity>
     {
+        protected BaseEntity(TIdentity identity, VersionId version)
+        {
+            Identity = identity;
+            Version = version;
+        }
+        
+        public TIdentity Identity { get; }
+        
+        public VersionId Version { get; }
+
+        public bool IsNew() => Version.Initial;
+        
+        public override string ToString()
+        {
+            return $"[ENTITY]:[IDENTITY: {Identity}]";
+        }
+        
         protected abstract IEnumerable<object> GetEqualityComponents();
 
         public override bool Equals(object obj)
@@ -33,9 +47,9 @@ namespace DFlow.Domain.BusinessObjects
                 return false;
             }
 
-            var valueObject = (ValueObject)obj;
+            var entity = (BaseEntity<TIdentity>)obj;
 
-            return GetEqualityComponents().SequenceEqual(valueObject.GetEqualityComponents());
+            return GetEqualityComponents().SequenceEqual(entity.GetEqualityComponents());
         }
 
         public override int GetHashCode()

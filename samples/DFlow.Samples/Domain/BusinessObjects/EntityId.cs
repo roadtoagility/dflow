@@ -12,65 +12,16 @@ using DFlow.Samples.BusinessObjects.Domain.BusinessObjects.Validations;
 
 namespace DFlow.Samples.Domain.BusinessObjects
 {
-    public sealed class EntityId : ValidationStatus, IIdentity<Guid>
+    public sealed class EntityId : ValueOf<Guid,EntityId, EntityIdValidator>
     {
-        public Guid Value { get; }
-        
-        private EntityId(Guid id)
-        {
-            Value = id;
-        }
-
-        public static EntityId From(Guid id)
-        {
-            var entityId = new EntityId(id);
-            var validator = new EntityIdValidator();
-
-            entityId.SetValidationResult(validator.Validate(entityId));
-            
-            return entityId;
-        }
-        
         public static EntityId Empty()
         {
-            return EntityId.From(Guid.Empty);
+            return From(Guid.Empty);
         }
         
         public static EntityId GetNext()
         {
             return From(Guid.NewGuid());
         }
-        public override string ToString()
-        {
-            return Value.ToString("N");
-        }
-
-        #region IEquatable
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value;
-        }
-
-        #endregion
-
-        #region IComparable
-
-        public int CompareTo(EntityId other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return 0;
-            }
-
-            if (ReferenceEquals(null, other))
-            {
-                return 1;
-            }
-
-            return Value.CompareTo(other.Value);
-        }
-
-        #endregion
     }
 }

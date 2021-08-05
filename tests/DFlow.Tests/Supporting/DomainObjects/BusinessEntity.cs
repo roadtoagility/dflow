@@ -4,37 +4,27 @@ using DFlow.Domain.Validation;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
-    public class BusinessEntity : ValidationStatus
+    public class BusinessEntity : BaseEntity<EntityTestId>
     {
-        private BusinessEntity(EntityTestId businessTestId, Version version)
+        private BusinessEntity(EntityTestId businessTestId, VersionId version)
+            :base(businessTestId,version)
         {
-            BusinessTestId = businessTestId;
-            Version = version;
         }
 
-        public EntityTestId BusinessTestId { get; }
-
-        public Version Version { get; }
-
-        public bool IsNew() => Version.Value == 1; 
-
-        public static BusinessEntity From(EntityTestId testId, Version version)
+        public static BusinessEntity From(EntityTestId testId, VersionId version)
         {
             var bobj = new BusinessEntity(testId, version);
-            var validator = new BusinessEntityValidator();
-            bobj.SetValidationResult(validator.Validate(bobj));
-            
             return bobj;
         }
         
         public static BusinessEntity New()
         {
-            return From(EntityTestId.GetNext(), Version.New());
+            return From(EntityTestId.GetNext(), VersionId.New());
         }
-        
+
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            yield return BusinessTestId;
+            yield return Identity;
             yield return Version;
         }
     }

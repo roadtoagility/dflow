@@ -6,6 +6,7 @@
 
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Validation;
 using DFlow.Samples.BusinessObjects.Domain.BusinessObjects;
@@ -13,47 +14,44 @@ using DFlow.Samples.BusinessObjects.Domain.BusinessObjects.Validations;
 
 namespace DFlow.Samples.Domain.BusinessObjects
 {
-    public sealed class User : ValidationStatus
+    public sealed class User : BaseEntity<EntityId>
     {
-        private User(EntityId clientId, Name name, Email commercialEmail, Version version)
+        private User(EntityId clientId, Name name, Email commercialEmail, VersionId version)
+        :base(clientId,version)
         {
-            Id = clientId;
             Name = name;
             Mail = commercialEmail;
-            Version = version;
+            
+            AppendValidationResult(Identity.ValidationStatus.Errors.ToImmutableList());
+            AppendValidationResult(Name.ValidationStatus.Errors.ToImmutableList());
+            AppendValidationResult(Mail.ValidationStatus.Errors.ToImmutableList());
         }
-        public EntityId Id { get; }
-        
         public Name Name { get; }
         
         public Email Mail { get; }
-        
-        public Version Version { get; }
-
-        public bool IsNew() => Version.Value == 1;
                 
-        public static User From(EntityId clientId, Name name, Email commercialEmail, Version version)
+        public static User From(EntityId clientId, Name name, Email commercialEmail, VersionId version)
         {
-            var user = new User(clientId,name,commercialEmail, version);
-            var validator = new UserValidator();
-            user.SetValidationResult(validator.Validate(user));
-            return user;        
+            var user = new User(clientId,name,commercialEmail,version);
+            return user;
         }
 
         public static User Empty()
         {
-            return From(EntityId.Empty(), Name.Empty(), Email.Empty(), Version.Empty());
+            return From(EntityId.Empty(), Name.Empty(), Email.Empty(), VersionId.Empty());
         }
         
         public override string ToString()
         {
-            return $"[User]:[ID: {Id} Name: {Name}, Commercial Email: {Mail}]";
+            return $"[User]:[ID: {Identity} Name: {Name}, Commercial Email: {Mail}]";
         }
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            yield return Id;
+            yield return Identity;
+            yield return Name;
             yield return Mail;
+            yield return Version;
         }
     }
 }

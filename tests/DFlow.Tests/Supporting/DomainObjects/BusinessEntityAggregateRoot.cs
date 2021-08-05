@@ -1,14 +1,15 @@
+using System.Collections.Immutable;
 using DFlow.Domain.Aggregates;
 using DFlow.Domain.BusinessObjects;
 using DFlow.Tests.Supporting.DomainObjects.Events;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
-    public sealed class BusinessEntityAggregateRoot:ObjectBasedAggregationRoot<BusinessEntity>
+    public sealed class BusinessEntityAggregateRoot:ObjectBasedAggregationRoot<BusinessEntity, EntityTestId>
     {
         private BusinessEntityAggregateRoot(BusinessEntity businessEntity)
         {
-            if (businessEntity.ValidationResults.IsValid)
+            if (businessEntity.IsValid)
             {
                 Apply(businessEntity);
 
@@ -18,7 +19,7 @@ namespace DFlow.Tests.Supporting.DomainObjects
                 }
             }
 
-            ValidationResults = businessEntity.ValidationResults;
+            AppendValidationResult(businessEntity.Failures);
         }
 
         public static BusinessEntityAggregateRoot Create()
@@ -28,7 +29,7 @@ namespace DFlow.Tests.Supporting.DomainObjects
         
         public static BusinessEntityAggregateRoot ReconstructFrom(BusinessEntity entity)
         {
-            return new BusinessEntityAggregateRoot(BusinessEntity.From(entity.BusinessTestId, Version.Next(entity.Version)));
+            return new BusinessEntityAggregateRoot(BusinessEntity.From(entity.Identity, VersionId.Next(entity.Version)));
         }
     }
 }
