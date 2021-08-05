@@ -6,8 +6,6 @@
 
 using System;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.Events;
-using Version = DFlow.Domain.BusinessObjects.Version;
 
 namespace DFlow.Domain.DomainEvents
 {

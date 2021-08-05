@@ -9,38 +9,8 @@ using DFlow.Domain.Validation;
 
 namespace DFlow.Domain.BusinessObjects
 {
-    public sealed class AggregationName : ValidationStatus
+    public sealed class AggregationName : ValueOf<string, AggregationName, AggregationNameValidator>
     {
-        public string Value { get; }
-
-        private AggregationName(string name)
-        {
-            Value = name;
-        }
-
-        public static AggregationName From(string current)
-        {
-            var aggregationName = new AggregationName(current);
-            var validator = new AggregationNameValidator();
-
-            aggregationName.SetValidationResult(validator.Validate(aggregationName));
-
-            return aggregationName;
-        }
-
-        public override string ToString()
-        {
-            return $"{Value}";
-        }
-
-        #region IEquatable
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value;
-        }
-
-        #endregion
-
+    
     }
 }

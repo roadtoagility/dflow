@@ -19,7 +19,6 @@
 using System;
 using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.DomainEvents;
-using Version = DFlow.Domain.BusinessObjects.Version;
 
 namespace DFlow.Tests.Supporting.DomainObjects.Events
 {

@@ -54,13 +54,27 @@ namespace DFlow.Tests.Domain
         [Fact]
         public void Aggregate_EventBased_create_an_invalid()
         {
-            var fixture = new Fixture()
-                .Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
-            
             var name = Name.Empty();
             var email = Email.Empty();
             var agg = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), name, email);
             Assert.False(agg.IsValid);
+        }
+        
+        [Fact]
+        public void Aggregate_EventBased_valid_Entity_create()
+        {
+            var fixture = new Fixture()
+                .Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
+            fixture.Register<Name>(()=> Name.From(fixture.Create<String>()));
+            fixture.Register<Email>(()=> Email.From("email@de.com"));
+            
+            var name = fixture.Create<Name>();
+            var email = fixture.Create<Email>();
+            var agg = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), name, email);
+            var change = agg.GetChange();
+            Assert.True(agg.IsValid);
+            Assert.True(change.IsValid);
+            Assert.Equal(1,change.Events.Count);
         }
     }
 }

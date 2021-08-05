@@ -8,9 +8,7 @@
 using System;
 using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.DomainEvents;
-using DFlow.Samples.BusinessObjects.Domain.BusinessObjects;
 using DFlow.Samples.Domain.BusinessObjects;
-using Version = DFlow.Domain.BusinessObjects.Version;
 
 namespace DFlow.Samples.Domain.Aggregates.Events
 {

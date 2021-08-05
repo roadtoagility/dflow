@@ -14,7 +14,6 @@ using DFlow.Domain.BusinessObjects;
 using DFlow.Samples.Domain.BusinessObjects;
 using DFlow.Samples.Persistence.ExtensionMethods;
 using Microsoft.EntityFrameworkCore;
-using Version = DFlow.Domain.BusinessObjects.Version;
 
 namespace DFlow.Samples.Persistence.Model.Repositories
 {

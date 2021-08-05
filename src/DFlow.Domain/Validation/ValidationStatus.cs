@@ -10,7 +10,7 @@ using FluentValidation.Results;
 
 namespace DFlow.Domain.Validation
 {
-    public abstract class ValidationStatus: ValueObject
+    public abstract class ValidationStatus
     {
         public void SetValidationResult(ValidationResult result)
         {

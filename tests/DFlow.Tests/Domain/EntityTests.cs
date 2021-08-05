@@ -10,7 +10,6 @@ using AutoFixture;
 using DFlow.Domain.BusinessObjects;
 using DFlow.Tests.Supporting.DomainObjects;
 using Xunit;
-using Version = DFlow.Domain.BusinessObjects.Version;
 
 namespace DFlow.Tests.Domain
 {

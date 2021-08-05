@@ -7,9 +7,9 @@
 
 using System;
 using AutoFixture;
+using DFlow.Domain.BusinessObjects;
 using DFlow.Tests.Supporting.DomainObjects;
 using Xunit;
-using Version = DFlow.Domain.BusinessObjects.Version;
 
 namespace DFlow.Tests.Domain
 {
@@ -53,9 +53,9 @@ namespace DFlow.Tests.Domain
         {
             var fixture = new Fixture();
             var input = fixture.Create<int>();
-            fixture.Register<Version>(() => Version.From(input));
+            fixture.Register<VersionId>(() => VersionId.From(input));
 
-            var version = fixture.Create<Version>();
+            var version = fixture.Create<VersionId>();
             
             Assert.Equal(input,version.Value);
         }
@@ -63,16 +63,16 @@ namespace DFlow.Tests.Domain
         [Fact]
         public void Version_create_an_empty()
         {
-            var entityId = Version.Empty();
+            var entityId = VersionId.Empty();
             
-            Assert.True(entityId.Equals(Version.Empty()));
+            Assert.True(entityId.Equals(VersionId.Empty()));
         }
 
         [Fact]
         public void Version_get_next()
         {
-            var version = Version.New();
-            var next = Version.Next(version);
+            var version = VersionId.New();
+            var next = VersionId.Next(version);
             var nextCheck = version.Value + 1;
             Assert.Equal(next.Value,nextCheck);
         }
