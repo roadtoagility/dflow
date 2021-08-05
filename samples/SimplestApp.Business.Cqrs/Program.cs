@@ -24,7 +24,7 @@ namespace SimplestApp.Business.Cqrs
 {
     class Program
     {
-        private static async Task Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("== Simple Cqrs App to Create a User");
             
