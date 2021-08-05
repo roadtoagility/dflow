@@ -4,6 +4,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using AutoFixture;
@@ -36,17 +37,18 @@ namespace DFlow.Tests.Domain
         }
         
         [Fact]
-        public void Aggregate_EventBased_create_a_valid_one()
+        public void Aggregate_EventBased_create_a_valid()
         {
             var fixture = new Fixture()
                 .Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
+            fixture.Register<Name>(()=> Name.From(fixture.Create<String>()));
+            fixture.Register<Email>(()=> Email.From("email@de.com"));
             
             var name = fixture.Create<Name>();
             var email = fixture.Create<Email>();
             var agg = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), name, email);
-            var change = agg.GetChange();
-            Assert.Equal(1,change.Events.Count);
-            Assert.Equal(nameof(EventStreamBusinessEntityAggregateRoot),change.Name.Value);
+            Assert.Equal(nameof(EventStreamBusinessEntityAggregateRoot),agg.GetChange().Name.Value);
+            Assert.True(agg.IsValid);
         }
         
         [Fact]
