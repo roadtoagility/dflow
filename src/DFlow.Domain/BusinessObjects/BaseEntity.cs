@@ -5,7 +5,9 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using DFlow.Domain.Validation;
 using FluentValidation.Results;
 
@@ -29,6 +31,30 @@ namespace DFlow.Domain.BusinessObjects
         public override string ToString()
         {
             return $"[ENTITY]:[IDENTITY: {Identity}]";
+        }
+        
+        protected abstract IEnumerable<object> GetEqualityComponents();
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            var entity = (BaseEntity<TIdentity>)obj;
+
+            return GetEqualityComponents().SequenceEqual(entity.GetEqualityComponents());
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(GetEqualityComponents());
         }
     }
 }

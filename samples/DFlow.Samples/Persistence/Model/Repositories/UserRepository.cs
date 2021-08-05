@@ -72,7 +72,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             var user = DbContext.Users.AsNoTracking()
                 .OrderByDescending(ob => ob.Id)
                 .ThenByDescending(ob => ob.RowVersion)
-                .FirstOrDefault(t =>t.Id.Equals(id.Identity));
+                .FirstOrDefault(t =>t.Id.Equals(id.Identity.Value));
             
             if (user == null)
             {

@@ -45,5 +45,13 @@ namespace DFlow.Samples.Domain.BusinessObjects
         {
             return $"[User]:[ID: {Identity} Name: {Name}, Commercial Email: {Mail}]";
         }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Identity;
+            yield return Name;
+            yield return Mail;
+            yield return Version;
+        }
     }
 }
