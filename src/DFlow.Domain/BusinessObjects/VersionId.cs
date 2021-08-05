@@ -10,8 +10,9 @@ namespace DFlow.Domain.BusinessObjects
 {
     public sealed class VersionId : ValueOf<int, VersionId, VersionIdValidator>
     {
-        public static readonly int VersionEmpty = 0;
-        public static readonly int VersionInitial = 1;
+        public const int VersionEmpty = 0;
+        public const int VersionInitial = 1;
+        public const int VersionIncrement = 1;
 
         public bool Initial => Value == VersionInitial;
         
@@ -27,7 +28,7 @@ namespace DFlow.Domain.BusinessObjects
 
         public static VersionId Next(VersionId current)
         {
-            return From(current.Value + 1);
+            return From(current.Value + VersionIncrement);
         }
 
         public static bool operator >=(VersionId a, VersionId b)

@@ -21,5 +21,11 @@ namespace DFlow.Tests.Supporting.DomainObjects
         {
             return From(EntityTestId.GetNext(), VersionId.New());
         }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Identity;
+            yield return Version;
+        }
     }
 }

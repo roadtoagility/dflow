@@ -9,19 +9,12 @@ using System.Collections.Immutable;
 using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Events;
 using DFlow.Domain.Validation;
-using FluentValidation.Results;
 
 namespace DFlow.Domain.Aggregates
 {
-    public abstract class BasedAggregationRoot<TAggregateId>: BaseValidation //, IChangeSet<TChange>
+    public abstract class BasedAggregationRoot<TAggregateId>: BaseValidation 
     {
-        // protected TChange AggregateRootEntity { get; set; }
         private readonly IList<IDomainEvent> _changes = new List<IDomainEvent>();
-
-        // protected void Apply(TChange item)
-        // {
-        //     AggregateRootEntity = item;
-        // }
 
         protected BasedAggregationRoot(IEntityIdentity<TAggregateId> aggregateId, VersionId versionId)
         {
@@ -33,11 +26,6 @@ namespace DFlow.Domain.Aggregates
         {
             _changes.Add(@event);
         }
-        
-        // public TChange GetChange()
-        // {
-        //     return AggregateRootEntity;
-        // }
 
         public IReadOnlyList<IDomainEvent> GetEvents()
         {

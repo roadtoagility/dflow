@@ -22,5 +22,11 @@ namespace DFlow.Tests.Supporting.DomainObjects
             AppendValidationResult(businessTestId.ValidationStatus.Errors.ToImmutableList());
             AppendValidationResult(version.ValidationStatus.Errors.ToImmutableList());
         }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Identity;
+            yield return Version;
+        }
     }
 }

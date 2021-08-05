@@ -25,7 +25,7 @@ namespace SimplestApp.Persistence.EntityFramework
 {
     class Program
     {
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             Console.WriteLine("== Simple Cqrs App to Create a User");
             
