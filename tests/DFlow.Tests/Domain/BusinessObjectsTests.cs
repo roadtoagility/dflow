@@ -76,5 +76,14 @@ namespace DFlow.Tests.Domain
             var nextCheck = version.Value + 1;
             Assert.Equal(next.Value,nextCheck);
         }
+        
+        [Fact]
+        public void Version_get_gr_and_lt()
+        {
+            var version = VersionId.From(1);
+            var next = VersionId.Next(version);
+            Assert.True(version < next);
+            Assert.True(next > version);
+        }
     }
 }
