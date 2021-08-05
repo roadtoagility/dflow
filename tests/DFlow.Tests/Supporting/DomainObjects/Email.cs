@@ -18,46 +18,19 @@
 
 using System;
 using System.Collections.Generic;
+using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Validation;
 using DFlow.Tests.Supporting.DomainObjects.Validators;
+using Xunit.Sdk;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
-    public sealed class Email : ValidationStatus
+    public sealed class Email : ValueOf<string,Email, EmailValidator>
     {
-        public string Value { get; }
-        
-        private Email(string name)
-        {
-            Value = name;
-        }
-
-        public static Email From(string name)
-        {
-            var email = new Email(name);
-            var validator = new EmailValidator();
-
-            email.SetValidationResult(validator.Validate(email));
-            
-            return email;
-        }
-        
+       private static readonly string EmailEmpty = string.Empty;
         public static Email Empty()
         {
-            return new Email(String.Empty);
+            return From(EmailEmpty);
         }
-        
-        public override string ToString()
-        {
-            return $"{Value}";
-        }
-
-        #region IEquatable
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value;
-        }
-        #endregion
     }
 }

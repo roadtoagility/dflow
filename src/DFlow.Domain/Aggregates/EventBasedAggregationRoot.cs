@@ -62,7 +62,5 @@ namespace DFlow.Domain.Aggregates
         {
             return _changes.ToImmutableList();
         }
-
-        public ValidationResult ValidationResults { get; protected set; }
     }
 }

@@ -48,5 +48,17 @@ namespace DFlow.Tests.Domain
             Assert.Equal(1,change.Events.Count);
             Assert.Equal(nameof(EventStreamBusinessEntityAggregateRoot),change.Name.Value);
         }
+        
+        [Fact]
+        public void Aggregate_EventBased_create_an_invalid()
+        {
+            var fixture = new Fixture()
+                .Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
+            
+            var name = Name.Empty();
+            var email = Email.Empty();
+            var agg = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), name, email);
+            Assert.False(agg.IsValid);
+        }
     }
 }

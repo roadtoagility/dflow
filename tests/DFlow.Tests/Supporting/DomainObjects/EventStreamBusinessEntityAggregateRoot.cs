@@ -10,7 +10,7 @@ namespace DFlow.Tests.Supporting.DomainObjects
         private EventStreamBusinessEntityAggregateRoot(EntityTestId aggregationId, Name name, Email email, VersionId version)
             :base(aggregationId,version, AggregationName.From(nameof(EventStreamBusinessEntityAggregateRoot)))
         {
-            if (name.ValidationResults.IsValid && email.ValidationResults.IsValid)
+            if (name.ValidationStatus.IsValid && email.ValidationStatus.IsValid)
             {
                 var change = TestEntityAggregateAddedDomainEvent.From(aggregationId, name, email, version);
                 Apply(change);
@@ -18,29 +18,30 @@ namespace DFlow.Tests.Supporting.DomainObjects
                 // it is always new
                 Raise(change);
             }
-            ValidationResults = name.ValidationResults;
+            
+            AppendValidationResult(name.ValidationStatus.Errors.ToImmutableList());
+            AppendValidationResult(email.ValidationStatus.Errors.ToImmutableList());
         }
 
         private EventStreamBusinessEntityAggregateRoot(EventStream<EntityTestId> eventStream)
             : base(eventStream.AggregationId, eventStream.Version,
                 AggregationName.From(nameof(EventStreamBusinessEntityAggregateRoot)))
         {
-            if (eventStream.ValidationResults.IsValid)
+            if (eventStream.IsValid)
             {
                 Apply(eventStream.Events);
             }
-
-            ValidationResults = eventStream.ValidationResults;
+            AppendValidationResult(eventStream.Failures.ToImmutableList());
         }
 
         public void UpdateName(EntityTestId aggregateId, Name name)
         {
-            if (name.ValidationResults.IsValid && !AggregateId.Equals(aggregateId))
+            if (name.ValidationStatus.IsValid && !AggregateId.Equals(aggregateId))
             {
                 Apply(TestEntityAggregateUpdatedDomainEvent.From(AggregateId,name,Version));
             }
 
-            ValidationResults = name.ValidationResults;
+            AppendValidationResult(name.ValidationStatus.Errors.ToImmutableList());
         }
 
         public static EventStreamBusinessEntityAggregateRoot Create(EntityTestId aggregateId, Name name, Email email)

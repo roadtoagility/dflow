@@ -23,7 +23,7 @@ namespace DFlow.Tests.Domain
 
             var entityId = fixture.Create<EntityTestId>();
             
-            Assert.True(entityId.ValidationResults.IsValid);
+            Assert.True(entityId.ValidationStatus.IsValid);
         }
         
         [Fact]
@@ -34,7 +34,7 @@ namespace DFlow.Tests.Domain
 
             var entityId = fixture.Create<EntityTestId>();
             
-            Assert.False(entityId.ValidationResults.IsValid);
+            Assert.False(entityId.ValidationStatus.IsValid);
         }
         
         [Fact]
@@ -45,7 +45,7 @@ namespace DFlow.Tests.Domain
 
             var entityId = fixture.Create<EntityTestId>();
             
-            Assert.False(entityId.ValidationResults.IsValid);
+            Assert.False(entityId.ValidationStatus.IsValid);
         }
         
         [Fact]

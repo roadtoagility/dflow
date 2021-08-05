@@ -6,70 +6,24 @@
 
 using System;
 using System.Collections.Generic;
+using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Validation;
 using DFlow.Tests.Supporting.DomainObjects.Validators;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
-    public sealed class EntityTestId : ValidationStatus
+    public sealed class EntityTestId : ValueOf<Guid,EntityTestId, EntityIdTestValidator>
     {
-        public Guid Value { get; }
-        
-        private EntityTestId(Guid id)
-        {
-            Value = id;
-        }
-
-        public static EntityTestId From(Guid id)
-        {
-            var entityId = new EntityTestId(id);
-            var validator = new EntityIdTestValidator();
-
-            entityId.SetValidationResult(validator.Validate(entityId));
-            
-            return entityId;
-        }
-        
+       private static readonly Guid EmptyId = Guid.Empty;
+       
         public static EntityTestId Empty()
         {
-            return EntityTestId.From(Guid.Empty);
+            return From(EmptyId);
         }
         
         public static EntityTestId GetNext()
         {
             return From(Guid.NewGuid());
         }
-        public override string ToString()
-        {
-            return Value.ToString("N");
-        }
-
-        #region IEquatable
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value;
-        }
-
-        #endregion
-
-        #region IComparable
-
-        public int CompareTo(EntityTestId other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return 0;
-            }
-
-            if (ReferenceEquals(null, other))
-            {
-                return 1;
-            }
-
-            return Value.CompareTo(other.Value);
-        }
-
-        #endregion
     }
 }
