@@ -36,8 +36,4 @@
       </PackageReference>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Supporting\Commands\Validator" />
-    </ItemGroup>
-
 </Project>

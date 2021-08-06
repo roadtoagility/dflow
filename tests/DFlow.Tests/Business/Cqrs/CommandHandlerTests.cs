@@ -10,6 +10,7 @@ using AutoFixture.AutoNSubstitute;
 using DFlow.Domain.Events;
 using DFlow.Tests.Supporting;
 using DFlow.Tests.Supporting.Commands;
+using DFlow.Tests.Supporting.DomainObjects.Commands;
 using DFlow.Tests.Supporting.DomainObjects.Events;
 using NSubstitute;
 using Xunit;
