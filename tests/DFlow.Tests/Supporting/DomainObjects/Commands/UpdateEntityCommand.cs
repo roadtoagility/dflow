@@ -18,10 +18,11 @@
 
 
 using System;
+using DFlow.Domain.Validation;
 
-namespace DFlow.Tests.Supporting.Commands
+namespace DFlow.Tests.Supporting.DomainObjects.Commands
 {
-    public class UpdateEntityCommand
+    public class UpdateEntityCommand: BaseValidation
     {
         public string Name { get; set; }
         public Guid AggregateId { get; set; }

@@ -4,15 +4,13 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-using DFlow.Domain.Command;
+using DFlow.Domain.Validation;
 
 namespace DFlow.Domain.Aggregates
 {
-    public interface IAggregateFactory<out TAggregate, in TCommandCreate, in TReconstruct>
-                where TCommandCreate: BaseCommand
+    public interface IAggregateFactory<out TAggregate, in TCreateFrom>
+                where TCreateFrom: BaseValidation
     {
-        TAggregate Create(TCommandCreate command); 
-        
-        TAggregate ReconstructFrom(TReconstruct aggregationRoot); 
+        TAggregate Create(TCreateFrom source);
     }
 }

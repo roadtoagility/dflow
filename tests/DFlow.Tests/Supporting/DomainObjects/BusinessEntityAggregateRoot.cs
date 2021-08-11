@@ -7,7 +7,7 @@ namespace DFlow.Tests.Supporting.DomainObjects
 {
     public sealed class BusinessEntityAggregateRoot:ObjectBasedAggregationRoot<BusinessEntity, EntityTestId>
     {
-        private BusinessEntityAggregateRoot(BusinessEntity businessEntity)
+        internal BusinessEntityAggregateRoot(BusinessEntity businessEntity)
         {
             if (businessEntity.IsValid)
             {

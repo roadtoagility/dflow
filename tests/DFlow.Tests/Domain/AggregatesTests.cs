@@ -5,13 +5,9 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.DomainEvents;
-using DFlow.Domain.Events;
 using DFlow.Tests.Supporting.DomainObjects;
 using DFlow.Tests.Supporting.DomainObjects.Commands;
 using Xunit;
@@ -47,6 +43,7 @@ namespace DFlow.Tests.Domain
             
             var name = fixture.Create<Name>();
             var email = fixture.Create<Email>();
+            
             var agg = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), name, email);
             Assert.Equal(nameof(EventStreamBusinessEntityAggregateRoot),agg.GetChange().Name.Value);
             Assert.True(agg.IsValid);

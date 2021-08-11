@@ -23,7 +23,6 @@ using System.Threading.Tasks;
 using DFlow.Business.Cqrs;
 using DFlow.Business.Cqrs.CommandHandlers;
 using DFlow.Domain.Events;
-using DFlow.Tests.Supporting.Commands;
 using DFlow.Tests.Supporting.DomainObjects;
 using DFlow.Tests.Supporting.DomainObjects.Commands;
 

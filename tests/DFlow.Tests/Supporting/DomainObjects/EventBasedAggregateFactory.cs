@@ -11,7 +11,8 @@ using DFlow.Tests.Supporting.DomainObjects.Commands;
 namespace DFlow.Tests.Supporting.DomainObjects
 {
     public class EventBasedAggregateFactory: 
-        IAggregateFactory<EventStreamBusinessEntityAggregateRoot, AddEntityCommand, EventStream<EntityTestId>>
+        IAggregateFactory<EventStreamBusinessEntityAggregateRoot, AddEntityCommand>,
+        IAggregateFactory<EventStreamBusinessEntityAggregateRoot, EventStream<EntityTestId>>
     {
         public EventStreamBusinessEntityAggregateRoot Create(AddEntityCommand command)
         {
@@ -20,12 +21,9 @@ namespace DFlow.Tests.Supporting.DomainObjects
                                                                 VersionId.New());
         }
 
-        public EventStreamBusinessEntityAggregateRoot ReconstructFrom(EventStream<EntityTestId> eventStream)
+        public EventStreamBusinessEntityAggregateRoot Create(EventStream<EntityTestId> source)
         {
-            return new EventStreamBusinessEntityAggregateRoot(
-                EventStream<EntityTestId>.From(eventStream.AggregationId, 
-                eventStream.Name,VersionId.Next(eventStream.Version),
-                eventStream.Events));   
+            return new EventStreamBusinessEntityAggregateRoot(source);
         }
     }
 }
