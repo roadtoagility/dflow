@@ -5,15 +5,18 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using DFlow.Business.Cqrs.CommandHandlers;
 using DFlow.Domain.Events;
+using DFlow.Domain.Validation;
 using Microsoft.Extensions.Logging;
 
 namespace DFlow.Business.Cqrs
 {
-    public abstract class CommandHandler<TCommand, TResult> : ICommandHandler<TCommand, TResult>
+    public abstract class CommandHandler<TCommand, TResult>:
+        ICommandHandler<TCommand, TResult>
     {
         protected IDomainEventBus Publisher { get; }
 

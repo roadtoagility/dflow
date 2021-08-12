@@ -7,12 +7,12 @@ namespace DFlow.Tests.Supporting.DomainObjects
 {
     public sealed class EventStreamBusinessEntityAggregateRoot:EventBasedAggregationRoot<EntityTestId>
     {
-        private EventStreamBusinessEntityAggregateRoot(EntityTestId aggregationId, Name name, Email email, VersionId version)
-            :base(aggregationId,version, AggregationName.From(nameof(EventStreamBusinessEntityAggregateRoot)))
+        internal EventStreamBusinessEntityAggregateRoot(Name name, Email email, VersionId version)
+            :base(EntityTestId.GetNext(),version, AggregationName.From(nameof(EventStreamBusinessEntityAggregateRoot)))
         {
             if (name.ValidationStatus.IsValid && email.ValidationStatus.IsValid)
             {
-                var change = TestEntityAggregateAddedDomainEvent.From(aggregationId, name, email, version);
+                var change = TestEntityAggregateAddedDomainEvent.From(AggregateId, name, email, version);
                 Apply(change);
                 
                 // it is always new
@@ -23,7 +23,7 @@ namespace DFlow.Tests.Supporting.DomainObjects
             AppendValidationResult(email.ValidationStatus.Errors.ToImmutableList());
         }
 
-        private EventStreamBusinessEntityAggregateRoot(EventStream<EntityTestId> eventStream)
+        internal EventStreamBusinessEntityAggregateRoot(EventStream<EntityTestId> eventStream)
             : base(eventStream.AggregationId, eventStream.Version,
                 AggregationName.From(nameof(EventStreamBusinessEntityAggregateRoot)))
         {
@@ -42,17 +42,6 @@ namespace DFlow.Tests.Supporting.DomainObjects
             }
 
             AppendValidationResult(name.ValidationStatus.Errors.ToImmutableList());
-        }
-
-        public static EventStreamBusinessEntityAggregateRoot Create(EntityTestId aggregateId, Name name, Email email)
-        {
-            return new EventStreamBusinessEntityAggregateRoot(aggregateId, name, email, VersionId.New());
-        }
-        
-        public static EventStreamBusinessEntityAggregateRoot ReconstructFrom(EventStream<EntityTestId> eventStream)
-        {
-            return new EventStreamBusinessEntityAggregateRoot(EventStream<EntityTestId>.From(eventStream.AggregationId, 
-                eventStream.Name,VersionId.Next(eventStream.Version), eventStream.Events));
         }
     }
 }

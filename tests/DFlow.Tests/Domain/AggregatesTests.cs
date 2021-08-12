@@ -5,14 +5,11 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.DomainEvents;
-using DFlow.Domain.Events;
 using DFlow.Tests.Supporting.DomainObjects;
+using DFlow.Tests.Supporting.DomainObjects.Commands;
 using Xunit;
 
 namespace DFlow.Tests.Domain
@@ -31,7 +28,9 @@ namespace DFlow.Tests.Domain
         public void Aggregate_reconstruct_a_valid()
         {
             var be = BusinessEntity.From(EntityTestId.GetNext(), VersionId.New());
-            var agg = BusinessEntityAggregateRoot.ReconstructFrom(be);
+            
+            var factory = new ObjectBasedAggregateFactory();
+            var agg = factory.Create(be);
 
             Assert.True(agg.IsValid);
         }
@@ -44,9 +43,10 @@ namespace DFlow.Tests.Domain
             fixture.Register<Name>(()=> Name.From(fixture.Create<String>()));
             fixture.Register<Email>(()=> Email.From("email@de.com"));
             
-            var name = fixture.Create<Name>();
-            var email = fixture.Create<Email>();
-            var agg = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), name, email);
+            var addEntity = fixture.Create<AddEntityCommand>();
+
+            var factory = new EventBasedAggregateFactory(); 
+            var agg = factory.Create(addEntity);
             Assert.Equal(nameof(EventStreamBusinessEntityAggregateRoot),agg.GetChange().Name.Value);
             Assert.True(agg.IsValid);
         }
@@ -54,9 +54,8 @@ namespace DFlow.Tests.Domain
         [Fact]
         public void Aggregate_EventBased_create_an_invalid()
         {
-            var name = Name.Empty();
-            var email = Email.Empty();
-            var agg = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), name, email);
+            var factory = new EventBasedAggregateFactory();
+            var agg = factory.Create(new AddEntityCommand("", ""));
             Assert.False(agg.IsValid);
         }
         
@@ -65,12 +64,14 @@ namespace DFlow.Tests.Domain
         {
             var fixture = new Fixture()
                 .Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
-            fixture.Register<Name>(()=> Name.From(fixture.Create<String>()));
-            fixture.Register<Email>(()=> Email.From("email@de.com"));
+            fixture.Register<string>(()=> "email@de.com");
             
-            var name = fixture.Create<Name>();
-            var email = fixture.Create<Email>();
-            var agg = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), name, email);
+            var name = fixture.Create<string>();
+            var email = fixture.Create<string>();
+            
+            var factory = new EventBasedAggregateFactory();
+            var agg = factory.Create(new AddEntityCommand(name, email));
+            
             var change = agg.GetChange();
             Assert.True(agg.IsValid);
             Assert.True(change.IsValid);

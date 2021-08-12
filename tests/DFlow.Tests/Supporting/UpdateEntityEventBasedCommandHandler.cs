@@ -17,35 +17,38 @@
 //
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
 using DFlow.Business.Cqrs;
 using DFlow.Business.Cqrs.CommandHandlers;
+using DFlow.Domain.Aggregates;
 using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Events;
-using DFlow.Tests.Supporting.Commands;
 using DFlow.Tests.Supporting.DomainObjects;
+using DFlow.Tests.Supporting.DomainObjects.Commands;
 
 namespace DFlow.Tests.Supporting
 {
     public sealed class UpdateEntityEventBasedCommandHandler : CommandHandler<UpdateEntityCommand, CommandResult<Guid>>
     {
-        public UpdateEntityEventBasedCommandHandler(IDomainEventBus publisher)
+        private IAggregateFactory<EventStreamBusinessEntityAggregateRoot, EventStream<EntityTestId>>
+            _aggregateFactory;
+        
+        public UpdateEntityEventBasedCommandHandler(IDomainEventBus publisher, 
+            IAggregateFactory<EventStreamBusinessEntityAggregateRoot, EventStream<EntityTestId>> aggregateFactory)
             :base(publisher)
         {
+            _aggregateFactory = aggregateFactory;
         }
         
         protected override Task<CommandResult<Guid>> ExecuteCommand(UpdateEntityCommand command, CancellationToken cancellationToken)
         {
-            // FIXME: remove this after clear my mind, i do need port the persistence event sourcing infrastructure now :)
-            var aggOld = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), 
-                Name.From("My name"), Email.From("my@mail.com"));
-
-            var currentstream = aggOld.GetChange();  
-            var agg = EventStreamBusinessEntityAggregateRoot.ReconstructFrom(currentstream);
-            
+            var agg = _aggregateFactory.Create(
+                EventStream<EntityTestId>.From(EntityTestId.Empty(),
+                    new AggregationName(), 
+                    VersionId.Empty(), new ImmutableArray<IDomainEvent>())
+                );
             var isSucceed = agg.IsValid;
             var okId = Guid.Empty;
             

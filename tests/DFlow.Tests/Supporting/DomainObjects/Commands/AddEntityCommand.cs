@@ -17,13 +17,23 @@
 //
 
 
-using System;
+using System.Collections.Immutable;
+using DFlow.Domain.Command;
+using DFlow.Domain.Validation;
 
-namespace DFlow.Tests.Supporting.Commands
+namespace DFlow.Tests.Supporting.DomainObjects.Commands
 {
-    public class UpdateEntityCommand
+    public class AddEntityCommand: BaseCommand
     {
-        public string Name { get; set; }
-        public Guid AggregateId { get; set; }
+        public AddEntityCommand(string name, string email)
+        {
+            Name = Name.From(name);
+            Mail = Email.From(email);
+            
+            AppendValidationResult(Name.ValidationStatus.Errors.ToImmutableList());
+            AppendValidationResult(Mail.ValidationStatus.Errors.ToImmutableList());
+        }
+        public Name Name { get; set; }
+        public Email Mail { get; set; }
     }
 }
