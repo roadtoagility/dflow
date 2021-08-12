@@ -23,6 +23,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using DFlow.Business.Cqrs;
 using DFlow.Business.Cqrs.CommandHandlers;
+using DFlow.Domain.Aggregates;
+using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Events;
 using DFlow.Tests.Supporting.DomainObjects;
 using DFlow.Tests.Supporting.DomainObjects.Commands;
@@ -32,15 +34,18 @@ namespace DFlow.Tests.Supporting
 {
     public sealed class AddEntityEventBasedCommandHandler : CommandHandler<AddEntityCommand, CommandResult<Guid>>
     {
-        public AddEntityEventBasedCommandHandler(IDomainEventBus publisher)
+        private IAggregateFactory<EventStreamBusinessEntityAggregateRoot, AddEntityCommand> _aggregateFactory;
+        
+        public AddEntityEventBasedCommandHandler(IDomainEventBus publisher, 
+            IAggregateFactory<EventStreamBusinessEntityAggregateRoot, AddEntityCommand> aggregateFactory)
             :base(publisher)
         {
+            _aggregateFactory = aggregateFactory;
         }
         
         protected override Task<CommandResult<Guid>> ExecuteCommand(AddEntityCommand command, CancellationToken cancellationToken)
         {
-            var agg = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), 
-                Name.From(command.Name), Email.From(command.Mail));
+            var agg = _aggregateFactory.Create(command);
             
             var isSucceed = false;
             var okId = Guid.Empty;

@@ -17,7 +17,6 @@
 //
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,28 +32,23 @@ namespace DFlow.Tests.Supporting
 {
     public sealed class UpdateEntityEventBasedCommandHandler : CommandHandler<UpdateEntityCommand, CommandResult<Guid>>
     {
-        private IAggregateReconstructFactory<EventStreamBusinessEntityAggregateRoot, EventStream<EntityTestId>>
-            _aggregationRoot;
+        private IAggregateFactory<EventStreamBusinessEntityAggregateRoot, EventStream<EntityTestId>>
+            _aggregateFactory;
         
         public UpdateEntityEventBasedCommandHandler(IDomainEventBus publisher, 
-            IAggregateReconstructFactory<EventStreamBusinessEntityAggregateRoot, EventStream<EntityTestId>> aggregateFactory)
+            IAggregateFactory<EventStreamBusinessEntityAggregateRoot, EventStream<EntityTestId>> aggregateFactory)
             :base(publisher)
         {
-            _aggregationRoot = aggregateFactory;
+            _aggregateFactory = aggregateFactory;
         }
         
         protected override Task<CommandResult<Guid>> ExecuteCommand(UpdateEntityCommand command, CancellationToken cancellationToken)
         {
-            // FIXME: remove this after clear my mind, i do need port the persistence event sourcing infrastructure now :)
-            // var aggNew = _aggregationRoot
-            //     .ReconstructFrom(EntityTestId.GetNext(), Name.From("My name"), Email.From("my@mail.com"));
-
-            // var currentstream = aggOld.GetChange();  
-            // var agg = EventStreamBusinessEntityAggregateRoot.Reconstruct(currentstream);
-
-            var agg = _aggregationRoot
-                .ReconstructFrom(EventStream<EntityTestId>.From(EntityTestId.Empty(),
-                    new AggregationName(), VersionId.Empty(), new ImmutableArray<IDomainEvent>()));
+            var agg = _aggregateFactory.Create(
+                EventStream<EntityTestId>.From(EntityTestId.Empty(),
+                    new AggregationName(), 
+                    VersionId.Empty(), new ImmutableArray<IDomainEvent>())
+                );
             var isSucceed = agg.IsValid;
             var okId = Guid.Empty;
             

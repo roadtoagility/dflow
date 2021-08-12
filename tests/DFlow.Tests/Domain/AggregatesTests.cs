@@ -28,7 +28,9 @@ namespace DFlow.Tests.Domain
         public void Aggregate_reconstruct_a_valid()
         {
             var be = BusinessEntity.From(EntityTestId.GetNext(), VersionId.New());
-            var agg = BusinessEntityAggregateRoot.ReconstructFrom(be);
+            
+            var factory = new ObjectBasedAggregateFactory();
+            var agg = factory.Create(be);
 
             Assert.True(agg.IsValid);
         }
@@ -41,10 +43,10 @@ namespace DFlow.Tests.Domain
             fixture.Register<Name>(()=> Name.From(fixture.Create<String>()));
             fixture.Register<Email>(()=> Email.From("email@de.com"));
             
-            var name = fixture.Create<Name>();
-            var email = fixture.Create<Email>();
-            
-            var agg = EventStreamBusinessEntityAggregateRoot.Create(EntityTestId.GetNext(), name, email);
+            var addEntity = fixture.Create<AddEntityCommand>();
+
+            var factory = new EventBasedAggregateFactory(); 
+            var agg = factory.Create(addEntity);
             Assert.Equal(nameof(EventStreamBusinessEntityAggregateRoot),agg.GetChange().Name.Value);
             Assert.True(agg.IsValid);
         }
@@ -62,7 +64,8 @@ namespace DFlow.Tests.Domain
         {
             var fixture = new Fixture()
                 .Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
-
+            fixture.Register<string>(()=> "email@de.com");
+            
             var name = fixture.Create<string>();
             var email = fixture.Create<string>();
             
