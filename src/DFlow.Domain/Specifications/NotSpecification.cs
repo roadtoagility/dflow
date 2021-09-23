@@ -4,20 +4,20 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-namespace DFlow.Specifications
+namespace DFlow.Domain.Specifications
 {
     public class NotSpecification<TBusinessObject>:CompositeSpecification<TBusinessObject>
     {
-        private readonly ISpecification<TBusinessObject> _condition;
+        protected ISpecification<TBusinessObject> Condition { get; }
         
         public NotSpecification(ISpecification<TBusinessObject> condition)
         {
-            _condition = condition;
+            Condition = condition;
         }
 
         public override bool IsSatisfiedBy(TBusinessObject candidate)
         {
-            return !_condition.IsSatisfiedBy(candidate);
+            return !Condition.IsSatisfiedBy(candidate);
         }
     }
 }

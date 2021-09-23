@@ -7,7 +7,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace DFlow.Specifications
+namespace DFlow.Domain.Specifications
 {
     public abstract class LinqExpressionSpecification<TBusinessObject>
         :CompositeSpecification<TBusinessObject>

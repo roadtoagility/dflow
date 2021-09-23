@@ -4,14 +4,15 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-namespace DFlow.Specifications
+namespace DFlow.Domain.Specifications
 {
-    public abstract class ConditionalCompositeSpecification<TBusinessObject>:CompositeSpecification<TBusinessObject>
+    public abstract class LogicalSpecification<TBusinessObject>:CompositeSpecification<TBusinessObject>
     {
         protected ISpecification<TBusinessObject> LeftCondition { get; }
+
         protected ISpecification<TBusinessObject> RightCondition { get; }
 
-        protected ConditionalCompositeSpecification(ISpecification<TBusinessObject> leftCondition,
+        protected LogicalSpecification(ISpecification<TBusinessObject> leftCondition,
             ISpecification<TBusinessObject> rightCondition)
         {
             LeftCondition = leftCondition;
