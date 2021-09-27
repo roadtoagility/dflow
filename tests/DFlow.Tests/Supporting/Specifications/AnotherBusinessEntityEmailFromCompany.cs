@@ -19,6 +19,7 @@
 
 using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Specifications;
+using DFlow.Domain.Validation;
 using DFlow.Tests.Supporting.DomainObjects;
 
 namespace DFlow.Tests.Supporting.Specifications
@@ -36,7 +37,8 @@ namespace DFlow.Tests.Supporting.Specifications
         {
             if (candidate.EntityEmail.Equals(_emailToCheck) == false)
             {
-                AppendUnsatisfiedRule(UnsatisfiedRule.For("EntityEmail",$"The canditate not is from company {candidate.EntityEmail}."));
+                candidate.AppendValidationResult(new ValidationFailure("EntityEmail",
+                    $"The candidate not is from company {candidate.EntityEmail}."));
                 return false;
             }
             

@@ -14,7 +14,5 @@ namespace DFlow.Domain.Specifications
         ISpecification<TBusinessObject> And(ISpecification<TBusinessObject> other);
         ISpecification<TBusinessObject> Or(ISpecification<TBusinessObject> other);
         ISpecification<TBusinessObject> Not();
-        
-        IReadOnlyList<UnsatisfiedRule> UnsatisfiedRules { get; }
     }
 }

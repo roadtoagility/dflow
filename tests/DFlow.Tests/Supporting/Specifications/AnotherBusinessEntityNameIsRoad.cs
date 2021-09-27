@@ -19,6 +19,7 @@
 
 using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Specifications;
+using DFlow.Domain.Validation;
 using DFlow.Tests.Supporting.DomainObjects;
 
 namespace DFlow.Tests.Supporting.Specifications
@@ -36,7 +37,8 @@ namespace DFlow.Tests.Supporting.Specifications
         {
             if (candidate.EntityName != _nameToCheck )
             {
-                AppendUnsatisfiedRule(UnsatisfiedRule.For("EntityName",$"The canditate name {candidate.EntityName} it is not spected name."));
+                candidate.AppendValidationResult(new ValidationFailure("EntityName",
+                    $"The candidate name {candidate.EntityName} it is not expected name."));
                 return false;
             }
             

@@ -11,11 +11,6 @@ namespace DFlow.Domain.Specifications
 {
     public abstract class CompositeSpecification<TBusinessObject>:ISpecification<TBusinessObject>
     {
-        protected void AppendUnsatisfiedRule(UnsatisfiedRule rule)
-        {
-            _unsatisfiedRules.Add(rule);
-        }
-
         public ISpecification<TBusinessObject> And(ISpecification<TBusinessObject> candidate)
         {
             return new AndSpecification<TBusinessObject>(this,candidate);
@@ -31,11 +26,7 @@ namespace DFlow.Domain.Specifications
         {
             return new NotSpecification<TBusinessObject>(this);
         }
-
-        public IReadOnlyList<UnsatisfiedRule> UnsatisfiedRules => _unsatisfiedRules.ToImmutableList();
-
-        public abstract bool IsSatisfiedBy(TBusinessObject candidate);
         
-        private readonly IList<UnsatisfiedRule> _unsatisfiedRules = new List<UnsatisfiedRule>();
+        public abstract bool IsSatisfiedBy(TBusinessObject candidate);
     }
 }

@@ -5,16 +5,21 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using DFlow.Domain.BusinessObjects;
-using FluentValidation.Results;
 
 namespace DFlow.Domain.Validation
 {
     public abstract class BaseValidation: IValidable
     {
         private readonly List<ValidationFailure> _failures = new List<ValidationFailure>();
+
+        public void AppendValidationResult(ValidationFailure failure)
+        {
+            _failures.Add(failure);
+        }
+
         public void AppendValidationResult(IReadOnlyList<ValidationFailure> failures)
         {
             _failures.AddRange(failures);

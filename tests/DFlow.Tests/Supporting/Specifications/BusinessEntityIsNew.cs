@@ -17,8 +17,8 @@
 //
 
 
-using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Specifications;
+using DFlow.Domain.Validation;
 using DFlow.Tests.Supporting.DomainObjects;
 
 namespace DFlow.Tests.Supporting.Specifications
@@ -29,7 +29,8 @@ namespace DFlow.Tests.Supporting.Specifications
         {
             if (candidate.IsNew() == false)
             {
-                AppendUnsatisfiedRule(UnsatisfiedRule.For("NotNew","The candidate already exists."));
+                candidate.AppendValidationResult(new ValidationFailure("NotNew",
+                    "The candidate already exists."));
                 return false;
             }
             

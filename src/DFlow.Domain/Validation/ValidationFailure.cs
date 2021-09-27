@@ -6,14 +6,19 @@
 
 
 using System.Collections.Generic;
+using FluentValidation.Results;
 
 namespace DFlow.Domain.Validation
 {
-    public interface IValidable
+    public readonly struct ValidationFailure
     {
-        bool IsValid { get; }
-        void AppendValidationResult(ValidationFailure failure);
+        public ValidationFailure(string propertyName, string errorTag)
+        {
+            PropertyName = propertyName;
+            ErrorTag = errorTag;
+        }
         
-        void AppendValidationResult(IReadOnlyList<ValidationFailure> failures);
+        public string PropertyName { get; }
+        public string ErrorTag { get; }
     }
 }
