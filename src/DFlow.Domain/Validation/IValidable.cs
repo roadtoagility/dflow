@@ -6,6 +6,7 @@
 
 
 using System.Collections.Generic;
+using FluentValidation.Results;
 
 namespace DFlow.Domain.Validation
 {
