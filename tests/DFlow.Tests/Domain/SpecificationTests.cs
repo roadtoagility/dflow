@@ -1,40 +1,17 @@
-using System;
-using System.Linq;
-using AutoFixture;
-using AutoFixture.Kernel;
-using DFlow.Base;
-using DFlow.Bus;
+// Copyright (C) 2021  Road to Agility
+//
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+
 using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.Specifications;
-using DFlow.Example;
-using DFlow.Example.Aggregates;
-using DFlow.Example.Commands;
-using DFlow.Example.Events;
-using DFlow.Example.Views;
 using DFlow.Tests.Supporting.DomainObjects;
 using DFlow.Tests.Supporting.Specifications;
 using Xunit;
 
-namespace DFlow.Tests
+namespace DFlow.Tests.Domain
 {
-    public class SpecificationForValidationReportsTests
-    {
-        [Fact]
-        public void RetrieveAggregateLoadedFromSnapshot()
-        {
-            
-        }
-    }
-    
-    public class SpecificationForCreationAggregationTests
-    {
-        [Fact]
-        public void RetrieveAggregateLoadedFromSnapshot()
-        {
-
-        }
-    }
-    
     public class SpecificationForCreationEntityTests
     {
         [Fact]

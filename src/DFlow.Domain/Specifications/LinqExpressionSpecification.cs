@@ -12,7 +12,7 @@ namespace DFlow.Domain.Specifications
     public abstract class LinqExpressionSpecification<TBusinessObject>
         :CompositeSpecification<TBusinessObject>
     {
-        public abstract Expression<Func<TBusinessObject, bool>> AsExpression();
+        protected abstract Expression<Func<TBusinessObject, bool>> AsExpression();
         
         public override bool IsSatisfiedBy(TBusinessObject candidate) 
             => AsExpression().Compile()(candidate);
