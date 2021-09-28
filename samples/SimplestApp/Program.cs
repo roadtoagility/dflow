@@ -7,6 +7,7 @@
 using System;
 using SimplestApp.Operations;
 using SimplestApp.Services;
+using SimplestApp.Specifications;
 
 namespace SimplestApp
 {
@@ -16,7 +17,8 @@ namespace SimplestApp
         {
             Console.WriteLine("== Simple App to Create a User");
 
-            UserService us = new UserService();
+            var spec = new UserValidSpecification();
+            UserService us = new UserService(spec);
 
             var user = us.Add(new AddUser {Name = "My name", Mail = "my@mail.com"});
             

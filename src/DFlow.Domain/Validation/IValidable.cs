@@ -13,6 +13,8 @@ namespace DFlow.Domain.Validation
     public interface IValidable
     {
         bool IsValid { get; }
+        void AppendValidationResult(ValidationFailure failure);
+        
         void AppendValidationResult(IReadOnlyList<ValidationFailure> failures);
     }
 }

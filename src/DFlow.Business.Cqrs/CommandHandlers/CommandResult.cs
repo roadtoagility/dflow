@@ -5,6 +5,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System.Collections.Generic;
+using DFlow.Domain.Validation;
 using FluentValidation.Results;
 
 namespace DFlow.Business.Cqrs.CommandHandlers
