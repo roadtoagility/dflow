@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DFlow.Domain\DFlow.Domain.csproj" />
+      <ProjectReference Include="..\DFlow.Persistence.EventStore\DFlow.Persistence.EventStore.csproj" />
+      <ProjectReference Include="..\DFlow.Persistence\DFlow.Persistence.csproj" />
+    </ItemGroup>
+    <PropertyGroup>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    </PropertyGroup>
+</Project>
