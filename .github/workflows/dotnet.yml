@@ -11,21 +11,22 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        dotnet: [6.x]
+        sdk: [6.x]
+        dotnetFramework: [net6.0]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: ${{ matrix.dotnet }}
+          dotnet-version: ${{ matrix.sdk }}
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
         run: dotnet build --no-restore
       - name: Test
         run: |
-          dotnet test -f ${{ matrix.dotnet }} --no-build --verbosity normal \
+          dotnet test -f ${{ matrix.dotnetFramework }} --no-build --verbosity normal \
             /p:CollectCoverage=true \
             /p:CoverletOutputFormat=opencover \
             /p:CoverletOutput=opencovertests.xml \
