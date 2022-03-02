@@ -42,12 +42,14 @@ jobs:
           path: |
             **/opencovertests.xml
   codeQuality:
-    - name: Download Coverage Report
-      uses: actions/download-artifact@v2
-      with:
-        name: code-coverage-report
-    - name: Codecov
-      uses: codecov/codecov-action@v2.1.0
-      with:
-        files: |
-          **/opencovertests.xml
+    needs: build
+    steps:
+      - name: Download Coverage Report
+        uses: actions/download-artifact@v2
+        with:
+          name: code-coverage-report
+      - name: Codecov
+        uses: codecov/codecov-action@v2.1.0
+        with:
+          files: |
+            **/opencovertests.xml
