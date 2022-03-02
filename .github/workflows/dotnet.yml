@@ -43,6 +43,7 @@ jobs:
             **/opencovertests.xml
   codeQuality:
     needs: build
+    runs-on: ubuntu-latest
     steps:
       - name: Download Coverage Report
         uses: actions/download-artifact@v2
