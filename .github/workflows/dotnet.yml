@@ -39,4 +39,5 @@ jobs:
         with: 
           name: code-coverage-report
           # A file, directory or wildcard pattern that describes what to upload
-          path: **/opencovertests.xml
+          path: |
+            **/opencovertests.xml
