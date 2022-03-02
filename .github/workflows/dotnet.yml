@@ -6,15 +6,13 @@ on:
   pull_request:
     branches: [master]
 
-strategy:
-  matrix:
-    os: [ubuntu-latest]
-    dotnet: [6.x]
-
 jobs:
   build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        dotnet: [6.x]
     runs-on: ${{ matrix.os }}
-
     steps:
       - uses: actions/checkout@v2
       - name: Setup .NET
