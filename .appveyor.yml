@@ -1,6 +1,6 @@
 version: '{build}'
 image: 
-  - Visual Studio 2019
+  - Previous Visual Studio 2022
 branches:
   only:
     - master
