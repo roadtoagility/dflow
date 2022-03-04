@@ -1,22 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-    <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
-        <Configurations>Debug;Release;Release Profilling</Configurations>
-        <Platforms>AnyCPU</Platforms>
-    </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(Configuration)' == 'Release Profilling' ">
-      <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
-    </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release Profilling' ">
+    <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
+  </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\DFlow.Tests\DFlow.Tests.csproj" />
-    </ItemGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\DFlow.Tests\DFlow.Tests.csproj" />
+  </ItemGroup>
 </Project>
