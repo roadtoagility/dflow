@@ -11,11 +11,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="FluentMediator" Version="0.4.7" />
+      <ProjectReference Include="..\..\DFlow.Domain.Events\DFlow.Domain.Events.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\DFlow.Domain.Events\DFlow.Domain.Events.csproj" />
+      <PackageReference Include="Confluent.Kafka" Version="1.6.3" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
     </ItemGroup>
 
 </Project>
