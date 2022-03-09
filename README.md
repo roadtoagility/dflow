@@ -16,7 +16,7 @@ Domain events Flow is a platform to support development with agility in mind bas
 
 ## Build Status
 
-[![DFlow AppVeyor Build](https://ci.appveyor.com/api/projects/status/481jwy9pnyh0fv41/branch/master?svg=true)](https://ci.appveyor.com/project/drr00t/dflow/branch/master)
+[![DFlow Build](https://github.com/roadtoagility/dflow/actions/workflows/dotnet.yml/badge.svg)](https://github.com/roadtoagility/dflow/actions/workflows/dotnet.yml/badge.svg)
 
 ## Tests Passing
 ![AppVeyor tests](https://img.shields.io/appveyor/tests/drr00t/dfow)
