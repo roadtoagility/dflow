@@ -5,6 +5,12 @@
     <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
   </PropertyGroup>
 
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks />
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\samples\DFlow.Example\DFlow.Example.csproj" />
     <ProjectReference Include="..\..\src\DFlow.Business.Cqrs\DFlow.Business.Cqrs.csproj" />
