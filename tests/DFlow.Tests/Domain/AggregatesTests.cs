@@ -52,11 +52,11 @@ namespace DFlow.Tests.Domain
         }
         
         [Fact]
-        public void Aggregate_EventBased_create_an_invalid()
+        public void Aggregate_EventBased_create_an_empty()
         {
             var factory = new EventBasedAggregateFactory();
             var agg = factory.Create(new AddEntityCommand("", ""));
-            Assert.False(agg.IsValid);
+            Assert.True(agg.IsValid);
         }
         
         [Fact]

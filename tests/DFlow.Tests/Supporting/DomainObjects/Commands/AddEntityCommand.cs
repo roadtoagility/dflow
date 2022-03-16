@@ -16,10 +16,7 @@
 // Boston, MA  02110-1301, USA.
 //
 
-
-using System.Collections.Immutable;
 using DFlow.Domain.Command;
-using DFlow.Domain.Validation;
 
 namespace DFlow.Tests.Supporting.DomainObjects.Commands
 {
@@ -30,8 +27,8 @@ namespace DFlow.Tests.Supporting.DomainObjects.Commands
             Name = Name.From(name);
             Mail = Email.From(email);
             
-            AppendValidationResult(Name.ValidationStatus.Errors.ToImmutableList());
-            AppendValidationResult(Mail.ValidationStatus.Errors.ToImmutableList());
+            AppendValidationResult(Name.ValidationStatus.Failures);
+            AppendValidationResult(Mail.ValidationStatus.Failures);
         }
         public Name Name { get; set; }
         public Email Mail { get; set; }

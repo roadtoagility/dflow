@@ -4,11 +4,9 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-using DFlow.Domain.Validation;
-
 namespace DFlow.Domain.BusinessObjects
 {
-    public sealed class VersionId : ValueOf<int, VersionId, VersionIdValidator>
+    public sealed class VersionId : ValueOf<int, VersionId>
     {
         public static readonly int VersionEmpty = 0;
         public static readonly int VersionInitial = 1;

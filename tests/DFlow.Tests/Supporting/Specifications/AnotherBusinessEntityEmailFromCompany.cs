@@ -16,12 +16,9 @@
 // Boston, MA  02110-1301, USA.
 //
 
-
-using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Specifications;
 using DFlow.Domain.Validation;
 using DFlow.Tests.Supporting.DomainObjects;
-using FluentValidation.Results;
 
 namespace DFlow.Tests.Supporting.Specifications
 {
@@ -38,7 +35,7 @@ namespace DFlow.Tests.Supporting.Specifications
         {
             if (candidate.EntityEmail.Equals(_emailToCheck) == false)
             {
-                candidate.AppendValidationResult(new ValidationFailure("EntityEmail",
+                candidate.AppendValidationResult(Failure.For("EntityEmail",
                     $"The candidate not is from company {candidate.EntityEmail}."));
                 return false;
             }

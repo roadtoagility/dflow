@@ -6,7 +6,6 @@
 
 using System;
 using DFlow.Domain.Specifications;
-using DFlow.Samples.BusinessObjects.Domain.BusinessObjects;
 using DFlow.Samples.Domain.Aggregates;
 using DFlow.Samples.Domain.BusinessObjects;
 using SimplestApp.Operations;
@@ -27,7 +26,7 @@ namespace SimplestApp.Services
 
             if (!_specification.IsSatisfiedBy(agg))
             {
-                throw new ArgumentException(agg.Failures[0].ErrorMessage);
+                throw new ArgumentException(agg.Failures[0].Message);
             }
 
             return agg.GetChange();

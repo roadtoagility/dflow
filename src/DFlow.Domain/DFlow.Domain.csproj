@@ -4,10 +4,10 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <Configurations>Debug;Release;Release Profilling</Configurations>
         <Platforms>AnyCPU</Platforms>
+        <LangVersion>9</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="FluentValidation" Version="9.3.0" />
       <PackageReference Include="ValueOf" Version="2.0.21" />
     </ItemGroup>
 

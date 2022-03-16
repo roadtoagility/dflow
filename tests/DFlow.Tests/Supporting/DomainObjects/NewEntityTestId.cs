@@ -6,11 +6,10 @@
 
 using System;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Tests.Supporting.DomainObjects.Validators;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
-    public sealed class NewEntityTestId : ValueOf<Guid,NewEntityTestId,NewEntityTestIdValidator>
+    public sealed class NewEntityTestId : ValueOf<Guid,NewEntityTestId>
     {
 
         public static NewEntityTestId Empty()

@@ -19,8 +19,8 @@ namespace DFlow.Tests.Supporting.DomainObjects
                 Raise(change);
             }
             
-            AppendValidationResult(name.ValidationStatus.Errors.ToImmutableList());
-            AppendValidationResult(email.ValidationStatus.Errors.ToImmutableList());
+            AppendValidationResult(name.ValidationStatus.Failures);
+            AppendValidationResult(email.ValidationStatus.Failures);
         }
 
         internal EventStreamBusinessEntityAggregateRoot(EventStream<EntityTestId> eventStream)
@@ -41,7 +41,7 @@ namespace DFlow.Tests.Supporting.DomainObjects
                 Apply(TestEntityAggregateUpdatedDomainEvent.From(AggregateId,name,Version));
             }
 
-            AppendValidationResult(name.ValidationStatus.Errors.ToImmutableList());
+            AppendValidationResult(name.ValidationStatus.Failures);
         }
     }
 }

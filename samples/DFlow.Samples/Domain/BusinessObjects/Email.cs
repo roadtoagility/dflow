@@ -5,14 +5,11 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System;
-using System.Collections.Generic;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.Validation;
-using DFlow.Samples.BusinessObjects.Domain.BusinessObjects.Validations;
 
 namespace DFlow.Samples.Domain.BusinessObjects
 {
-    public sealed class Email : ValueOf<string, Email, EmailValidator>
+    public sealed class Email : ValueOf<string, Email>
     {
         public static Email Empty()
         {
