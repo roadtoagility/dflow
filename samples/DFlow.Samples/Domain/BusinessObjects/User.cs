@@ -6,12 +6,7 @@
 
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.Validation;
-using DFlow.Samples.BusinessObjects.Domain.BusinessObjects;
-using DFlow.Samples.BusinessObjects.Domain.BusinessObjects.Validations;
-
 namespace DFlow.Samples.Domain.BusinessObjects
 {
     public sealed class User : BaseEntity<EntityId>
@@ -22,9 +17,9 @@ namespace DFlow.Samples.Domain.BusinessObjects
             Name = name;
             Mail = commercialEmail;
             
-            AppendValidationResult(Identity.ValidationStatus.Errors.ToImmutableList());
-            AppendValidationResult(Name.ValidationStatus.Errors.ToImmutableList());
-            AppendValidationResult(Mail.ValidationStatus.Errors.ToImmutableList());
+            AppendValidationResult(Identity.ValidationStatus.Failures);
+            AppendValidationResult(Name.ValidationStatus.Failures);
+            AppendValidationResult(Mail.ValidationStatus.Failures);
         }
         public Name Name { get; }
         

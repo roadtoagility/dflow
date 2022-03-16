@@ -65,7 +65,7 @@ namespace DFlow.Tests.Supporting
                 okId = agg.GetChange().AggregationId.Value;
             }
             
-            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.Failures.ToImmutableList()));
+            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.Failures));
         }
     }
 }

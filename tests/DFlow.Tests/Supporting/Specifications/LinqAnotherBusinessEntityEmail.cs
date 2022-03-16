@@ -19,12 +19,8 @@
 
 using System;
 using System.Linq.Expressions;
-using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Specifications;
-using DFlow.Domain.Validation;
 using DFlow.Tests.Supporting.DomainObjects;
-using FluentValidation.Results;
-using NSubstitute;
 
 namespace DFlow.Tests.Supporting.Specifications
 {

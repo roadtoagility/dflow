@@ -9,7 +9,6 @@ using System.Collections.Immutable;
 using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Events;
 using DFlow.Domain.Validation;
-using FluentValidation.Results;
 
 namespace DFlow.Domain.Aggregates
 {

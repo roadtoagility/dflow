@@ -6,15 +6,14 @@
 
 
 using System.Collections.Generic;
-using FluentValidation.Results;
 
 namespace DFlow.Domain.Validation
 {
     public interface IValidable
     {
         bool IsValid { get; }
-        void AppendValidationResult(ValidationFailure failure);
+        void AppendValidationResult(Failure failure);
         
-        void AppendValidationResult(IReadOnlyList<ValidationFailure> failures);
+        void AppendValidationResult(IReadOnlyList<Failure> failures);
     }
 }
