@@ -13,7 +13,7 @@ namespace DFlow.Domain.Validation
 {
     public class ValidationResult
     {
-        private List<Failure> _failures = new();
+        private readonly List<Failure> _failures = new();
 
         public ValidationResult( IReadOnlyList<Failure> failures)
         {
