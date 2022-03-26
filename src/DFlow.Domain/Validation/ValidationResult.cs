@@ -27,11 +27,6 @@ namespace DFlow.Domain.Validation
         :this(new List<Failure>(){failure})
         {
         }
-
-        public ValidationResult()
-            :this(ImmutableList<Failure>.Empty)
-        {
-        }
         
         public virtual bool IsValid => Failures.Count == 0;
 
