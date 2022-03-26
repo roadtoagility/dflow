@@ -39,7 +39,7 @@ namespace DFlow.Domain.Validation
         
         public static ValidationResult For(Failure failure)
         {
-            return new ValidationResult(new List<Failure>(){failure});
+            return new ValidationResult(new List<Failure>{failure});
         } 
         
         public static ValidationResult Empty()
