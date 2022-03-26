@@ -49,7 +49,7 @@ namespace DFlow.Domain.Validation
         
         public static ValidationResult Empty()
         {
-            return new ValidationResult();
+            return new ValidationResult(ImmutableList<Failure>.Empty);
         }
     }
 }
