@@ -22,11 +22,6 @@ namespace DFlow.Domain.Validation
                 _failures.AddRange(failures);                
             }
         }
-
-        public ValidationResult(Failure failure)
-        :this(new List<Failure>(){failure})
-        {
-        }
         
         public virtual bool IsValid => Failures.Count == 0;
 
@@ -44,7 +39,7 @@ namespace DFlow.Domain.Validation
         
         public static ValidationResult For(Failure failure)
         {
-            return new ValidationResult(failure);
+            return new ValidationResult(new List<Failure>(){failure});
         } 
         
         public static ValidationResult Empty()
