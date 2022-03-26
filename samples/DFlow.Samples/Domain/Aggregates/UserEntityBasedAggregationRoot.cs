@@ -6,7 +6,6 @@
 
 using DFlow.Domain.Aggregates;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Samples.BusinessObjects.Domain.BusinessObjects;
 using DFlow.Samples.Domain.Aggregates.Events;
 using DFlow.Samples.Domain.BusinessObjects;
 

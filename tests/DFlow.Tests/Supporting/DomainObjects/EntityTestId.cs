@@ -8,11 +8,10 @@ using System;
 using System.Collections.Generic;
 using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Validation;
-using DFlow.Tests.Supporting.DomainObjects.Validators;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
-    public sealed class EntityTestId : ValueOf<Guid,EntityTestId, EntityIdTestValidator>
+    public sealed class EntityTestId : ValueOf<Guid,EntityTestId>
     {
        private static readonly Guid EmptyId = Guid.Empty;
        

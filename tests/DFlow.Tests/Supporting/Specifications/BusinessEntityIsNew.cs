@@ -20,7 +20,6 @@
 using DFlow.Domain.Specifications;
 using DFlow.Domain.Validation;
 using DFlow.Tests.Supporting.DomainObjects;
-using FluentValidation.Results;
 
 namespace DFlow.Tests.Supporting.Specifications
 {
@@ -30,7 +29,7 @@ namespace DFlow.Tests.Supporting.Specifications
         {
             if (candidate.IsNew() == false)
             {
-                candidate.AppendValidationResult(new ValidationFailure("NotNew",
+                candidate.AppendValidationResult(Failure.For("NotNew",
                     "The candidate already exists."));
                 return false;
             }

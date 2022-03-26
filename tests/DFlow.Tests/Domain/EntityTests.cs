@@ -33,8 +33,8 @@ namespace DFlow.Tests.Domain
 
             var entity = fixture.Create<NewBusinessEntity>();
             
-            Assert.False(entity.IsValid);
-            Assert.True(entity.Failures.Count == 2);
+            Assert.True(entity.IsValid);
+            Assert.True(entity.Failures.Count == 0);
         }
     }
 }

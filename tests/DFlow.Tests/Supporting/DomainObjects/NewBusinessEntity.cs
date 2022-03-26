@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.Validation;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
@@ -19,8 +17,8 @@ namespace DFlow.Tests.Supporting.DomainObjects
         private NewBusinessEntity(NewEntityTestId businessTestId, VersionId version)
         :base(businessTestId, version)
         {
-            AppendValidationResult(businessTestId.ValidationStatus.Errors.ToImmutableList());
-            AppendValidationResult(version.ValidationStatus.Errors.ToImmutableList());
+            AppendValidationResult(businessTestId.ValidationStatus.Failures);
+            AppendValidationResult(version.ValidationStatus.Failures);
         }
 
         protected override IEnumerable<object> GetEqualityComponents()

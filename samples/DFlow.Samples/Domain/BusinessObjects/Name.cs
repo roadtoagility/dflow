@@ -6,11 +6,10 @@
 
 using System;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Samples.BusinessObjects.Domain.BusinessObjects.Validations;
 
 namespace DFlow.Samples.Domain.BusinessObjects
 {
-    public sealed class Name : ValueOf<string,Name, NameValidator>
+    public sealed class Name : ValueOf<string,Name>
     {
         public static Name Empty()
         {
