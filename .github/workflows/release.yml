@@ -15,7 +15,7 @@ jobs:
         with:
           dotnet-version: 5.x
       - name: Pack
-        run: dotnet pack --include-symbols --no-build --no-restore -o ./pkg ${{ github.ref }}
+        run: dotnet pack --include-symbols --no-build --no-restore -o ./pkg
       - name: Push
         working-directory: ./pkg
         run: dotnet nuget push -k ${{secrets.NUGET_KEY}}
