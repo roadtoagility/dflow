@@ -6,30 +6,20 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+using DFlow.Business.Cqrs;
 using FluentMediator;
 
 namespace DFlow.Business.MessageBus.FluentMediator
 {
-    public class MessageBus:IBusinessMessageBus
+    public class FluentMediatorBusinessMessageBus:IBusinessMessageBus
     {
         private readonly IMediator _mediator;
         
-        public MessageBus(IMediator mediator)
+        public FluentMediatorBusinessMessageBus(IMediator mediator)
         {
             _mediator = mediator;
         }
-
-        public async Task Publish<TEvent>(TEvent request)
-        {
-            var cancellation = new CancellationToken();
-            await Publish(request, cancellation).ConfigureAwait(false);
-        }
-
-        public async Task Publish<TEvent>(TEvent request, CancellationToken cancellationToken)
-        {
-            await _mediator.PublishAsync(request, cancellationToken).ConfigureAwait(false);
-        }
-
+        
         public async Task<TResult> Send<TResult,TRequest>(TRequest request)
         {
             var cancellation = new CancellationToken();
