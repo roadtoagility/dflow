@@ -18,21 +18,21 @@ namespace DFlow.Tests.Domain
         public void EntityId_create_a_valid()
         {
             var fixture = new Fixture();
-            fixture.Register<NewBusinessEntity>(() => NewBusinessEntity.New());
+            fixture.Register(() => NewBusinessEntity.New());
 
             var entity = fixture.Create<NewBusinessEntity>();
-            
+
             Assert.True(entity.IsValid);
         }
-        
+
         [Fact]
         public void EntityId_create_is_not_valid()
         {
             var fixture = new Fixture();
-            fixture.Register<NewBusinessEntity>(() => NewBusinessEntity.From(NewEntityTestId.Empty(), VersionId.Empty()));
+            fixture.Register(() => NewBusinessEntity.From(NewEntityTestId.Empty(), VersionId.Empty()));
 
             var entity = fixture.Create<NewBusinessEntity>();
-            
+
             Assert.True(entity.IsValid);
             Assert.True(entity.Failures.Count == 0);
         }

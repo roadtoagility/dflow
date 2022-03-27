@@ -10,22 +10,12 @@ namespace DFlow.Example
 {
     public class SnapshotRepository : ISnapshotRepository<Guid>
     {
-        internal class SnapshotAggregate<TKey>
-        {
-            public TKey Id { get; set; }
-            public long Version { get; set; }
-            public byte[] Data { get; set; }
-        }
-        
-        private ICollection<SnapshotAggregate<Guid>> _snapshotStorage = new List<SnapshotAggregate<Guid>>();
-        readonly BinaryFormatter _formatter = new BinaryFormatter();
-        
-        public SnapshotRepository()
-        {
-            
-        }
-        
-        public bool TryGetSnapshotById<TAggregate>(Guid id, out TAggregate snapshot, out long version) where TAggregate : AggregateRoot<Guid>
+        private readonly BinaryFormatter _formatter = new BinaryFormatter();
+
+        private readonly ICollection<SnapshotAggregate<Guid>> _snapshotStorage = new List<SnapshotAggregate<Guid>>();
+
+        public bool TryGetSnapshotById<TAggregate>(Guid id, out TAggregate snapshot, out long version)
+            where TAggregate : AggregateRoot<Guid>
         {
             var aggregate = _snapshotStorage
                 .Where(x => x.Id == id)
@@ -35,7 +25,7 @@ namespace DFlow.Example
             if (aggregate == null)
             {
                 version = 0;
-                snapshot = default(TAggregate);
+                snapshot = default;
                 return false;
             }
 
@@ -46,7 +36,8 @@ namespace DFlow.Example
             return true;
         }
 
-        public void SaveSnapshot<TAggregate>(Guid id, TAggregate snapshot, long version) where TAggregate : AggregateRoot<Guid>
+        public void SaveSnapshot<TAggregate>(Guid id, TAggregate snapshot, long version)
+            where TAggregate : AggregateRoot<Guid>
         {
             /*o snapshot é a materialização da agregação, ou seja, é um arquivo desnormalizado com todas as informações
              da agregação em um determinado ponto do tempo, só que em vez de criar um DTO pra isso, resolvi apenas remover as changes e 
@@ -55,10 +46,10 @@ namespace DFlow.Example
             snapshot.Changes.Clear();
             snapshot.DomainEvents.Clear();
             var data = Serialize(snapshot);
-            _snapshotStorage.Add(new SnapshotAggregate<Guid>(){Data = data, Id = id, Version = version });
+            _snapshotStorage.Add(new SnapshotAggregate<Guid> { Data = data, Id = id, Version = version });
         }
-        
-        byte[] Serialize(AggregateRoot<Guid> e)
+
+        private byte[] Serialize(AggregateRoot<Guid> e)
         {
             using (var mem = new MemoryStream())
             {
@@ -66,13 +57,20 @@ namespace DFlow.Example
                 return mem.ToArray();
             }
         }
-        
-        AggregateRoot<Guid> Deserialize(byte[] data)
+
+        private AggregateRoot<Guid> Deserialize(byte[] data)
         {
             using (var mem = new MemoryStream(data))
             {
                 return (AggregateRoot<Guid>)_formatter.Deserialize(mem);
             }
+        }
+
+        internal class SnapshotAggregate<TKey>
+        {
+            public TKey Id { get; set; }
+            public long Version { get; set; }
+            public byte[] Data { get; set; }
         }
     }
 }

@@ -7,27 +7,29 @@
 
 using System.Collections.Generic;
 using DFlow.Domain.BusinessObjects;
+
 namespace DFlow.Samples.Domain.BusinessObjects
 {
     public sealed class User : BaseEntity<EntityId>
     {
         private User(EntityId clientId, Name name, Email commercialEmail, VersionId version)
-        :base(clientId,version)
+            : base(clientId, version)
         {
             Name = name;
             Mail = commercialEmail;
-            
+
             AppendValidationResult(Identity.ValidationStatus.Failures);
             AppendValidationResult(Name.ValidationStatus.Failures);
             AppendValidationResult(Mail.ValidationStatus.Failures);
         }
+
         public Name Name { get; }
-        
+
         public Email Mail { get; }
-                
+
         public static User From(EntityId clientId, Name name, Email commercialEmail, VersionId version)
         {
-            var user = new User(clientId,name,commercialEmail,version);
+            var user = new User(clientId, name, commercialEmail, version);
             return user;
         }
 
@@ -35,7 +37,7 @@ namespace DFlow.Samples.Domain.BusinessObjects
         {
             return From(EntityId.Empty(), Name.Empty(), Email.Empty(), VersionId.Empty());
         }
-        
+
         public override string ToString()
         {
             return $"[User]:[ID: {Identity} Name: {Name}, Commercial Email: {Mail}]";

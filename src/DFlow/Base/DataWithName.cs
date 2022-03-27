@@ -8,8 +8,7 @@ namespace DFlow.Base
             Data = data;
         }
 
-        public string Name { get; private set; }
-        public byte[] Data{ get; private set; }
-        
+        public string Name { get; }
+        public byte[] Data { get; }
     }
 }

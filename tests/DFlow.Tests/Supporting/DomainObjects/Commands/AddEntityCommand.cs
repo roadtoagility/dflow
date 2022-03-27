@@ -20,16 +20,17 @@ using DFlow.Domain.Command;
 
 namespace DFlow.Tests.Supporting.DomainObjects.Commands
 {
-    public class AddEntityCommand: BaseCommand
+    public class AddEntityCommand : BaseCommand
     {
         public AddEntityCommand(string name, string email)
         {
             Name = Name.From(name);
             Mail = Email.From(email);
-            
+
             AppendValidationResult(Name.ValidationStatus.Failures);
             AppendValidationResult(Mail.ValidationStatus.Failures);
         }
+
         public Name Name { get; set; }
         public Email Mail { get; set; }
     }

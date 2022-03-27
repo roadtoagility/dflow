@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using DFlow.Configuration;
+﻿using DFlow.Configuration;
 using DFlow.Interfaces;
 
 namespace DFlow.Bus
@@ -20,11 +17,8 @@ namespace DFlow.Bus
             foreach (var @event in events)
             {
                 var subscribers = _resolver.Resolve(@event.GetType());
-                
-                foreach (var subscriber in subscribers)
-                {
-                    ((dynamic)subscriber).Update((dynamic)@event);
-                }
+
+                foreach (var subscriber in subscribers) ((dynamic)subscriber).Update((dynamic)@event);
             }
         }
     }

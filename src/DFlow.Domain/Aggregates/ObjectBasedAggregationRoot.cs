@@ -12,22 +12,12 @@ using DFlow.Domain.Validation;
 
 namespace DFlow.Domain.Aggregates
 {
-    public abstract class ObjectBasedAggregationRoot<TChange, TEntityId>:BaseValidation,
-        IChangeSet<TChange> where TChange: BaseEntity<TEntityId>
+    public abstract class ObjectBasedAggregationRoot<TChange, TEntityId> : BaseValidation,
+        IChangeSet<TChange> where TChange : BaseEntity<TEntityId>
     {
-        protected TChange AggregateRootEntity { get; set; }
         private readonly IList<IDomainEvent> _changes = new List<IDomainEvent>();
+        protected TChange AggregateRootEntity { get; set; }
 
-        protected void Apply(TChange item)
-        {
-            AggregateRootEntity = item;
-        }
-        
-        protected void Raise(IDomainEvent @event)
-        {
-            _changes.Add(@event);
-        }
-        
         public TChange GetChange()
         {
             return AggregateRootEntity;
@@ -36,6 +26,16 @@ namespace DFlow.Domain.Aggregates
         public IReadOnlyList<IDomainEvent> GetEvents()
         {
             return _changes.ToImmutableList();
+        }
+
+        protected void Apply(TChange item)
+        {
+            AggregateRootEntity = item;
+        }
+
+        protected void Raise(IDomainEvent @event)
+        {
+            _changes.Add(@event);
         }
     }
 }

@@ -8,8 +8,8 @@
         <RootNamespace>DFlow</RootNamespace>
         <AssemblyName>DFlow</AssemblyName>
         <OutputType>Library</OutputType>
-        <ApplicationIcon />
-        <StartupObject />
+        <ApplicationIcon/>
+        <StartupObject/>
         <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/roadtoagility/dflow</RepositoryUrl>
         <RepositoryType>GIT</RepositoryType>
@@ -26,10 +26,10 @@
         <VersionPrefix>0.1.0</VersionPrefix>
         <PackageVersion></PackageVersion>
         <VersionSuffix></VersionSuffix>
-        
+
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release Profilling' ">
-      <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
+        <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
     </PropertyGroup>
 </Project>

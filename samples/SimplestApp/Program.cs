@@ -11,17 +11,17 @@ using SimplestApp.Specifications;
 
 namespace SimplestApp
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("== Simple App to Create a User");
 
             var spec = new UserValidSpecification();
-            UserService us = new UserService(spec);
+            var us = new UserService(spec);
 
-            var user = us.Add(new AddUser {Name = "My name", Mail = "my@mail.com"});
-            
+            var user = us.Add(new AddUser { Name = "My name", Mail = "my@mail.com" });
+
             Console.WriteLine();
             Console.WriteLine($"My name is {user.Name}, my mail is {user.Mail} i'm a valid {user.IsValid}");
             Console.WriteLine();

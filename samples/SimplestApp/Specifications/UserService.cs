@@ -13,17 +13,14 @@ using SimplestApp.Operations;
 
 namespace SimplestApp.Specifications
 {
-    public class UserValidSpecification:CompositeSpecification<UserEntityBasedAggregationRoot>
+    public class UserValidSpecification : CompositeSpecification<UserEntityBasedAggregationRoot>
     {
-        
         public User Add(AddUser user)
         {
             var agg = UserEntityBasedAggregationRoot.CreateFrom(Name.From(user.Name), Email.From(user.Mail));
 
             if (!agg.IsValid)
-            {
                 throw new ArgumentException("One or more parameters informed to create a user are not valid.");
-            }
 
             return agg.GetChange();
         }

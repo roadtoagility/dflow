@@ -27,18 +27,20 @@ namespace DFlow.Samples.Persistence.ExtensionMethods
     public static class BusinessObjectsExtensions
     {
         public static UserState ToUserState(this User user)
-            => new UserState(user.Identity.Value,
-                user.Name.Value, 
+        {
+            return new UserState(user.Identity.Value,
+                user.Name.Value,
                 user.Mail.Value,
                 BitConverter.GetBytes(user.Version.Value));
+        }
 
         public static User ToUser(this UserState state)
-            => User.From(
-                    EntityId.From(state.Id),
-                    Name.From(state.Name),
-                    Email.From(state.Mail),
-                    VersionId.From(BitConverter.ToInt32(state.RowVersion)));
-
-
+        {
+            return User.From(
+                EntityId.From(state.Id),
+                Name.From(state.Name),
+                Email.From(state.Mail),
+                VersionId.From(BitConverter.ToInt32(state.RowVersion)));
+        }
     }
 }

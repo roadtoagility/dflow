@@ -7,7 +7,6 @@ namespace DFlow.Base.Exceptions
         public DuplicatedRootException(string key)
             : base($"An aggregate with the same key {key} is already registered")
         {
-            
         }
     }
 }

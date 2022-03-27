@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using DFlow.Configuration;
-using DFlow.Interfaces;
 using SimpleInjector;
 
 namespace DFlow.DependencyInjection
@@ -10,7 +8,7 @@ namespace DFlow.DependencyInjection
     public class SimpleInjectorDependencyResolver : IDependencyResolver
     {
         private readonly Container _container;
-        
+
         public SimpleInjectorDependencyResolver(Container container)
         {
             _container = container;

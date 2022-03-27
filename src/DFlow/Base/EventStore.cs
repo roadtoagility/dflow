@@ -3,26 +3,56 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Transactions;
 using DFlow.Interfaces;
 
 namespace DFlow.Base
 {
     public class EventStore : IEventStore<Guid>
     {
-        
-        readonly IAppendOnlyStore<Guid> _appendOnlyStore;
+        private readonly IAppendOnlyStore<Guid> _appendOnlyStore;
         private readonly IEventBus _eventBus;
-        readonly BinaryFormatter _formatter = new BinaryFormatter();
-        
+        private readonly BinaryFormatter _formatter = new BinaryFormatter();
+
         public EventStore(IAppendOnlyStore<Guid> appendOnlyStore, IEventBus eventBus)
         {
             _appendOnlyStore = appendOnlyStore;
             _eventBus = eventBus;
         }
-        
-        public EventStream LoadEventStream(Guid id) => LoadEventStream(id, 0, Int32.MaxValue);
-        
+
+        public EventStream LoadEventStream(Guid id)
+        {
+            return LoadEventStream(id, 0, int.MaxValue);
+        }
+
+        public EventStream LoadEventStreamAfterVersion(Guid id, long afterVersion)
+        {
+            var records = _appendOnlyStore.ReadRecords(id, afterVersion, int.MaxValue).ToList();
+
+            var stream = new EventStream();
+
+            foreach (var tapeRecord in records)
+            {
+                stream.Events.AddRange(DeserializeEvent(tapeRecord.Data));
+                stream.Version = tapeRecord.Version;
+            }
+
+            return stream;
+        }
+
+        public void AppendToStream<TType>(Guid id, long version, ICollection<IEvent> events,
+            params IDomainEvent[] domainEvents)
+        {
+            //salvar os dados em uma lista interna
+            var aggregateType = typeof(TType).Name;
+            _appendOnlyStore.Append(id, aggregateType, version, events);
+            _eventBus.Publish(domainEvents);
+        }
+
+        public bool Any(Guid id)
+        {
+            return _appendOnlyStore.Any(id);
+        }
+
         public EventStream LoadEventStream(Guid id, int skipEvents, int maxCount)
         {
             var records = _appendOnlyStore.ReadRecords(id, skipEvents, maxCount).ToList();
@@ -38,35 +68,7 @@ namespace DFlow.Base
             return stream;
         }
 
-        public EventStream LoadEventStreamAfterVersion(Guid id, long afterVersion)
-        {
-            var records = _appendOnlyStore.ReadRecords(id, afterVersion, Int32.MaxValue).ToList();
-
-            var stream = new EventStream();
-
-            foreach (var tapeRecord in records)
-            {
-                stream.Events.AddRange(DeserializeEvent(tapeRecord.Data));
-                stream.Version = tapeRecord.Version;
-            }
-
-            return stream;
-        }
-
-        public void AppendToStream<TType>(Guid id, long version, ICollection<IEvent> events, params IDomainEvent[] domainEvents)
-        {
-            //salvar os dados em uma lista interna
-            var aggregateType = typeof(TType).Name;
-            _appendOnlyStore.Append(id, aggregateType, version, events);
-            _eventBus.Publish(domainEvents);
-        }
-
-        public bool Any(Guid id)
-        {
-            return _appendOnlyStore.Any(id);
-        }
-        
-        IEvent[] DeserializeEvent(byte[] data)
+        private IEvent[] DeserializeEvent(byte[] data)
         {
             using (var mem = new MemoryStream(data))
             {

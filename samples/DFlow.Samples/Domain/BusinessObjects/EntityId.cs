@@ -6,15 +6,16 @@
 
 using System;
 using DFlow.Domain.BusinessObjects;
+
 namespace DFlow.Samples.Domain.BusinessObjects
 {
-    public sealed class EntityId : ValueOf<Guid,EntityId>
+    public sealed class EntityId : ValueOf<Guid, EntityId>
     {
         public static EntityId Empty()
         {
             return From(Guid.Empty);
         }
-        
+
         public static EntityId GetNext()
         {
             return From(Guid.NewGuid());

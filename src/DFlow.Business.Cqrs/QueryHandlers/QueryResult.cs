@@ -9,13 +9,14 @@ using DFlow.Domain.Validation;
 
 namespace DFlow.Business.Cqrs.QueryHandlers
 {
-    public class QueryResult<TResult>: ExecutionResult
+    public class QueryResult<TResult> : ExecutionResult
     {
         public QueryResult(bool isSucceed, TResult data)
-            :base(isSucceed, ImmutableList<Failure>.Empty)
+            : base(isSucceed, ImmutableList<Failure>.Empty)
         {
             Data = data;
         }
-        public TResult Data { get;}
+
+        public TResult Data { get; }
     }
 }

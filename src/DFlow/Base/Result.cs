@@ -11,8 +11,8 @@ namespace DFlow.Base
             Exceptions = exceptions;
         }
 
-        public T Data { get; private set; }
-        public IList<Exception> Exceptions { get; private set; }
+        public T Data { get; }
+        public IList<Exception> Exceptions { get; }
 
         public bool HasExceptions => Exceptions != null && Exceptions.Count > 0;
     }

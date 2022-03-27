@@ -19,22 +19,23 @@ namespace DFlow.Samples.Business.CommandHandlers
     public sealed class AddUserCommandHandler : CommandHandler<AddUserCommand, CommandResult<Guid>>
     {
         public AddUserCommandHandler(IDomainEventBus publisher)
-            :base(publisher)
+            : base(publisher)
         {
         }
-        
-        protected override Task<CommandResult<Guid>> ExecuteCommand(AddUserCommand command, CancellationToken cancellationToken)
+
+        protected override Task<CommandResult<Guid>> ExecuteCommand(AddUserCommand command,
+            CancellationToken cancellationToken)
         {
-            var agg = UserEntityBasedAggregationRoot.CreateFrom(command.Name,command.Mail);
-            
+            var agg = UserEntityBasedAggregationRoot.CreateFrom(command.Name, command.Mail);
+
             var isSucceed = agg.IsValid;
             var okId = Guid.Empty;
-      
+
             if (agg.IsValid)
             {
                 agg.GetEvents().ToImmutableList()
-                    .ForEach( ev => Publisher.Publish(ev));
-                
+                    .ForEach(ev => Publisher.Publish(ev));
+
                 okId = agg.GetChange().Identity.Value;
             }
 

@@ -6,16 +6,17 @@
 
 namespace DFlow.Domain.Specifications
 {
-    public class OrSpecification<TBusinessObject>:LogicalSpecification<TBusinessObject>
+    public class OrSpecification<TBusinessObject> : LogicalSpecification<TBusinessObject>
     {
-        public OrSpecification(ISpecification<TBusinessObject> leftCondition, ISpecification<TBusinessObject> rightCondition) 
+        public OrSpecification(ISpecification<TBusinessObject> leftCondition,
+            ISpecification<TBusinessObject> rightCondition)
             : base(leftCondition, rightCondition)
         {
         }
 
         public override bool IsSatisfiedBy(TBusinessObject candidate)
         {
-            return LeftCondition.IsSatisfiedBy(candidate) 
+            return LeftCondition.IsSatisfiedBy(candidate)
                    || RightCondition.IsSatisfiedBy(candidate);
         }
     }

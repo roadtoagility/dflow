@@ -22,7 +22,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
         public UserRepository(SampleAppDbContext context)
         {
             DbContext = context;
-            
+
             DbContext.Database.EnsureDeleted();
             DbContext.Database.EnsureCreated();
         }
@@ -44,9 +44,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             else
             {
                 if (VersionId.Next(oldState.Version) > entity.Version)
-                {
                     throw new DbUpdateConcurrencyException("This version is not the most updated for this object.");
-                }
 
                 DbContext.Entry(oldState).CurrentValues.SetValues(entry);
             }
@@ -57,12 +55,10 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             var oldState = Get(entity);
 
             if (VersionId.Next(oldState.Version) > entity.Version)
-            {
                 throw new DbUpdateConcurrencyException("This version is not the most updated for this object.");
-            }
 
             var entry = entity.ToUserState();
-            
+
             DbContext.Users.Remove(entry);
         }
 
@@ -71,29 +67,29 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             var user = DbContext.Users.AsNoTracking()
                 .OrderByDescending(ob => ob.Id)
                 .ThenByDescending(ob => ob.RowVersion)
-                .FirstOrDefault(t =>t.Id.Equals(id.Identity.Value));
-            
-            if (user == null)
-            {
-                return User.Empty();
-            }
-            
+                .FirstOrDefault(t => t.Id.Equals(id.Identity.Value));
+
+            if (user == null) return User.Empty();
+
             return user.ToUser();
         }
+
         public IEnumerable<User> Find(Expression<Func<UserState, bool>> predicate)
         {
             return DbContext.Users.Where(predicate).AsNoTracking()
                 .Select(t => t.ToUser()).ToList();
         }
 
-        
+
         public async Task<IEnumerable<User>> FindAsync(Expression<Func<UserState, bool>> predicate)
         {
             var cancellationToken = new CancellationToken();
             return await FindAsync(predicate, cancellationToken)
                 .ConfigureAwait(false);
         }
-        public async Task<IEnumerable<User>> FindAsync(Expression<Func<UserState, bool>> predicate, CancellationToken cancellationToken)
+
+        public async Task<IEnumerable<User>> FindAsync(Expression<Func<UserState, bool>> predicate,
+            CancellationToken cancellationToken)
         {
             return await DbContext.Users.Where(predicate).AsNoTracking()
                 .Select(t => t.ToUser()).ToListAsync()

@@ -23,6 +23,7 @@ namespace DFlow.Tests.Supporting.DomainObjects
     public sealed class Name : ValueOf<string, Name>
     {
         private static readonly string NameEmpty = string.Empty;
+
         public static Name Empty()
         {
             return From(NameEmpty);

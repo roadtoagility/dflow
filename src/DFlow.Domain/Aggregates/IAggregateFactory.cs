@@ -9,7 +9,7 @@ using DFlow.Domain.Validation;
 namespace DFlow.Domain.Aggregates
 {
     public interface IAggregateFactory<out TAggregate, in TCreateFrom>
-                where TCreateFrom: BaseValidation
+        where TCreateFrom : BaseValidation
     {
         TAggregate Create(TCreateFrom source);
     }

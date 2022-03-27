@@ -8,10 +8,10 @@ using DFlow.Persistence.LiteDB;
 
 namespace DFlow.Samples.Persistence
 {
-    public class SampleProjectionDbSession<TRepository>: ProjectionDbSession<TRepository>
+    public class SampleProjectionDbSession<TRepository> : ProjectionDbSession<TRepository>
     {
         public SampleProjectionDbSession(SampleAppProjectionDbContext context, TRepository repository)
-        :base(context,repository)
+            : base(context, repository)
         {
         }
     }

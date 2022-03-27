@@ -7,15 +7,15 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release Profilling' ">
-      <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
+        <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="FluentMediator" Version="0.4.7" />
+        <PackageReference Include="FluentMediator" Version="0.4.7"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\DFlow.Domain.Events\DFlow.Domain.Events.csproj" />
+        <ProjectReference Include="..\..\DFlow.Domain.Events\DFlow.Domain.Events.csproj"/>
     </ItemGroup>
 
 </Project>

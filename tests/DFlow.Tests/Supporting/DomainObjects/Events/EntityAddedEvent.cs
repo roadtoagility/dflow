@@ -29,8 +29,9 @@ namespace DFlow.Tests.Supporting.DomainObjects.Events
         {
             Id = clientId;
         }
+
         public EntityTestId Id { get; }
-        
+
         public static EntityAddedEvent For(BusinessEntity user)
         {
             return new EntityAddedEvent(user.Identity, user.Version);

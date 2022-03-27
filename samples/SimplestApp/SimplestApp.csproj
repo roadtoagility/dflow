@@ -8,16 +8,16 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release Profilling' ">
-      <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
+        <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\DFlow.Domain\DFlow.Domain.csproj" />
-      <ProjectReference Include="..\DFlow.Samples\DFlow.Samples.csproj" />
+        <ProjectReference Include="..\..\src\DFlow.Domain\DFlow.Domain.csproj"/>
+        <ProjectReference Include="..\DFlow.Samples\DFlow.Samples.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Operations" />
+        <Folder Include="Operations"/>
     </ItemGroup>
 
 </Project>

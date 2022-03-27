@@ -27,7 +27,7 @@ namespace DFlow.Tests.Domain
             var vo = SimpleVo.From("");
             Assert.True(vo.ValidationStatus.IsValid);
         }
-        
+
         [Fact]
         public void ValueOf_create_Vo_is_the_same()
         {
@@ -36,7 +36,7 @@ namespace DFlow.Tests.Domain
 
             Assert.True(vo1.Equals(vo2));
         }
-        
+
         [Fact]
         public void ValueOf_create_Vo_is_not_the_same()
         {
@@ -45,7 +45,7 @@ namespace DFlow.Tests.Domain
 
             Assert.False(vo1.Equals(vo2));
         }
-        
+
         [Fact]
         public void ValueOf_create_ComplexVo_isValid()
         {
@@ -69,41 +69,30 @@ namespace DFlow.Tests.Domain
 
             Assert.False(vo.ValidationStatus.IsValid);
         }
-        
-        class ComplexNamedTupleVo : ValueOf<(string Name,SimpleVo Svo), ComplexVo>
+
+        private class ComplexNamedTupleVo : ValueOf<(string Name, SimpleVo Svo), ComplexVo>
         {
             protected override void Validate()
             {
                 if (string.IsNullOrEmpty(Value.Name))
-                {
                     ValidationStatus.Append(Failure.For("Name", "Name can't be empty"));
-                }
-                
-                if (Value.Svo.Equals(null))
-                {
-                    ValidationStatus.Append(Failure.For("Svo", "Name can't be empty"));
-                }
+
+                if (Value.Svo.Equals(null)) ValidationStatus.Append(Failure.For("Svo", "Name can't be empty"));
             }
         }
-        
-        class ComplexVo : ValueOf<(string,SimpleVo), ComplexVo>
+
+        private class ComplexVo : ValueOf<(string, SimpleVo), ComplexVo>
         {
             protected override void Validate()
             {
                 if (string.IsNullOrEmpty(Value.Item1))
-                {
                     ValidationStatus.Append(Failure.For("Name", "Name can't be empty"));
-                }
-                
-                if (Value.Item2.Equals(null))
-                {
-                    ValidationStatus.Append(Failure.For("Svo", "Name can't be empty"));
-                }
+
+                if (Value.Item2.Equals(null)) ValidationStatus.Append(Failure.For("Svo", "Name can't be empty"));
             }
-            
         }
-        
-        class SimpleVo : ValueOf<string, SimpleVo>
+
+        private class SimpleVo : ValueOf<string, SimpleVo>
         {
         }
     }

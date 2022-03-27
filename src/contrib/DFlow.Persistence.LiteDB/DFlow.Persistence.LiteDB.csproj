@@ -5,11 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="LiteDB" Version="5.0.10" />
+        <PackageReference Include="LiteDB" Version="5.0.10"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\DFlow.Persistence\DFlow.Persistence.csproj" />
+        <ProjectReference Include="..\..\DFlow.Persistence\DFlow.Persistence.csproj"/>
     </ItemGroup>
     <PropertyGroup>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>

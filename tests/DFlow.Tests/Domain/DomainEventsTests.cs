@@ -19,12 +19,12 @@ namespace DFlow.Tests.Domain
         public async Task DomainEvent_Publishing()
         {
             var fixture = new Fixture()
-                .Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
+                .Customize(new AutoNSubstituteCustomization { ConfigureMembers = true });
 
             var realEventBus = fixture.Create<IDomainEventBus>();
             var myEvent = fixture.Create<IDomainEvent>();
             await realEventBus.Publish(myEvent);
-            
+
             await realEventBus.Received().Publish(Arg.Any<IDomainEvent>());
         }
     }

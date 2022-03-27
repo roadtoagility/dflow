@@ -21,9 +21,9 @@ namespace DFlow.Tests.Business.Cqrs
         [Fact]
         public async Task Add_entity_valid_command()
         {
-            var fixture = new Fixture().Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
+            var fixture = new Fixture().Customize(new AutoNSubstituteCustomization { ConfigureMembers = true });
 
-            
+
             var command = fixture.Create<AddEntityCommand>();
             var eventBus = fixture.Create<IDomainEventBus>();
 
@@ -34,13 +34,13 @@ namespace DFlow.Tests.Business.Cqrs
             await eventBus.Received(1).Publish(Arg.Any<EntityAddedEvent>());
             Assert.True(result.IsSucceed);
         }
-        
+
         [Fact]
         public async Task Add_entity_eventbased_valid_command()
         {
-            var fixture = new Fixture().Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
+            var fixture = new Fixture().Customize(new AutoNSubstituteCustomization { ConfigureMembers = true });
 
-            
+
             var command = fixture.Create<AddEntityCommand>();
             var eventBus = fixture.Create<IDomainEventBus>();
 

@@ -4,7 +4,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-using System;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using DFlow.Domain.BusinessObjects;
@@ -23,34 +22,34 @@ namespace DFlow.Tests.Domain
 
             Assert.True(agg.IsValid);
         }
-        
+
         [Fact]
         public void Aggregate_reconstruct_a_valid()
         {
             var be = BusinessEntity.From(EntityTestId.GetNext(), VersionId.New());
-            
+
             var factory = new ObjectBasedAggregateFactory();
             var agg = factory.Create(be);
 
             Assert.True(agg.IsValid);
         }
-        
+
         [Fact]
         public void Aggregate_EventBased_create_a_valid()
         {
             var fixture = new Fixture()
-                .Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
-            fixture.Register<Name>(()=> Name.From(fixture.Create<String>()));
-            fixture.Register<Email>(()=> Email.From("email@de.com"));
-            
+                .Customize(new AutoNSubstituteCustomization { ConfigureMembers = true });
+            fixture.Register(() => Name.From(fixture.Create<string>()));
+            fixture.Register(() => Email.From("email@de.com"));
+
             var addEntity = fixture.Create<AddEntityCommand>();
 
-            var factory = new EventBasedAggregateFactory(); 
+            var factory = new EventBasedAggregateFactory();
             var agg = factory.Create(addEntity);
-            Assert.Equal(nameof(EventStreamBusinessEntityAggregateRoot),agg.GetChange().Name.Value);
+            Assert.Equal(nameof(EventStreamBusinessEntityAggregateRoot), agg.GetChange().Name.Value);
             Assert.True(agg.IsValid);
         }
-        
+
         [Fact]
         public void Aggregate_EventBased_create_an_empty()
         {
@@ -58,24 +57,24 @@ namespace DFlow.Tests.Domain
             var agg = factory.Create(new AddEntityCommand("", ""));
             Assert.True(agg.IsValid);
         }
-        
+
         [Fact]
         public void Aggregate_EventBased_valid_Entity_create()
         {
             var fixture = new Fixture()
-                .Customize(new AutoNSubstituteCustomization{ ConfigureMembers = true });
-            fixture.Register<string>(()=> "email@de.com");
-            
+                .Customize(new AutoNSubstituteCustomization { ConfigureMembers = true });
+            fixture.Register(() => "email@de.com");
+
             var name = fixture.Create<string>();
             var email = fixture.Create<string>();
-            
+
             var factory = new EventBasedAggregateFactory();
             var agg = factory.Create(new AddEntityCommand(name, email));
-            
+
             var change = agg.GetChange();
             Assert.True(agg.IsValid);
             Assert.True(change.IsValid);
-            Assert.Equal(1,change.Events.Count);
+            Assert.Equal(1, change.Events.Count);
         }
     }
 }

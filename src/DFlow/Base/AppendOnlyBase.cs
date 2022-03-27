@@ -10,14 +10,11 @@ namespace DFlow.Base
 {
     public abstract class AppendOnlyBase
     {
-        readonly BinaryFormatter _formatter = new BinaryFormatter();
+        private readonly BinaryFormatter _formatter = new BinaryFormatter();
 
         public void Append(Guid id, string aggregateType, long version, ICollection<IEvent> events)
         {
-            if (events.Count == 0)
-            {
-                return;
-            }
+            if (events.Count == 0) return;
 
             var data = SerializeEvent(events.ToArray());
 
@@ -34,19 +31,17 @@ namespace DFlow.Base
 
                 //Version = 0 significa que não existe stream anterior a versao informada no ReadRecords
                 if (stream.Version > 0 && originalVersion != stream.Version)
-                {
                     throw new EventStoreConcurrencyException(stream.Events, stream.Version);
-                }
             }
-            
+
             Save(id, aggregateType, version, data);
         }
 
         protected abstract void Save(Guid id, string aggregateType, long version, byte[] data);
         public abstract bool Any(Guid aggregateId);
         public abstract IEnumerable<DataWithVersion> ReadRecords(Guid aggregateId, long afterVersion, int maxCount);
-        
-        byte[] SerializeEvent(IEvent[] e)
+
+        private byte[] SerializeEvent(IEvent[] e)
         {
             using (var mem = new MemoryStream())
             {
@@ -54,8 +49,8 @@ namespace DFlow.Base
                 return mem.ToArray();
             }
         }
-        
-        IEvent[] DeserializeEvent(byte[] data)
+
+        private IEvent[] DeserializeEvent(byte[] data)
         {
             using (var mem = new MemoryStream(data))
             {

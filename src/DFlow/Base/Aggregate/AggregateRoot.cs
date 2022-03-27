@@ -7,11 +7,6 @@ namespace DFlow.Base.Aggregate
     [Serializable]
     public abstract class AggregateRoot<T>
     {
-        public IList<IEvent> Changes { get; protected set; }
-        public IList<IDomainEvent> DomainEvents { get; protected set; }
-        public T Id { get; protected set; }
-        public long Version { get; protected set; }
-        
         protected AggregateRoot(EventStream stream)
         {
             Changes = new List<IEvent>();
@@ -20,14 +15,16 @@ namespace DFlow.Base.Aggregate
             ReplayEvents(stream.Events);
         }
 
+        public IList<IEvent> Changes { get; protected set; }
+        public IList<IDomainEvent> DomainEvents { get; protected set; }
+        public T Id { get; protected set; }
+        public long Version { get; protected set; }
+
         public void ReplayEvents(IEnumerable<IEvent> events)
         {
-            foreach (var @event in events)
-            {
-                Mutate(@event);
-            }
+            foreach (var @event in events) Mutate(@event);
         }
-        
+
         protected void Apply(IEvent @event)
         {
             Changes.Add(@event);
@@ -41,6 +38,5 @@ namespace DFlow.Base.Aggregate
         }
 
         protected abstract void Mutate(IEvent e);
-
     }
 }

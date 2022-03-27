@@ -13,7 +13,7 @@ namespace DFlow.Domain.Validation
     {
         bool IsValid { get; }
         void AppendValidationResult(Failure failure);
-        
+
         void AppendValidationResult(IReadOnlyList<Failure> failures);
     }
 }

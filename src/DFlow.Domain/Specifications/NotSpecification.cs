@@ -6,14 +6,14 @@
 
 namespace DFlow.Domain.Specifications
 {
-    public class NotSpecification<TBusinessObject>:CompositeSpecification<TBusinessObject>
+    public class NotSpecification<TBusinessObject> : CompositeSpecification<TBusinessObject>
     {
-        protected ISpecification<TBusinessObject> Condition { get; }
-        
         public NotSpecification(ISpecification<TBusinessObject> condition)
         {
             Condition = condition;
         }
+
+        protected ISpecification<TBusinessObject> Condition { get; }
 
         public override bool IsSatisfiedBy(TBusinessObject candidate)
         {

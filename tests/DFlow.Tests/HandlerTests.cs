@@ -16,10 +16,10 @@ namespace DFlow.Tests
         private readonly IAppendOnlyStore<Guid> _appendOnly;
         private readonly IEventBus _eventBus;
         private readonly IEventStore<Guid> _eventStore;
-        private ISnapshotRepository<Guid> _snapShotRepo;
         private readonly AggregateFactory _factory;
         private readonly MemoryResolver _resolver;
-        
+        private readonly ISnapshotRepository<Guid> _snapShotRepo;
+
         public HandlerTests()
         {
             _resolver = new MemoryResolver();
@@ -29,7 +29,7 @@ namespace DFlow.Tests
             _snapShotRepo = new SnapshotRepository();
             _factory = new AggregateFactory(_eventStore, _snapShotRepo);
         }
-        
+
         [Fact]
         public void ShouldCreateProductCatalog()
         {
@@ -37,12 +37,13 @@ namespace DFlow.Tests
             var handler = new ProductServiceCommandHandler(_eventStore, _factory);
             var view = new ProductView();
             _resolver.Register<ProductCreated>(view);
-            
+
             handler.Execute(new CreateProductCatalog(rootId));
-            handler.Execute(new CreateProductCommand(rootId, Guid.NewGuid(), "Notebook Lenovo 2 em 1 ideapad C340", "Notebook Lenovo 2 em 1 ideapad C340 i7-8565U 8GB 256GB SSD Win10 14' FHD IPS - 81RL0001BR"));
+            handler.Execute(new CreateProductCommand(rootId, Guid.NewGuid(), "Notebook Lenovo 2 em 1 ideapad C340",
+                "Notebook Lenovo 2 em 1 ideapad C340 i7-8565U 8GB 256GB SSD Win10 14' FHD IPS - 81RL0001BR"));
 
             var stream = _eventStore.LoadEventStream(rootId);
-            
+
             Assert.True(stream.Version == 2);
             Assert.True(1 == view.Products.Count);
         }

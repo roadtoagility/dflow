@@ -19,7 +19,8 @@ namespace DFlow.Persistence.ReadModel.Repositories
         void Remove(TModel entity);
         IReadOnlyList<TModel> Find(Expression<Func<TModel, bool>> predicate);
         Task<IReadOnlyList<TModel>> FindAsync(Expression<Func<TModel, bool>> predicate);
-        
-        Task<IReadOnlyList<TModel>> FindAsync(Expression<Func<TModel, bool>> predicate, CancellationToken cancellationToken);
+
+        Task<IReadOnlyList<TModel>> FindAsync(Expression<Func<TModel, bool>> predicate,
+            CancellationToken cancellationToken);
     }
 }

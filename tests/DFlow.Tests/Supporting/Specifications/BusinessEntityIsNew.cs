@@ -33,7 +33,7 @@ namespace DFlow.Tests.Supporting.Specifications
                     "The candidate already exists."));
                 return false;
             }
-            
+
             return true;
         }
     }

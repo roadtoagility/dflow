@@ -20,9 +20,10 @@ using DFlow.Domain.BusinessObjects;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
-    public sealed class Email : ValueOf<string,Email>
+    public sealed class Email : ValueOf<string, Email>
     {
-       private static readonly string EmailEmpty = string.Empty;
+        private static readonly string EmailEmpty = string.Empty;
+
         public static Email Empty()
         {
             return From(EmailEmpty);

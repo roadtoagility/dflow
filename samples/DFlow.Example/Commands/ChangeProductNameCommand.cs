@@ -3,13 +3,8 @@ using DFlow.Interfaces;
 
 namespace DFlow.Example.Commands
 {
-    
     public class ChangeProductNameCommand : ICommand
     {
-        public Guid RootId { get; set; }
-        public Guid ProductId { get; set; }
-        public string Name { get; set; }
-
         public ChangeProductNameCommand(Guid rootId)
         {
             RootId = rootId;
@@ -21,5 +16,9 @@ namespace DFlow.Example.Commands
             Name = name;
             RootId = rootId;
         }
+
+        public Guid RootId { get; set; }
+        public Guid ProductId { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -16,7 +16,6 @@
 // Boston, MA  02110-1301, USA.
 //
 
-using System;
 using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.DomainEvents;
 
@@ -25,13 +24,14 @@ namespace DFlow.Tests.Supporting.DomainObjects.Events
     public class TestEntityAggregateAddedDomainEvent : AggregateAddedDomainEvent<EntityTestId>
     {
         private TestEntityAggregateAddedDomainEvent(EntityTestId aggregateId, Name name, Email email, VersionId version)
-        :base(aggregateId,version)
+            : base(aggregateId, version)
         {
         }
-       
-        public static TestEntityAggregateAddedDomainEvent From(EntityTestId aggregateId, Name name, Email email, VersionId version)
+
+        public static TestEntityAggregateAddedDomainEvent From(EntityTestId aggregateId, Name name, Email email,
+            VersionId version)
         {
-            return new TestEntityAggregateAddedDomainEvent(aggregateId, name,email, version);
+            return new TestEntityAggregateAddedDomainEvent(aggregateId, name, email, version);
         }
     }
 }

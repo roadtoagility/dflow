@@ -14,13 +14,10 @@ namespace DFlow.Samples.Business.QueryHandlers
         }
 
         public string Name { get; }
-        
+
         public static GetUsersByFilter From(string name)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                name = string.Empty;
-            }
+            if (string.IsNullOrEmpty(name)) name = string.Empty;
 
             return new GetUsersByFilter(name);
         }

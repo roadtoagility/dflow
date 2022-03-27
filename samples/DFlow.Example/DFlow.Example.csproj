@@ -9,19 +9,19 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Tests' ">
-      <DefineConstants>TRACE;TEST_BUILD</DefineConstants>
+        <DefineConstants>TRACE;TEST_BUILD</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release Profilling' ">
-      <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
+        <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.3"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\DFlow\DFlow.csproj" />
+        <ProjectReference Include="..\..\src\DFlow\DFlow.csproj"/>
     </ItemGroup>
 
 </Project>

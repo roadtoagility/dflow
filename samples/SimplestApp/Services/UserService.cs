@@ -12,22 +12,20 @@ using SimplestApp.Operations;
 
 namespace SimplestApp.Services
 {
-    public class UserService:IUserService
+    public class UserService : IUserService
     {
-        private ISpecification<UserEntityBasedAggregationRoot> _specification;
+        private readonly ISpecification<UserEntityBasedAggregationRoot> _specification;
+
         public UserService(ISpecification<UserEntityBasedAggregationRoot> specification)
         {
             _specification = specification;
         }
-        
+
         public User Add(AddUser user)
         {
             var agg = UserEntityBasedAggregationRoot.CreateFrom(Name.From(user.Name), Email.From(user.Mail));
 
-            if (!_specification.IsSatisfiedBy(agg))
-            {
-                throw new ArgumentException(agg.Failures[0].Message);
-            }
+            if (!_specification.IsSatisfiedBy(agg)) throw new ArgumentException(agg.Failures[0].Message);
 
             return agg.GetChange();
         }
