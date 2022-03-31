@@ -1,14 +1,13 @@
-﻿// Copyright (C) 2020  Road to Agility
+// Copyright (C) 2021  Road to Agility
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-
-namespace DFlow.Domain.BusinessObjects
+namespace DFlow.Domain.Validation
 {
-    public sealed class AggregationName : ValueOf<string, AggregationName>
+    public interface IValidator<in TObject>
     {
-    
+        void Validate(TObject toValidate);
     }
 }

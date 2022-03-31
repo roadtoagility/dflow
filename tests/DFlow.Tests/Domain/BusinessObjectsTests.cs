@@ -29,12 +29,9 @@ namespace DFlow.Tests.Domain
         [Fact]
         public void EntityId_create_an_empty()
         {
-            var fixture = new Fixture();
-            fixture.Register<EntityTestId>(() => EntityTestId.Empty());
-
-            var entityId = fixture.Create<EntityTestId>();
+            var entityId = EntityTestId.Empty();
             
-            Assert.False(entityId.ValidationStatus.IsValid);
+            Assert.True(entityId.ValidationStatus.IsValid);
         }
         
         [Fact]
@@ -45,7 +42,7 @@ namespace DFlow.Tests.Domain
 
             var entityId = fixture.Create<EntityTestId>();
             
-            Assert.False(entityId.ValidationStatus.IsValid);
+            Assert.True(entityId.ValidationStatus.IsValid);
         }
         
         [Fact]

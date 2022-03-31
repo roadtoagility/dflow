@@ -5,14 +5,14 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System.Collections.Immutable;
-using DFlow.Domain.Validation;
+using FluentValidation.Results;
 
 namespace DFlow.Business.Cqrs.QueryHandlers
 {
     public class QueryResult<TResult>: ExecutionResult
     {
         public QueryResult(bool isSucceed, TResult data)
-            :base(isSucceed, ImmutableList<Failure>.Empty)
+            :base(isSucceed, ImmutableList<ValidationFailure>.Empty)
         {
             Data = data;
         }

@@ -16,16 +16,11 @@
 // Boston, MA  02110-1301, USA.
 //
 
-using System;
-using System.Collections.Generic;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.Validation;
-using DFlow.Tests.Supporting.DomainObjects.Validators;
-using Xunit.Sdk;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
-    public sealed class Email : ValueOf<string,Email, EmailValidator>
+    public sealed class Email : ValueOf<string,Email>
     {
        private static readonly string EmailEmpty = string.Empty;
         public static Email Empty()

@@ -19,7 +19,6 @@
 
 using System;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Samples.BusinessObjects.Domain.BusinessObjects;
 using DFlow.Samples.Domain.BusinessObjects;
 using DFlow.Samples.Persistence.Model;
 

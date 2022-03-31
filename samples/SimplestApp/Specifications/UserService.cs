@@ -6,11 +6,10 @@
 
 using System;
 using DFlow.Domain.Specifications;
+using DFlow.Domain.Validation;
 using DFlow.Samples.Domain.Aggregates;
 using DFlow.Samples.Domain.BusinessObjects;
-using FluentValidation.Results;
 using SimplestApp.Operations;
-using SimplestApp.Services;
 
 namespace SimplestApp.Specifications
 {
@@ -33,7 +32,7 @@ namespace SimplestApp.Specifications
         {
             if (!candidate.IsValid)
             {
-                candidate.AppendValidationResult(new ValidationFailure("InvalidUser",
+                candidate.AppendValidationResult(Failure.For("InvalidUser",
                     "One or more parameters informed to create a user are not valid."));
                 return false;
             }

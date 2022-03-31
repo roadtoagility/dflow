@@ -6,12 +6,13 @@
 
 using System.Collections.Generic;
 using DFlow.Domain.Validation;
+using FluentValidation.Results;
 
 namespace DFlow.Business.Cqrs.CommandHandlers
 {
     public class CommandResult<TResult>: ExecutionResult
     {
-        public CommandResult(bool isSucceed, TResult id, IReadOnlyList<Failure> violations)
+        public CommandResult(bool isSucceed, TResult id, IReadOnlyList<ValidationFailure> violations)
             :base(isSucceed, violations)
         {
             Id = id;

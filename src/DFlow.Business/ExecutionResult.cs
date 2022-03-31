@@ -5,13 +5,13 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using System.Collections.Generic;
-using DFlow.Domain.Validation;
+using FluentValidation.Results;
 
 namespace DFlow.Business.Cqrs
 {
     public class ExecutionResult
     {
-        public ExecutionResult(bool isSucceed, IReadOnlyList<Failure> violations)
+        public ExecutionResult(bool isSucceed, IReadOnlyList<ValidationFailure> violations)
         {
             IsSucceed = isSucceed;
             Violations = violations;
@@ -19,6 +19,6 @@ namespace DFlow.Business.Cqrs
 
         public bool IsSucceed { get; }
 
-        public IReadOnlyList<Failure> Violations { get; }
+        public IReadOnlyList<ValidationFailure> Violations { get; }
     }
 }

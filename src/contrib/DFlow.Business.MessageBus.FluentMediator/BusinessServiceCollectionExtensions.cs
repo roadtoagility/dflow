@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2020  Road to Agility
+﻿// Copyright (C) 2021  Road to Agility
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Library General Public
@@ -16,15 +16,19 @@
 // Boston, MA  02110-1301, USA.
 //
 
-using FluentValidation;
+using DFlow.Business.Cqrs;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace DFlow.Tests.Supporting.DomainObjects.Validators
+namespace DFlow.Business.MessageBus.FluentMediator
 {
-    public sealed class EmailValidator: AbstractValidator<Email>
+    public static class BusinessMessageBusContribServiceCollectionExtensions
     {
-        public EmailValidator()
+        public static void AddBusinessMessageBusForFluentMediatr(this IServiceCollection services)
         {
-            RuleFor(item => item.Value).EmailAddress();
+            // message bus implementation
+            services
+                .AddScoped<IBusinessMessageBus, FluentMediatorBusinessMessageBus>();
+
         }
     }
 }
