@@ -10,16 +10,16 @@ using DFlow.Samples.Persistence.ReadModel;
 
 namespace DFlow.Samples.Business.QueryHandlers
 {
-    public class GetUsersResponse:QueryResult<IReadOnlyList<UserProjection>>
+    public class GetUsersResponse : QueryResult<IReadOnlyList<UserProjection>>
     {
         public GetUsersResponse(bool isSucceed, IReadOnlyList<UserProjection> data)
-        :base(isSucceed, data)
+            : base(isSucceed, data)
         {
         }
 
         public static GetUsersResponse From(bool isSucceed, IReadOnlyList<UserProjection> items)
         {
-            return new GetUsersResponse(isSucceed,items);
+            return new GetUsersResponse(isSucceed, items);
         }
     }
 }

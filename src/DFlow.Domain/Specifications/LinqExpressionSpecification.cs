@@ -10,11 +10,13 @@ using System.Linq.Expressions;
 namespace DFlow.Domain.Specifications
 {
     public abstract class LinqExpressionSpecification<TBusinessObject>
-        :CompositeSpecification<TBusinessObject>
+        : CompositeSpecification<TBusinessObject>
     {
         protected abstract Expression<Func<TBusinessObject, bool>> AsExpression();
-        
-        public override bool IsSatisfiedBy(TBusinessObject candidate) 
-            => AsExpression().Compile()(candidate);
+
+        public override bool IsSatisfiedBy(TBusinessObject candidate)
+        {
+            return AsExpression().Compile()(candidate);
+        }
     }
 }

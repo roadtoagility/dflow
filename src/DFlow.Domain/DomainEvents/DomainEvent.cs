@@ -18,7 +18,8 @@ namespace DFlow.Domain.DomainEvents
             Version = version;
         }
 
-        public DateTime When { get; }
         public VersionId Version { get; }
+
+        public DateTime When { get; }
     }
 }

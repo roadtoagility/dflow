@@ -25,15 +25,15 @@ namespace DFlow.Samples.Persistence.Model
     public class UserState : PersistentState
     {
         public UserState(Guid id, string name, string mail, byte[] rowVersion)
-        :base(DateTime.Now, rowVersion)
+            : base(DateTime.Now, rowVersion)
         {
             Id = id;
             Name = name;
             Mail = mail;
         }
 
-        public Guid Id { get; set;}
-        public string Name { get; set;}
+        public Guid Id { get; set; }
+        public string Name { get; set; }
         public string Mail { get; set; }
     }
 }

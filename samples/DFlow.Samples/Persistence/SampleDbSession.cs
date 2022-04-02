@@ -5,15 +5,14 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-using System;
 using DFlow.Persistence.EntityFramework;
 
 namespace DFlow.Samples.Persistence
 {
-    public class SampleDbSession<TRepository>: DbSession<TRepository>
+    public class SampleDbSession<TRepository> : DbSession<TRepository>
     {
         public SampleDbSession(SampleAppDbContext context, TRepository repository)
-        :base(context,repository)
+            : base(context, repository)
         {
         }
     }

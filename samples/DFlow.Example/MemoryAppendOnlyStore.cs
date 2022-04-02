@@ -11,7 +11,7 @@ namespace DFlow.Example
         private ICollection<EventDTO<Guid>> _eventsStorage = new List<EventDTO<Guid>>();
 
 
-        public MemoryAppendOnlyStore(IEventBus eventBus) : base()
+        public MemoryAppendOnlyStore(IEventBus eventBus)
         {
         }
 
@@ -35,7 +35,7 @@ namespace DFlow.Example
                 .Take(maxCount)
                 .Select(x => new DataWithVersion(x.Version, x.Data));
         }
-        
+
         public IEnumerable<DataWithVersion> ReadRecords<T>(long afterVersion, int maxCount)
         {
             var aggregateType = typeof(T).Name;
@@ -60,14 +60,13 @@ namespace DFlow.Example
 
         public void Close()
         {
-            
         }
-        
+
         protected override void Save(Guid id, string aggregateType, long version, byte[] data)
         {
-            _eventsStorage.Add(new EventDTO<System.Guid>(id, aggregateType, version, data));
+            _eventsStorage.Add(new EventDTO<Guid>(id, aggregateType, version, data));
         }
-        
+
 
         //DTO para poder inserir em qualquer modelo de banco
         private class EventDTO<TKey>
@@ -80,11 +79,11 @@ namespace DFlow.Example
                 Data = data;
             }
 
-            public TKey AggregateId { get; set; }
-            
-            public string AggregateType { get; set; }
-            public long Version { get; set; }
-            public byte[] Data { get; set; }
+            public TKey AggregateId { get; }
+
+            public string AggregateType { get; }
+            public long Version { get; }
+            public byte[] Data { get; }
         }
     }
 }

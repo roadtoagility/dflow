@@ -32,40 +32,41 @@ namespace DFlow.Tests.Supporting
 {
     public sealed class UpdateEntityEventBasedCommandHandler : CommandHandler<UpdateEntityCommand, CommandResult<Guid>>
     {
-        private IAggregateFactory<EventStreamBusinessEntityAggregateRoot, EventStream<EntityTestId>>
+        private readonly IAggregateFactory<EventStreamBusinessEntityAggregateRoot, EventStream<EntityTestId>>
             _aggregateFactory;
-        
-        public UpdateEntityEventBasedCommandHandler(IDomainEventBus publisher, 
+
+        public UpdateEntityEventBasedCommandHandler(IDomainEventBus publisher,
             IAggregateFactory<EventStreamBusinessEntityAggregateRoot, EventStream<EntityTestId>> aggregateFactory)
-            :base(publisher)
+            : base(publisher)
         {
             _aggregateFactory = aggregateFactory;
         }
-        
-        protected override Task<CommandResult<Guid>> ExecuteCommand(UpdateEntityCommand command, CancellationToken cancellationToken)
+
+        protected override Task<CommandResult<Guid>> ExecuteCommand(UpdateEntityCommand command,
+            CancellationToken cancellationToken)
         {
             var agg = _aggregateFactory.Create(
                 EventStream<EntityTestId>.From(EntityTestId.Empty(),
-                    new AggregationName(), 
+                    new AggregationName(),
                     VersionId.Empty(), new ImmutableArray<IDomainEvent>())
-                );
+            );
             var isSucceed = agg.IsValid;
             var okId = Guid.Empty;
-            
-            
+
+
             if (isSucceed)
             {
                 agg.UpdateName(EntityTestId.From(command.AggregateId), Name.From(command.Name));
 
                 isSucceed = agg.IsValid;
-                
+
                 agg.GetEvents().ToImmutableList()
-                    .ForEach( ev => Publisher.Publish(ev));
-                
+                    .ForEach(ev => Publisher.Publish(ev));
+
                 okId = agg.GetChange().AggregationId.Value;
             }
-            
-            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.Failures));
+
+            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId, agg.Failures));
         }
     }
 }

@@ -9,6 +9,5 @@ namespace DFlow.Domain.BusinessObjects
 {
     public sealed class AggregationName : ValueOf<string, AggregationName>
     {
-    
     }
 }

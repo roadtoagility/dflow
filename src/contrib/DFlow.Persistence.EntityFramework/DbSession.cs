@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DFlow.Persistence.EntityFramework
 {
-    public class DbSession<TRepository>: IDbSession<TRepository>, IDisposable
+    public class DbSession<TRepository> : IDbSession<TRepository>, IDisposable
     {
         public DbSession(DbContext context, TRepository repository)
         {
@@ -21,24 +21,26 @@ namespace DFlow.Persistence.EntityFramework
         }
 
         private DbContext Context { get; }
-        
+
         public TRepository Repository { get; }
 
         public void SaveChanges()
         {
             Context.SaveChanges();
         }
-        
+
         public async Task SaveChangesAsync()
         {
             var cancellationToken = new CancellationToken();
             await SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
+
         public async Task SaveChangesAsync(CancellationToken cancellationToken)
         {
             await Context.SaveChangesAsync(cancellationToken)
                 .ConfigureAwait(false);
         }
+
         public void Dispose()
         {
             Context?.Dispose();

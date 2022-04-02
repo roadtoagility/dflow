@@ -9,13 +9,14 @@ using DFlow.Domain.Validation;
 
 namespace DFlow.Business.Cqrs.CommandHandlers
 {
-    public class CommandResult<TResult>: ExecutionResult
+    public class CommandResult<TResult> : ExecutionResult
     {
         public CommandResult(bool isSucceed, TResult id, IReadOnlyList<Failure> violations)
-            :base(isSucceed, violations)
+            : base(isSucceed, violations)
         {
             Id = id;
         }
-        public TResult Id { get;}
+
+        public TResult Id { get; }
     }
 }

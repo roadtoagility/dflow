@@ -10,15 +10,15 @@ using DFlow.Tests.Supporting.DomainObjects.Commands;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
-    public class EventBasedAggregateFactory: 
+    public class EventBasedAggregateFactory :
         IAggregateFactory<EventStreamBusinessEntityAggregateRoot, AddEntityCommand>,
         IAggregateFactory<EventStreamBusinessEntityAggregateRoot, EventStream<EntityTestId>>
     {
         public EventStreamBusinessEntityAggregateRoot Create(AddEntityCommand command)
         {
-            return new EventStreamBusinessEntityAggregateRoot(command.Name, 
-                                                                command.Mail, 
-                                                                VersionId.New());
+            return new EventStreamBusinessEntityAggregateRoot(command.Name,
+                command.Mail,
+                VersionId.New());
         }
 
         public EventStreamBusinessEntityAggregateRoot Create(EventStream<EntityTestId> source)

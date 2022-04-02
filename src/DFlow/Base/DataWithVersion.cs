@@ -8,7 +8,7 @@ namespace DFlow.Base
             Data = data;
         }
 
-        public long Version { get; private set; }
-        public byte[] Data{ get; private set; }
+        public long Version { get; }
+        public byte[] Data { get; }
     }
 }

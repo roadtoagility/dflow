@@ -21,31 +21,33 @@ namespace DFlow.Samples.Business.CommandHandlers
     public sealed class AddUserPersistentCommandHandler : CommandHandler<AddUserCommand, CommandResult<Guid>>
     {
         private readonly IDbSession<IUserRepository> _sessionDb;
+
         public AddUserPersistentCommandHandler(IDomainEventBus publisher, IDbSession<IUserRepository> sessionDb)
-            :base(publisher)
+            : base(publisher)
         {
             _sessionDb = sessionDb;
         }
-        
-        protected override async Task<CommandResult<Guid>> ExecuteCommand(AddUserCommand command, CancellationToken cancellationToken)
+
+        protected override async Task<CommandResult<Guid>> ExecuteCommand(AddUserCommand command,
+            CancellationToken cancellationToken)
         {
-            var agg = UserEntityBasedAggregationRoot.CreateFrom(command.Name,command.Mail);
-            
+            var agg = UserEntityBasedAggregationRoot.CreateFrom(command.Name, command.Mail);
+
             var isSucceed = agg.IsValid;
             var okId = Guid.Empty;
-      
+
             if (agg.IsValid)
             {
                 _sessionDb.Repository.Add(agg.GetChange());
                 await _sessionDb.SaveChangesAsync(cancellationToken);
-                
+
                 agg.GetEvents().ToImmutableList()
-                    .ForEach( async ev => await Publisher.Publish(ev, cancellationToken));
-                
+                    .ForEach(async ev => await Publisher.Publish(ev, cancellationToken));
+
                 okId = agg.GetChange().Identity.Value;
             }
-            
-            return await Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.Failures))
+
+            return await Task.FromResult(new CommandResult<Guid>(isSucceed, okId, agg.Failures))
                 .ConfigureAwait(false);
         }
     }

@@ -10,9 +10,11 @@ using System.Collections.Immutable;
 
 namespace DFlow.Domain.Validation
 {
-    public abstract class BaseValidation: IValidable
+    public abstract class BaseValidation : IValidable
     {
-        private readonly List<Failure> _failures = new ();
+        private readonly List<Failure> _failures = new();
+
+        public IReadOnlyList<Failure> Failures => _failures.ToImmutableList();
 
         public void AppendValidationResult(Failure failure)
         {
@@ -23,8 +25,6 @@ namespace DFlow.Domain.Validation
         {
             _failures.AddRange(failures);
         }
-
-        public IReadOnlyList<Failure> Failures => _failures.ToImmutableList();
 
         public bool IsValid => _failures.Count == 0;
     }

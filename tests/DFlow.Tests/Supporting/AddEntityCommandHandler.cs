@@ -31,28 +31,29 @@ namespace DFlow.Tests.Supporting
     public sealed class AddEntityCommandHandler : CommandHandler<AddEntityCommand, CommandResult<Guid>>
     {
         public AddEntityCommandHandler(IDomainEventBus publisher)
-            :base(publisher)
+            : base(publisher)
         {
         }
-        
-        protected override Task<CommandResult<Guid>> ExecuteCommand(AddEntityCommand command, CancellationToken cancellationToken)
+
+        protected override Task<CommandResult<Guid>> ExecuteCommand(AddEntityCommand command,
+            CancellationToken cancellationToken)
         {
             var agg = BusinessEntityAggregateRoot.Create();
-            
+
             var isSucceed = false;
             var okId = Guid.Empty;
-      
+
             if (agg.IsValid)
             {
                 isSucceed = true;
-                
+
                 agg.GetEvents().ToImmutableList()
-                    .ForEach( ev => Publisher.Publish(ev));
-                
+                    .ForEach(ev => Publisher.Publish(ev));
+
                 okId = agg.GetChange().Identity.Value;
             }
-            
-            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.Failures));
+
+            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId, agg.Failures));
         }
     }
 }

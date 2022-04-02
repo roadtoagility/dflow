@@ -30,16 +30,16 @@ namespace DFlow.Tests.Supporting.Specifications
         {
             _nameToCheck = nameToCheck;
         }
-        
+
         public override bool IsSatisfiedBy(AnotherBusinessEntity candidate)
         {
-            if (candidate.EntityName != _nameToCheck )
+            if (candidate.EntityName != _nameToCheck)
             {
                 candidate.AppendValidationResult(Failure.For("EntityName",
                     $"The candidate name {candidate.EntityName} it is not expected name."));
                 return false;
             }
-            
+
             return true;
         }
     }

@@ -24,7 +24,6 @@ namespace DFlow.Persistence.EntityFramework.Model
         private void UpdateSoftDeleteLogic()
         {
             foreach (var entry in ChangeTracker.Entries())
-            {
                 if (entry.State == EntityState.Deleted)
                 {
                     entry.State = EntityState.Modified;
@@ -34,7 +33,6 @@ namespace DFlow.Persistence.EntityFramework.Model
                 {
                     entry.CurrentValues["IsDeleted"] = false;
                 }
-            }
         }
     }
 }

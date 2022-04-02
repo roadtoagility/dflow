@@ -4,10 +4,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 
 namespace DFlow.Domain.Validation
 {
@@ -15,14 +13,11 @@ namespace DFlow.Domain.Validation
     {
         private readonly List<Failure> _failures = new();
 
-        public ValidationResult( IReadOnlyList<Failure> failures)
+        public ValidationResult(IReadOnlyList<Failure> failures)
         {
-            if (failures.Count > 0)
-            {
-                _failures.AddRange(failures);                
-            }
+            if (failures.Count > 0) _failures.AddRange(failures);
         }
-        
+
         public virtual bool IsValid => Failures.Count == 0;
 
         public IReadOnlyList<Failure> Failures => _failures;
@@ -31,17 +26,17 @@ namespace DFlow.Domain.Validation
         {
             _failures.Add(failure);
         }
-        
+
         public static ValidationResult For(IReadOnlyList<Failure> failures)
         {
             return new ValidationResult(failures);
-        } 
-        
+        }
+
         public static ValidationResult For(Failure failure)
         {
-            return new ValidationResult(new List<Failure>{failure});
-        } 
-        
+            return new ValidationResult(new List<Failure> { failure });
+        }
+
         public static ValidationResult Empty()
         {
             return new ValidationResult(ImmutableList<Failure>.Empty);

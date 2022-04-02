@@ -6,17 +6,17 @@
 
 namespace DFlow.Domain.Specifications
 {
-    public abstract class LogicalSpecification<TBusinessObject>:CompositeSpecification<TBusinessObject>
+    public abstract class LogicalSpecification<TBusinessObject> : CompositeSpecification<TBusinessObject>
     {
-        protected ISpecification<TBusinessObject> LeftCondition { get; }
-
-        protected ISpecification<TBusinessObject> RightCondition { get; }
-
         protected LogicalSpecification(ISpecification<TBusinessObject> leftCondition,
             ISpecification<TBusinessObject> rightCondition)
         {
             LeftCondition = leftCondition;
             RightCondition = rightCondition;
         }
+
+        protected ISpecification<TBusinessObject> LeftCondition { get; }
+
+        protected ISpecification<TBusinessObject> RightCondition { get; }
     }
 }

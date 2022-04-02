@@ -8,7 +8,7 @@ namespace DFlow.AspNetCore
     public class AspNetCoreDependencyResolver : IDependencyResolver
     {
         private readonly IServiceProvider _provider;
-        
+
         public AspNetCoreDependencyResolver(IServiceProvider provider)
         {
             _provider = provider;

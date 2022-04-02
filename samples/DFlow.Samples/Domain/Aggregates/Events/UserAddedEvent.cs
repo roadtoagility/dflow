@@ -21,15 +21,16 @@ namespace DFlow.Samples.Domain.Aggregates.Events
             Name = name;
             Mail = mail;
         }
+
         public EntityId Id { get; }
-        
+
         public Name Name { get; }
-        
+
         public Email Mail { get; }
-        
+
         public static UserAddedEvent For(User user)
         {
-            return new UserAddedEvent(user.Identity,user.Name,user.Mail, user.Version);
+            return new UserAddedEvent(user.Identity, user.Name, user.Mail, user.Version);
         }
     }
 }

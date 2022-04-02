@@ -13,12 +13,14 @@ using System.Threading.Tasks;
 
 namespace DFlow.Persistence.Repositories
 {
-    public interface IRepository<TState,TModel> where TModel : class
+    public interface IRepository<TState, TModel> where TModel : class
     {
         void Add(TModel entity);
         void Remove(TModel entity);
         IEnumerable<TModel> Find(Expression<Func<TState, bool>> predicate);
         Task<IEnumerable<TModel>> FindAsync(Expression<Func<TState, bool>> predicate);
-        Task<IEnumerable<TModel>> FindAsync(Expression<Func<TState, bool>> predicate, CancellationToken cancellationToken);
+
+        Task<IEnumerable<TModel>> FindAsync(Expression<Func<TState, bool>> predicate,
+            CancellationToken cancellationToken);
     }
 }

@@ -10,10 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DFlow.Domain.Validation;
 
-
 namespace DFlow.Domain.BusinessObjects
 {
-    public abstract class BaseEntity<TIdentity>: BaseValidation, 
+    public abstract class BaseEntity<TIdentity> : BaseValidation,
         IEntityIdentity<TIdentity>
     {
         protected BaseEntity(TIdentity identity, VersionId version)
@@ -21,31 +20,28 @@ namespace DFlow.Domain.BusinessObjects
             Identity = identity;
             Version = version;
         }
-        
-        public TIdentity Identity { get; }
-        
+
         public VersionId Version { get; }
 
-        public bool IsNew() => Version.Initial;
-        
+        public TIdentity Identity { get; }
+
+        public bool IsNew()
+        {
+            return Version.Initial;
+        }
+
         public override string ToString()
         {
             return $"[ENTITY]:[IDENTITY: {Identity}]";
         }
-        
+
         protected abstract IEnumerable<object> GetEqualityComponents();
 
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj == null) return false;
 
-            if (GetType() != obj.GetType())
-            {
-                return false;
-            }
+            if (GetType() != obj.GetType()) return false;
 
             var entity = (BaseEntity<TIdentity>)obj;
 

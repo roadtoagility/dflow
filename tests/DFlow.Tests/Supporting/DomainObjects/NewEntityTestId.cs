@@ -9,14 +9,13 @@ using DFlow.Domain.BusinessObjects;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
-    public sealed class NewEntityTestId : ValueOf<Guid,NewEntityTestId>
+    public sealed class NewEntityTestId : ValueOf<Guid, NewEntityTestId>
     {
-
         public static NewEntityTestId Empty()
         {
             return From(Guid.Empty);
         }
-        
+
         public static NewEntityTestId GetNext()
         {
             return From(Guid.NewGuid());

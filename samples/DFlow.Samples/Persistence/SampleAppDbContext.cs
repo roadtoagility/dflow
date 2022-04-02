@@ -19,7 +19,7 @@ namespace DFlow.Samples.Persistence
         }
 
         public DbSet<UserState> Users { get; set; }
-        
+
         public DbSet<UserProjection> UsersProjection { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -47,7 +47,6 @@ namespace DFlow.Samples.Persistence
                 u.Property(pr => pr.CommercialEmail);
                 u.HasQueryFilter(user => EF.Property<bool>(user, "IsDeleted") == false);
             });
-
         }
     }
 }

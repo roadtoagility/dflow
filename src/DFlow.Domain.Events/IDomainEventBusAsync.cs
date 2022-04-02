@@ -13,6 +13,6 @@ namespace DFlow.Domain.Events
     {
         Task PublishAsync<TEvent>(TEvent request, CancellationToken cancellationToken);
 
-        Task<TResult> SendAsync<TResult,TRequest>(TRequest request, CancellationToken cancellationToken);
+        Task<TResult> SendAsync<TResult, TRequest>(TRequest request, CancellationToken cancellationToken);
     }
 }

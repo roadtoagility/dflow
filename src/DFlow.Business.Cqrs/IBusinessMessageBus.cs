@@ -10,6 +10,6 @@ namespace DFlow.Business.Cqrs
     {
         void Publish<TEvent>(TEvent request);
 
-        TResult Send<TResult,TRequest>(TRequest request);
+        TResult Send<TResult, TRequest>(TRequest request);
     }
 }

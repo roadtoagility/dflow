@@ -22,7 +22,7 @@ namespace DFlow.Tests.Domain
 
             Assert.True(isNew.IsSatisfiedBy(bu));
         }
-        
+
         [Fact]
         public void BusinessEntityNotIsNew()
         {
@@ -31,29 +31,29 @@ namespace DFlow.Tests.Domain
 
             Assert.False(isNew.IsSatisfiedBy(buUpdated));
         }
-        
+
         [Fact]
         public void AnotherBusinessEntityNameIsRoad()
         {
             var bu = AnotherBusinessEntity
                 .New(Name.From("Road"), Email.From("my@email.com"));
-            
+
             var isRoad = new AnotherBusinessEntityNameIsRoad(Name.From("Road"));
 
             Assert.True(isRoad.IsSatisfiedBy(bu));
         }
-        
+
         [Fact]
         public void AnotherBusinessEntityNameIsRoadAndEmailFromRoadCompany()
         {
             var bu = AnotherBusinessEntity
                 .New(Name.From("Road"), Email.From("email@roadtoagility.com"));
-            
+
             var isRoad = new AnotherBusinessEntityNameIsRoad(Name.From("Road"));
             var isFromCompany = new AnotherBusinessEntityEmailFromCompany(Email.From("email@roadtoagility.com"));
 
             isRoad.And(isFromCompany);
-            
+
             Assert.True(isRoad.IsSatisfiedBy(bu));
         }
     }

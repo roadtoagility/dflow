@@ -19,49 +19,49 @@ namespace DFlow.Tests.Domain
         public void EntityId_create_a_valid()
         {
             var fixture = new Fixture();
-            fixture.Register<EntityTestId>(() => EntityTestId.From(fixture.Create<Guid>()));
+            fixture.Register(() => EntityTestId.From(fixture.Create<Guid>()));
 
             var entityId = fixture.Create<EntityTestId>();
-            
+
             Assert.True(entityId.ValidationStatus.IsValid);
         }
-        
+
         [Fact]
         public void EntityId_create_an_empty()
         {
             var entityId = EntityTestId.Empty();
-            
+
             Assert.True(entityId.ValidationStatus.IsValid);
         }
-        
+
         [Fact]
         public void EntityId_create_an_invalid()
         {
             var fixture = new Fixture();
-            fixture.Register<EntityTestId>(() => EntityTestId.From(Guid.Empty));
+            fixture.Register(() => EntityTestId.From(Guid.Empty));
 
             var entityId = fixture.Create<EntityTestId>();
-            
+
             Assert.True(entityId.ValidationStatus.IsValid);
         }
-        
+
         [Fact]
         public void Version_create_a_valid_from()
         {
             var fixture = new Fixture();
             var input = fixture.Create<int>();
-            fixture.Register<VersionId>(() => VersionId.From(input));
+            fixture.Register(() => VersionId.From(input));
 
             var version = fixture.Create<VersionId>();
-            
-            Assert.Equal(input,version.Value);
+
+            Assert.Equal(input, version.Value);
         }
-        
+
         [Fact]
         public void Version_create_an_empty()
         {
             var entityId = VersionId.Empty();
-            
+
             Assert.True(entityId.Equals(VersionId.Empty()));
         }
 
@@ -71,9 +71,9 @@ namespace DFlow.Tests.Domain
             var version = VersionId.New();
             var next = VersionId.Next(version);
             var nextCheck = version.Value + 1;
-            Assert.Equal(next.Value,nextCheck);
+            Assert.Equal(next.Value, nextCheck);
         }
-        
+
         [Fact]
         public void Version_get_gr_and_lt()
         {

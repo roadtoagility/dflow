@@ -12,14 +12,13 @@ namespace DFlow.Business.Cqrs
 {
     public abstract class QueryHandler<TFilter, TResult> : ICommandHandler<TFilter, TResult>
     {
-      
         public async Task<TResult> Execute(TFilter filter)
         {
             var cancellationToken = new CancellationTokenSource();
             return await Execute(filter, cancellationToken.Token)
                 .ConfigureAwait(false);
         }
-        
+
         public async Task<TResult> Execute(TFilter filter, CancellationToken cancellationToken)
         {
             return await ExecuteQuery(filter, cancellationToken)

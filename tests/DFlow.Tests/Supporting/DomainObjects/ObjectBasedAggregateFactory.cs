@@ -5,12 +5,11 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 using DFlow.Domain.Aggregates;
-using DFlow.Domain.BusinessObjects;
 using DFlow.Tests.Supporting.DomainObjects.Commands;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
-    public class ObjectBasedAggregateFactory: 
+    public class ObjectBasedAggregateFactory :
         IAggregateFactory<BusinessEntityAggregateRoot, AddEntityCommand>,
         IAggregateFactory<BusinessEntityAggregateRoot, BusinessEntity>
     {

@@ -26,6 +26,7 @@ namespace DFlow.Samples.Persistence.ReadModel
         public UserProjection()
         {
         }
+
         public UserProjection(Guid id, string name, string commercialEmail, int rowVersion)
         {
             Id = id;
@@ -39,14 +40,14 @@ namespace DFlow.Samples.Persistence.ReadModel
         public string Name { get; set; }
         public string Cnpj { get; set; }
         public string CommercialEmail { get; set; }
-        
+
         public bool IsDeleted { get; set; }
 
         public int RowVersion { get; set; }
-        
+
         public static UserProjection Empty()
         {
-            return new UserProjection(Guid.Empty, String.Empty, String.Empty,0);
+            return new UserProjection(Guid.Empty, string.Empty, string.Empty, 0);
         }
     }
 }

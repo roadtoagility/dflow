@@ -12,19 +12,15 @@ namespace DFlow.Samples.Domain.Aggregates
 {
     public sealed class UserObjectBasedAggregationRootWithEvent : ObjectBasedAggregationRoot<User, EntityId>
     {
-
         private UserObjectBasedAggregationRootWithEvent(User user)
         {
-            if (user.IsValid)
-            {
-                Apply(user);
-            }
+            if (user.IsValid) Apply(user);
 
             AppendValidationResult(user.Failures);
         }
 
         #region Aggregation contruction
-       
+
         public static UserObjectBasedAggregationRootWithEvent CreateFrom(Name name, Email commercialEmail)
         {
             var user = User.From(EntityId.GetNext(), name, commercialEmail, VersionId.New());

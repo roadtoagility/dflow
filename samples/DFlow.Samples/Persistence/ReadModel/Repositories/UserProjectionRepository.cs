@@ -18,6 +18,7 @@ namespace DFlow.Samples.Persistence.ReadModel.Repositories
     public sealed class UserProjectionRepository : IUserProjectionRepository
     {
         private readonly SampleAppProjectionDbContext _context;
+
         public UserProjectionRepository(SampleAppProjectionDbContext context)
         {
             _context = context;
@@ -26,12 +27,9 @@ namespace DFlow.Samples.Persistence.ReadModel.Repositories
         public UserProjection Get(IEntityIdentity<Guid> id)
         {
             var user = _context.Users.FindById(id.Identity);
-            
-            if (user == null)
-            {
-                return UserProjection.Empty();
-            }
-            
+
+            if (user == null) return UserProjection.Empty();
+
             return user;
         }
 
@@ -55,7 +53,8 @@ namespace DFlow.Samples.Persistence.ReadModel.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IReadOnlyList<UserProjection>> FindAsync(Expression<Func<UserProjection, bool>> predicate, CancellationToken cancellationToken)
+        public Task<IReadOnlyList<UserProjection>> FindAsync(Expression<Func<UserProjection, bool>> predicate,
+            CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

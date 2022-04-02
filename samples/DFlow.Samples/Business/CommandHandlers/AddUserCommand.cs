@@ -15,6 +15,7 @@ namespace DFlow.Samples.Business.CommandHandlers
             Name = Name.From(name);
             Mail = Email.From(email);
         }
+
         public Name Name { get; set; }
         public Email Mail { get; set; }
     }

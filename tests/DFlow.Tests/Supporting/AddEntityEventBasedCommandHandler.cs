@@ -31,34 +31,35 @@ namespace DFlow.Tests.Supporting
 {
     public sealed class AddEntityEventBasedCommandHandler : CommandHandler<AddEntityCommand, CommandResult<Guid>>
     {
-        private IAggregateFactory<EventStreamBusinessEntityAggregateRoot, AddEntityCommand> _aggregateFactory;
-        
-        public AddEntityEventBasedCommandHandler(IDomainEventBus publisher, 
+        private readonly IAggregateFactory<EventStreamBusinessEntityAggregateRoot, AddEntityCommand> _aggregateFactory;
+
+        public AddEntityEventBasedCommandHandler(IDomainEventBus publisher,
             IAggregateFactory<EventStreamBusinessEntityAggregateRoot, AddEntityCommand> aggregateFactory)
-            :base(publisher)
+            : base(publisher)
         {
             _aggregateFactory = aggregateFactory;
         }
-        
-        protected override Task<CommandResult<Guid>> ExecuteCommand(AddEntityCommand command, CancellationToken cancellationToken)
+
+        protected override Task<CommandResult<Guid>> ExecuteCommand(AddEntityCommand command,
+            CancellationToken cancellationToken)
         {
             var agg = _aggregateFactory.Create(command);
-            
+
             var isSucceed = false;
             var okId = Guid.Empty;
-      
+
             //validation is not working nice yet
             if (agg.IsValid)
             {
                 isSucceed = true;
-                
+
                 agg.GetEvents().ToImmutableList()
-                    .ForEach( ev => Publisher.Publish(ev));
-                
+                    .ForEach(ev => Publisher.Publish(ev));
+
                 okId = agg.GetChange().AggregationId.Value;
             }
-            
-            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId,agg.Failures.ToImmutableList()));
+
+            return Task.FromResult(new CommandResult<Guid>(isSucceed, okId, agg.Failures.ToImmutableList()));
         }
     }
 }

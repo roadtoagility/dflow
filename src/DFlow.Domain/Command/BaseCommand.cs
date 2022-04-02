@@ -10,13 +10,13 @@ using DFlow.Domain.Validation;
 
 namespace DFlow.Domain.Command
 {
-    public class BaseCommand: BaseValidation, ICommand
+    public class BaseCommand : BaseValidation, ICommand
     {
-        public DateTime When { get; }
-
         public BaseCommand()
         {
             When = DateTime.Now;
         }
+
+        public DateTime When { get; }
     }
 }

@@ -30,7 +30,7 @@ namespace DFlow.Tests.Supporting.Specifications
         {
             _emailToCheck = emailToCheck;
         }
-        
+
         public override bool IsSatisfiedBy(AnotherBusinessEntity candidate)
         {
             if (candidate.EntityEmail.Equals(_emailToCheck) == false)
@@ -39,7 +39,7 @@ namespace DFlow.Tests.Supporting.Specifications
                     $"The candidate not is from company {candidate.EntityEmail}."));
                 return false;
             }
-            
+
             return true;
         }
     }

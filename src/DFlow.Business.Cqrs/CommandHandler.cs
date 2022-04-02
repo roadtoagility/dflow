@@ -4,26 +4,22 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-using System;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using DFlow.Business.Cqrs.CommandHandlers;
 using DFlow.Domain.Events;
-using DFlow.Domain.Validation;
-using Microsoft.Extensions.Logging;
 
 namespace DFlow.Business.Cqrs
 {
-    public abstract class CommandHandler<TCommand, TResult>:
+    public abstract class CommandHandler<TCommand, TResult> :
         ICommandHandler<TCommand, TResult>
     {
-        protected IDomainEventBus Publisher { get; }
-
         protected CommandHandler(IDomainEventBus publisher)
         {
             Publisher = publisher;
         }
+
+        protected IDomainEventBus Publisher { get; }
 
         public async Task<TResult> Execute(TCommand command)
         {
@@ -31,7 +27,7 @@ namespace DFlow.Business.Cqrs
             return await Execute(command, cancellationToken.Token)
                 .ConfigureAwait(false);
         }
-        
+
         public async Task<TResult> Execute(TCommand command, CancellationToken cancellationToken)
         {
             return await ExecuteCommand(command, cancellationToken)

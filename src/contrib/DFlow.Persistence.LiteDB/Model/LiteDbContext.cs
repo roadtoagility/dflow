@@ -11,7 +11,7 @@ namespace DFlow.Persistence.LiteDB.Model
         }
 
         public ILiteDatabase Database { get; }
-        
+
         protected BsonMapper ModelBuilder { get; }
     }
 }

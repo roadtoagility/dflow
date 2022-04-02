@@ -13,7 +13,7 @@ namespace DFlow.Domain.BusinessObjects
         public static readonly int VersionIncrement = 1;
 
         public bool Initial => Value == VersionInitial;
-        
+
         public static VersionId Empty()
         {
             return From(VersionEmpty);
@@ -30,15 +30,23 @@ namespace DFlow.Domain.BusinessObjects
         }
 
         public static bool operator >=(VersionId a, VersionId b)
-            => a.Value >= b.Value;
+        {
+            return a.Value >= b.Value;
+        }
 
         public static bool operator <=(VersionId a, VersionId b)
-            => a.Value <= b.Value;
-        
+        {
+            return a.Value <= b.Value;
+        }
+
         public static bool operator >(VersionId a, VersionId b)
-            => a.Value > b.Value;
+        {
+            return a.Value > b.Value;
+        }
 
         public static bool operator <(VersionId a, VersionId b)
-            => a.Value < b.Value;
+        {
+            return a.Value < b.Value;
+        }
     }
 }

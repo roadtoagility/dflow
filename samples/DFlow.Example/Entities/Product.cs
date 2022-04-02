@@ -13,13 +13,14 @@ namespace DFlow.Example.Entities
             Description = description;
         }
 
+        public string Name { get; private set; }
+        public string Description { get; private set; }
+
+        public Guid Id { get; private set; }
+
         public void ChangeName(string name)
         {
             Name = name;
         }
-
-        public Guid Id { get; private set; }
-        public string Name { get; private set; }
-        public string Description { get; private set; }
     }
 }

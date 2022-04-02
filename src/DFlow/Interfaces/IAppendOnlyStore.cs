@@ -4,7 +4,7 @@ using DFlow.Base;
 
 namespace DFlow.Interfaces
 {
-    public interface IAppendOnlyStore<TKey>: IDisposable
+    public interface IAppendOnlyStore<TKey> : IDisposable
     {
         void Append(Guid id, string aggregateType, long version, ICollection<IEvent> events);
 
@@ -13,10 +13,9 @@ namespace DFlow.Interfaces
         IEnumerable<DataWithVersion> ReadRecords<T>(long afterVersion, int maxCount);
 
         IEnumerable<DataWithName> ReadRecords(long afterVersion, int maxCount);
-        
+
         bool Any(TKey aggregateId);
 
         void Close();
-
     }
 }

@@ -16,7 +16,8 @@ namespace DFlow.Samples.Business.DomainEventHandlers
     {
         protected override Task ExecuteHandle(UserAddedEvent @event, CancellationToken cancellationToken)
         {
-            Console.WriteLine($"[{nameof(UserAddedEvent)}] event: {@event.Id}: name: {@event.Name} date: {@event.When}");
+            Console.WriteLine(
+                $"[{nameof(UserAddedEvent)}] event: {@event.Id}: name: {@event.Name} date: {@event.When}");
             return Task.CompletedTask;
         }
     }

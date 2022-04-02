@@ -16,17 +16,19 @@ namespace DFlow.Samples.Business.DomainEventHandlers
 {
     public sealed class UserAddedUpdateProjectionDomainEventHandler : DomainEventHandler<UserAddedEvent>
     {
-        private IDbSession<IUserProjectionRepository> _dbSession;
+        private readonly IDbSession<IUserProjectionRepository> _dbSession;
+
         public UserAddedUpdateProjectionDomainEventHandler(IDbSession<IUserProjectionRepository> dbSession)
         {
             _dbSession = dbSession;
         }
+
         protected override Task ExecuteHandle(UserAddedEvent @event, CancellationToken cancellationToken)
         {
-            _dbSession.Repository.Add(new UserProjection(@event.Id.Value, @event.Name.Value, 
+            _dbSession.Repository.Add(new UserProjection(@event.Id.Value, @event.Name.Value,
                 @event.Mail.Value, @event.Version.Value));
             _dbSession.SaveChanges();
-            
+
             return Task.CompletedTask;
         }
     }

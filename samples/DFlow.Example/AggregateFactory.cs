@@ -12,7 +12,7 @@ namespace DFlow.Example
         private readonly IEventStore<Guid> _eventStore;
         private readonly long INITIAL_VERSION = 1;
 
-        public AggregateFactory(IEventStore<Guid> eventStore, ISnapshotRepository<Guid> snapshotRepository = null) 
+        public AggregateFactory(IEventStore<Guid> eventStore, ISnapshotRepository<Guid> snapshotRepository = null)
             : base(eventStore, snapshotRepository)
         {
             _eventStore = eventStore;
@@ -26,19 +26,16 @@ namespace DFlow.Example
         public override TAggregate Create<TAggregate>(Guid id)
         {
             var existStream = _eventStore.Any(id);
-            
-            if (existStream)
-            {
-                throw new DuplicatedRootException(id.ToString());
-            }
-            
+
+            if (existStream) throw new DuplicatedRootException(id.ToString());
+
             var createEvent = new AggregateCreated<Guid>(id);
-            var events = new List<IEvent>() { createEvent};
-            
-            var stream = new EventStream(){ Version = INITIAL_VERSION, Events = events};
-            
-            TAggregate aggregate = (TAggregate) Activator.CreateInstance(typeof(TAggregate), new object[] {stream});
-            
+            var events = new List<IEvent> { createEvent };
+
+            var stream = new EventStream { Version = INITIAL_VERSION, Events = events };
+
+            var aggregate = (TAggregate)Activator.CreateInstance(typeof(TAggregate), stream);
+
             aggregate.Changes.Add(createEvent);
             return aggregate;
         }

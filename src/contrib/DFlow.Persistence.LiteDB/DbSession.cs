@@ -9,11 +9,10 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using DFlow.Persistence.LiteDB.Model;
-using LiteDB;
 
 namespace DFlow.Persistence.LiteDB
 {
-    public class ProjectionDbSession<TRepository>: IDbSession<TRepository>, IDisposable
+    public class ProjectionDbSession<TRepository> : IDbSession<TRepository>, IDisposable
     {
         public ProjectionDbSession(LiteDbContext context, TRepository repository)
         {
@@ -22,7 +21,7 @@ namespace DFlow.Persistence.LiteDB
         }
 
         private LiteDbContext Context { get; }
-        
+
         public TRepository Repository { get; }
 
         public void SaveChanges()
