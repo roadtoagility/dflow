@@ -3,23 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DFlow.Example", "samples\DFlow.Example\DFlow.Example.csproj", "{3CE7D4D0-58BF-44C5-AC84-7CA1FBD17E03}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DFlow", "src\DFlow\DFlow.csproj", "{D5C025B8-AC7E-4C19-99EA-03732456F812}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DFlow.Tests", "tests\DFlow.Tests\DFlow.Tests.csproj", "{E592B474-F073-41A8-8AEE-C24A7AD19586}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DFlow.DependencyInjection.SimpleInjector", "src\contrib\DFlow.DependencyInjection.SimpleInjector\DFlow.DependencyInjection.SimpleInjector.csproj", "{AE714C76-3519-49DB-8B0E-484F363311FB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DFlow.AspNetCore", "src\contrib\DFlow.AspNetCore\DFlow.AspNetCore.csproj", "{F370775C-FA29-4340-BCE5-CB71304C58A4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DFlow.Domain", "src\DFlow.Domain\DFlow.Domain.csproj", "{C4379CA3-A13D-4E42-B381-3E71EE945FDF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DFlow.Domain.Events", "src\DFlow.Domain.Events\DFlow.Domain.Events.csproj", "{82AB6062-B521-48AF-9611-F632251077D0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DFlow.Business.Cqrs", "src\DFlow.Business.Cqrs\DFlow.Business.Cqrs.csproj", "{7057935D-2C6A-4CF7-B083-613441EA40AE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FirstImpl", "FirstImpl", "{085060D8-3CA9-4165-AFB3-A11EBF5746E6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{96AC39D1-C074-4993-B3E2-F190B2B3E5D4}"
 EndProject
@@ -53,23 +43,6 @@ Global
 		Tests|Any CPU = Tests|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3CE7D4D0-58BF-44C5-AC84-7CA1FBD17E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3CE7D4D0-58BF-44C5-AC84-7CA1FBD17E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3CE7D4D0-58BF-44C5-AC84-7CA1FBD17E03}.Release Profilling|Any CPU.ActiveCfg = Release Profilling|Any CPU
-		{3CE7D4D0-58BF-44C5-AC84-7CA1FBD17E03}.Release Profilling|Any CPU.Build.0 = Release Profilling|Any CPU
-		{3CE7D4D0-58BF-44C5-AC84-7CA1FBD17E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3CE7D4D0-58BF-44C5-AC84-7CA1FBD17E03}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3CE7D4D0-58BF-44C5-AC84-7CA1FBD17E03}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
-		{3CE7D4D0-58BF-44C5-AC84-7CA1FBD17E03}.Tests|Any CPU.Build.0 = Debug|Any CPU
-		{D5C025B8-AC7E-4C19-99EA-03732456F812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5C025B8-AC7E-4C19-99EA-03732456F812}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5C025B8-AC7E-4C19-99EA-03732456F812}.Release Profilling|Any CPU.ActiveCfg = Release Profilling|Any CPU
-		{D5C025B8-AC7E-4C19-99EA-03732456F812}.Release Profilling|Any CPU.Build.0 = Release Profilling|Any CPU
-		{D5C025B8-AC7E-4C19-99EA-03732456F812}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5C025B8-AC7E-4C19-99EA-03732456F812}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5C025B8-AC7E-4C19-99EA-03732456F812}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{D5C025B8-AC7E-4C19-99EA-03732456F812}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5C025B8-AC7E-4C19-99EA-03732456F812}.Tests|Any CPU.Build.0 = Debug|Any CPU
 		{E592B474-F073-41A8-8AEE-C24A7AD19586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E592B474-F073-41A8-8AEE-C24A7AD19586}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E592B474-F073-41A8-8AEE-C24A7AD19586}.Release Profilling|Any CPU.ActiveCfg = Release Profilling|Any CPU
@@ -77,14 +50,6 @@ Global
 		{E592B474-F073-41A8-8AEE-C24A7AD19586}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E592B474-F073-41A8-8AEE-C24A7AD19586}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
 		{E592B474-F073-41A8-8AEE-C24A7AD19586}.Tests|Any CPU.Build.0 = Debug|Any CPU
-		{AE714C76-3519-49DB-8B0E-484F363311FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE714C76-3519-49DB-8B0E-484F363311FB}.Release Profilling|Any CPU.ActiveCfg = Release Profilling|Any CPU
-		{AE714C76-3519-49DB-8B0E-484F363311FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE714C76-3519-49DB-8B0E-484F363311FB}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
-		{F370775C-FA29-4340-BCE5-CB71304C58A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F370775C-FA29-4340-BCE5-CB71304C58A4}.Release Profilling|Any CPU.ActiveCfg = Release Profilling|Any CPU
-		{F370775C-FA29-4340-BCE5-CB71304C58A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F370775C-FA29-4340-BCE5-CB71304C58A4}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
 		{C4379CA3-A13D-4E42-B381-3E71EE945FDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C4379CA3-A13D-4E42-B381-3E71EE945FDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4379CA3-A13D-4E42-B381-3E71EE945FDF}.Release Profilling|Any CPU.ActiveCfg = Release Profilling|Any CPU
@@ -182,11 +147,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{3CE7D4D0-58BF-44C5-AC84-7CA1FBD17E03} = {085060D8-3CA9-4165-AFB3-A11EBF5746E6}
-		{D5C025B8-AC7E-4C19-99EA-03732456F812} = {085060D8-3CA9-4165-AFB3-A11EBF5746E6}
 		{E592B474-F073-41A8-8AEE-C24A7AD19586} = {1D9940E4-09D4-42B9-B72D-2DA4D1AA00EB}
-		{AE714C76-3519-49DB-8B0E-484F363311FB} = {085060D8-3CA9-4165-AFB3-A11EBF5746E6}
-		{F370775C-FA29-4340-BCE5-CB71304C58A4} = {085060D8-3CA9-4165-AFB3-A11EBF5746E6}
 		{BDF24821-36AA-43D8-A55F-DF960D88E349} = {96AC39D1-C074-4993-B3E2-F190B2B3E5D4}
 		{ECB83291-4308-440B-863E-A4BFDDC46D36} = {96AC39D1-C074-4993-B3E2-F190B2B3E5D4}
 		{7C3FA12E-C1AB-4937-BB91-D3D32366672F} = {96AC39D1-C074-4993-B3E2-F190B2B3E5D4}

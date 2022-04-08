@@ -7,15 +7,14 @@
 
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks />
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\samples\DFlow.Example\DFlow.Example.csproj" />
     <ProjectReference Include="..\..\src\DFlow.Business.Cqrs\DFlow.Business.Cqrs.csproj" />
     <ProjectReference Include="..\..\src\DFlow.Domain\DFlow.Domain.csproj" />
     <ProjectReference Include="..\..\src\DFlow.Persistence\DFlow.Persistence.csproj" />
-    <ProjectReference Include="..\..\src\DFlow\DFlow.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,10 +33,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Validation" />
   </ItemGroup>
 
 </Project>
