@@ -2,6 +2,7 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
 
 name: Create Release
 
@@ -11,12 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)      
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 5.x
+          dotnet-version: 5.x      
       - name: Pack
-        run: dotnet pack --include-symbols  -o ./pkg ${{ github.ref }}
+        run: dotnet pack --include-symbols --include-source -o ./pkg --version-suffix ${{ steps.get_version.outputs.VERSION }}
       - name: Push
         working-directory: ./pkg
         run: dotnet nuget push -k ${{secrets.NUGET_KEY}}
