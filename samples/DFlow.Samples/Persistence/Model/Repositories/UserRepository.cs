@@ -72,8 +72,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             var user = await DbContext.Users.AsNoTracking()
                 .OrderByDescending(ob => ob.Id)
                 .ThenByDescending(ob => ob.RowVersion)
-                .FirstOrDefaultAsync(t =>t.Id.Equals(id.Identity.Value))
-                .ConfigureAwait(false);
+                .FirstOrDefaultAsync(t =>t.Id.Equals(id.Identity.Value));
             
             if (user == null)
             {
