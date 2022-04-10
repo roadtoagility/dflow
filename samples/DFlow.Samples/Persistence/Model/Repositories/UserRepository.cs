@@ -31,11 +31,12 @@ namespace DFlow.Samples.Persistence.Model.Repositories
 
         // https://docs.microsoft.com/en-us/ef/core/saving/disconnected-entities
 
-        public void Add(User entity)
+        public async Task Add(User entity)
         {
             var entry = entity.ToUserState();
 
-            var oldState = Get(entity);
+            var oldState = await Get(entity)
+                .ConfigureAwait(false);
 
             if (oldState.Equals(User.Empty()))
             {
@@ -52,9 +53,9 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             }
         }
 
-        public void Remove(User entity)
+        public async Task Remove(User entity)
         {
-            var oldState = Get(entity);
+            var oldState = await Get(entity);
 
             if (VersionId.Next(oldState.Version) > entity.Version)
             {
@@ -66,12 +67,12 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             DbContext.Users.Remove(entry);
         }
 
-        public User Get(IEntityIdentity<EntityId> id)
+        public async Task<User> Get(IEntityIdentity<EntityId> id)
         {
-            var user = DbContext.Users.AsNoTracking()
+            var user = await DbContext.Users.AsNoTracking()
                 .OrderByDescending(ob => ob.Id)
                 .ThenByDescending(ob => ob.RowVersion)
-                .FirstOrDefault(t =>t.Id.Equals(id.Identity.Value));
+                .FirstOrDefaultAsync(t =>t.Id.Equals(id.Identity.Value));
             
             if (user == null)
             {
@@ -80,23 +81,11 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             
             return user.ToUser();
         }
-        public IEnumerable<User> Find(Expression<Func<UserState, bool>> predicate)
-        {
-            return DbContext.Users.Where(predicate).AsNoTracking()
-                .Select(t => t.ToUser()).ToList();
-        }
-
-        
-        public async Task<IEnumerable<User>> FindAsync(Expression<Func<UserState, bool>> predicate)
-        {
-            var cancellationToken = new CancellationToken();
-            return await FindAsync(predicate, cancellationToken)
-                .ConfigureAwait(false);
-        }
-        public async Task<IEnumerable<User>> FindAsync(Expression<Func<UserState, bool>> predicate, CancellationToken cancellationToken)
+       
+        public async Task<IReadOnlyList<User>> FindAsync(Expression<Func<UserState, bool>> predicate, CancellationToken cancellationToken)
         {
             return await DbContext.Users.Where(predicate).AsNoTracking()
-                .Select(t => t.ToUser()).ToListAsync()
+                .Select(t => t.ToUser()).ToListAsync(cancellationToken)
                 .ConfigureAwait(false);
         }
     }

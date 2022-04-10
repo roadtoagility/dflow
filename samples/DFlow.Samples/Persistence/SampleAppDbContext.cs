@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DFlow.Samples.Persistence
 {
-    public class SampleAppDbContext : AggregateDbContext
+    public class SampleAppDbContext : SoftDeleteDbContext
     {
         public SampleAppDbContext(DbContextOptions<SampleAppDbContext> options)
             : base(options)

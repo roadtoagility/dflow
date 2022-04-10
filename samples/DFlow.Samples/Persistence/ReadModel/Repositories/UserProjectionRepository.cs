@@ -7,11 +7,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using DFlow.Domain.BusinessObjects;
+using DFlow.Samples.Domain.Aggregates.Events;
+using LiteDB;
 
 namespace DFlow.Samples.Persistence.ReadModel.Repositories
 {
@@ -35,29 +38,24 @@ namespace DFlow.Samples.Persistence.ReadModel.Repositories
             return user;
         }
 
-        public void Add(UserProjection entity)
+        public Task Add(UserProjection entity)
         {
             _context.Users.Upsert(entity);
+            
+            return Task.CompletedTask;
         }
 
-        public void Remove(UserProjection entity)
+        public Task Remove(UserProjection entity)
         {
             _context.Users.Delete(entity.Id);
-        }
-
-        public IReadOnlyList<UserProjection> Find(Expression<Func<UserProjection, bool>> predicate)
-        {
-            return _context.Users.Find(predicate).ToList();
-        }
-
-        public Task<IReadOnlyList<UserProjection>> FindAsync(Expression<Func<UserProjection, bool>> predicate)
-        {
-            throw new NotImplementedException();
+            
+            return Task.CompletedTask;
         }
 
         public Task<IReadOnlyList<UserProjection>> FindAsync(Expression<Func<UserProjection, bool>> predicate, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<IReadOnlyList<UserProjection>>(_context.Users.FindAll()
+                .Where(predicate.Compile()).ToImmutableList());
         }
     }
 }

@@ -4,14 +4,13 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-using System;
-using DFlow.Domain.BusinessObjects;
-using DFlow.Persistence.ReadModel.Repositories;
+using DFlow.Persistence.Repositories;
+using DFlow.Samples.Domain.Aggregates.Events;
 
 namespace DFlow.Samples.Persistence.ReadModel.Repositories
 {
-    public interface IUserProjectionRepository : IProjectionRepository<UserProjection>
+    public interface IUserProjectionRepository : IRepository<UserProjection, UserProjection>
     {
-        UserProjection Get(IEntityIdentity<Guid> entityId);
+
     }
 }

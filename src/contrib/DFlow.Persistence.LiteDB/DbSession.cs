@@ -30,14 +30,9 @@ namespace DFlow.Persistence.LiteDB
             Context.Database.Commit();
         }
 
-        public Task SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
         public Task SaveChangesAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(Context.Database.Commit());
         }
 
         public void Dispose()
