@@ -36,7 +36,7 @@ namespace DFlow.Samples.Business.CommandHandlers
       
             if (agg.IsValid)
             {
-                _sessionDb.Repository.Add(agg.GetChange());
+                await _sessionDb.Repository.Add(agg.GetChange());
                 await _sessionDb.SaveChangesAsync(cancellationToken);
                 
                 agg.GetEvents().ToImmutableList()

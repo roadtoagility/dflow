@@ -38,14 +38,18 @@ namespace DFlow.Samples.Persistence.ReadModel.Repositories
             return user;
         }
 
-        public void Add(UserProjection entity)
+        public Task Add(UserProjection entity)
         {
             _context.Users.Upsert(entity);
+            
+            return Task.CompletedTask;
         }
 
-        public void Remove(UserProjection entity)
+        public Task Remove(UserProjection entity)
         {
             _context.Users.Delete(entity.Id);
+            
+            return Task.CompletedTask;
         }
 
         public Task<IReadOnlyList<UserProjection>> FindAsync(Expression<Func<UserProjection, bool>> predicate, CancellationToken cancellationToken)

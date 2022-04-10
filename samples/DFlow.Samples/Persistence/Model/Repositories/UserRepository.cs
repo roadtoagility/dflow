@@ -31,7 +31,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
 
         // https://docs.microsoft.com/en-us/ef/core/saving/disconnected-entities
 
-        public async void Add(User entity)
+        public async Task Add(User entity)
         {
             var entry = entity.ToUserState();
 
@@ -52,7 +52,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             }
         }
 
-        public async void Remove(User entity)
+        public async Task Remove(User entity)
         {
             var oldState = await Get(entity);
 
@@ -71,7 +71,8 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             var user = await DbContext.Users.AsNoTracking()
                 .OrderByDescending(ob => ob.Id)
                 .ThenByDescending(ob => ob.RowVersion)
-                .FirstOrDefaultAsync(t =>t.Id.Equals(id.Identity.Value));
+                .FirstOrDefaultAsync(t =>t.Id.Equals(id.Identity.Value))
+                .ConfigureAwait(false);
             
             if (user == null)
             {

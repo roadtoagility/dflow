@@ -15,7 +15,7 @@ namespace DFlow.Persistence.Repositories
 {
     public interface IRepositoryAppendOnly<TState,TModel>
     {
-        void Add(TModel entity);
+        Task Add(TModel entity);
         Task<IReadOnlyList<TModel>> FindAsync(Expression<Func<TState, bool>> predicate, CancellationToken cancellationToken);
     }
 }
