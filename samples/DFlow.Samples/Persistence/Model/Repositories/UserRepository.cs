@@ -81,7 +81,7 @@ namespace DFlow.Samples.Persistence.Model.Repositories
             return user.ToUser();
         }
        
-        public async Task<IEnumerable<User>> FindAsync(Expression<Func<UserState, bool>> predicate, CancellationToken cancellationToken)
+        public async Task<IReadOnlyList<User>> FindAsync(Expression<Func<UserState, bool>> predicate, CancellationToken cancellationToken)
         {
             return await DbContext.Users.Where(predicate).AsNoTracking()
                 .Select(t => t.ToUser()).ToListAsync(cancellationToken)

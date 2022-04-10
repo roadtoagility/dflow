@@ -23,9 +23,9 @@ namespace DFlow.Samples.Business.DomainEventHandlers
         }
         protected override Task ExecuteHandle(UserAddedEvent @event, CancellationToken cancellationToken)
         {
-            _dbSession.Repository.Add(new UserProjection(@event.Id.Value, @event.Name.Value, 
+            _dbSession.Repository.Add(new UserProjection(@event.Id.Value,@event.Name.Value, 
                 @event.Mail.Value, @event.Version.Value));
-            _dbSession.SaveChanges();
+            _dbSession.SaveChangesAsync(cancellationToken);
             
             return Task.CompletedTask;
         }

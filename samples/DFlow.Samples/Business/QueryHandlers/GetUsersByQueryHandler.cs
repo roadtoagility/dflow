@@ -21,12 +21,12 @@ namespace DFlow.Samples.Business.QueryHandlers
             _dbSession = session;
         }
 
-        protected override Task<GetUsersResponse> ExecuteQuery(GetUsersByFilter filter, CancellationToken cancellationToken)
+        protected override async Task<GetUsersResponse> ExecuteQuery(GetUsersByFilter filter, CancellationToken cancellationToken)
         {
-            var clients = _dbSession.Repository
-                .Find(up=>  up.Name.Contains(filter.Name));
+            var clients = await _dbSession.Repository
+                .FindAsync(up=>  up.Name.Contains(filter.Name), cancellationToken);
 
-            return Task.FromResult(GetUsersResponse.From(clients.Count>0, clients));
+            return GetUsersResponse.From(clients.Count>0, clients);
         }
     }
 }
