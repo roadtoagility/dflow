@@ -35,7 +35,8 @@ namespace DFlow.Samples.Persistence.Model.Repositories
         {
             var entry = entity.ToUserState();
 
-            var oldState = await Get(entity);
+            var oldState = await Get(entity)
+                .ConfigureAwait(false);
 
             if (oldState.Equals(User.Empty()))
             {
