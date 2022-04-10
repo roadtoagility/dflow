@@ -13,8 +13,9 @@ using System.Threading.Tasks;
 
 namespace DFlow.Persistence.Repositories
 {
-    public interface IRepository<TState,TModel>: IRepositoryAppendOnly<TState,TModel>
+    public interface IRepositoryAppendOnly<TState,TModel>
     {
-        void Remove(TModel entity);
+        void Add(TModel entity);
+        Task<IEnumerable<TModel>> FindAsync(Expression<Func<TState, bool>> predicate, CancellationToken cancellationToken);
     }
 }

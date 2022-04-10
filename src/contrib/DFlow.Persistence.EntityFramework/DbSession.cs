@@ -24,16 +24,6 @@ namespace DFlow.Persistence.EntityFramework
         
         public TRepository Repository { get; }
 
-        public void SaveChanges()
-        {
-            Context.SaveChanges();
-        }
-        
-        public async Task SaveChangesAsync()
-        {
-            var cancellationToken = new CancellationToken();
-            await SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-        }
         public async Task SaveChangesAsync(CancellationToken cancellationToken)
         {
             await Context.SaveChangesAsync(cancellationToken)

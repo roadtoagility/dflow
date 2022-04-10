@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DFlow.Persistence.EntityFramework.Model
 {
-    public class AggregateDbContext : DbContext
+    public class SoftDeleteDbContext : DbContext
     {
-        public AggregateDbContext(DbContextOptions options)
+        public SoftDeleteDbContext(DbContextOptions options)
             : base(options)
         {
         }

@@ -12,8 +12,6 @@ namespace DFlow.Persistence
     public interface IDbSession<out TRepository>
     {
         TRepository Repository { get; }
-        void SaveChanges();
-        Task SaveChangesAsync();
         Task SaveChangesAsync(CancellationToken cancellationToken);
     }
 }
