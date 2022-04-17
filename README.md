@@ -13,9 +13,9 @@ Domain events Flow is a platform to support development with agility in mind bas
 ## Code Quality
 [![codecov](https://codecov.io/gh/roadtoagility/dflow/branch/develop/graph/badge.svg?token=5I6T20JZC8)](https://codecov.io/gh/roadtoagility/dflow)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/008ea00243504ac5ab31a24ebed9e5e8)](https://www.codacy.com/gh/roadtoagility/dflow/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=roadtoagility/dflow&amp;utm_campaign=Badge_Grade)
+[![CodeQL](https://github.com/roadtoagility/dflow/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/roadtoagility/dflow/actions/workflows/codeql-analysis.yml)
 
 ## CI Status
-
 [![Build and Testing](https://github.com/roadtoagility/dflow/actions/workflows/dotnet.yml/badge.svg)](https://github.com/roadtoagility/dflow/actions/workflows/dotnet.yml/badge.svg)
 
 ## Nuget packages from DFlow Platform
