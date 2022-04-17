@@ -13,24 +13,20 @@ Domain events Flow is a platform to support development with agility in mind bas
 ## Code Quality
 [![codecov](https://codecov.io/gh/roadtoagility/dflow/branch/develop/graph/badge.svg?token=5I6T20JZC8)](https://codecov.io/gh/roadtoagility/dflow)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/008ea00243504ac5ab31a24ebed9e5e8)](https://www.codacy.com/gh/roadtoagility/dflow/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=roadtoagility/dflow&amp;utm_campaign=Badge_Grade)
+[![CodeQL](https://github.com/roadtoagility/dflow/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/roadtoagility/dflow/actions/workflows/codeql-analysis.yml)
 
-## Build Status
-
-[![DFlow Build](https://github.com/roadtoagility/dflow/actions/workflows/dotnet.yml/badge.svg)](https://github.com/roadtoagility/dflow/actions/workflows/dotnet.yml/badge.svg)
-
-## Tests Passing
-![AppVeyor tests](https://img.shields.io/appveyor/tests/drr00t/dfow)
+## CI Status
+[![Build and Testing](https://github.com/roadtoagility/dflow/actions/workflows/dotnet.yml/badge.svg)](https://github.com/roadtoagility/dflow/actions/workflows/dotnet.yml/badge.svg)
 
 ## Nuget packages from DFlow Platform
 Core Packages|Description|Dependencies|Latest Version|
 -|-|-|-|
-DFlow| First implementaion with full event sourcing aggregation support|none|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.svg)|
 DFlow.Domain|Base framewor to rich domain modelling based on Object Value, Entity and Aggregates design patterns|- DFlow.Domain.Events|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Domain.svg)|
 DFlow.Domain.Events|Base framework that provides capability to declare events raise from Aggregates|none|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Domain.Events.svg)|
 DFlow.Business.Cqrs|CQRS framework to implement command and query handlers event and event publishing as well|- DFlow.Domain </br>- DFlow.Domain.Events </br>- DFlow.Domain.EventBus.(*)</br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Business.Cqrs.svg)|
 DFlow.Persistence|Base framework providing an Unity of Work and Repository design patterns to support persistence layer implementation|- DFlow.Domain </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Persistence.svg)|
 
-Contrib Pastyle="ckages|Description|Dependencies|Latest Version|
+Contrib Pakages|Description|Dependencies|Latest Version|
 -|-|-|-|
 DFlow.Persistence.EntityFramework|Specialization of DFlow.Persistence to support EntityFramework based persistence layers abstraction|- DFlow.Domain </br>- DFlow.Domain.Persistence </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Persistence.EntityFramework.svg)|
 DFlow.Domain.EventBus.FluentMediator|Implementation of IDomainEventBus to be used to DomainEvents publishing |- DFlow.Domain.Events </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Domain.EventBus.FluentMediator.svg)|
