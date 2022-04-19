@@ -21,9 +21,11 @@ jobs:
           dotnet-version: 5.x      
       - name: Pack
         run: dotnet pack --include-symbols --include-source -o ./pkg --version-suffix ${{ steps.get_version.outputs.VERSION }}
-      - name: Push
-        working-directory: ./pkg
-        run: dotnet nuget push -k ${{secrets.NUGET_KEY}}
+      - name: Push       
+        run: | 
+            cd ./pkg
+            ls -l 
+            dotnet nuget push -k ${{secrets.NUGET_KEY}}
   create-github-release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
