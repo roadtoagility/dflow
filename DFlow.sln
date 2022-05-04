@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DFlow.Persistence.LiteDB", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Samples.Tests", "tests\DFlow.Samples.Tests\DFlow.Samples.Tests.csproj", "{2E6C41D2-830B-44E7-99FE-6220CA6C9943}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Eventing", "src\DFlow.Eventing\DFlow.Eventing.csproj", "{B9EE46F0-1C78-40B9-BBA5-09F3AEA466F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -142,6 +144,14 @@ Global
 		{2E6C41D2-830B-44E7-99FE-6220CA6C9943}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E6C41D2-830B-44E7-99FE-6220CA6C9943}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
 		{2E6C41D2-830B-44E7-99FE-6220CA6C9943}.Tests|Any CPU.Build.0 = Debug|Any CPU
+		{B9EE46F0-1C78-40B9-BBA5-09F3AEA466F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9EE46F0-1C78-40B9-BBA5-09F3AEA466F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9EE46F0-1C78-40B9-BBA5-09F3AEA466F2}.Release Profilling|Any CPU.ActiveCfg = Release Profilling|Any CPU
+		{B9EE46F0-1C78-40B9-BBA5-09F3AEA466F2}.Release Profilling|Any CPU.Build.0 = Release Profilling|Any CPU
+		{B9EE46F0-1C78-40B9-BBA5-09F3AEA466F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9EE46F0-1C78-40B9-BBA5-09F3AEA466F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9EE46F0-1C78-40B9-BBA5-09F3AEA466F2}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9EE46F0-1C78-40B9-BBA5-09F3AEA466F2}.Tests|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,10 +4,13 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-namespace DFlow.Domain.Aggregates
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace DFlow.Domain.Events
 {
-    public interface IChangeSet<out TChange>
+    public interface IDomainEventHandlerAsync<in TDomainEvent>
     {
-        TChange GetChange();
+        Task HandleAsync(TDomainEvent @event, CancellationToken cancellationToken);
     }
 }

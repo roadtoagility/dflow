@@ -11,8 +11,4 @@
       <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
     </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\DFlow.Domain\DFlow.Domain.csproj" />
-    </ItemGroup>
-
 </Project>
