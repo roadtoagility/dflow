@@ -25,7 +25,7 @@ jobs:
         run: | 
             cd ./pkg
             ls -l 
-            dotnet nuget push "*.nupkg" -k ${{secrets.NUGET_KEY}}
+            dotnet nuget push ./pkg/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_KEY}}
   create-github-release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
