@@ -1,12 +1,6 @@
 <Project>
   <PropertyGroup>
-    <!--    <VersionPrefix>0.6.0</VersionPrefix>
-    <VersionSuffix></VersionSuffix>
- <PackageProjectUrl>https://github.com/roadtoagility/dflow</PackageProjectUrl>
-        <PackageIconUrl>https://github.com/roadtoagility/dflow/raw/master/docs/img/logodflow_200x200.png</PackageIconUrl> -->
-  
-  	<LicenseUrl>https://github.com/roadtoagility/dflow/blob/master/LICENSE.TXT</LicenseUrl>
-    	<Title></Title>
+        <PackageIconUrl>https://github.com/roadtoagility/dflow/raw/master/docs/img/logodflow_200x200.png</PackageIconUrl>  
         <TargetFramework>net5.0</TargetFramework>
         <Configurations>Debug;Release;Release Profilling</Configurations>
         <Platforms>AnyCPU</Platforms>
@@ -15,6 +9,7 @@
         <Copyright>Road to Agility</Copyright>
         <PackageProjectUrl>https://github.com/roadtoagility/dflow</PackageProjectUrl>
         <RepositoryUrl>https://github.com/roadtoagility/dflow</RepositoryUrl>
+        <PackageLicenseUrl>https://github.com/roadtoagility/dflow/blob/master/LICENSE.TXT</PackageLicenseUrl>
         <PackageTags>ddd;roadtoagility</PackageTags>
   
   </PropertyGroup>
