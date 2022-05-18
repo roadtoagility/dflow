@@ -7,11 +7,12 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using DFlow.Domain.Aggregates;
+using DFlow.Domain.BusinessObjects;
 
 namespace DFlow.Domain.Events
 {
-    public abstract class DomainEventsObjectBasedAggregationRoot<TChange, TEntityId>:ObjectBasedAggregationRoot<TChange, TEntityId>,
-        IDomainEvents
+    public abstract class ObjectBasedAggregationRootWithEvents<TChange, TEntityId>: 
+        ObjectBasedAggregationRoot<TChange, TEntityId> where TChange:BaseEntity<TEntityId>
     {
         private readonly IList<IDomainEvent> _changes = new List<IDomainEvent>();
         

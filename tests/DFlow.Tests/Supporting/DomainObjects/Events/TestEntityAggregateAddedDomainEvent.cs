@@ -18,7 +18,7 @@
 
 using System;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.DomainEvents;
+using DFlow.Domain.Events.DomainEvents;
 
 namespace DFlow.Tests.Supporting.DomainObjects.Events
 {

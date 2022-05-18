@@ -1,11 +1,12 @@
 using System.Collections.Immutable;
 using DFlow.Domain.Aggregates;
 using DFlow.Domain.BusinessObjects;
+using DFlow.Domain.Events;
 using DFlow.Tests.Supporting.DomainObjects.Events;
 
 namespace DFlow.Tests.Supporting.DomainObjects
 {
-    public sealed class BusinessEntityAggregateRoot:ObjectBasedAggregationRoot<BusinessEntity, EntityTestId>
+    public sealed class BusinessEntityAggregateRoot:ObjectBasedAggregationRootWithEvents<BusinessEntity, EntityTestId>
     {
         internal BusinessEntityAggregateRoot(BusinessEntity businessEntity)
         {
