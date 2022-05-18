@@ -21,8 +21,8 @@ Domain events Flow is a platform to support development with agility in mind bas
 ## Nuget packages from DFlow Platform
 Core Packages|Description|Dependencies|Latest Version|
 -|-|-|-|
-DFlow.Domain|Base framewor to rich domain modelling based on Object Value, Entity and Aggregates design patterns|- DFlow.Domain.Events|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Domain.svg)|
-DFlow.Domain.Events|Base framework that provides capability to declare events raise from Aggregates|none|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Domain.Events.svg)|
+DFlow.Domain|Base framework to **rich domain modelling** based on Object Value, Entity and Aggregates design patterns|None|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Domain.svg)|
+DFlow.Domain.Events|Base framework that provides capability to declare events raise from Aggregates| - DFlow.Domain|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Domain.Events.svg)|
 DFlow.Business.Cqrs|CQRS framework to implement command and query handlers event and event publishing as well|- DFlow.Domain </br>- DFlow.Domain.Events </br>- DFlow.Domain.EventBus.(*)</br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Business.Cqrs.svg)|
 DFlow.Persistence|Base framework providing an Unity of Work and Repository design patterns to support persistence layer implementation|- DFlow.Domain </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Persistence.svg)|
 

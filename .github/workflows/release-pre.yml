@@ -4,7 +4,7 @@ on:
     - "v[0-9]+.[0-9]+.[0-9]+-pre[0-9][0-9][0-9]"
 
 
-name: Pre-release
+name: .NET (CD - Github Packages)
     
 jobs:
   nuget:
