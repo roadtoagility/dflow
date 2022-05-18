@@ -4,14 +4,14 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-using DFlow.Domain.Aggregates;
 using DFlow.Domain.BusinessObjects;
+using DFlow.Domain.Events;
 using DFlow.Samples.Domain.Aggregates.Events;
 using DFlow.Samples.Domain.BusinessObjects;
 
 namespace DFlow.Samples.Domain.Aggregates
 {
-    public sealed class UserEntityBasedAggregationRoot : ObjectBasedAggregationRoot<User, EntityId>
+    public sealed class UserEntityBasedAggregationRoot : ObjectBasedAggregationRootWithEvents<User, EntityId>
     {
 
         private UserEntityBasedAggregationRoot(User user)

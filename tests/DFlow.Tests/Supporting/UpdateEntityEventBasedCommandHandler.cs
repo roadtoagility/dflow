@@ -1,20 +1,9 @@
-﻿// Copyright (C) 2020  Road to Agility
+﻿// Copyright (C) 2022  Road to Agility
 //
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the GNU Library General Public
-// License as published by the Free Software Foundation; either
-// version 2 of the License, or (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// Library General Public License for more details.
-//
-// You should have received a copy of the GNU Library General Public
-// License along with this library; if not, write to the
-// Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
-// Boston, MA  02110-1301, USA.
-//
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 
 using System;
 using System.Collections.Immutable;
@@ -25,6 +14,7 @@ using DFlow.Business.Cqrs.CommandHandlers;
 using DFlow.Domain.Aggregates;
 using DFlow.Domain.BusinessObjects;
 using DFlow.Domain.Events;
+using DFlow.Domain.Events.BusinessObjects;
 using DFlow.Tests.Supporting.DomainObjects;
 using DFlow.Tests.Supporting.DomainObjects.Commands;
 
@@ -32,7 +22,7 @@ namespace DFlow.Tests.Supporting
 {
     public sealed class UpdateEntityEventBasedCommandHandler : CommandHandler<UpdateEntityCommand, CommandResult<Guid>>
     {
-        private IAggregateFactory<EventStreamBusinessEntityAggregateRoot, EventStream<EntityTestId>>
+        private readonly IAggregateFactory<EventStreamBusinessEntityAggregateRoot, EventStream<EntityTestId>>
             _aggregateFactory;
         
         public UpdateEntityEventBasedCommandHandler(IDomainEventBus publisher, 
@@ -47,7 +37,7 @@ namespace DFlow.Tests.Supporting
             var agg = _aggregateFactory.Create(
                 EventStream<EntityTestId>.From(EntityTestId.Empty(),
                     new AggregationName(), 
-                    VersionId.Empty(), new ImmutableArray<IDomainEvent>())
+                    VersionId.Empty(), ImmutableList<IDomainEvent>.Empty)
                 );
             var isSucceed = agg.IsValid;
             var okId = Guid.Empty;

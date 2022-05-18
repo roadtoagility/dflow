@@ -7,7 +7,7 @@
 
 using System;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.DomainEvents;
+using DFlow.Domain.Events.DomainEvents;
 using DFlow.Samples.Domain.BusinessObjects;
 
 namespace DFlow.Samples.Domain.Aggregates.Events

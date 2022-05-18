@@ -6,11 +6,12 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using DFlow.Domain.Aggregates;
 using DFlow.Domain.BusinessObjects;
-using DFlow.Domain.Events;
+using DFlow.Domain.Events.BusinessObjects;
 using DFlow.Domain.Validation;
 
-namespace DFlow.Domain.Aggregates
+namespace DFlow.Domain.Events.Aggregates
 {
     public class EventBasedAggregationRoot<TEntityId>: BaseValidation, IChangeSet<EventStream<TEntityId>>
     {
@@ -45,10 +46,9 @@ namespace DFlow.Domain.Aggregates
             _currentStream.Add(domainEvent);
         }
         
-        //Need to check tath
+ 
         protected void Raise(IDomainEvent @event)
         {
-            //this isint right
             _changes.Add(@event);
         }
         

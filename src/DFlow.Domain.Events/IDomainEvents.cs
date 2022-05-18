@@ -4,15 +4,12 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-using System.Threading;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace DFlow.Domain.Events
 {
-    public interface IDomainEventBusAsync
+    public interface IDomainEvents
     {
-        Task PublishAsync<TEvent>(TEvent request, CancellationToken cancellationToken);
-
-        Task<TResult> SendAsync<TResult,TRequest>(TRequest request, CancellationToken cancellationToken);
+        IReadOnlyList<IDomainEvent> GetEvents();
     }
 }

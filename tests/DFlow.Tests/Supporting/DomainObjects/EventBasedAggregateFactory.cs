@@ -6,6 +6,7 @@
 
 using DFlow.Domain.Aggregates;
 using DFlow.Domain.BusinessObjects;
+using DFlow.Domain.Events.BusinessObjects;
 using DFlow.Tests.Supporting.DomainObjects.Commands;
 
 namespace DFlow.Tests.Supporting.DomainObjects
