@@ -14,7 +14,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\DFlow.Business.Cqrs\DFlow.Business.Cqrs.csproj" />
     <ProjectReference Include="..\..\src\DFlow.Domain\DFlow.Domain.csproj" />
-    <ProjectReference Include="..\..\src\DFlow.Eventing\DFlow.Eventing.csproj" />
     <ProjectReference Include="..\..\src\DFlow.Persistence\DFlow.Persistence.csproj" />
   </ItemGroup>
 
