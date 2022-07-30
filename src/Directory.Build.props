@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
         <PackageIconUrl>https://github.com/roadtoagility/dflow/raw/master/docs/img/logodflow_200x200.png</PackageIconUrl>  
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <Configurations>Debug;Release;Release Profilling</Configurations>
         <Platforms>AnyCPU</Platforms>
         <LangVersion>9</LangVersion>
