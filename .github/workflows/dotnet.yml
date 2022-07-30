@@ -11,8 +11,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        sdk: [5.x]
-        dotnetFramework: [net5.0]
+        sdk: [6.x]
+        dotnetFramework: [net6.0]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
