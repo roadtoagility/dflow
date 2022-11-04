@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 using DFlow.Business.Cqrs.CommandHandlers;
 using DFlow.Domain.EventBus.FluentMediator;
 using DFlow.Domain.Events;
-using DFlow.Persistence;
-using DFlow.Persistence.EntityFramework;
 using DFlow.Samples.Business.CommandHandlers;
 using DFlow.Samples.Business.DomainEventHandlers;
 using DFlow.Samples.Domain.Aggregates.Events;
