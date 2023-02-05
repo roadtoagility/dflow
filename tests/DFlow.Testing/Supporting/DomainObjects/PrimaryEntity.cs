@@ -7,20 +7,18 @@
 using System.Collections.Generic;
 using DFlow.BusinessObjects;
 using DFlow.Testing.Supporting.DomainObjects.Events;
-using DFlow.Validation;
-using Ecommerce.Domain;
 
 namespace DFlow.Testing.Supporting.DomainObjects;
 
 public class PrimaryEntity : EntityBase<PrimaryEntityId>
 {
-    public PrimaryEntity(PrimaryEntityId identity, SecondaryEntity secondaryEntity, SimpleValueObject simpleValue, VersionId version)
+    public PrimaryEntity(PrimaryEntityId identity, SecondaryEntity secondaryEntity, SimpleValueObject simpleValue,
+        VersionId version)
         : base(identity, version)
     {
-
         SimpleValue = simpleValue;
         Secondary = secondaryEntity;
-        
+
         AppendValidationResult(identity.ValidationStatus.Failures);
         AppendValidationResult(simpleValue.ValidationStatus.Failures);
         AppendValidationResult(secondaryEntity.Failures);
@@ -36,7 +34,8 @@ public class PrimaryEntity : EntityBase<PrimaryEntityId>
         yield return Secondary;
     }
 
-    public static PrimaryEntity From(PrimaryEntityId id, SecondaryEntity secondary, SimpleValueObject simpleObject, VersionId version)
+    public static PrimaryEntity From(PrimaryEntityId id, SecondaryEntity secondary, SimpleValueObject simpleObject,
+        VersionId version)
     {
         return new PrimaryEntity(id, secondary, simpleObject, version);
     }
@@ -55,7 +54,7 @@ public class PrimaryEntity : EntityBase<PrimaryEntityId>
 
     public static PrimaryEntity Empty()
     {
-        return From(PrimaryEntityId.Empty,SecondaryEntity.Empty(), SimpleValueObject.Empty(), VersionId.Empty());
+        return From(PrimaryEntityId.Empty, SecondaryEntity.Empty(), SimpleValueObject.Empty(), VersionId.Empty());
     }
 
     public void Update(SimpleValueObject simpleValue)
@@ -68,7 +67,7 @@ public class PrimaryEntity : EntityBase<PrimaryEntityId>
         SimpleValue = simpleValue;
         RaisedEvent(SimpleValueUpdatedEvent.For(this));
     }
-    
+
     public void UpdateSecondary(SecondaryEntity secondary)
     {
         if (!secondary.IsValid)
@@ -78,5 +77,5 @@ public class PrimaryEntity : EntityBase<PrimaryEntityId>
 
         Secondary = secondary;
         RaisedEvent(SecondaryEntityUpdatedEvent.For(this));
-    }    
+    }
 }

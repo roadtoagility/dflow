@@ -8,7 +8,7 @@ public sealed record ChangeSet(Guid Id
     , string AggregationType
     , string EventType
     , DateTimeOffset EventDatetime
-    , JsonDocument EventData):IDisposable
+    , JsonDocument EventData) : IDisposable
 {
     public void Dispose()
     {

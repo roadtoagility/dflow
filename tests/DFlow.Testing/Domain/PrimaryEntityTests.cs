@@ -17,10 +17,10 @@ public class PrimaryEntityTests
     [ClassData(typeof(PrimaryEntityValid))]
     public void PrimaryEntity_Create_Valid(SecondaryEntity secondary, SimpleValueObject name, int expected)
     {
-        var entity = PrimaryEntity.NewEntity(secondary,name);
+        var entity = PrimaryEntity.NewEntity(secondary, name);
         Assert.Equal(expected, entity.GetEvents().Count);
     }
-    
+
     [Theory]
     [ClassData(typeof(SecondaryEntityUpdate))]
     public void SecondaryEntity_Updated(PrimaryEntity primary, SecondaryEntity toUpdate, SecondaryEntity expected)

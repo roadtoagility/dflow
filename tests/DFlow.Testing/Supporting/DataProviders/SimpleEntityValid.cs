@@ -9,13 +9,13 @@ using System.Collections;
 using System.Collections.Generic;
 using DFlow.BusinessObjects;
 using DFlow.Testing.Supporting.DomainObjects;
-using Ecommerce.Domain;
 
 namespace DFlow.Testing.Supporting.DataProviders;
 
 public class SimpleEntityValid : IEnumerable<object[]>
 {
     private static Guid entityId = Guid.NewGuid();
+
     private static readonly SimpleEntity entity = SimpleEntity.From(
         SimpleEntityId.From(entityId),
         SimpleValueObject.From("name"),

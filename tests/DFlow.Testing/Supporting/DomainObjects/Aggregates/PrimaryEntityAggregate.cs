@@ -7,14 +7,13 @@
 
 using DFlow.Aggregates;
 using DFlow.Testing.Supporting.DomainObjects.Events;
-using Ecommerce.Domain;
 
 namespace DFlow.Testing.Supporting.DomainObjects.Aggregates;
 
 public sealed class PrimaryEntityAggregate : AggregateBase<PrimaryEntity, PrimaryEntityId>
 {
     private PrimaryEntityAggregate(PrimaryEntity primaryEntity)
-        :base(primaryEntity)
+        : base(primaryEntity)
     {
         if (primaryEntity.IsValid)
         {
@@ -30,22 +29,22 @@ public sealed class PrimaryEntityAggregate : AggregateBase<PrimaryEntity, Primar
             AppendValidationResult(primaryEntity.Failures);
         }
     }
-    
+
     public void Update(SecondaryEntity secondary)
     {
         var primary = PrimaryEntity.Combine(Root, secondary);
-        
+
         if (primary.IsValid)
         {
             Apply(primary);
             Raise(SecondaryEntityUpdatedEvent.For(primary));
         }
-        
+
         AppendValidationResult(primary.Failures);
     }
 
     public static PrimaryEntityAggregate CreateFrom(SecondaryEntity secondary, SimpleValueObject simpleValue)
     {
-        return new PrimaryEntityAggregate(PrimaryEntity.NewEntity(secondary,simpleValue));
+        return new PrimaryEntityAggregate(PrimaryEntity.NewEntity(secondary, simpleValue));
     }
 }

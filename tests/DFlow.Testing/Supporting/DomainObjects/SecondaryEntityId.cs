@@ -6,23 +6,12 @@
 
 using System;
 using DFlow.BusinessObjects;
-using DFlow.Validation;
 
 namespace Ecommerce.Domain;
 
 public class SecondaryEntityId : ValueOf<Guid, SecondaryEntityId>
 {
     public static SecondaryEntityId Empty => From(Guid.Empty);
-
-    public static SecondaryEntityId From(string inputId)
-    {
-        var id = Guid.Empty;
-        if (Guid.TryParse(inputId, out id) != false) return From(id);
-        var result = From(Empty.Value);
-        result.ValidationStatus.Append(Failure.For("Identity", $"The Simple entity id is not valid.", inputId));
-        return result;
-
-    }
 
     public static SecondaryEntityId NewId()
     {

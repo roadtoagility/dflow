@@ -6,6 +6,7 @@
 
 
 using System;
+
 namespace DFlow.Persistence.Model;
 
 public abstract class PersistentState : IPersistentState
@@ -17,7 +18,7 @@ public abstract class PersistentState : IPersistentState
         RowVersion = rowVersion;
     }
 
-    public DateTime CreateAt { get;}
+    public DateTime CreateAt { get; }
 
     public byte[] RowVersion { get; }
     public bool IsDeleted { get; set; }

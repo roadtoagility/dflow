@@ -20,7 +20,7 @@ public sealed class ExportPrimaryEntityEvents : IEventsExporting<ChangeSet, Prim
             fromEntity.Identity.Value,
             fromEntity.GetType().Name,
             evt.GetType().Name,
-            DateTimeOffset.Now, 
+            DateTimeOffset.Now,
             JsonSerializer.SerializeToDocument(evt, evt.GetType())
         )).ToImmutableList();
     }

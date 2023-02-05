@@ -6,7 +6,7 @@
 
 namespace DFlow.Specifications
 {
-    public abstract class LogicalSpecification<TBusinessObject>:CompositeSpecification<TBusinessObject>
+    public abstract class LogicalSpecification<TBusinessObject> : CompositeSpecification<TBusinessObject>
     {
         protected ISpecification<TBusinessObject> LeftCondition { get; }
 

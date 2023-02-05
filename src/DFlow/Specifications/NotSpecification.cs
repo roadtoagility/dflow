@@ -6,10 +6,10 @@
 
 namespace DFlow.Specifications
 {
-    public class NotSpecification<TBusinessObject>:CompositeSpecification<TBusinessObject>
+    public class NotSpecification<TBusinessObject> : CompositeSpecification<TBusinessObject>
     {
         protected ISpecification<TBusinessObject> Condition { get; }
-        
+
         public NotSpecification(ISpecification<TBusinessObject> condition)
         {
             Condition = condition;

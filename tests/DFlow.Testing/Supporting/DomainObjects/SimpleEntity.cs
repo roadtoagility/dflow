@@ -16,7 +16,7 @@ public class SimpleEntity : EntityBase<SimpleEntityId>
         : base(identity, version)
     {
         SimpleValue = simpleValue;
-        
+
         AppendValidationResult(identity.ValidationStatus.Failures);
         AppendValidationResult(simpleValue.ValidationStatus.Failures);
     }

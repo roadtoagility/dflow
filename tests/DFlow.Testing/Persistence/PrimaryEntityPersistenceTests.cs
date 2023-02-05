@@ -2,7 +2,6 @@
 
 using DFlow.Testing.Supporting.DataProviders;
 using DFlow.Testing.Supporting.DomainObjects;
-using DFlow.Testing.Supporting.DomainObjects.Events;
 using DFlow.Testing.Supporting.Persistence;
 using Xunit;
 
@@ -14,11 +13,11 @@ public class PrimaryEntityPersistenceTests
     [ClassData(typeof(PrimaryEntityForEventsPersistence))]
     public void PrimaryEntity_Events_Export(SecondaryEntity secondary, SimpleValueObject name, int expected)
     {
-        var entity = PrimaryEntity.NewEntity(secondary,name);
+        var entity = PrimaryEntity.NewEntity(secondary, name);
         entity.UpdateSecondary(secondary);
-        
+
         var changeSet = new ExportPrimaryEntityEvents().ToOutBox(entity);
-        
+
         Assert.Equal(expected, changeSet.Count);
     }
 }

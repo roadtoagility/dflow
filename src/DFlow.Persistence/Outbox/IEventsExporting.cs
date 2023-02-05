@@ -6,8 +6,6 @@
 
 
 using System.Collections.Generic;
-using DFlow.BusinessObjects;
-using DFlow.Events;
 
 namespace DFlow.Persistence.Outbox;
 

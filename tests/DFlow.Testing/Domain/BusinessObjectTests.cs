@@ -19,8 +19,9 @@ public class BusinessObjectTests
     public void CreateNewVersion(int input, bool expectedTrue)
     {
         var versionId = VersionId.From(input);
-        Assert.Equal(expectedTrue,  versionId.IsNew);
+        Assert.Equal(expectedTrue, versionId.IsNew);
     }
+
     [Theory]
     [ClassData(typeof(SimpleValueObjectValid))]
     public void CreateValidVO(string input, SimpleValueObject expectedValid)
@@ -30,7 +31,7 @@ public class BusinessObjectTests
     }
 
     [Theory]
-    [InlineData("",false)]
+    [InlineData("", false)]
     public void CreateInvalidVO(string input, bool expectedFalse)
     {
         var invalidVO = SimpleValueObject.From(input);

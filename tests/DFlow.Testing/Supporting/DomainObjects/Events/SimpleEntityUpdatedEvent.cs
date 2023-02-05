@@ -6,7 +6,6 @@
 
 using System;
 using DFlow.Events;
-using Ecommerce.Domain;
 
 namespace DFlow.Testing.Supporting.DomainObjects.Events;
 
@@ -26,7 +25,7 @@ public class SimpleEntityUpdatedEvent : DomainEvent
 
     public static SimpleEntityUpdatedEvent For(SimpleEntity simpleEntity)
     {
-        return new (
+        return new(
             simpleEntity.Identity,
             simpleEntity.SimpleValue,
             DateTimeOffset.UtcNow);

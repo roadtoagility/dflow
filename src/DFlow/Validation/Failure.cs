@@ -16,20 +16,21 @@ namespace DFlow.Validation
             Message = message;
             Value = value;
         }
+
         public string PropertyName { get; }
-        
+
         public string Message { get; }
-        
+
         public string Value { get; }
 
         public static Failure For(string propertyName, string message, string value)
         {
             return new Failure(propertyName, message, value);
-        } 
-        
+        }
+
         public static Failure For(string propertyName, string message)
         {
             return For(propertyName, message, String.Empty);
-        } 
+        }
     }
 }

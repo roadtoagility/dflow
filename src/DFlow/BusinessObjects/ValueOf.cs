@@ -8,8 +8,8 @@ using DFlow.Validation;
 
 namespace DFlow.BusinessObjects
 {
-    public class ValueOf<TValue, TThis>:ValueOf.ValueOf<TValue, TThis> 
-        where TThis : ValueOf<TValue, TThis>,new()
+    public class ValueOf<TValue, TThis> : ValueOf.ValueOf<TValue, TThis>
+        where TThis : ValueOf<TValue, TThis>, new()
     {
         private readonly ValidationResult _validationStatus = ValidationResult.Empty();
         public ValidationResult ValidationStatus => _validationStatus;

@@ -10,8 +10,8 @@ using DFlow.Validation;
 
 namespace DFlow.Aggregates
 {
-    public abstract class AggregateBase<TChange, TEntityId>:BaseValidation,
-        IAggregate<TChange> where TChange: EntityBase<TEntityId>
+    public abstract class AggregateBase<TChange, TEntityId> : BaseValidation,
+        IAggregate<TChange> where TChange : EntityBase<TEntityId>
     {
         protected AggregateBase(TChange root)
         {
@@ -24,12 +24,12 @@ namespace DFlow.Aggregates
         {
             Root = item;
         }
-        
+
         protected void Raise(DomainEvent @event)
         {
             Root.RaisedEvent(@event);
         }
-        
+
         public TChange GetChange()
         {
             return Root;

@@ -6,7 +6,6 @@
 
 using System;
 using DFlow.Events;
-using Ecommerce.Domain;
 
 namespace DFlow.Testing.Supporting.DomainObjects.Events;
 
@@ -14,7 +13,8 @@ namespace DFlow.Testing.Supporting.DomainObjects.Events;
 
 public class PrimaryEntityCreatedEvent : DomainEvent
 {
-    public PrimaryEntityCreatedEvent(PrimaryEntityId id, SimpleValueObject simpleValue, SecondaryEntity secondary, DateTimeOffset when)
+    public PrimaryEntityCreatedEvent(PrimaryEntityId id, SimpleValueObject simpleValue, SecondaryEntity secondary,
+        DateTimeOffset when)
         : base(when)
     {
         Id = id.Value;
@@ -30,7 +30,7 @@ public class PrimaryEntityCreatedEvent : DomainEvent
 
     public static PrimaryEntityCreatedEvent For(PrimaryEntity entity)
     {
-        return new (
+        return new(
             entity.Identity,
             entity.SimpleValue,
             entity.Secondary,

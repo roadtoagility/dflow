@@ -8,7 +8,6 @@ using System;
 
 namespace DFlow.Events
 {
-
     public abstract class DomainEvent
     {
         protected DomainEvent(DateTimeOffset when)

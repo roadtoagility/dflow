@@ -24,7 +24,7 @@ public sealed class SimpleValueObject : ValueOf<string, SimpleValueObject>
         if (string.IsNullOrEmpty(Value) ||
             string.IsNullOrWhiteSpace(Value))
         {
-            ValidationStatus.Append(Failure.For("Value","The simple value can not be empty"));
+            ValidationStatus.Append(Failure.For("Value", "The simple value can not be empty"));
         }
     }
 }

@@ -23,7 +23,7 @@ public class SimpleEntityTests
         var entity = SimpleEntity.From(simpleEntityId, name, versionId);
         Assert.Equal(expected, entity);
     }
-    
+
     [Theory]
     [ClassData(typeof(SimpleEntityInvalid))]
     public void SimpleEntity_Create_InValid(SimpleEntity entity, bool expected)

@@ -6,4 +6,4 @@ namespace DFlow.Events
     {
         IReadOnlyList<DomainEvent> GetEvents();
     }
-}    
+}
