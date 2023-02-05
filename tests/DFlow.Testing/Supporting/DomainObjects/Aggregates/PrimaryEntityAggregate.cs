@@ -5,7 +5,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-using DFlow.Domain.Aggregates;
+using DFlow.Aggregates;
 using DFlow.Testing.Supporting.DomainObjects.Events;
 using Ecommerce.Domain;
 
@@ -41,5 +41,10 @@ public sealed class PrimaryEntityAggregate : AggregateBase<PrimaryEntity, Primar
         }
         
         AppendValidationResult(primary.Failures);
+    }
+
+    public static PrimaryEntityAggregate CreateFrom(SecondaryEntity secondary, SimpleValueObject simpleValue)
+    {
+        return new PrimaryEntityAggregate(PrimaryEntity.NewEntity(secondary,simpleValue));
     }
 }

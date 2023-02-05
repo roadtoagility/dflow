@@ -6,10 +6,9 @@
 
 using System.Threading.Tasks;
 
-namespace DFlow.Persistence.Repositories
+namespace DFlow.Persistence.Repositories;
+
+public interface IRepository<TState, TModel> : IRepositoryAppendOnly<TState, TModel>
 {
-    public interface IRepository<TState,TModel>: IRepositoryAppendOnly<TState,TModel>
-    {
-        Task Remove(TModel entity);
-    }
+    Task Remove(TModel entity);
 }

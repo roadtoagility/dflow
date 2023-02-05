@@ -8,24 +8,23 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
-namespace DFlow.Validation
+namespace DFlow.Validation;
+
+public abstract class BaseValidation : IValidable
 {
-    public abstract class BaseValidation: IValidable
+    private readonly List<Failure> _failures = new();
+
+    public void AppendValidationResult(Failure failure)
     {
-        private readonly List<Failure> _failures = new ();
-
-        public void AppendValidationResult(Failure failure)
-        {
-            _failures.Add(failure);
-        }
-
-        public void AppendValidationResult(IReadOnlyList<Failure> failures)
-        {
-            _failures.AddRange(failures);
-        }
-
-        public IReadOnlyList<Failure> Failures => _failures.ToImmutableList();
-
-        public bool IsValid => _failures.Count == 0;
+        _failures.Add(failure);
     }
+
+    public void AppendValidationResult(IReadOnlyList<Failure> failures)
+    {
+        _failures.AddRange(failures);
+    }
+
+    public IReadOnlyList<Failure> Failures => _failures.ToImmutableList();
+
+    public bool IsValid => _failures.Count == 0;
 }

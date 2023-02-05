@@ -17,7 +17,7 @@ public sealed class SecondaryEntity : EntityBase<SecondaryEntityId>
     public SecondaryEntity(SecondaryEntityId identity, SimpleValueObject simpleValue, VersionId version)
         : base(identity, version)
     {
-        
+        SimpleValue = simpleValue;
 
         AppendValidationResult(identity.ValidationStatus.Failures);
         AppendValidationResult(simpleValue.ValidationStatus.Failures);

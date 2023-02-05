@@ -11,11 +11,12 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DFlow.Persistence.Repositories
+namespace DFlow.Persistence.Repositories;
+
+public interface IRepositoryAppendOnly<TState, TModel>
 {
-    public interface IRepositoryAppendOnly<TState,TModel>
-    {
-        Task Add(TModel entity);
-        Task<IReadOnlyList<TModel>> FindAsync(Expression<Func<TState, bool>> predicate, CancellationToken cancellationToken);
-    }
+    Task Add(TModel entity);
+
+    Task<IReadOnlyList<TModel>> FindAsync(Expression<Func<TState, bool>> predicate,
+        CancellationToken cancellationToken);
 }

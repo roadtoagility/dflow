@@ -43,7 +43,9 @@ public class PrimaryEntity : EntityBase<PrimaryEntityId>
 
     public static PrimaryEntity NewEntity(SecondaryEntity secondary, SimpleValueObject simpleObject)
     {
-        return From(PrimaryEntityId.NewId(), secondary, simpleObject, VersionId.New());
+        var entity = From(PrimaryEntityId.NewId(), secondary, simpleObject, VersionId.New());
+        entity.RaisedEvent(PrimaryEntityCreatedEvent.For(entity));
+        return entity;
     }
 
     public static PrimaryEntity Combine(PrimaryEntity primary, SecondaryEntity secondary)

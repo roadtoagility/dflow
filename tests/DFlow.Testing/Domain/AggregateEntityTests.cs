@@ -4,6 +4,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+using DFlow.BusinessObjects;
+using DFlow.Testing.Supporting.DataProviders;
 using DFlow.Testing.Supporting.DomainObjects;
 using DFlow.Testing.Supporting.DomainObjects.Aggregates;
 using Xunit;
@@ -12,11 +14,13 @@ namespace DFlow.Testing.Domain;
 
 public class AggregateEntityTests
 {
-    // [Theory]
-    // [ClassData(typeof(SimpleEntityValid))]
-    // public void CreatePrimaryAggregate(PrimaryEntityAggregateFactory, PrimaryEntityAggregate expected)
-    // {
-    //     // var entity = SimpleEntity.From(simpleEntityId, name, versionId);
-    //     // Assert.Equal(expected, entity);
-    // }
+    [Theory]
+    [ClassData(typeof(PrimaryEntityForAggregate))]
+    public void CreatePrimaryAggregate(SecondaryEntity inputSecondary, SimpleValueObject inputValue,
+        PrimaryEntity expected)
+    {
+        var agg = PrimaryEntityAggregate.CreateFrom(inputSecondary, inputValue);
+        Assert.Equal(expected.Secondary, agg.GetChange().Secondary);
+        Assert.Equal(expected.SimpleValue, agg.GetChange().SimpleValue);
+    }
 }

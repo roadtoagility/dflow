@@ -12,63 +12,61 @@ using System.Linq;
 using DFlow.Events;
 using DFlow.Validation;
 
-namespace DFlow.BusinessObjects
+namespace DFlow.BusinessObjects;
+
+public abstract class EntityBase<TIdentity> : BaseValidation,
+    IEntityIdentity<TIdentity>, IDomainEvents
 {
-    public abstract class  EntityBase<TIdentity>: BaseValidation, 
-        IEntityIdentity<TIdentity>
+    private readonly IList<DomainEvent> _events = new List<DomainEvent>();
+
+    protected EntityBase(TIdentity identity, VersionId version)
     {
-        private readonly IList<DomainEvent> _events = new List<DomainEvent>();
-        
-        protected EntityBase(TIdentity identity, VersionId version)
+        Identity = identity;
+        Version = version;
+    }
+
+    public TIdentity Identity { get; }
+
+    public VersionId Version { get; }
+
+    public bool IsNew() => Version.IsNew;
+
+    public void RaisedEvent(DomainEvent @event)
+    {
+        this._events.Add(@event);
+    }
+
+    public IReadOnlyList<DomainEvent> GetEvents()
+    {
+        return this._events.ToImmutableList();
+    }
+
+    public override string ToString()
+    {
+        return $"[ENTITY]:[IDENTITY: {Identity}]";
+    }
+
+    protected abstract IEnumerable<object> GetEqualityComponents();
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null)
         {
-            Identity = identity;
-            Version = version;
-        }
-        
-        public TIdentity Identity { get; }
-        
-        public VersionId Version { get; }
-
-        public bool IsNew() => Version.IsNew;
-
-        public void RaisedEvent(DomainEvent @event)
-        {
-            this._events.Add(@event);
-        }
-    
-        public IReadOnlyList<DomainEvent> GetEvents()
-        {
-            return this._events.ToImmutableList();
-        }
-
-        
-        public override string ToString()
-        {
-            return $"[ENTITY]:[IDENTITY: {Identity}]";
-        }
-        
-        protected abstract IEnumerable<object> GetEqualityComponents();
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            if (GetType() != obj.GetType())
-            {
-                return false;
-            }
-
-            var entity = (EntityBase<TIdentity>)obj;
-
-            return GetEqualityComponents().SequenceEqual(entity.GetEqualityComponents());
+            return false;
         }
 
-        public override int GetHashCode()
+        if (GetType() != obj.GetType())
         {
-            return HashCode.Combine(GetEqualityComponents());
+            return false;
         }
+
+        var entity = (EntityBase<TIdentity>)obj;
+
+        return GetEqualityComponents().SequenceEqual(entity.GetEqualityComponents());
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(GetEqualityComponents());
     }
 }

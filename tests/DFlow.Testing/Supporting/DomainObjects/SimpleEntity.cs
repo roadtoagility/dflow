@@ -7,8 +7,6 @@
 using System.Collections.Generic;
 using DFlow.BusinessObjects;
 using DFlow.Testing.Supporting.DomainObjects.Events;
-using DFlow.Validation;
-using Ecommerce.Domain;
 
 namespace DFlow.Testing.Supporting.DomainObjects;
 
@@ -17,8 +15,8 @@ public class SimpleEntity : EntityBase<SimpleEntityId>
     public SimpleEntity(SimpleEntityId identity, SimpleValueObject simpleValue, VersionId version)
         : base(identity, version)
     {
+        SimpleValue = simpleValue;
         
-
         AppendValidationResult(identity.ValidationStatus.Failures);
         AppendValidationResult(simpleValue.ValidationStatus.Failures);
     }

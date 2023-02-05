@@ -6,23 +6,21 @@
 
 
 using System;
+namespace DFlow.Persistence.Model;
 
-namespace DFlow.Persistence.Model
+public abstract class PersistentState : IPersistentState
 {
-    public abstract class PersistentState : IPersistentState
+    protected PersistentState(DateTime createAt, byte[] rowVersion)
     {
-        protected PersistentState(DateTime createAt, byte[] rowVersion)
-        {
-            PersistenceId = Guid.NewGuid();
-            CreateAt = createAt;
-            RowVersion = rowVersion;
-        }
-
-        public DateTime CreateAt { get; set; }
-
-        public byte[] RowVersion { get; set; }
-        public bool IsDeleted { get; set; }
-
-        public Guid PersistenceId { get; set; }
+        PersistenceId = Guid.NewGuid();
+        CreateAt = createAt;
+        RowVersion = rowVersion;
     }
+
+    public DateTime CreateAt { get;}
+
+    public byte[] RowVersion { get; }
+    public bool IsDeleted { get; set; }
+
+    public Guid PersistenceId { get; set; }
 }

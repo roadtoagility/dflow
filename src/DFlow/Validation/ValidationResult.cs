@@ -7,42 +7,41 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
-namespace DFlow.Validation
+namespace DFlow.Validation;
+
+public sealed class ValidationResult
 {
-    public sealed class ValidationResult
+    private readonly List<Failure> _failures = new();
+
+    public ValidationResult(IReadOnlyList<Failure> failures)
     {
-        private readonly List<Failure> _failures = new();
-
-        public ValidationResult( IReadOnlyList<Failure> failures)
+        if (failures.Count > 0)
         {
-            if (failures.Count > 0)
-            {
-                _failures.AddRange(failures);                
-            }
+            _failures.AddRange(failures);
         }
-        
-        public bool IsValid => Failures.Count == 0;
+    }
 
-        public IReadOnlyList<Failure> Failures => _failures;
+    public bool IsValid => Failures.Count == 0;
 
-        public void Append(Failure failure)
-        {
-            _failures.Add(failure);
-        }
-        
-        public static ValidationResult For(IReadOnlyList<Failure> failures)
-        {
-            return new ValidationResult(failures);
-        } 
-        
-        public static ValidationResult For(Failure failure)
-        {
-            return new ValidationResult(new List<Failure>{failure});
-        } 
-        
-        public static ValidationResult Empty()
-        {
-            return new ValidationResult(ImmutableList<Failure>.Empty);
-        }
+    public IReadOnlyList<Failure> Failures => _failures;
+
+    public void Append(Failure failure)
+    {
+        _failures.Add(failure);
+    }
+
+    public static ValidationResult For(IReadOnlyList<Failure> failures)
+    {
+        return new ValidationResult(failures);
+    }
+
+    public static ValidationResult For(Failure failure)
+    {
+        return new ValidationResult(new List<Failure> { failure });
+    }
+
+    public static ValidationResult Empty()
+    {
+        return new ValidationResult(ImmutableList<Failure>.Empty);
     }
 }

@@ -7,21 +7,27 @@
 using DFlow.BusinessObjects;
 using DFlow.Testing.Supporting.DataProviders;
 using DFlow.Testing.Supporting.DomainObjects;
-using Ecommerce.Domain;
 using Xunit;
 
-namespace Ecommerce.Tests.Domain;
+namespace DFlow.Testing.Domain;
 
 public class SimpleEntityTests
 {
     [Theory]
     [ClassData(typeof(SimpleEntityValid))]
-    public void CreateValidProduct(
+    public void SimpleEntity_Create_Valid(
         SimpleEntityId simpleEntityId,
         SimpleValueObject name,
         VersionId versionId, SimpleEntity expected)
     {
         var entity = SimpleEntity.From(simpleEntityId, name, versionId);
         Assert.Equal(expected, entity);
+    }
+    
+    [Theory]
+    [ClassData(typeof(SimpleEntityInvalid))]
+    public void SimpleEntity_Create_InValid(SimpleEntity entity, bool expected)
+    {
+        Assert.Equal(expected, entity.IsValid);
     }
 }

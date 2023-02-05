@@ -4,12 +4,11 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-using DFlow.Aggregates;
 using DFlow.BusinessObjects;
 using DFlow.Events;
 using DFlow.Validation;
 
-namespace DFlow.Domain.Aggregates
+namespace DFlow.Aggregates
 {
     public abstract class AggregateBase<TChange, TEntityId>:BaseValidation,
         IAggregate<TChange> where TChange: EntityBase<TEntityId>
