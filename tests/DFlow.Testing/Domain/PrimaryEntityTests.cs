@@ -27,6 +27,6 @@ public class PrimaryEntityTests
     {
         primary.UpdateSecondary(toUpdate);
         var raisedEvent = primary.GetEvents()[0] as SecondaryEntityUpdatedEvent;
-        Assert.Equal(expected.Identity.Value, raisedEvent.SecondaryEntityId);
+        Assert.Equal(expected.Identity.Value, raisedEvent?.SecondaryEntityId);
     }
 }

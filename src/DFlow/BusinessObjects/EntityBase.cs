@@ -48,7 +48,7 @@ public abstract class EntityBase<TIdentity> : BaseValidation,
 
     protected abstract IEnumerable<object> GetEqualityComponents();
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (obj == null)
         {

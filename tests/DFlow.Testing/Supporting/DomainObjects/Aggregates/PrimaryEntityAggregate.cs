@@ -13,7 +13,8 @@ namespace DFlow.Testing.Supporting.DomainObjects.Aggregates;
 
 public sealed class PrimaryEntityAggregate : AggregateBase<PrimaryEntity, PrimaryEntityId>
 {
-    public PrimaryEntityAggregate(PrimaryEntity primaryEntity)
+    private PrimaryEntityAggregate(PrimaryEntity primaryEntity)
+        :base(primaryEntity)
     {
         if (primaryEntity.IsValid)
         {

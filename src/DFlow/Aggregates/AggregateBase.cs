@@ -13,6 +13,11 @@ namespace DFlow.Aggregates
     public abstract class AggregateBase<TChange, TEntityId>:BaseValidation,
         IAggregate<TChange> where TChange: EntityBase<TEntityId>
     {
+        protected AggregateBase(TChange root)
+        {
+            Root = root;
+        }
+
         protected TChange Root { get; private set; }
 
         protected void Apply(TChange item)
