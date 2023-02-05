@@ -7,11 +7,11 @@
 
 using System.Collections.Generic;
 using DFlow.BusinessObjects;
-using DFlow.Persistence.Model;
+using DFlow.Events;
 
 namespace DFlow.Persistence.Outbox;
 
-interface IEventsExporting
+public interface IEventsExporting<out TChangeSet, in TPrimaryEntity>
 {
-    IReadOnlyList<AggregateState> ToOutBox(IDomainEvents entity);
+    IReadOnlyList<TChangeSet> ToOutBox(TPrimaryEntity fromEntity);
 }

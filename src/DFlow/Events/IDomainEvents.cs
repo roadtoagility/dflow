@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using DFlow.Events;
 
-namespace DFlow.BusinessObjects
+namespace DFlow.Events
 {
     public interface IDomainEvents
     {

@@ -8,7 +8,7 @@ using System;
 using DFlow.BusinessObjects;
 using DFlow.Validation;
 
-namespace Ecommerce.Domain;
+namespace DFlow.Testing.Supporting.DomainObjects;
 
 public class PrimaryEntityId : ValueOf<Guid, PrimaryEntityId>
 {

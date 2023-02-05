@@ -10,7 +10,7 @@ using DFlow.Testing.Supporting.DataProviders;
 using DFlow.Testing.Supporting.DomainObjects;
 using Xunit;
 
-namespace Ecommerce.Tests.Domain;
+namespace DFlow.Testing.Domain;
 
 public class BusinessObjectTests
 {

@@ -10,7 +10,4 @@
     <ItemGroup>
       <ProjectReference Include="..\DFlow\DFlow.csproj" />
     </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Aggregates" />
-    </ItemGroup>
 </Project>
