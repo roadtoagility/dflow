@@ -17,14 +17,11 @@ public class SimpleEntityId : ValueOf<Guid, SimpleEntityId>
     public static SimpleEntityId From(string inputId)
     {
         var id = Guid.Empty;
-        if (Guid.TryParse(inputId, out id) == false)
-        {
-            var result = From(Empty.Value);
-            result.ValidationStatus.Append(Failure.For("Identity", $"The Simple entity id is not valid.", inputId));
-            return result;
-        }
+        if (Guid.TryParse(inputId, out id) != false) return From(id);
+        var result = From(Empty.Value);
+        result.ValidationStatus.Append(Failure.For("Identity", $"The Simple entity id is not valid.", inputId));
+        return result;
 
-        return From(id);
     }
 
     public static SimpleEntityId NewId()
