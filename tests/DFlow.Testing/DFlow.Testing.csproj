@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\DFlow.Persistence\DFlow.Persistence.csproj" />
+    <ProjectReference Include="..\..\src\DFlow.Specifications\DFlow.Specifications.csproj" />
     <ProjectReference Include="..\..\src\DFlow\DFlow.csproj" />
   </ItemGroup>
 

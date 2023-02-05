@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Testing", "tests\DFlo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow", "src\DFlow\DFlow.csproj", "{3008E7CA-82EF-4FEC-BB5A-5098DC63BD37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Specifications", "src\DFlow.Specifications\DFlow.Specifications.csproj", "{AFDCB37C-E883-407B-8C91-9C8C8ED7587B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,14 @@ Global
 		{3008E7CA-82EF-4FEC-BB5A-5098DC63BD37}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3008E7CA-82EF-4FEC-BB5A-5098DC63BD37}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
 		{3008E7CA-82EF-4FEC-BB5A-5098DC63BD37}.Tests|Any CPU.Build.0 = Debug|Any CPU
+		{AFDCB37C-E883-407B-8C91-9C8C8ED7587B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFDCB37C-E883-407B-8C91-9C8C8ED7587B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFDCB37C-E883-407B-8C91-9C8C8ED7587B}.Release Profilling|Any CPU.ActiveCfg = Release Profilling|Any CPU
+		{AFDCB37C-E883-407B-8C91-9C8C8ED7587B}.Release Profilling|Any CPU.Build.0 = Release Profilling|Any CPU
+		{AFDCB37C-E883-407B-8C91-9C8C8ED7587B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFDCB37C-E883-407B-8C91-9C8C8ED7587B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFDCB37C-E883-407B-8C91-9C8C8ED7587B}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFDCB37C-E883-407B-8C91-9C8C8ED7587B}.Tests|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

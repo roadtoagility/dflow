@@ -7,7 +7,7 @@
 using System;
 using DFlow.BusinessObjects;
 
-namespace Ecommerce.Domain;
+namespace DFlow.Testing.Supporting.DomainObjects;
 
 public class SecondaryEntityId : ValueOf<Guid, SecondaryEntityId>
 {

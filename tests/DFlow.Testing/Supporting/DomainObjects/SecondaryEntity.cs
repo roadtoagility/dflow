@@ -6,7 +6,6 @@
 
 using System.Collections.Generic;
 using DFlow.BusinessObjects;
-using Ecommerce.Domain;
 
 namespace DFlow.Testing.Supporting.DomainObjects;
 
