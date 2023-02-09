@@ -26,8 +26,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\samples\DFlow.Samples\DFlow.Samples.csproj" />
-  </ItemGroup>
-
 </Project>
