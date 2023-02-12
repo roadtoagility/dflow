@@ -19,12 +19,12 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.NUGET_KEY }}
       - name: Pack
         run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
       - name: Push       
         run: dotnet nuget push *.${VERSION}.nupkg -s https://api.nuget.org/v3/index.json -k $NUGET_AUTH_TOKEN
-    env:
-      NUGET_AUTH_TOKEN: ${{ secrets.NUGET_KEY }}
   create-github-release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
       - name: Create Release Notes
         uses: actions/github-script@v4.0.2
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{secrets.PKG_GITHUB_TOKEN}}
           script: |
             await github.request(`POST /repos/${{ github.repository }}/releases`, {
               tag_name: "${{ github.ref }}",
