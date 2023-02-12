@@ -21,10 +21,10 @@ jobs:
           dotnet-version: 6.0.x
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.NUGET_KEY }}
-      - name: Pack
+      - name: Packing
         run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
-      - name: Push       
-        run: dotnet nuget push *.${VERSION}.nupkg -s https://api.nuget.org/v3/index.json -k $NUGET_AUTH_TOKEN
+      - name: Pushing to Nuget       
+        run: dotnet nuget push */bin/Release/*.${VERSION}.nupkg -s https://api.nuget.org/v3/index.json -k $NUGET_AUTH_TOKEN
   create-github-release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
