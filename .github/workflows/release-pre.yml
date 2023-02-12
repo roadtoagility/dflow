@@ -11,18 +11,19 @@ jobs:
     name: Publish Nuget
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Get the version
         id: get_version
         run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV     
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.x      
+          dotnet-version: 6.0.x
+          source-url: https://nuget.pkg.github.com/roadtoagility/index.json
       - name: Pack
         run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
       - name: Push       
-        run: dotnet nuget push *.${VERSION}.nupkg --source https://nuget.pkg.github.com/roadtoagility/index.json --api-key ${PKG_GITHUB_TOKEN}
+        run: dotnet nuget push *.${VERSION}.nupkg
         env:
           PKG_GITHUB_TOKEN: ${{ secrets.PKG_GITHUB_TOKEN }}
   create-github-release:
