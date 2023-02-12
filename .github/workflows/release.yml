@@ -19,12 +19,21 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
-        env:
-          NUGET_AUTH_TOKEN: ${{ secrets.NUGET_KEY }}
-      - name: Packing
+          source-url: https://nuget.pkg.github.com/roadtoagility/index.json
+      - name: Pack
         run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
-      - name: Pushing to Nuget       
-        run: dotnet nuget push *.${VERSION}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_KEY }}
+      - name: Push to GitHub Nuget 
+        run: dotnet nuget push *.${VERSION}.nupkg
+        env:
+          PKG_GITHUB_TOKEN: ${{ secrets.PKG_GITHUB_TOKEN }}
+      #   with:
+      #     dotnet-version: 6.0.x
+      #   env:
+      #     NUGET_AUTH_TOKEN: ${{ secrets.NUGET_KEY }}
+      # - name: Packing
+      #   run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
+      # - name: Pushing to Nuget       
+      #   run: dotnet nuget push *.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_KEY }}
   create-github-release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
