@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-        <PackageIconUrl>https://github.com/roadtoagility/dflow/raw/master/docs/img/logodflow_200x200.png</PackageIconUrl>  
+        <icon>https://github.com/roadtoagility/dflow/raw/master/docs/img/logodflow_200x200.png</icon>  
         <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
         <Configurations>Debug;Release;Release Profilling</Configurations>
         <Platforms>AnyCPU</Platforms>
@@ -10,7 +10,7 @@
         <Copyright>Road to Agility</Copyright>
         <PackageProjectUrl>https://github.com/roadtoagility/dflow</PackageProjectUrl>
         <RepositoryUrl>https://github.com/roadtoagility/dflow</RepositoryUrl>
-        <PackageLicenseUrl>https://github.com/roadtoagility/dflow/blob/master/LICENSE.TXT</PackageLicenseUrl>
+        <license>https://github.com/roadtoagility/dflow/blob/master/LICENSE.TXT</license>
         <PackageTags>ddd;roadtoagility;clean architecture</PackageTags>
   
   </PropertyGroup>
