@@ -11,18 +11,20 @@ jobs:
     name: Publish Nuget
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Get the version
         id: get_version
         run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV     
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.x      
+          dotnet-version: 6.0.x
       - name: Pack
         run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
       - name: Push       
-        run: dotnet nuget push *.${VERSION}.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_KEY}}
+        run: dotnet nuget push *.${VERSION}.nupkg -s https://api.nuget.org/v3/index.json -k $NUGET_AUTH_TOKEN
+    env:
+      NUGET_AUTH_TOKEN: ${{ secrets.NUGET_KEY }}
   create-github-release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
