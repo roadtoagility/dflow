@@ -23,7 +23,7 @@ jobs:
       - name: Pack
         run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
       - name: Push       
-        run: dotnet nuget push *.${VERSION}.nupkg
+        run: dotnet nuget push *.${VERSION}.nupkg --api-key $PKG_GITHUB_TOKEN
         env:
           PKG_GITHUB_TOKEN: ${{ secrets.PKG_GITHUB_TOKEN }}
   create-github-release:
