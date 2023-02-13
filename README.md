@@ -1,8 +1,8 @@
 <center><img src="docs/img/logodflow_200x200.png" width="350" /></center>
 
-# DFlow - Domain Events Flow
+# DFlow - Domain Flow
 
-Domain events Flow is a platform to support development with agility in mind based on Domain-Driven Design tools.
+It is a set of framework to learn, organize and accelerate development of the heart of software.
 
 ## Project Informations
 [![GitHub issues](https://img.shields.io/github/issues/roadtoagility/dflow)](https://img.shields.io/github/issues/roadtoagility/dflow)
@@ -18,50 +18,113 @@ Domain events Flow is a platform to support development with agility in mind bas
 ## CI Status
 [![Build and Testing](https://github.com/roadtoagility/dflow/actions/workflows/dotnet.yml/badge.svg)](https://github.com/roadtoagility/dflow/actions/workflows/dotnet.yml/badge.svg)
 
-## Nuget packages from DFlow Platform
-Core Packages|Description|Dependencies|Latest Version|
--|-|-|-|
-DFlow.Domain|Base framework to **rich domain modelling** based on Object Value, Entity and Aggregates design patterns|None|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Domain.svg)|
-DFlow.Domain.Events|Base framework that provides capability to declare events raise from Aggregates| - DFlow.Domain|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Domain.Events.svg)|
-DFlow.Business.Cqrs|CQRS framework to implement command and query handlers event and event publishing as well|- DFlow.Domain </br>- DFlow.Domain.Events </br>- DFlow.Domain.EventBus.(*)</br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Business.Cqrs.svg)|
-DFlow.Persistence|Base framework providing an Unity of Work and Repository design patterns to support persistence layer implementation|- DFlow.Domain </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Persistence.svg)|
+## Breaking Changes in 0.6.3 -> v0.8.0
 
-Contrib Pakages|Description|Dependencies|Latest Version|
--|-|-|-|
-DFlow.Persistence.EntityFramework|Specialization of DFlow.Persistence to support EntityFramework based persistence layers abstraction|- DFlow.Domain </br>- DFlow.Domain.Persistence </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Persistence.EntityFramework.svg)|
-DFlow.Domain.EventBus.FluentMediator|Implementation of IDomainEventBus to be used to DomainEvents publishing |- DFlow.Domain.Events </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Domain.EventBus.FluentMediator.svg)|
-DFlow.Persistence.LiteDB|Specialization of DFlow.Persistence to support LiteDB |- DFlow.Domain </br>- DFlow.Domain.Persistence </br>|![DFlow NuGet version](https://img.shields.io/nuget/v/DFlow.Persistence.LiteDB.svg)|
+That is a major refactoring of DFlow to be more "friendly" and have consistent programming model.
+
+- DFlow.Business will be maintained any more
+- DFlow.Business.Cqrs will be maintained any more
+- DFlow.Domain become DFlow (back to origins :)
+- DFlow.Specifications become a separated assembly
+- BaseEntity -> EntityBase
+- All Events must inherits from DomainEvent abstract class
+- There a new interface to raise events, so events can be raised from Entities or via Aggregates as you need.
+- DFlow.Domain.Events merged with DFlow and had several APIs changes
 
 ## About Project
-DFlow was born as a reference implementation of Domain-Drive Design architecture based with aggregates supporting Event Sourcing design pattern but evolves to a full flagged platform to helps you to implement your own framework based on DFlow Domain-Driven concepts supported by Domain-Driven Design tools.
 
-Do you have a lot of flexibility to evolve your applications. Each platform library enforce just few concepts used by each specific layer, do you pay for what you use but you can implement your view of DFlow interfaces and evolve as your desire.
+Domain Flow aka **DFlow** is a very light and opnionated set of frameworks to help implement the hearth of applications based on Domain-Driven Design. There are 3 assemblys organized as described bellow:
 
-As an example, we provide contrib packages like **Dflow.Persistence.EntityFramework** that enables you to use ORM based approach to your persistence layer using EntityFramework with any database driver that you want and DFlow.EventBus.FluentMediator that is a interface to used the excellent framework FluentMediator.
+- **DFlow**: Core assembly providing objets to implement Entities, ValueObjects, Validations and Aggregates;
+- **DFlow.Specifications**: It is a Specification Design Pattern implementation;
+- **DFlow.Persistence**: This project depends on DFlow because it is responsible to translate from/to domain objects  representation. It is a set os interfaces to materialize domain layer to be persisted in any format that you want. The 3 major patterns implemented are Unity Of Work and Repository.
 
-## Documentation
-For now we implement few example projects that you can look at in [samples](https://github.com/roadtoagility/dflow/tree/master/samples) folder
+Addon: DFlow.Persistence.
+DFlow as based on clean architecture principles, so domain layer aka Entities are first class citizen.   
 
-Sample|Description|Link|
--|-|-|
-SimplestApp| It is a basicv application using **DFlow.Domain** library|[SimplestApp](https://github.com/roadtoagility/dflow/tree/master/samples/SimplestApp)|
-SimplestApp.Business.Cqrs| It is a basic implementation of CQRS-base application using **DFlow.Business.Cqrs** library |[SimplestApp.Business.Cqrs](https://github.com/roadtoagility/dflow/tree/master/samples/SimplestApp.Business.Cqrs)|
-SimplestApp.Persistence.EntityFramework|It is a basic application using all libraries of DFlow platform for CQRS + DDD + ORM|[SimplestApp.Persistence.EntityFramework](https://github.com/roadtoagility/dflow/tree/master/samples/SimplestApp.Persistence.EntityFramework)|
+## Usage
 
-## Roadmap
-  * Finish support to Event Sourcing in Persistence Layer
-  * Test a 100% of code
-  * Finish the performance tests support
-  * Improve documentation
-  * much more...
+### Referencing DFlow
+```shell
+
+```
+
+
+### Creating Domain objects
+
+1. The most basic DFlow business object is the **Value Object** implementation that allows you follow the principle of non-primitive obsession for the objects you want. 
+
+```c#
+// Value Object
+public sealed class Email : ValueOf<string,Email>
+{
+
+}
+```
+
+2. Defining and Entity
+
+```c#
+// Entity
+public class User : EntityBase<UserId>
+{
+    public User(UserId identity, Email mail, VersionId version)
+        : base(identity, version)
+    {
+        Mail = mail;
+
+        AppendValidationResult(identity.ValidationStatus.Failures);
+        AppendValidationResult(mail.Failures);
+    }
+
+    public Email Mail { get; private set; }
+
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return Identity;
+        yield return Mail;
+    }
+
+    // DOmain objects can have static contualized api based on factory methods
+    public static PrimaryEntity From(PrimaryEntityId id, SecondaryEntity secondary, SimpleValueObject simpleObject,
+        VersionId version)
+    {
+        return new PrimaryEntity(id, secondary, simpleObject, version);
+    }
+
+    // Domain Objects can have instance business methods
+    // Entities can raise events
+    public void Update(Email mail)
+    {
+        if (!mail.ValidationStatus.IsValid)
+        {
+            AppendValidationResult(mail.ValidationStatus.Failures);
+        }
+
+        Mail = mail;
+        RaisedEvent(UserMailUpdatedEvent.For(this));
+    }
+
+}
+```
+## Getting Help
+The best way to get help for Npgsql is to post a question to Stack Overflow and tag it with the npgsql tag. If you think you've encountered a bug or want to request a feature, open an issue in the appropriate project's github repository.
+
+## Contributors
+* Adriano Ribeiro [@drr00t](https://github.com/drr00t)
+* Douglas José Ramalho Araujo [@dougramalho](https://github.com/dougramalho)
+* Marco V Gurrola [@marcovgurrola](https://github.com/marcovgurrola)
+* Zama Bandeira Braga [@zamabraga](https://github.com/zamabraga)
+
 
 ## Supporters
 
-| Supporter | Description |      |
-| ---- | ----- | ----------- |
-| <img src="img/jetbrains-variant-4.png" alt="./img/" width="300px" /> | All Products Pack License for Open Source under program [**Free License Programs**](https://www.jetbrains.com/community/education/) |             |
+| Supporter                                                            | Description                                                                                                                         | 
+|----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="img/jetbrains-variant-4.png" alt="./img/" width="200px" /> | All Products Pack License for Open Source under program [**Free License Programs**](https://www.jetbrains.com/community/education/) |
 
-### Thank You for all **supporters** of this project
+## Thanks
+A special thank you to [Jetbrains](http://jetbrains.com/) for donating licenses to the project.
 
 ## License
 
