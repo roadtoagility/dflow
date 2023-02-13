@@ -25,7 +25,7 @@ jobs:
       - name: Pack
         run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
       - name: Push to GitHub Nuget 
-        run: dotnet nuget push *.${VERSION}.nupkg
+        run: dotnet nuget push *.${VERSION}.nupkg --api-key $NUGET_AUTH_TOKEN --skip-duplicate
   create-github-release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
