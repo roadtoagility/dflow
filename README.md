@@ -4,6 +4,13 @@
 
 It is a set of framework to learn, organize and accelerate development of the heart of software.
 
+## Package source
+
+```shell
+<repository url="https://github.com/roadtoagility/dflow" />
+```
+
+
 ## Project Informations
 [![GitHub issues](https://img.shields.io/github/issues/roadtoagility/dflow)](https://img.shields.io/github/issues/roadtoagility/dflow)
 [![GitHub stars](https://img.shields.io/github/stars/roadtoagility/dflow)](https://github.com/roadtoagility/dflow/stargazers)
@@ -107,8 +114,6 @@ public class User : EntityBase<UserId>
 
 }
 ```
-## Getting Help
-The best way to get help for Npgsql is to post a question to Stack Overflow and tag it with the npgsql tag. If you think you've encountered a bug or want to request a feature, open an issue in the appropriate project's github repository.
 
 ## Contributors
 * Adriano Ribeiro [@drr00t](https://github.com/drr00t)
