@@ -19,13 +19,12 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
-          source-url: https://nuget.pkg.github.com/roadtoagility/index.json
         env:
           PKG_GITHUB_TOKEN: ${{ secrets.PKG_GITHUB_TOKEN }}
       - name: Pack
         run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
       - name: Push to GitHub Nuget 
-        run: dotnet nuget push *.${VERSION}.nupkg --api-key ${{secrets.PKG_GITHUB_TOKEN}} --skip-duplicate
+        run: dotnet nuget push *.${VERSION}.nupkg --api-key ${{secrets.PKG_GITHUB_TOKEN}} -s https://nuget.pkg.github.com/roadtoagility/index.json --skip-duplicate
   create-github-release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
