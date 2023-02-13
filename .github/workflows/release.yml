@@ -21,11 +21,11 @@ jobs:
           dotnet-version: 6.0.x
           source-url: https://nuget.pkg.github.com/roadtoagility/index.json
         env:
-          NUGET_AUTH_TOKEN: ${{ secrets.PKG_GITHUB_TOKEN }}
+          PKG_GITHUB_TOKEN: ${{ secrets.PKG_GITHUB_TOKEN }}
       - name: Pack
         run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
       - name: Push to GitHub Nuget 
-        run: dotnet nuget push *.${VERSION}.nupkg --api-key $NUGET_AUTH_TOKEN --skip-duplicate
+        run: dotnet nuget push *.${VERSION}.nupkg --api-key $PKG_GITHUB_TOKEN --skip-duplicate
   create-github-release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
