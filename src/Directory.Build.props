@@ -8,10 +8,12 @@
         <Nullable>enable</Nullable>
         <Authors>AUTHORS.md</Authors>
         <Copyright>Road to Agility</Copyright>
+        <PackageVersion>0.8.1</PackageVersion>
+        <Title>Domain Flow Modelling Framework</Title>
+        <Description>Small framework to acelerate DDD-based applications</Description>
         <PackageProjectUrl>https://github.com/roadtoagility/dflow</PackageProjectUrl>
         <RepositoryUrl>https://github.com/roadtoagility/dflow</RepositoryUrl>
         <license>https://github.com/roadtoagility/dflow/blob/master/LICENSE.TXT</license>
-        <PackageTags>ddd;roadtoagility;clean architecture</PackageTags>
-  
+        <PackageTags>ddd;roadtoagility;clean architecture</PackageTags>  
   </PropertyGroup>
 </Project>
