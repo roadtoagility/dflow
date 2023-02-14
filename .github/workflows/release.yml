@@ -25,6 +25,8 @@ jobs:
         run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
       - name: Push to GitHub Nuget 
         run: dotnet nuget push *.${VERSION}.nupkg --api-key ${{secrets.PKG_GITHUB_TOKEN}} -s https://nuget.pkg.github.com/roadtoagility/index.json --skip-duplicate
+      - name: Publish the package to nuget.org
+        run: dotnet nuget push *.nupkg --api-key ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json --skip-duplicate
   create-github-release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
