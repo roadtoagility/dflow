@@ -27,7 +27,7 @@ jobs:
 #      - name: Push to GitHub Nuget 
 #        run: dotnet nuget push *.${VERSION}.nupkg --api-key ${{secrets.PKG_GITHUB_TOKEN}} -s https://nuget.pkg.github.com/roadtoagility/index.json --skip-duplicate
       - name: Publish the package to nuget.org
-        run: dotnet nuget push *.${VERSION}.nupkg -s https://api.nuget.org/v3/index.json --api-key $NUGET_AUTH_TOKEN --skip-duplicate
+        run: dotnet nuget push *.${VERSION}.nupkg -s https://api.nuget.org/v3/index.json --api-key $NUGET_AUTH_TOKEN --skip-duplicate --no-service-endpoint 
 #        env:
 #          NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
   create-github-release:
