@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    
+    <PropertyGroup>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <RootNamespace>DFlow.Persistence.EntityFrameworkCore</RootNamespace>
+    </PropertyGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\..\DFlow.Persistence\DFlow.Persistence.csproj" />
+      <ProjectReference Include="..\DFlow.Persistence.EntityFrameworkCore\DFlow.Persistence.EntityFrameworkCore.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.14" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.8" />
+    </ItemGroup>
+</Project>
