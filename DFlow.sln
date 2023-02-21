@@ -19,6 +19,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Persistence.EntityFra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFlow.Persistence.EntityFrameworkCore.Npgsql", "src\contrib\DFlow.Persistence.EntityFrameworkCore.Npgsql\DFlow.Persistence.EntityFrameworkCore.Npgsql.csproj", "{50C047E2-DBFC-4652-9C8F-B3B3F3CD5B98}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_containers", "_containers", "{5FD6DE92-1A55-4261-A0AC-4FF2166134E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "postgres", "postgres", "{7D569F94-FDE6-4B68-9399-FC1DCF9090B7}"
+	ProjectSection(SolutionItems) = preProject
+		_local_testing\postgresql\docker-compose.postgres.yml = _local_testing\postgresql\docker-compose.postgres.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +90,7 @@ Global
 		{8AA5683F-E4E6-4D43-95C1-30F7F5C1C301} = {1D9940E4-09D4-42B9-B72D-2DA4D1AA00EB}
 		{716765C5-EF6D-44B3-9FEB-2F25E617C70A} = {20A4CE3F-D6FD-4FA2-91EB-1AC62221A4FE}
 		{50C047E2-DBFC-4652-9C8F-B3B3F3CD5B98} = {20A4CE3F-D6FD-4FA2-91EB-1AC62221A4FE}
+		{7D569F94-FDE6-4B68-9399-FC1DCF9090B7} = {5FD6DE92-1A55-4261-A0AC-4FF2166134E5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95BFE15C-2D7D-47F7-8108-AAD1B212E52D}

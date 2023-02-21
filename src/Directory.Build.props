@@ -1,7 +1,11 @@
 <Project>
   <PropertyGroup>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+	<ReportAnalyzer>true</ReportAnalyzer>
+  	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <AnalysisLevel>latest</AnalysisLevel>
         <icon>https://github.com/roadtoagility/dflow/raw/master/docs/img/logodflow_200x200.png</icon>  
-        <TargetFrameworks>netstandard2.0</TargetFrameworks>
+        <TargetFrameworks>net6.0</TargetFrameworks>
         <Configurations>Debug;Release;Release Profilling</Configurations>
         <Platforms>AnyCPU</Platforms>
         <LangVersion>10</LangVersion>
